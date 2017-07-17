@@ -8,20 +8,62 @@
 
 /* Begin PBXBuildFile section */
 		742D90011F1CF7A4000B656E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90001F1CF7A4000B656E /* AppDelegate.swift */; };
-		742D90031F1CF7A4000B656E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90021F1CF7A4000B656E /* ViewController.swift */; };
 		742D90061F1CF7A4000B656E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 742D90041F1CF7A4000B656E /* Main.storyboard */; };
 		742D90081F1CF7A4000B656E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 742D90071F1CF7A4000B656E /* Assets.xcassets */; };
 		742D900B1F1CF7A4000B656E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 742D90091F1CF7A4000B656E /* LaunchScreen.storyboard */; };
+		742D90141F1CF8C1000B656E /* FirstStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90131F1CF8C1000B656E /* FirstStartVC.swift */; };
+		742D901D1F1CF8F8000B656E /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90161F1CF8F8000B656E /* Constraint.swift */; };
+		742D901E1F1CF8F8000B656E /* Unwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90171F1CF8F8000B656E /* Unwrapper.swift */; };
+		742D901F1F1CF8F8000B656E /* DeviceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90181F1CF8F8000B656E /* DeviceUtil.swift */; };
+		742D90201F1CF8F8000B656E /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90191F1CF8F8000B656E /* Shadow.swift */; };
+		742D90211F1CF8F8000B656E /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D901A1F1CF8F8000B656E /* Utility.swift */; };
+		742D90221F1CF8F8000B656E /* ScheduleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D901B1F1CF8F8000B656E /* ScheduleColor.swift */; };
+		742D90231F1CF8F8000B656E /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D901C1F1CF8F8000B656E /* Strings.swift */; };
+		742D902B1F1CF90E000B656E /* ExtVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90251F1CF90E000B656E /* ExtVC.swift */; };
+		742D902C1F1CF90E000B656E /* ExtColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90261F1CF90E000B656E /* ExtColor.swift */; };
+		742D902D1F1CF90E000B656E /* ExtUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90271F1CF90E000B656E /* ExtUIImage.swift */; };
+		742D902E1F1CF90E000B656E /* ExtDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90281F1CF90E000B656E /* ExtDate.swift */; };
+		742D902F1F1CF90E000B656E /* ExtInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90291F1CF90E000B656E /* ExtInt.swift */; };
+		742D90301F1CF90E000B656E /* ExtTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D902A1F1CF90E000B656E /* ExtTextfield.swift */; };
+		742D90351F1CF931000B656E /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90331F1CF931000B656E /* NetworkModel.swift */; };
+		742D90361F1CF931000B656E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90341F1CF931000B656E /* Network.swift */; };
+		742D90381F1CF937000B656E /* NetworkCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90371F1CF937000B656E /* NetworkCallback.swift */; };
+		742D903D1F1CFBBE000B656E /* KoPub Dotum_Pro Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 742D903A1F1CFA9A000B656E /* KoPub Dotum_Pro Bold.otf */; };
+		742D903E1F1CFBBE000B656E /* KoPub Dotum_Pro Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 742D903B1F1CFA9A000B656E /* KoPub Dotum_Pro Light.otf */; };
+		742D903F1F1CFBBE000B656E /* KoPub Dotum_Pro Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 742D903C1F1CFA9A000B656E /* KoPub Dotum_Pro Medium.otf */; };
+		EE675D3C3CBA6DD98E62C7C6 /* Pods_inu_cafeteria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB53F6A7C5EE08F3F06A529 /* Pods_inu_cafeteria.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2243B7A300FDCBCAA2CA145C /* Pods-inu_cafeteria.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inu_cafeteria.release.xcconfig"; path = "Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria.release.xcconfig"; sourceTree = "<group>"; };
 		742D8FFD1F1CF7A4000B656E /* inu_cafeteria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inu_cafeteria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		742D90001F1CF7A4000B656E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		742D90021F1CF7A4000B656E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		742D90051F1CF7A4000B656E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		742D90071F1CF7A4000B656E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		742D900A1F1CF7A4000B656E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		742D900C1F1CF7A4000B656E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		742D90131F1CF8C1000B656E /* FirstStartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstStartVC.swift; sourceTree = "<group>"; };
+		742D90161F1CF8F8000B656E /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
+		742D90171F1CF8F8000B656E /* Unwrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unwrapper.swift; sourceTree = "<group>"; };
+		742D90181F1CF8F8000B656E /* DeviceUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceUtil.swift; sourceTree = "<group>"; };
+		742D90191F1CF8F8000B656E /* Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
+		742D901A1F1CF8F8000B656E /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		742D901B1F1CF8F8000B656E /* ScheduleColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleColor.swift; sourceTree = "<group>"; };
+		742D901C1F1CF8F8000B656E /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		742D90251F1CF90E000B656E /* ExtVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtVC.swift; sourceTree = "<group>"; };
+		742D90261F1CF90E000B656E /* ExtColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtColor.swift; sourceTree = "<group>"; };
+		742D90271F1CF90E000B656E /* ExtUIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtUIImage.swift; sourceTree = "<group>"; };
+		742D90281F1CF90E000B656E /* ExtDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtDate.swift; sourceTree = "<group>"; };
+		742D90291F1CF90E000B656E /* ExtInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtInt.swift; sourceTree = "<group>"; };
+		742D902A1F1CF90E000B656E /* ExtTextfield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtTextfield.swift; sourceTree = "<group>"; };
+		742D90331F1CF931000B656E /* NetworkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
+		742D90341F1CF931000B656E /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		742D90371F1CF937000B656E /* NetworkCallback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCallback.swift; sourceTree = "<group>"; };
+		742D903A1F1CFA9A000B656E /* KoPub Dotum_Pro Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KoPub Dotum_Pro Bold.otf"; sourceTree = "<group>"; };
+		742D903B1F1CFA9A000B656E /* KoPub Dotum_Pro Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KoPub Dotum_Pro Light.otf"; sourceTree = "<group>"; };
+		742D903C1F1CFA9A000B656E /* KoPub Dotum_Pro Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KoPub Dotum_Pro Medium.otf"; sourceTree = "<group>"; };
+		8CB53F6A7C5EE08F3F06A529 /* Pods_inu_cafeteria.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_inu_cafeteria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAC391EA048ECBD595D9E381 /* Pods-inu_cafeteria.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inu_cafeteria.debug.xcconfig"; path = "Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +71,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE675D3C3CBA6DD98E62C7C6 /* Pods_inu_cafeteria.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		52DFDF437E936AF629C3C19F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8CB53F6A7C5EE08F3F06A529 /* Pods_inu_cafeteria.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		59EF53CE0F9A6A056A306F1C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CAC391EA048ECBD595D9E381 /* Pods-inu_cafeteria.debug.xcconfig */,
+				2243B7A300FDCBCAA2CA145C /* Pods-inu_cafeteria.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		742D8FF41F1CF7A4000B656E = {
 			isa = PBXGroup;
 			children = (
 				742D8FFF1F1CF7A4000B656E /* inu_cafeteria */,
 				742D8FFE1F1CF7A4000B656E /* Products */,
+				59EF53CE0F9A6A056A306F1C /* Pods */,
+				52DFDF437E936AF629C3C19F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +116,81 @@
 		742D8FFF1F1CF7A4000B656E /* inu_cafeteria */ = {
 			isa = PBXGroup;
 			children = (
+				742D90121F1CF8A9000B656E /* VC */,
+				742D90321F1CF91D000B656E /* Protocol */,
+				742D90311F1CF91A000B656E /* Network */,
+				742D90241F1CF904000B656E /* Extension */,
+				742D90151F1CF8EE000B656E /* Utils */,
 				742D90001F1CF7A4000B656E /* AppDelegate.swift */,
-				742D90021F1CF7A4000B656E /* ViewController.swift */,
+				742D90391F1CFA82000B656E /* Font */,
 				742D90041F1CF7A4000B656E /* Main.storyboard */,
 				742D90071F1CF7A4000B656E /* Assets.xcassets */,
 				742D90091F1CF7A4000B656E /* LaunchScreen.storyboard */,
 				742D900C1F1CF7A4000B656E /* Info.plist */,
 			);
 			path = inu_cafeteria;
+			sourceTree = "<group>";
+		};
+		742D90121F1CF8A9000B656E /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				742D90131F1CF8C1000B656E /* FirstStartVC.swift */,
+			);
+			name = VC;
+			sourceTree = "<group>";
+		};
+		742D90151F1CF8EE000B656E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				742D90161F1CF8F8000B656E /* Constraint.swift */,
+				742D90171F1CF8F8000B656E /* Unwrapper.swift */,
+				742D90181F1CF8F8000B656E /* DeviceUtil.swift */,
+				742D90191F1CF8F8000B656E /* Shadow.swift */,
+				742D901A1F1CF8F8000B656E /* Utility.swift */,
+				742D901B1F1CF8F8000B656E /* ScheduleColor.swift */,
+				742D901C1F1CF8F8000B656E /* Strings.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		742D90241F1CF904000B656E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				742D90251F1CF90E000B656E /* ExtVC.swift */,
+				742D90261F1CF90E000B656E /* ExtColor.swift */,
+				742D90271F1CF90E000B656E /* ExtUIImage.swift */,
+				742D90281F1CF90E000B656E /* ExtDate.swift */,
+				742D90291F1CF90E000B656E /* ExtInt.swift */,
+				742D902A1F1CF90E000B656E /* ExtTextfield.swift */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
+		742D90311F1CF91A000B656E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				742D90331F1CF931000B656E /* NetworkModel.swift */,
+				742D90341F1CF931000B656E /* Network.swift */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		742D90321F1CF91D000B656E /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				742D90371F1CF937000B656E /* NetworkCallback.swift */,
+			);
+			name = Protocol;
+			sourceTree = "<group>";
+		};
+		742D90391F1CFA82000B656E /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				742D903A1F1CFA9A000B656E /* KoPub Dotum_Pro Bold.otf */,
+				742D903B1F1CFA9A000B656E /* KoPub Dotum_Pro Light.otf */,
+				742D903C1F1CFA9A000B656E /* KoPub Dotum_Pro Medium.otf */,
+			);
+			name = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +200,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 742D900F1F1CF7A4000B656E /* Build configuration list for PBXNativeTarget "inu_cafeteria" */;
 			buildPhases = (
+				B7092C1950EB8AD6F6A114CC /* [CP] Check Pods Manifest.lock */,
 				742D8FF91F1CF7A4000B656E /* Sources */,
 				742D8FFA1F1CF7A4000B656E /* Frameworks */,
 				742D8FFB1F1CF7A4000B656E /* Resources */,
+				DEA326F19448FD24DA144683 /* [CP] Embed Pods Frameworks */,
+				8713666049F64F236536BFA4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -124,6 +256,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				742D903D1F1CFBBE000B656E /* KoPub Dotum_Pro Bold.otf in Resources */,
+				742D903E1F1CFBBE000B656E /* KoPub Dotum_Pro Light.otf in Resources */,
+				742D903F1F1CFBBE000B656E /* KoPub Dotum_Pro Medium.otf in Resources */,
 				742D900B1F1CF7A4000B656E /* LaunchScreen.storyboard in Resources */,
 				742D90081F1CF7A4000B656E /* Assets.xcassets in Resources */,
 				742D90061F1CF7A4000B656E /* Main.storyboard in Resources */,
@@ -132,12 +267,76 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8713666049F64F236536BFA4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B7092C1950EB8AD6F6A114CC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DEA326F19448FD24DA144683 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		742D8FF91F1CF7A4000B656E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				742D90031F1CF7A4000B656E /* ViewController.swift in Sources */,
+				742D90211F1CF8F8000B656E /* Utility.swift in Sources */,
+				742D90301F1CF90E000B656E /* ExtTextfield.swift in Sources */,
+				742D90231F1CF8F8000B656E /* Strings.swift in Sources */,
+				742D902C1F1CF90E000B656E /* ExtColor.swift in Sources */,
+				742D902F1F1CF90E000B656E /* ExtInt.swift in Sources */,
+				742D90381F1CF937000B656E /* NetworkCallback.swift in Sources */,
+				742D902B1F1CF90E000B656E /* ExtVC.swift in Sources */,
+				742D901D1F1CF8F8000B656E /* Constraint.swift in Sources */,
+				742D902E1F1CF90E000B656E /* ExtDate.swift in Sources */,
+				742D90351F1CF931000B656E /* NetworkModel.swift in Sources */,
+				742D90221F1CF8F8000B656E /* ScheduleColor.swift in Sources */,
+				742D90361F1CF931000B656E /* Network.swift in Sources */,
+				742D90141F1CF8C1000B656E /* FirstStartVC.swift in Sources */,
+				742D901E1F1CF8F8000B656E /* Unwrapper.swift in Sources */,
+				742D90201F1CF8F8000B656E /* Shadow.swift in Sources */,
+				742D902D1F1CF90E000B656E /* ExtUIImage.swift in Sources */,
+				742D901F1F1CF8F8000B656E /* DeviceUtil.swift in Sources */,
 				742D90011F1CF7A4000B656E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +458,7 @@
 		};
 		742D90101F1CF7A4000B656E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAC391EA048ECBD595D9E381 /* Pods-inu_cafeteria.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AANGG4Q668;
@@ -272,6 +472,7 @@
 		};
 		742D90111F1CF7A4000B656E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2243B7A300FDCBCAA2CA145C /* Pods-inu_cafeteria.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AANGG4Q668;
@@ -302,6 +503,7 @@
 				742D90111F1CF7A4000B656E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
