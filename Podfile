@@ -7,5 +7,7 @@ target 'inu_cafeteria' do
 
   # Pods for inu_cafeteria
   pod 'Toaster'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
 
 end

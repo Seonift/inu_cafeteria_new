@@ -31,6 +31,7 @@
 		742D903D1F1CFBBE000B656E /* KoPub Dotum_Pro Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 742D903A1F1CFA9A000B656E /* KoPub Dotum_Pro Bold.otf */; };
 		742D903E1F1CFBBE000B656E /* KoPub Dotum_Pro Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 742D903B1F1CFA9A000B656E /* KoPub Dotum_Pro Light.otf */; };
 		742D903F1F1CFBBE000B656E /* KoPub Dotum_Pro Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 742D903C1F1CFA9A000B656E /* KoPub Dotum_Pro Medium.otf */; };
+		742D90411F1DB5FA000B656E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 742D90401F1DB5FA000B656E /* GoogleService-Info.plist */; };
 		EE675D3C3CBA6DD98E62C7C6 /* Pods_inu_cafeteria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB53F6A7C5EE08F3F06A529 /* Pods_inu_cafeteria.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,8 @@
 		742D903A1F1CFA9A000B656E /* KoPub Dotum_Pro Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KoPub Dotum_Pro Bold.otf"; sourceTree = "<group>"; };
 		742D903B1F1CFA9A000B656E /* KoPub Dotum_Pro Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KoPub Dotum_Pro Light.otf"; sourceTree = "<group>"; };
 		742D903C1F1CFA9A000B656E /* KoPub Dotum_Pro Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KoPub Dotum_Pro Medium.otf"; sourceTree = "<group>"; };
+		742D90401F1DB5FA000B656E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		742D90421F1DBC45000B656E /* inu_cafeteria.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = inu_cafeteria.entitlements; sourceTree = "<group>"; };
 		8CB53F6A7C5EE08F3F06A529 /* Pods_inu_cafeteria.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_inu_cafeteria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAC391EA048ECBD595D9E381 /* Pods-inu_cafeteria.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inu_cafeteria.debug.xcconfig"; path = "Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,6 +119,7 @@
 		742D8FFF1F1CF7A4000B656E /* inu_cafeteria */ = {
 			isa = PBXGroup;
 			children = (
+				742D90421F1DBC45000B656E /* inu_cafeteria.entitlements */,
 				742D90121F1CF8A9000B656E /* VC */,
 				742D90321F1CF91D000B656E /* Protocol */,
 				742D90311F1CF91A000B656E /* Network */,
@@ -127,6 +131,7 @@
 				742D90071F1CF7A4000B656E /* Assets.xcassets */,
 				742D90091F1CF7A4000B656E /* LaunchScreen.storyboard */,
 				742D900C1F1CF7A4000B656E /* Info.plist */,
+				742D90401F1DB5FA000B656E /* GoogleService-Info.plist */,
 			);
 			path = inu_cafeteria;
 			sourceTree = "<group>";
@@ -230,6 +235,14 @@
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = AANGG4Q668;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -262,6 +275,7 @@
 				742D900B1F1CF7A4000B656E /* LaunchScreen.storyboard in Resources */,
 				742D90081F1CF7A4000B656E /* Assets.xcassets in Resources */,
 				742D90061F1CF7A4000B656E /* Main.storyboard in Resources */,
+				742D90411F1DB5FA000B656E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +475,7 @@
 			baseConfigurationReference = CAC391EA048ECBD595D9E381 /* Pods-inu_cafeteria.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = inu_cafeteria/inu_cafeteria.entitlements;
 				DEVELOPMENT_TEAM = AANGG4Q668;
 				INFOPLIST_FILE = inu_cafeteria/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -475,6 +490,7 @@
 			baseConfigurationReference = 2243B7A300FDCBCAA2CA145C /* Pods-inu_cafeteria.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = inu_cafeteria/inu_cafeteria.entitlements;
 				DEVELOPMENT_TEAM = AANGG4Q668;
 				INFOPLIST_FILE = inu_cafeteria/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
