@@ -32,6 +32,15 @@
 		742D903E1F1CFBBE000B656E /* KoPub Dotum_Pro Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 742D903B1F1CFA9A000B656E /* KoPub Dotum_Pro Light.otf */; };
 		742D903F1F1CFBBE000B656E /* KoPub Dotum_Pro Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 742D903C1F1CFA9A000B656E /* KoPub Dotum_Pro Medium.otf */; };
 		742D90411F1DB5FA000B656E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 742D90401F1DB5FA000B656E /* GoogleService-Info.plist */; };
+		742D90441F1E38E8000B656E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90431F1E38E8000B656E /* LoginVC.swift */; };
+		742D90461F1E43E2000B656E /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90451F1E43E2000B656E /* HomeVC.swift */; };
+		742D90481F1E441D000B656E /* DefaultNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90471F1E441D000B656E /* DefaultNC.swift */; };
+		742D904C1F1E4957000B656E /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 742D904B1F1E4957000B656E /* iCarousel.m */; };
+		742D904E1F1E497E000B656E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 742D904D1F1E497E000B656E /* QuartzCore.framework */; };
+		742D90501F1E53AC000B656E /* MyNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D904F1F1E53AC000B656E /* MyNumberVC.swift */; };
+		742D90521F1E5D3F000B656E /* DrawerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90511F1E5D3F000B656E /* DrawerVC.swift */; };
+		742D90541F1E61CF000B656E /* NumberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90531F1E61CF000B656E /* NumberModel.swift */; };
+		74E4330B1F1F1C230081AE08 /* BarcodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4330A1F1F1C230081AE08 /* BarcodeVC.swift */; };
 		EE675D3C3CBA6DD98E62C7C6 /* Pods_inu_cafeteria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB53F6A7C5EE08F3F06A529 /* Pods_inu_cafeteria.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +74,17 @@
 		742D903C1F1CFA9A000B656E /* KoPub Dotum_Pro Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KoPub Dotum_Pro Medium.otf"; sourceTree = "<group>"; };
 		742D90401F1DB5FA000B656E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		742D90421F1DBC45000B656E /* inu_cafeteria.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = inu_cafeteria.entitlements; sourceTree = "<group>"; };
+		742D90431F1E38E8000B656E /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		742D90451F1E43E2000B656E /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		742D90471F1E441D000B656E /* DefaultNC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultNC.swift; sourceTree = "<group>"; };
+		742D90491F1E4957000B656E /* inu_cafeteria-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inu_cafeteria-Bridging-Header.h"; sourceTree = "<group>"; };
+		742D904A1F1E4957000B656E /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		742D904B1F1E4957000B656E /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		742D904D1F1E497E000B656E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		742D904F1F1E53AC000B656E /* MyNumberVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNumberVC.swift; sourceTree = "<group>"; };
+		742D90511F1E5D3F000B656E /* DrawerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerVC.swift; sourceTree = "<group>"; };
+		742D90531F1E61CF000B656E /* NumberModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberModel.swift; sourceTree = "<group>"; };
+		74E4330A1F1F1C230081AE08 /* BarcodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeVC.swift; sourceTree = "<group>"; };
 		8CB53F6A7C5EE08F3F06A529 /* Pods_inu_cafeteria.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_inu_cafeteria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAC391EA048ECBD595D9E381 /* Pods-inu_cafeteria.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inu_cafeteria.debug.xcconfig"; path = "Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				742D904E1F1E497E000B656E /* QuartzCore.framework in Frameworks */,
 				EE675D3C3CBA6DD98E62C7C6 /* Pods_inu_cafeteria.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +105,7 @@
 		52DFDF437E936AF629C3C19F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				742D904D1F1E497E000B656E /* QuartzCore.framework */,
 				8CB53F6A7C5EE08F3F06A529 /* Pods_inu_cafeteria.framework */,
 			);
 			name = Frameworks;
@@ -119,7 +141,6 @@
 		742D8FFF1F1CF7A4000B656E /* inu_cafeteria */ = {
 			isa = PBXGroup;
 			children = (
-				742D90421F1DBC45000B656E /* inu_cafeteria.entitlements */,
 				742D90121F1CF8A9000B656E /* VC */,
 				742D90321F1CF91D000B656E /* Protocol */,
 				742D90311F1CF91A000B656E /* Network */,
@@ -132,6 +153,10 @@
 				742D90091F1CF7A4000B656E /* LaunchScreen.storyboard */,
 				742D900C1F1CF7A4000B656E /* Info.plist */,
 				742D90401F1DB5FA000B656E /* GoogleService-Info.plist */,
+				742D904A1F1E4957000B656E /* iCarousel.h */,
+				742D904B1F1E4957000B656E /* iCarousel.m */,
+				742D90421F1DBC45000B656E /* inu_cafeteria.entitlements */,
+				742D90491F1E4957000B656E /* inu_cafeteria-Bridging-Header.h */,
 			);
 			path = inu_cafeteria;
 			sourceTree = "<group>";
@@ -140,6 +165,12 @@
 			isa = PBXGroup;
 			children = (
 				742D90131F1CF8C1000B656E /* FirstStartVC.swift */,
+				742D90431F1E38E8000B656E /* LoginVC.swift */,
+				742D90451F1E43E2000B656E /* HomeVC.swift */,
+				742D904F1F1E53AC000B656E /* MyNumberVC.swift */,
+				742D90471F1E441D000B656E /* DefaultNC.swift */,
+				742D90511F1E5D3F000B656E /* DrawerVC.swift */,
+				74E4330A1F1F1C230081AE08 /* BarcodeVC.swift */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -176,6 +207,7 @@
 			children = (
 				742D90331F1CF931000B656E /* NetworkModel.swift */,
 				742D90341F1CF931000B656E /* Network.swift */,
+				742D90531F1E61CF000B656E /* NumberModel.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -234,6 +266,7 @@
 					742D8FFC1F1CF7A4000B656E = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = AANGG4Q668;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -334,18 +367,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				742D90501F1E53AC000B656E /* MyNumberVC.swift in Sources */,
 				742D90211F1CF8F8000B656E /* Utility.swift in Sources */,
+				742D90541F1E61CF000B656E /* NumberModel.swift in Sources */,
+				742D90461F1E43E2000B656E /* HomeVC.swift in Sources */,
 				742D90301F1CF90E000B656E /* ExtTextfield.swift in Sources */,
 				742D90231F1CF8F8000B656E /* Strings.swift in Sources */,
+				742D90441F1E38E8000B656E /* LoginVC.swift in Sources */,
+				74E4330B1F1F1C230081AE08 /* BarcodeVC.swift in Sources */,
 				742D902C1F1CF90E000B656E /* ExtColor.swift in Sources */,
+				742D90521F1E5D3F000B656E /* DrawerVC.swift in Sources */,
 				742D902F1F1CF90E000B656E /* ExtInt.swift in Sources */,
 				742D90381F1CF937000B656E /* NetworkCallback.swift in Sources */,
 				742D902B1F1CF90E000B656E /* ExtVC.swift in Sources */,
 				742D901D1F1CF8F8000B656E /* Constraint.swift in Sources */,
+				742D90481F1E441D000B656E /* DefaultNC.swift in Sources */,
 				742D902E1F1CF90E000B656E /* ExtDate.swift in Sources */,
 				742D90351F1CF931000B656E /* NetworkModel.swift in Sources */,
 				742D90221F1CF8F8000B656E /* ScheduleColor.swift in Sources */,
 				742D90361F1CF931000B656E /* Network.swift in Sources */,
+				742D904C1F1E4957000B656E /* iCarousel.m in Sources */,
 				742D90141F1CF8C1000B656E /* FirstStartVC.swift in Sources */,
 				742D901E1F1CF8F8000B656E /* Unwrapper.swift in Sources */,
 				742D90201F1CF8F8000B656E /* Shadow.swift in Sources */,
@@ -475,12 +516,15 @@
 			baseConfigurationReference = CAC391EA048ECBD595D9E381 /* Pods-inu_cafeteria.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = inu_cafeteria/inu_cafeteria.entitlements;
 				DEVELOPMENT_TEAM = AANGG4Q668;
 				INFOPLIST_FILE = inu_cafeteria/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "appcenter.inu.ac.kr.inu-cafeteria";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "inu_cafeteria/inu_cafeteria-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -490,12 +534,14 @@
 			baseConfigurationReference = 2243B7A300FDCBCAA2CA145C /* Pods-inu_cafeteria.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = inu_cafeteria/inu_cafeteria.entitlements;
 				DEVELOPMENT_TEAM = AANGG4Q668;
 				INFOPLIST_FILE = inu_cafeteria/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "appcenter.inu.ac.kr.inu-cafeteria";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "inu_cafeteria/inu_cafeteria-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

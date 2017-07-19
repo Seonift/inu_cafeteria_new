@@ -18,14 +18,18 @@ extension UIViewController {
         self.navigationController?.view.addSubview(view)
     }
     
-    func networkFailed() {
-        //        let alert = UIAlertController(title: "네트워크 오류", message: "인터넷 연결을 확인해주세요.", preferredStyle: .alert)
-        //        let okAction = UIAlertAction(title: "확인", style: .default)
-        //        alert.addAction(okAction)
-        //        present(alert, animated: true)
-        
-        Toast(text: "인터넷 연결을 확인해주세요.").show()
-        
+//    func networkFailed() {
+//        //        let alert = UIAlertController(title: "네트워크 오류", message: "인터넷 연결을 확인해주세요.", preferredStyle: .alert)
+//        //        let okAction = UIAlertAction(title: "확인", style: .default)
+//        //        alert.addAction(okAction)
+//        //        present(alert, animated: true)
+//        
+//        Toast(text: "인터넷 연결을 확인해주세요.").show()
+//        
+//    }
+//    
+    func networkFailed(code: Any) {
+        Toast(text: "서버에 접속할 수 없습니다.").show()
     }
     
     func setTabBarVisible(visible:Bool, animated:Bool, duration:Double?) {

@@ -39,16 +39,16 @@ class NetworkModel {
 //        return num
 //    }
     
-    func isSuccess(statuscode: Int) -> Bool{
-        // 200, 304 성공
-        // 401 404 500 오류
-        switch statuscode {
-        case 200:
-            fallthrough
-        case 304:
-            return true
-        default:
-            return false
-        }
-    }
+//    func isSuccess(statuscode: Int) -> Bool{
+//        // 200, 304 성공
+//        // 401 404 500 오류
+//        switch statuscode {
+//        case 200:
+//            fallthrough
+//        case 304:
+//            return true
+//        default:
+//            return false
+//        }
+//    }
 }

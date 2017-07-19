@@ -60,32 +60,7 @@ extension UIColor {
 }
 
 extension UIColor {
-    class var untYellow: UIColor {
-        return UIColor(red: 254.0 / 255.0, green: 207.0 / 255.0, blue: 51.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var untLightOrange: UIColor {
-        return UIColor(red: 253.0 / 255.0, green: 189.0 / 255.0, blue: 57.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var untPeach: UIColor {
-        return UIColor(red: 238.0 / 255.0, green: 103.0 / 255.0, blue: 35.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var untBrightSkyBlue: UIColor {
-        return UIColor(red: 40.0 / 255.0, green: 186.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0)
-    }
-    
     class var untGreyishBrown: UIColor {
-        return UIColor(white: 82.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var untWhite: UIColor {
-        return UIColor(white: 235.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var untGreyishBrownTwo: UIColor {
-        return UIColor(white: 60.0 / 255.0, alpha: 1.0)
+        return UIColor(red: 89.0 / 255.0, green: 88.0 / 255.0, blue: 76.0 / 255.0, alpha: 1.0)
     }
 }
-

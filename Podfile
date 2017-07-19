@@ -9,5 +9,6 @@ target 'inu_cafeteria' do
   pod 'Toaster'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
-
+  pod 'KYDrawerController'
+  pod 'Alamofire', '~> 4.4'
 end
