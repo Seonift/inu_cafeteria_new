@@ -11,4 +11,8 @@ target 'inu_cafeteria' do
   pod 'Firebase/Messaging'
   pod 'KYDrawerController'
   pod 'Alamofire', '~> 4.4'
+  pod 'AlamofireObjectMapper', '~> 4.0'
+  pod 'ObjectMapper', '~> 2.2'
+  pod 'NVActivityIndicatorView'
+  pod 'Socket.IO-Client-Swift', '~> 10.2.0' # Or latest version
 end

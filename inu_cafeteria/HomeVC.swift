@@ -14,7 +14,9 @@ import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 
-class HomeVC: UIViewController {
+import NVActivityIndicatorView
+
+class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var carouselView: iCarousel!
     @IBOutlet weak var leftB: UIButton!
@@ -27,7 +29,13 @@ class HomeVC: UIViewController {
     
     @IBOutlet weak var confirmBtn: UIButton!
     
+    let names:[String] = ["제1학생식당", "미유", "카페드림 학생식당", "카페드림 도서관", "소담국밥", "김밥천국", "봉구스밥버거"]
+    
+    var numberHint:UILabel!
+    
     override func viewDidLoad() {
+        
+        self.titleL.text = names[0]
         
         let logoIV = UIImageView(image: UIImage(named: "nav_logo"))
         logoIV.contentMode = .scaleAspectFit
@@ -45,21 +53,24 @@ class HomeVC: UIViewController {
         topL.font = UIFont(name: "KoPubDotumPM", size: 12)
         titleL.font = UIFont(name: "KoPubDotumPB", size: 20)
         
-        let hamburger = UIImage(named: "ic_drawer")
-        let hamB = UIButton(frame: CGRect(x: 0, y: 0, width: 21, height: 15))
-        hamB.setImage(hamburger, for: .normal)
-        hamB.contentMode = .scaleAspectFit
-        hamB.addTarget(self, action: #selector(showDrawer(_:)), for: .touchUpInside)
-        let lB = UIBarButtonItem(customView: hamB)
-        self.navigationItem.leftBarButtonItem = lB
-        
         setupTF()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap_mainview(_:)))
+        tap.delegate = self
+        self.view.addGestureRecognizer(tap)
+        
+        setupDrawerBtn()
     }
     
-    func showDrawer(_ sender: UIButton){
-        if let drawerController = navigationController?.parent as? KYDrawerController {
-            drawerController.setDrawerState(.opened, animated: true)
+    override func viewDidAppear(_ animated: Bool) {
+        if userPreferences.object(forKey: "socket") != nil {
+            showNumberVC(userPreferences.integer(forKey: "code"), userPreferences.integer(forKey: "number"))
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        numberTF.text = ""
+        numberTF.endEditing(true)
     }
     
     func setupTF(){
@@ -73,7 +84,16 @@ class HomeVC: UIViewController {
         numberTF.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         numberTF.keyboardType = .numberPad
         numberTF.addDoneButtonOnKeyboard()
-        numberTF.setHint(hint: "음식번호를 입력해주세요.", font: UIFont(name: "KoPubDotumPM", size: 12)!, textcolor: UIColor.untGreyishBrown)
+//        numberTF.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+//        numberTF.setHint(hint: "주문번호를 입력해주세요.", font: UIFont(name: "KoPubDotumPM", size: 12)!, textcolor: UIColor.untGreyishBrown)
+        
+        numberHint = UILabel(frame: numberTF.bounds)
+        numberTF.addSubview(numberHint)
+//        label.backgroundColor = .black
+        numberHint.text = "주문번호를 입력해주세요."
+        numberHint.textAlignment = .center
+        numberHint.textColor = UIColor.untGreyishBrown
+        numberHint.font = UIFont(name: "KoPubDotumPM", size: 12)
     }
     
     func btnClicked(_ sender: UIButton){
@@ -87,38 +107,90 @@ class HomeVC: UIViewController {
     }
     
     func confirmClicked(_ sender: UIButton){
-        let number = numberTF.text
+        let number = Int(numberTF.text!)
         if self.numberTF.text == nil || self.numberTF.text?.characters.count == 0 {
             Toast(text: "번호를 입력해주세요.").show()
         } else {
-            let token = gsno(FIRInstanceID.instanceID().token())
-            print(token)
+            Indicator.startAnimating(activityData)
+            
+//            print(token)
             let model = NumberModel(self)
-            model.postNum(num: number!, token: token)
+            model.registerNumber(code: 1, num1: number!, num2: nil, num3: nil)
+//            model.postNum(num: number!, token: token)
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        numberTF.text = ""
-        numberTF.endEditing(true)
+    //resignFirsReponder
+    func handleTap_mainview(_ sender: UITapGestureRecognizer?) {
+        print("tap")
+        self.numberTF.resignFirstResponder()
+        
+    }
+    
+    //TapGesu
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if (touch.view?.isDescendant(of: self.numberTF))! || (touch.view?.isDescendant(of: self.confirmBtn))! {
+            return false
+        }
+        return true
     }
 }
 
-extension HomeVC: NetworkCallback {
-    func networkResult(resultData: Any, code: String) {
-        if code == "postnum" {
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            guard let vc = sb.instantiateViewController(withIdentifier: "mynumbervc") as? MyNumberVC else { return }
-            
-            vc.bTitle = gsno(titleL.text)
-            vc.number = gsno(numberTF.text)
-            
-            self.navigationController?.pushViewController(vc, animated: true)
+extension HomeVC {
+    override func networkResult(resultData: Any, code: String) {
+        if code == "register_num" {
+            showNumberVC(1, gino(Int(gsno(numberTF.text))))
         }
+        
+        if code == "logout" {
+            logout_ncb()
+        }
+    }
+    
+    override func networkFailed(code: Any) {
+        Toast.init(text: Strings.noServer()).show()
+        Indicator.stopAnimating()
+    }
+    
+    func showNumberVC(_ code:Int, _ number: Int){
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        //            guard let vc = sb.instantiateViewController(withIdentifier: "mynumbervc") as? MyNumberVC else { return }
+        guard let vc = sb.instantiateViewController(withIdentifier: "mynumbervcnav") as? DefaultNC else { return }
+        let mynum = vc.childViewControllers[0] as! MyNumberVC
+        
+        let drawerC = KYDrawerController(drawerDirection: .left, drawerWidth: CGFloats.drawer_width())
+        drawerC.mainViewController = vc
+        
+        guard let drawer = sb.instantiateViewController(withIdentifier: "drawervc") as? DrawerVC else { return }
+        drawerC.drawerViewController = drawer
+        drawer.delegate = mynum
+        
+        mynum.bTitle = gsno(titleL.text)
+        mynum.number = number
+        mynum.code = code
+        
+        self.present(drawerC, animated: false, completion: nil)
     }
 }
 
 extension HomeVC: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        numberHint.isHidden = true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.text == "" || textField.text?.characters.count == 0 {
+            numberHint.isHidden = false
+        }
+    }
+//    func textFieldDidChange(_ textField: UITextField){
+//        if textField.text != "" || textField.text?.characters.count != 0 {
+//            numberHint.isHidden = true
+//        } else {
+//            numberHint.isHidden = false
+//        }
+//    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
@@ -137,7 +209,8 @@ extension HomeVC: UITextFieldDelegate {
 extension HomeVC: iCarouselDelegate, iCarouselDataSource {
     
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return 10
+//        return 10
+        return names.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
@@ -172,24 +245,13 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
         
         return value
     }
-}
-
-extension HomeVC: ViewCallback {
-    func passData(resultData: Any, code: String) {
-        print(code)
-        
-        if code == "barcode" {
-            
-            if let drawerController = navigationController?.parent as? KYDrawerController {
-                drawerController.setDrawerState(.closed, animated: true)
-            }
-            
-            DispatchQueue.main.async {
-                let sb = UIStoryboard(name: "Main", bundle: nil)
-                guard let barcodevc = sb.instantiateViewController(withIdentifier: "barcodevc") as? BarcodeVC else {return}
-                self.navigationController?.pushViewController(barcodevc, animated: true)
-            }
-            
-        }
+    
+    func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
+        self.view.endEditing(true)
+        self.titleL.text = names[carousel.currentItemIndex]
     }
 }
+
+//extension HomeVC: ViewCallback {
+//    
+//}

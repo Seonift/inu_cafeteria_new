@@ -11,6 +11,7 @@ import UserNotifications
 import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
+import KYDrawerController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate {
@@ -51,10 +52,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.tokenRefreshNotification(notification:)), name: .firInstanceIDTokenRefresh, object: nil)
         
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let firstVC = storyboard.instantiateViewController(withIdentifier: "firststartvc")
         
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let firstVC = storyboard.instantiateViewController(withIdentifier: "firststartvc")
+        let sb = UIStoryboard(name: "Splash", bundle: nil)
+        let firstVC = sb.instantiateViewController(withIdentifier: "splashvc")
         self.window?.rootViewController = firstVC
         self.window?.makeKeyAndVisible()
         
@@ -64,6 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -71,6 +75,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         FIRMessaging.messaging().disconnect()
         print("Disconnected from FCM.")
+        
+        removeFlag()
+        print("socket end")
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -80,15 +87,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         connectToFcm()
+        
+//        print("Becomeactive")
+        
+        if let vc = self.window?.visibleViewController as? KYDrawerController {
+            if vc.mainViewController.childViewControllers[0].isKind(of: MyNumberVC.self) && userPreferences.object(forKey: "socket") != nil {
+                print("socket restart")
+            }
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
+        removeFlag()
+        print("socket end")
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         FIRMessaging.messaging().appDidReceiveMessage(userInfo)
+        
+        
+        //푸시 메시지 클릭했을 때 이벤트
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
 //        let dict = userInfo["aps"] as! NSDictionary
 //        let message = dict["alert"]
@@ -109,7 +131,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let refreshedToken = FIRInstanceID.instanceID().token() {
             print("InstanceID token: \(refreshedToken)")
         }
-        
         connectToFcm()
     }
     
@@ -131,6 +152,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
+    func removeFlag(){
+        let model = FlagModel()
+        model.activeBarcode(0)
+    }
+    
 //    func connectToFcm() {
 //        FIRMessaging.messaging().connect { (error) in
 //            if (error != nil) {
@@ -141,5 +167,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        }
 //    }
 
+}
+
+public extension UIWindow {
+    public var visibleViewController: UIViewController? {
+        return UIWindow.getVisibleViewControllerFrom(self.rootViewController)
+    }
+    
+    public static func getVisibleViewControllerFrom(_ vc: UIViewController?) -> UIViewController? {
+        if let nc = vc as? UINavigationController {
+            return UIWindow.getVisibleViewControllerFrom(nc.visibleViewController)
+        } else if let tc = vc as? UITabBarController {
+            return UIWindow.getVisibleViewControllerFrom(tc.selectedViewController)
+        } else {
+            if let pvc = vc?.presentedViewController {
+                return UIWindow.getVisibleViewControllerFrom(pvc)
+            } else {
+                return vc
+            }
+        }
+    }
 }
 

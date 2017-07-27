@@ -10,6 +10,7 @@ protocol NetworkCallback {
     
     func networkResult(resultData:Any, code:String)
     func networkFailed(code:Any)
+    func networkFailed()
     
 }
 

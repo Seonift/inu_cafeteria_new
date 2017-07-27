@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		741BD9181F22453600B56F30 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 741BD9171F22453600B56F30 /* Splash.storyboard */; };
+		741BD91B1F2245DA00B56F30 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741BD91A1F2245DA00B56F30 /* SplashVC.swift */; };
 		742D90011F1CF7A4000B656E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90001F1CF7A4000B656E /* AppDelegate.swift */; };
 		742D90061F1CF7A4000B656E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 742D90041F1CF7A4000B656E /* Main.storyboard */; };
 		742D90081F1CF7A4000B656E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 742D90071F1CF7A4000B656E /* Assets.xcassets */; };
@@ -40,12 +42,19 @@
 		742D90501F1E53AC000B656E /* MyNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D904F1F1E53AC000B656E /* MyNumberVC.swift */; };
 		742D90521F1E5D3F000B656E /* DrawerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90511F1E5D3F000B656E /* DrawerVC.swift */; };
 		742D90541F1E61CF000B656E /* NumberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90531F1E61CF000B656E /* NumberModel.swift */; };
+		745E68C21F21CA6600D0C0A5 /* IndicatorClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745E68C11F21CA6600D0C0A5 /* IndicatorClass.swift */; };
+		747C10541F231F4700C195A9 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747C10531F231F4700C195A9 /* LoginModel.swift */; };
+		747C10581F248BD500C195A9 /* Barcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747C10571F248BD500C195A9 /* Barcode.swift */; };
+		747C105B1F2A388200C195A9 /* LoginObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747C105A1F2A388200C195A9 /* LoginObject.swift */; };
+		747C105D1F2A3B9F00C195A9 /* FlagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747C105C1F2A3B9F00C195A9 /* FlagModel.swift */; };
 		74E4330B1F1F1C230081AE08 /* BarcodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4330A1F1F1C230081AE08 /* BarcodeVC.swift */; };
 		EE675D3C3CBA6DD98E62C7C6 /* Pods_inu_cafeteria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB53F6A7C5EE08F3F06A529 /* Pods_inu_cafeteria.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2243B7A300FDCBCAA2CA145C /* Pods-inu_cafeteria.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inu_cafeteria.release.xcconfig"; path = "Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria.release.xcconfig"; sourceTree = "<group>"; };
+		741BD9171F22453600B56F30 /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
+		741BD91A1F2245DA00B56F30 /* SplashVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		742D8FFD1F1CF7A4000B656E /* inu_cafeteria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inu_cafeteria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		742D90001F1CF7A4000B656E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		742D90051F1CF7A4000B656E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,6 +93,11 @@
 		742D904F1F1E53AC000B656E /* MyNumberVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNumberVC.swift; sourceTree = "<group>"; };
 		742D90511F1E5D3F000B656E /* DrawerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerVC.swift; sourceTree = "<group>"; };
 		742D90531F1E61CF000B656E /* NumberModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberModel.swift; sourceTree = "<group>"; };
+		745E68C11F21CA6600D0C0A5 /* IndicatorClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorClass.swift; sourceTree = "<group>"; };
+		747C10531F231F4700C195A9 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		747C10571F248BD500C195A9 /* Barcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Barcode.swift; sourceTree = "<group>"; };
+		747C105A1F2A388200C195A9 /* LoginObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginObject.swift; sourceTree = "<group>"; };
+		747C105C1F2A3B9F00C195A9 /* FlagModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlagModel.swift; sourceTree = "<group>"; };
 		74E4330A1F1F1C230081AE08 /* BarcodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeVC.swift; sourceTree = "<group>"; };
 		8CB53F6A7C5EE08F3F06A529 /* Pods_inu_cafeteria.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_inu_cafeteria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAC391EA048ECBD595D9E381 /* Pods-inu_cafeteria.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inu_cafeteria.debug.xcconfig"; path = "Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria.debug.xcconfig"; sourceTree = "<group>"; };
@@ -120,6 +134,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		741BD9191F22456A00B56F30 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				741BD9171F22453600B56F30 /* Splash.storyboard */,
+				742D90041F1CF7A4000B656E /* Main.storyboard */,
+			);
+			name = Storyboard;
+			sourceTree = "<group>";
+		};
 		742D8FF41F1CF7A4000B656E = {
 			isa = PBXGroup;
 			children = (
@@ -145,10 +168,11 @@
 				742D90321F1CF91D000B656E /* Protocol */,
 				742D90311F1CF91A000B656E /* Network */,
 				742D90241F1CF904000B656E /* Extension */,
+				747C10591F2A387200C195A9 /* Model */,
 				742D90151F1CF8EE000B656E /* Utils */,
 				742D90001F1CF7A4000B656E /* AppDelegate.swift */,
 				742D90391F1CFA82000B656E /* Font */,
-				742D90041F1CF7A4000B656E /* Main.storyboard */,
+				741BD9191F22456A00B56F30 /* Storyboard */,
 				742D90071F1CF7A4000B656E /* Assets.xcassets */,
 				742D90091F1CF7A4000B656E /* LaunchScreen.storyboard */,
 				742D900C1F1CF7A4000B656E /* Info.plist */,
@@ -167,10 +191,12 @@
 				742D90131F1CF8C1000B656E /* FirstStartVC.swift */,
 				742D90431F1E38E8000B656E /* LoginVC.swift */,
 				742D90451F1E43E2000B656E /* HomeVC.swift */,
+				745E68C11F21CA6600D0C0A5 /* IndicatorClass.swift */,
 				742D904F1F1E53AC000B656E /* MyNumberVC.swift */,
 				742D90471F1E441D000B656E /* DefaultNC.swift */,
 				742D90511F1E5D3F000B656E /* DrawerVC.swift */,
 				74E4330A1F1F1C230081AE08 /* BarcodeVC.swift */,
+				741BD91A1F2245DA00B56F30 /* SplashVC.swift */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -185,6 +211,7 @@
 				742D901A1F1CF8F8000B656E /* Utility.swift */,
 				742D901B1F1CF8F8000B656E /* ScheduleColor.swift */,
 				742D901C1F1CF8F8000B656E /* Strings.swift */,
+				747C10571F248BD500C195A9 /* Barcode.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -208,6 +235,8 @@
 				742D90331F1CF931000B656E /* NetworkModel.swift */,
 				742D90341F1CF931000B656E /* Network.swift */,
 				742D90531F1E61CF000B656E /* NumberModel.swift */,
+				747C10531F231F4700C195A9 /* LoginModel.swift */,
+				747C105C1F2A3B9F00C195A9 /* FlagModel.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -228,6 +257,14 @@
 				742D903C1F1CFA9A000B656E /* KoPub Dotum_Pro Medium.otf */,
 			);
 			name = Font;
+			sourceTree = "<group>";
+		};
+		747C10591F2A387200C195A9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				747C105A1F2A388200C195A9 /* LoginObject.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,6 +342,7 @@
 				742D903D1F1CFBBE000B656E /* KoPub Dotum_Pro Bold.otf in Resources */,
 				742D903E1F1CFBBE000B656E /* KoPub Dotum_Pro Light.otf in Resources */,
 				742D903F1F1CFBBE000B656E /* KoPub Dotum_Pro Medium.otf in Resources */,
+				741BD9181F22453600B56F30 /* Splash.storyboard in Resources */,
 				742D900B1F1CF7A4000B656E /* LaunchScreen.storyboard in Resources */,
 				742D90081F1CF7A4000B656E /* Assets.xcassets in Resources */,
 				742D90061F1CF7A4000B656E /* Main.storyboard in Resources */,
@@ -375,19 +413,25 @@
 				742D90231F1CF8F8000B656E /* Strings.swift in Sources */,
 				742D90441F1E38E8000B656E /* LoginVC.swift in Sources */,
 				74E4330B1F1F1C230081AE08 /* BarcodeVC.swift in Sources */,
+				747C10581F248BD500C195A9 /* Barcode.swift in Sources */,
 				742D902C1F1CF90E000B656E /* ExtColor.swift in Sources */,
 				742D90521F1E5D3F000B656E /* DrawerVC.swift in Sources */,
 				742D902F1F1CF90E000B656E /* ExtInt.swift in Sources */,
 				742D90381F1CF937000B656E /* NetworkCallback.swift in Sources */,
+				747C105B1F2A388200C195A9 /* LoginObject.swift in Sources */,
 				742D902B1F1CF90E000B656E /* ExtVC.swift in Sources */,
+				741BD91B1F2245DA00B56F30 /* SplashVC.swift in Sources */,
 				742D901D1F1CF8F8000B656E /* Constraint.swift in Sources */,
 				742D90481F1E441D000B656E /* DefaultNC.swift in Sources */,
 				742D902E1F1CF90E000B656E /* ExtDate.swift in Sources */,
 				742D90351F1CF931000B656E /* NetworkModel.swift in Sources */,
 				742D90221F1CF8F8000B656E /* ScheduleColor.swift in Sources */,
+				747C105D1F2A3B9F00C195A9 /* FlagModel.swift in Sources */,
 				742D90361F1CF931000B656E /* Network.swift in Sources */,
 				742D904C1F1E4957000B656E /* iCarousel.m in Sources */,
 				742D90141F1CF8C1000B656E /* FirstStartVC.swift in Sources */,
+				745E68C21F21CA6600D0C0A5 /* IndicatorClass.swift in Sources */,
+				747C10541F231F4700C195A9 /* LoginModel.swift in Sources */,
 				742D901E1F1CF8F8000B656E /* Unwrapper.swift in Sources */,
 				742D90201F1CF8F8000B656E /* Shadow.swift in Sources */,
 				742D902D1F1CF90E000B656E /* ExtUIImage.swift in Sources */,

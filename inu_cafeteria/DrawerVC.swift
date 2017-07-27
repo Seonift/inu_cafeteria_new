@@ -25,6 +25,18 @@ class DrawerVC: UIViewController {
         setupUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+//        print("flag")
+        let model = FlagModel()
+        model.activeBarcode(1)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+//        print("flag end")
+        let model = FlagModel()
+        model.activeBarcode(0)
+    }
+    
     func setupUI(){
         imageView.layer.cornerRadius = image_const.constant / 2
         imageView.clipsToBounds = true
@@ -52,5 +64,6 @@ class DrawerVC: UIViewController {
     }
     
     @IBAction func logoutClicked(_ sender: Any) {
+        self.delegate?.passData(resultData: true, code: "logout")
     }
 }

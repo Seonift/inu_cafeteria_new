@@ -8,6 +8,12 @@
 
 import UIKit
 
+let baseURL = ""
+
+let header:[String:String] = [
+    "Content-Type" : "application/x-www-form-urlencoded"
+]
+
 class NetworkModel {
     
     //뷰컨트롤러로 데이터를 전달해줄 위임자를 나타내주는 변수
@@ -19,9 +25,6 @@ class NetworkModel {
     init(_ vc : NetworkCallback){
         self.view = vc
     }
-    
-    let baseURL = ""
-    
     
 //    //옵셔널 String을 해제하는데 값이 nil이면 ""을 반환
 //    func gsno(_ data: String?) -> String {

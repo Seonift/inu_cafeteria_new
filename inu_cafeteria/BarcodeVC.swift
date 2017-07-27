@@ -12,12 +12,18 @@ class BarcodeVC: UIViewController {
     
     @IBOutlet weak var imageV: UIImageView!
     @IBOutlet weak var image_const: NSLayoutConstraint!
+    @IBOutlet weak var image_height: NSLayoutConstraint!
+    @IBOutlet weak var image_top: NSLayoutConstraint!
     
     @IBOutlet weak var nameL: UILabel!
     
     @IBOutlet weak var numL: UILabel!
     
+    @IBOutlet weak var barcodeIV: UIImageView!
+    
     @IBOutlet weak var barcodeBV: UIView!
+    @IBOutlet weak var barcode_width: NSLayoutConstraint!
+    @IBOutlet weak var barcode_height: NSLayoutConstraint!
     
     override func viewDidLoad() {
         
@@ -27,6 +33,10 @@ class BarcodeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         nameL.text = "김선일"
         numL.text = "정보통신공학과    201101720"
+        
+        let barcode = userPreferences.string(forKey: "barcode")
+        
+        barcodeIV.image = generateBarcode(from: gsno(barcode))
         
     }
     
@@ -38,7 +48,12 @@ class BarcodeVC: UIViewController {
     }
     
     func setupUI(){
-        imageV.layer.cornerRadius = image_const.constant / 2
+        image_top.constant = DeviceUtil.getHeight(height: image_top.constant)
+        var width = DeviceUtil.getWidth(width: image_const.constant)
+        image_const.constant = width
+        image_height.constant = width
+        
+        imageV.layer.cornerRadius = width / 2
         imageV.clipsToBounds = true
         
         imageV.layer.borderColor = UIColor(r: 189, g: 189, b: 183).cgColor
@@ -47,8 +62,11 @@ class BarcodeVC: UIViewController {
         nameL.font = UIFont(name: "KoPubDotumPB", size: 18)
         numL.font = UIFont(name: "KoPubDotumPL", size: 18)
         
-        barcodeBV.layer.cornerRadius = 10
+        barcodeBV.layer.cornerRadius = DeviceUtil.getWidth(width: 10)
         barcodeBV.clipsToBounds = true
+        width = DeviceUtil.getWidth(width: barcode_width.constant)
+        barcode_width.constant = width
+        barcode_height.constant = width
         
     }
 }

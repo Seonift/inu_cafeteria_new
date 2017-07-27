@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 let userPreferences = UserDefaults.standard
+// "id" : id. String
+// "pw" : pw. String
+// "auto_login" : 자동로그인 여부. Bool
 
 //let device_width = UIScreen.main.bounds.size.width
 //let device_height = UIScreen.main.bounds.size.height

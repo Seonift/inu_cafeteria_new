@@ -27,7 +27,7 @@ class MyNumberVC: UIViewController {
             }
         }
     }
-    var number:String = "" {
+    var number:Int = 0 {
         didSet {
             if numberL != nil {
                 numberL.text = String(number)
@@ -35,27 +35,69 @@ class MyNumberVC: UIViewController {
         }
     }
     
+    var code:Int = 0
+    
+    @IBOutlet weak var image_height: NSLayoutConstraint!
+    
     override func viewDidLoad() {
+        
+        setupDrawerBtn()
+        
+        let height = DeviceUtil.getHeight(height: image_height.constant)
+        image_height.constant = height
+        
+        Indicator.stopAnimating()
+        
         titleL.font = UIFont(name: "KoPubDotumPB", size: 20)
         numberL.font = UIFont(name: "KoPubDotumPB", size: 72)
         numberTitleL.font = UIFont(name: "KoPubDotumPB", size: 15)
         cView.isScrollEnabled = false
         cView.isUserInteractionEnabled = false
         
+        let layout = cView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.minimumInteritemSpacing = DeviceUtil.getWidth(width: 42)
+        layout.minimumLineSpacing = DeviceUtil.getHeight(height: 32)
+//        cView.collectionViewLayout = layout
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(close))
+        imageView.addGestureRecognizer(tap)
+        imageView.isUserInteractionEnabled = true
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         let logoIV = UIImageView(image: UIImage(named: "nav_logo"))
         logoIV.contentMode = .scaleAspectFit
         logoIV.frame = CGRect(x: 0, y: 0, width: 130, height: 21.5)
         self.navigationItem.titleView = logoIV
+        
+        print("socket start")
+        userPreferences.setValue(true, forKey: "socket")
+        userPreferences.setValue(number, forKey: "number")
+        userPreferences.setValue(code, forKey: "code")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.bTitle = { self.bTitle }()
         self.number = { self.number }()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("socket end")
+        userPreferences.removeObject(forKey: "socket")
+        userPreferences.removeObject(forKey: "number")
+        userPreferences.removeObject(forKey: "code")
+    }
+    
+    func close(){
+        self.dismiss(animated: false, completion: nil)
+    }
 
+    override func networkResult(resultData: Any, code: String) {
+        if code == "logout" {
+            logout_ncb()
+        }
+    }
 }
 
 extension MyNumberVC: UICollectionViewDelegate, UICollectionViewDataSource {

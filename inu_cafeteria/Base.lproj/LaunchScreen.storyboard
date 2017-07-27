@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,11 +8,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="KoPub Dotum_Pro Medium.otf">
-            <string>KoPubDotumPM</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -22,34 +17,38 @@
                         <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                    <view key="view" contentMode="scaleToFill" id="ngl-PT-Na3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_bg" translatesAutoresizingMaskIntoConstraints="NO" id="EjP-ae-e7z">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg2" translatesAutoresizingMaskIntoConstraints="NO" id="49k-cO-Tqh">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="mrc-Lr-ERE">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="lCY-FJ-4do">
                                 <rect key="frame" x="63" y="221" width="249" height="79"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="249" id="H9e-1V-NHn"/>
+                                    <constraint firstAttribute="height" constant="79" id="zQ9-0S-1QS"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인천대학교 식당 주문번호 알림앱." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFm-dJ-yHs">
-                                <rect key="frame" x="0.0" y="314" width="375" height="16.5"/>
-                                <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_text" translatesAutoresizingMaskIntoConstraints="NO" id="hxi-YL-bAy">
+                                <rect key="frame" x="90" y="315.5" width="195" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="dBy-Ck-zEF"/>
+                                    <constraint firstAttribute="width" constant="195" id="vNa-4u-wCu"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="EjP-ae-e7z" secondAttribute="trailing" id="Clc-8w-Yqt"/>
-                            <constraint firstItem="mrc-Lr-ERE" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="201" id="EBS-SX-aOm"/>
-                            <constraint firstItem="EjP-ae-e7z" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="ErC-5c-MHb"/>
-                            <constraint firstItem="dFm-dJ-yHs" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="KeP-vR-nIH"/>
-                            <constraint firstItem="EjP-ae-e7z" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="OQ7-nu-Abl"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="EjP-ae-e7z" secondAttribute="bottom" id="Xfn-FD-bat"/>
-                            <constraint firstItem="mrc-Lr-ERE" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="adz-Ft-eDL"/>
-                            <constraint firstItem="dFm-dJ-yHs" firstAttribute="top" secondItem="mrc-Lr-ERE" secondAttribute="bottom" constant="14" id="fp4-b8-sBr"/>
-                            <constraint firstAttribute="trailing" secondItem="dFm-dJ-yHs" secondAttribute="trailing" id="mkS-Yn-Cfd"/>
+                            <constraint firstItem="hxi-YL-bAy" firstAttribute="top" secondItem="lCY-FJ-4do" secondAttribute="bottom" constant="15.4" id="7hH-Ou-HGs"/>
+                            <constraint firstItem="49k-cO-Tqh" firstAttribute="top" secondItem="ngl-PT-Na3" secondAttribute="top" id="FVS-62-OKp"/>
+                            <constraint firstItem="49k-cO-Tqh" firstAttribute="leading" secondItem="ngl-PT-Na3" secondAttribute="leading" id="QYP-Yy-c5J"/>
+                            <constraint firstItem="lCY-FJ-4do" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="201" id="ez2-e6-zch"/>
+                            <constraint firstAttribute="trailing" secondItem="49k-cO-Tqh" secondAttribute="trailing" id="lQP-Bp-x6g"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="49k-cO-Tqh" secondAttribute="bottom" id="tN4-Dg-cqr"/>
+                            <constraint firstItem="lCY-FJ-4do" firstAttribute="centerX" secondItem="ngl-PT-Na3" secondAttribute="centerX" id="toK-vH-lg4"/>
+                            <constraint firstItem="hxi-YL-bAy" firstAttribute="centerX" secondItem="ngl-PT-Na3" secondAttribute="centerX" id="zss-pn-cEM"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -59,7 +58,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="login_bg" width="375" height="666"/>
+        <image name="bg2" width="375" height="666"/>
         <image name="splash_logo" width="249" height="79"/>
+        <image name="splash_text" width="195" height="15"/>
     </resources>
 </document>

@@ -15,7 +15,7 @@ class DefaultNC: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationBar.setBackgroundImage(UIImage(named: "nav_bg"), for: .default)
+        self.navigationBar.setBackgroundImage(UIImage(named: "nav_bg")?.resizableImage(withCapInsets: .zero, resizingMode: .stretch), for: .default)
         self.navigationBar.tintColor = .white
         self.navigationBar.topItem?.title = ""
     }

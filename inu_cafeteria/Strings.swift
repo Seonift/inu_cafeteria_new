@@ -11,3 +11,9 @@ class Strings {
         return "서버에 접속할 수 없습니다."
     }
 }
+
+class CGFloats {
+    class func drawer_width() -> CGFloat {
+        return 240.0
+    }
+}
