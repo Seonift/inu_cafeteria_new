@@ -33,6 +33,32 @@ class NumberModel: NetworkModel {
 //        }
 //    }
     
+    func isNumberWait(){
+        let token = gsno(FIRInstanceID.instanceID().token())
+        let params:[String:Any] = [
+            "fcmtoken" : token
+        ]
+        
+        Alamofire.request("\(baseURL)isNumberWait", method: .post, parameters: params, headers: header).responseJSON { res in
+            print(res.response?.statusCode)
+            switch res.result {
+            case .success:
+                print("success")
+                let json = res.result.value as? NSDictionary
+//                print(json)
+//                print(json?.count)
+//                let count = json?.count
+                self.view.networkResult(resultData: json!, code: "isnumberwait")
+            case .failure(let error):
+                print("failure")
+                print(error)
+                self.view.networkFailed(code: "isnumberwait")
+            }
+//            print(res.result.value)
+            
+        }
+    }
+    
     func registerNumber(code: Int, num1: Int, num2: Int?, num3: Int?){
         let token = gsno(FIRInstanceID.instanceID().token())
         print("firebase token:\(token)")

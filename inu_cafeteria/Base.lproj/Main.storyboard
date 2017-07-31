@@ -339,8 +339,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VwB-TY-zUC">
-                                        <rect key="frame" x="0.0" y="97.5" width="375" height="79.5"/>
-                                        <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="72"/>
+                                        <rect key="frame" x="0.0" y="97.5" width="375" height="60.5"/>
+                                        <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="55"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -432,10 +432,10 @@
             </objects>
             <point key="canvasLocation" x="4860" y="136.28185907046478"/>
         </scene>
-        <!--BarcodeVC-->
+        <!--View Controller-->
         <scene sceneID="cSw-OE-L5e">
             <objects>
-                <viewController storyboardIdentifier="barcodevc" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vkM-ML-fT9" customClass="BarcodeVC" customModule="inu_cafeteria" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="barcodevc" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vkM-ML-fT9" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iUt-mf-s3p"/>
                         <viewControllerLayoutGuide type="bottom" id="uKQ-78-Log"/>
@@ -550,23 +550,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김진웅" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJd-rm-oJe">
-                                <rect key="frame" x="0.0" y="150" width="375" height="20"/>
+                                <rect key="frame" x="0.0" y="183" width="375" height="20"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="18"/>
                                 <color key="textColor" red="0.34901960780000002" green="0.34509803919999998" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVV-sO-0TL">
-                                <rect key="frame" x="145.5" y="225" width="84" height="32"/>
-                                <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="18"/>
-                                <state key="normal" title="학생 바코드">
-                                    <color key="titleColor" red="0.56470588239999997" green="0.72941176470000002" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="barcodeClicked:" destination="ffh-yw-Nqe" eventType="touchUpInside" id="OE9-fF-IWh"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hw4-on-E4v">
-                                <rect key="frame" x="156" y="267" width="63" height="32"/>
+                                <rect key="frame" x="156" y="611" width="63" height="32"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="18"/>
                                 <state key="normal" title="로그아웃">
                                     <color key="titleColor" red="0.74117647060000003" green="0.74117647060000003" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -575,26 +565,54 @@
                                     <action selector="logoutClicked:" destination="ffh-yw-Nqe" eventType="touchUpInside" id="qUP-E9-aj2"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNr-Wh-2Lf">
+                                <rect key="frame" x="0.0" y="151" width="375" height="16.5"/>
+                                <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="15"/>
+                                <color key="textColor" red="0.34901960784313724" green="0.34509803921568627" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pgi-Bh-8ax">
+                                <rect key="frame" x="97" y="244" width="180" height="180"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uNa-Wa-oHA">
+                                        <rect key="frame" x="5" y="5" width="170" height="170"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="uNa-Wa-oHA" secondAttribute="trailing" constant="5" id="1qm-CE-ktw"/>
+                                    <constraint firstAttribute="bottom" secondItem="uNa-Wa-oHA" secondAttribute="bottom" constant="5" id="CMG-ya-Xg5"/>
+                                    <constraint firstItem="uNa-Wa-oHA" firstAttribute="top" secondItem="Pgi-Bh-8ax" secondAttribute="top" constant="5" id="baJ-bi-pNr"/>
+                                    <constraint firstItem="uNa-Wa-oHA" firstAttribute="leading" secondItem="Pgi-Bh-8ax" secondAttribute="leading" constant="5" id="g9c-Qq-b8H"/>
+                                    <constraint firstAttribute="width" constant="180" id="rID-4n-WRo"/>
+                                    <constraint firstAttribute="height" constant="180" id="xty-Ev-vwC"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="bVV-sO-0TL" firstAttribute="top" secondItem="pJd-rm-oJe" secondAttribute="bottom" constant="55" id="5Q8-48-g0a"/>
+                            <constraint firstAttribute="trailing" secondItem="DNr-Wh-2Lf" secondAttribute="trailing" id="8p7-qr-hfe"/>
                             <constraint firstItem="aZR-Km-F0q" firstAttribute="top" secondItem="TUG-3u-rMv" secondAttribute="topMargin" constant="44" id="EYV-6o-UUe"/>
                             <constraint firstItem="pJd-rm-oJe" firstAttribute="leading" secondItem="TUG-3u-rMv" secondAttribute="leading" id="GfH-q1-yVr"/>
-                            <constraint firstItem="bVV-sO-0TL" firstAttribute="centerX" secondItem="TUG-3u-rMv" secondAttribute="centerX" id="HUa-oD-q0m"/>
+                            <constraint firstItem="Pgi-Bh-8ax" firstAttribute="top" secondItem="aZR-Km-F0q" secondAttribute="bottom" constant="110" id="KM1-u5-aaq"/>
                             <constraint firstAttribute="trailing" secondItem="pJd-rm-oJe" secondAttribute="trailing" id="PpP-Ey-IwT"/>
-                            <constraint firstItem="Hw4-on-E4v" firstAttribute="top" secondItem="bVV-sO-0TL" secondAttribute="bottom" constant="10" id="ZZq-RI-eoq"/>
+                            <constraint firstItem="DaN-6T-Mm4" firstAttribute="top" secondItem="Hw4-on-E4v" secondAttribute="bottom" constant="24" id="Tcu-Ht-ipt"/>
+                            <constraint firstItem="Pgi-Bh-8ax" firstAttribute="centerX" secondItem="TUG-3u-rMv" secondAttribute="centerX" id="Ur4-Xs-ZK3"/>
+                            <constraint firstItem="pJd-rm-oJe" firstAttribute="top" secondItem="aZR-Km-F0q" secondAttribute="bottom" constant="49" id="cVA-VW-Msx"/>
                             <constraint firstItem="Hw4-on-E4v" firstAttribute="centerX" secondItem="TUG-3u-rMv" secondAttribute="centerX" id="f1X-JF-09H"/>
                             <constraint firstItem="aZR-Km-F0q" firstAttribute="centerX" secondItem="TUG-3u-rMv" secondAttribute="centerX" id="hn1-03-N9b"/>
-                            <constraint firstItem="pJd-rm-oJe" firstAttribute="top" secondItem="aZR-Km-F0q" secondAttribute="bottom" constant="16" id="j28-aV-ivH"/>
+                            <constraint firstItem="DNr-Wh-2Lf" firstAttribute="leading" secondItem="TUG-3u-rMv" secondAttribute="leading" id="sDR-jR-A5U"/>
+                            <constraint firstItem="DNr-Wh-2Lf" firstAttribute="top" secondItem="aZR-Km-F0q" secondAttribute="bottom" constant="17" id="tuB-uU-CWG"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="barcodeBtn" destination="bVV-sO-0TL" id="Pgf-L3-DbI"/>
+                        <outlet property="barcodeBG" destination="Pgi-Bh-8ax" id="9Zo-Cl-uPB"/>
+                        <outlet property="barcodeIV" destination="uNa-Wa-oHA" id="OAL-Bl-6FS"/>
                         <outlet property="imageView" destination="aZR-Km-F0q" id="YVm-k6-8Cc"/>
                         <outlet property="image_const" destination="SZZ-Fw-wSe" id="eV6-QG-2wb"/>
                         <outlet property="logoutBtn" destination="Hw4-on-E4v" id="6JK-Ve-bQP"/>
                         <outlet property="nameL" destination="pJd-rm-oJe" id="Nwh-Ov-KJT"/>
+                        <outlet property="numL" destination="DNr-Wh-2Lf" id="TLQ-KJ-qEi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V0o-uE-xnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -628,7 +646,7 @@
         <image name="home_right" width="20" height="32"/>
         <image name="login_btn" width="120" height="50"/>
         <image name="login_btn_clicked" width="120" height="50"/>
-        <image name="login_cbox" width="24" height="24"/>
+        <image name="login_cbox" width="18" height="18"/>
         <image name="login_logo" width="219" height="69"/>
         <image name="mynumber_bg" width="375" height="251"/>
     </resources>

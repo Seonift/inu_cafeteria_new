@@ -93,6 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let vc = self.window?.visibleViewController as? KYDrawerController {
             if vc.mainViewController.childViewControllers[0].isKind(of: MyNumberVC.self) && userPreferences.object(forKey: "socket") != nil {
                 print("socket restart")
+                //여기서 갯수 확인해서 없으면 dismiss 해야함.
             }
         }
     }
@@ -111,6 +112,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         //푸시 메시지 클릭했을 때 이벤트
         UIApplication.shared.applicationIconBadgeNumber = 0
+        userPreferences.set(false, forKey: "socket")
+        userPreferences.removeObject(forKey: "code")
+        userPreferences.removeObject(forKey: "num1")
+        userPreferences.removeObject(forKey: "num2")
+        userPreferences.removeObject(forKey: "num3")
         
 //        let dict = userInfo["aps"] as! NSDictionary
 //        let message = dict["alert"]

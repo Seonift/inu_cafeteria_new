@@ -37,17 +37,25 @@ class LoginModel: NetworkModel {
         
     }
     
-    func autologin(_ dtoken:String){
-        print(dtoken)
+    func autologin(){
+        let dtoken = userPreferences.string(forKey: "dtoken")!
+        let sno = userPreferences.string(forKey: "sno")!
         let params:[String:Any] = [
-            "dtoken" : dtoken
+            "dtoken" : dtoken,
+            "sno" : sno
         ]
+        print(params)
         
-        Alamofire.request("\(baseURL)autologin", method: .post, parameters: params, headers: header).response { res in
+        Alamofire.request("\(baseURL)autologin", method: .post, parameters: params, headers: header).responseObject { (res:DataResponse<LoginObject>) in
             let code = gino(res.response?.statusCode)
             
             print("code:\(code)")
             if code == 200 {
+                let result = res.result.value
+                if let barcode = result?.barcode {
+                    userPreferences.setValue(barcode, forKey: "barcode")
+                    print("barcode:\(barcode)")
+                }
                 self.view.networkResult(resultData: true, code: "auto_login")
             } else if code == 400 {
                 self.view.networkFailed(code: code)
@@ -57,9 +65,8 @@ class LoginModel: NetworkModel {
         }
     }
     
-    func login(_ id:String, _ pw:String, _ auto:Bool?){
-//        userPreferences.setValue(id, forKey: "id")
-//        userPreferences.setValue(pw, forKey: "pw")
+    func login(_ sno:String, _ pw:String, _ auto:Bool?){
+        userPreferences.setValue(sno, forKey: "sno")
         userPreferences.setValue(auto, forKey: "auto_login")
         
 //        self.view.networkResult(resultData: true, code: "login")
@@ -72,7 +79,7 @@ class LoginModel: NetworkModel {
         }
         
         let params:[String:Any]  = [
-            "sno" : id,
+            "sno" : sno,
             "pw" : pw,
             "device" : "iOS",
             "auto" : autoS

@@ -90,27 +90,34 @@ extension UIViewController: ViewCallback {
     func passData(resultData: Any, code: String) {
         print(code)
         
-        if code == "barcode" {
-            
-            if let drawerController = navigationController?.parent as? KYDrawerController {
-                drawerController.setDrawerState(.closed, animated: true)
-            }
-            
-            DispatchQueue.main.async {
-                let sb = UIStoryboard(name: "Main", bundle: nil)
-                guard let barcodevc = sb.instantiateViewController(withIdentifier: "barcodevc") as? BarcodeVC else {return}
-                self.navigationController?.pushViewController(barcodevc, animated: true)
-            }
-        }
+//        if code == "barcode" {
+//            
+//            if let drawerController = navigationController?.parent as? KYDrawerController {
+//                drawerController.setDrawerState(.closed, animated: true)
+//            }
+//            
+//            DispatchQueue.main.async {
+//                let sb = UIStoryboard(name: "Main", bundle: nil)
+//                guard let barcodevc = sb.instantiateViewController(withIdentifier: "barcodevc") as? BarcodeVC else {return}
+//                self.navigationController?.pushViewController(barcodevc, animated: true)
+//            }
+//        }
         
         if code == "logout" {
-            if let drawerController = navigationController?.parent as? KYDrawerController {
-                drawerController.setDrawerState(.closed, animated: true)
+            
+            let alertController = UIAlertController(title: nil, message: Strings.logout(), preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+                if let drawerController = self.navigationController?.parent as? KYDrawerController {
+                    drawerController.setDrawerState(.closed, animated: true)
+                }
+                
+                let model = LoginModel(self)
+                model.logout()
             }
-            
-            let model = LoginModel(self)
-            model.logout()
-            
+            alertController.addAction(ok)
+            alertController.addAction(cancel)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 }

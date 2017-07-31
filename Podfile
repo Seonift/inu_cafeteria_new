@@ -15,4 +15,5 @@ target 'inu_cafeteria' do
   pod 'ObjectMapper', '~> 2.2'
   pod 'NVActivityIndicatorView'
   pod 'Socket.IO-Client-Swift', '~> 10.2.0' # Or latest version
+  pod "TextImageButton"
 end

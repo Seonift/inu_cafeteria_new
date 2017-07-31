@@ -10,7 +10,7 @@ import ObjectMapper
 
 class LoginObject: Mappable {
     
-    var barcode: Int?
+    var barcode: String?
     var dtoken: String?
     
     required init?(map: Map) {

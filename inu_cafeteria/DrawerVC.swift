@@ -16,11 +16,19 @@ class DrawerVC: UIViewController {
     @IBOutlet weak var image_const: NSLayoutConstraint!
     
     @IBOutlet weak var nameL: UILabel!
-    @IBOutlet weak var barcodeBtn: UIButton!
+    @IBOutlet weak var numL: UILabel!
+    
+    
     @IBOutlet weak var logoutBtn: UIButton!
     
+    @IBOutlet weak var barcodeBG: UIView!
+    @IBOutlet weak var barcodeIV: UIImageView!
     
     override func viewDidLoad() {
+        numL.text = "정보통신공학과    \(userPreferences.string(forKey: "sno")!)"
+        
+        barcodeBG.layer.cornerRadius = 10.0
+        barcodeBG.clipsToBounds = true
         
         setupUI()
     }
@@ -44,19 +52,17 @@ class DrawerVC: UIViewController {
         imageView.layer.borderWidth = 2.0
         
         nameL.font = UIFont(name: "KoPubDotumPB", size: 18)
+        numL.font = UIFont(name: "KoPubDotumPL", size: 15)
         
-        var attributes = [
-            NSForegroundColorAttributeName: UIColor(r: 144, g:186, b:203),
-            NSFontAttributeName : UIFont(name: "KoPubDotumPB", size: 18)
-        ]
-        var string = NSAttributedString(string: "학생 바코드", attributes: attributes)
-        barcodeBtn.setAttributedTitle(string, for: .normal)
-        attributes = [
+        let attributes:[String:Any] = [
             NSForegroundColorAttributeName: UIColor(r: 189, g:189, b:183),
-            NSFontAttributeName : UIFont(name: "KoPubDotumPB", size: 18)
+            NSFontAttributeName : UIFont(name: "KoPubDotumPB", size: 15)!
         ]
-        string = NSAttributedString(string: "로그아웃", attributes: attributes)
+        let string = NSAttributedString(string: "로그아웃", attributes: attributes)
         logoutBtn.setAttributedTitle(string, for: .normal)
+        
+        let barcode = userPreferences.string(forKey: "barcode")
+        barcodeIV.image = generateBarcode(from: gsno(barcode))
     }
     
     @IBAction func barcodeClicked(_ sender: Any) {

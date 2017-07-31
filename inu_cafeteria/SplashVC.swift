@@ -23,7 +23,7 @@ class SplashVC: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             if userPreferences.bool(forKey: "auto_login") == true && userPreferences.object(forKey: "dtoken") != nil {
                 let model = LoginModel(self)
-                model.autologin(userPreferences.string(forKey: "dtoken")!)
+                model.autologin()
             } else {
                 let main_storyboard = UIStoryboard(name: "Main", bundle: nil)
                 guard let main = main_storyboard.instantiateViewController(withIdentifier: "firststartvc") as? FirstStartVC else {return}

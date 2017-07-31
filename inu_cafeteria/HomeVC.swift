@@ -35,6 +35,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     
     override func viewDidLoad() {
         
+//        print("token:\(FIRInstanceID.instanceID().token()))")
+        
         self.titleL.text = names[0]
         
         let logoIV = UIImageView(image: UIImage(named: "nav_logo"))
@@ -63,14 +65,20 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if userPreferences.object(forKey: "socket") != nil {
-            showNumberVC(userPreferences.integer(forKey: "code"), userPreferences.integer(forKey: "number"))
-        }
+//        if userPreferences.object(forKey: "socket") != nil {
+//            let arr = [userPreferences.integer(forKey: "num1"), userPreferences.integer(forKey: "num2"), userPreferences.integer(forKey: "num3")]
+//            showNumberVC(userPreferences.integer(forKey: "code"), arr)
+//        }
+        
+        Indicator.startAnimating(activityData)
+        let model = NumberModel(self)
+        model.isNumberWait()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         numberTF.text = ""
         numberTF.endEditing(true)
+        numberHint.isHidden = false
     }
     
     func setupTF(){
@@ -139,20 +147,55 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
 extension HomeVC {
     override func networkResult(resultData: Any, code: String) {
         if code == "register_num" {
-            showNumberVC(1, gino(Int(gsno(numberTF.text))))
+            let arr = [gino(Int(gsno(numberTF.text))), -1, -1]
+            showNumberVC(1, arr)
         }
         
         if code == "logout" {
             logout_ncb()
         }
+        
+        if code == "isnumberwait" {
+            let json = resultData as! NSDictionary
+            
+//            let arr = [userPreferences.integer(forKey: "num1"), userPreferences.integer(forKey: "num2"), userPreferences.integer(forKey: "num3")]
+//            showNumberVC(userPreferences.integer(forKey: "code"), arr)
+
+            var arr:[Int] = []
+            
+            if json.count == 0 || json.count == 1 {
+                Indicator.stopAnimating()
+                return
+            }
+            
+            let code = json["code"] as! String
+            let num1 = Int(json["num1"] as! String)
+            let num2 = Int(json["num2"] as! String)
+            let num3 = Int(json["num3"] as! String)
+            arr = [num1!, num2!, num3!]
+            
+//            arr.reverse()
+            print(arr)
+            Indicator.stopAnimating()
+            showNumberVC(Int(code)!, arr)
+
+        }
     }
     
     override func networkFailed(code: Any) {
+        if let str = code as? String {
+            if str == "isnumberwait" {
+                //번호 못받아올 경우 대처.
+            }
+        }
+    }
+    
+    override func networkFailed() {
         Toast.init(text: Strings.noServer()).show()
         Indicator.stopAnimating()
     }
     
-    func showNumberVC(_ code:Int, _ number: Int){
+    func showNumberVC(_ code:Int, _ numbers: [Int]){
         let sb = UIStoryboard(name: "Main", bundle: nil)
         //            guard let vc = sb.instantiateViewController(withIdentifier: "mynumbervc") as? MyNumberVC else { return }
         guard let vc = sb.instantiateViewController(withIdentifier: "mynumbervcnav") as? DefaultNC else { return }
@@ -166,7 +209,7 @@ extension HomeVC {
         drawer.delegate = mynum
         
         mynum.bTitle = gsno(titleL.text)
-        mynum.number = number
+        mynum.numbers = numbers
         mynum.code = code
         
         self.present(drawerC, animated: false, completion: nil)
