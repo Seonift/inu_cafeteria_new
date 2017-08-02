@@ -34,12 +34,13 @@ class NumberModel: NetworkModel {
 //    }
     
     func isNumberWait(){
+        print("isnumberwait")
         let token = gsno(FIRInstanceID.instanceID().token())
         let params:[String:Any] = [
             "fcmtoken" : token
         ]
         
-        Alamofire.request("\(baseURL)isNumberWait", method: .post, parameters: params, headers: header).responseJSON { res in
+        Alamofire.request("\(numberURL)isNumberWait", method: .post, parameters: params, headers: header).responseJSON { res in
             print(res.response?.statusCode)
             switch res.result {
             case .success:
@@ -60,6 +61,7 @@ class NumberModel: NetworkModel {
     }
     
     func registerNumber(code: Int, num1: Int, num2: Int?, num3: Int?){
+        print("registerNumber")
         let token = gsno(FIRInstanceID.instanceID().token())
         print("firebase token:\(token)")
         let params:[String:Any] = [
@@ -71,18 +73,25 @@ class NumberModel: NetworkModel {
         ]
         print(params)
         
-        Alamofire.request("\(baseURL)registerNumber", method: .post, parameters: params, headers: header).response { res in
-            let code = gino(res.response?.statusCode)
+        let url:String = "\(numberURL)registerNumber"
+        print(url)
+//        Alamofire.request("\(numberURL)registerNumber", method: .post, parameters: params, headers: header).response { res in
+//            let code = gino(res.response?.statusCode)
 //            print(gino(code))
-//            print(res)
-            
-            if code == 200 {
-                self.view.networkResult(resultData: true, code: "register_num")
-            } else if code == 400 {
-                self.view.networkFailed(code: code)
-            } else {
-                self.view.networkFailed()
-            }
+////            print(res)
+//            
+//            if code == 200 {
+//                self.view.networkResult(resultData: true, code: "register_num")
+//            } else if code == 400 {
+//                self.view.networkFailed(code: code)
+//            } else {
+//                self.view.networkFailed()
+//            }
+//        }
+        
+        Alamofire.request(url, method: .post, parameters: params, headers: header).responseJSON { res in
+//            print(res.response?.statusCode)
+            print(res)
         }
     }
 }

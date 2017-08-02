@@ -95,6 +95,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 print("socket restart")
                 //여기서 갯수 확인해서 없으면 dismiss 해야함.
             }
+            
+            if let drawerController = vc.mainViewController.parent as? KYDrawerController {
+//                drawerController.setDrawerState(.opened, animated: true)
+                if drawerController.drawerState == .opened {
+                    let model = FlagModel()
+                    model.activeBarcode(1)
+                    
+                }
+            }
         }
     }
 

@@ -20,7 +20,7 @@ class LoginModel: NetworkModel {
         model.activeBarcode(0)
         
         DispatchQueue.main.async {
-            Alamofire.request("\(baseURL)logout", method: .post, parameters: nil).response { res in
+            Alamofire.request("\(loginURL)logout", method: .post, parameters: nil).response { res in
                 //            print(res)
                 let code = gino(res.response?.statusCode)
                 print(code)
@@ -46,7 +46,7 @@ class LoginModel: NetworkModel {
         ]
         print(params)
         
-        Alamofire.request("\(baseURL)autologin", method: .post, parameters: params, headers: header).responseObject { (res:DataResponse<LoginObject>) in
+        Alamofire.request("\(loginURL)autologin", method: .post, parameters: params, headers: header).responseObject { (res:DataResponse<LoginObject>) in
             let code = gino(res.response?.statusCode)
             
             print("code:\(code)")
@@ -85,7 +85,7 @@ class LoginModel: NetworkModel {
             "auto" : autoS
         ]
         
-        Alamofire.request("\(baseURL)postlogin", method: .post, parameters: params, headers: header).responseObject { (res: DataResponse<LoginObject>) in
+        Alamofire.request("\(loginURL)postlogin", method: .post, parameters: params, headers: header).responseObject { (res: DataResponse<LoginObject>) in
             
             let code = res.response?.statusCode
             

@@ -20,7 +20,7 @@ class FlagModel {
                 "flag" : value
             ]
             
-            Alamofire.request("\(baseURL)activeBarcode", method: .post, parameters: params, headers: header).response { res in
+            Alamofire.request("\(loginURL)activeBarcode", method: .post, parameters: params, headers: header).response { res in
                 //            print(res)
                 print(res.response?.statusCode)
             }

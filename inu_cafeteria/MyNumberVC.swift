@@ -8,6 +8,12 @@
 
 import UIKit
 import TextImageButton
+import SocketIO
+
+let url:URL = URL(string: "\(numberURL)pushNumber")!
+let socket = SocketIOClient(socketURL: url, config: [.log(true), .compress])
+
+
 
 class MyNumberVC: UIViewController {
     @IBOutlet weak var titleL: UILabel!
@@ -95,6 +101,23 @@ class MyNumberVC: UIViewController {
         self.view.addConstraint(NSLayoutConstraint(item: cb, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0))
         self.view.addConstraint(NSLayoutConstraint(item: cb, attribute: .bottom, relatedBy: .equal, toItem: self.imageView, attribute: .bottom, multiplier: 1, constant: 0))
         
+        setSocket()
+    }
+    
+    func setSocket(){
+        socket.on(clientEvent: .connect) {data, ack in
+            print("socket connected")
+        }
+        
+        socket.on("currentAmount") {data, ack in
+            if let cur = data[0] as? Double {
+                socket.emitWithAck("canUpdate", cur).timingOut(after: 0) {data in
+                    socket.emit("update", ["amount": cur + 2.50])
+                }
+                
+                ack.with("Got your currentAmount", "dude")
+            }
+        }
     }
     
     
