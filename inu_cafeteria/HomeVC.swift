@@ -120,9 +120,9 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         model.isNumberWait()
         
 //        carouselView.reloadData()
-        print(code)
-        print(names)
-        print(codes)
+//        print(code)
+//        print(names)
+//        print(codes)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -296,13 +296,17 @@ extension HomeVC {
             let num3 = Int(json["num3"] as! String)
 //            arr = [num1!, num2!, num3!]
             
-            if num2 == -1 || num2 == nil {
+            if num1 != -1 && num1 != nil {
                 arr.append(num1!)
-            } else if num3 == -1 || num3 == nil {
+            }
+            if num2 != -1 && num2 != nil {
                 arr.append(num2!)
-            } else {
+            }
+            if num3 != -1 || num3 != nil {
                 arr.append(num3!)
             }
+            
+            
             
 //            arr.reverse()
             print(arr)

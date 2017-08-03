@@ -54,6 +54,7 @@ class MyNumberVC: UIViewController {
                     numberL.text = "\(String(numbers[0])) \(String(numbers[1])) \(String(numbers[2]))"
                 }
             }
+            userPreferences.setValue(numbers.count, forKey: "num_count")
         }
     }
     
@@ -130,20 +131,20 @@ class MyNumberVC: UIViewController {
         self.navigationItem.titleView = logoIV
         
         //분기를 설정. push가 왔으면 소켓을 설정하지 않고, vc를 닫는다.
-        if userPreferences.object(forKey: "socket") == nil {
-            print("socket start")
-            userPreferences.setValue(true, forKey: "socket")
-            userPreferences.setValue(numbers[0], forKey: "num1")
-            if numbers.count == 2 {
-                userPreferences.setValue(numbers[1], forKey: "num2")
-            }
-            if numbers.count == 3 {
-                userPreferences.setValue(numbers[2], forKey: "num3")
-            }
-            userPreferences.setValue(code, forKey: "code")
-        } else if userPreferences.bool(forKey: "socket") == false {
-            self.dismiss(animated: false, completion: nil)
-        }
+//        if userPreferences.object(forKey: "socket") == nil {
+//            print("socket start")
+//            userPreferences.setValue(true, forKey: "socket")
+//            userPreferences.setValue(numbers[0], forKey: "num1")
+//            if numbers.count == 2 {
+//                userPreferences.setValue(numbers[1], forKey: "num2")
+//            }
+//            if numbers.count == 3 {
+//                userPreferences.setValue(numbers[2], forKey: "num3")
+//            }
+//            userPreferences.setValue(code, forKey: "code")
+//        } else if userPreferences.bool(forKey: "socket") == false {
+//            self.dismiss(animated: false, completion: nil)
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -155,16 +156,27 @@ class MyNumberVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         print("socket end")
         print("viewwilldisapper")
-        userPreferences.removeObject(forKey: "socket")
-        userPreferences.removeObject(forKey: "num1")
-        userPreferences.removeObject(forKey: "num2")
-        userPreferences.removeObject(forKey: "num3")
-        userPreferences.removeObject(forKey: "code")
+//        userPreferences.removeObject(forKey: "socket")
+//        userPreferences.removeObject(forKey: "num1")
+//        userPreferences.removeObject(forKey: "num2")
+//        userPreferences.removeObject(forKey: "num3")
+//        userPreferences.removeObject(forKey: "code")
+        
+        socket.disconnect()
     }
     
 //    func close(){
 //        
 //    }
+    
+    func wakeUp(){
+        //background에서 복귀
+        print("wakeup")
+        
+        Indicator.startAnimating(activityData)
+        let model = NumberModel(self)
+        model.isNumberWait()
+    }
 
     override func networkResult(resultData: Any, code: String) {
         if code == "logout" {
@@ -174,6 +186,49 @@ class MyNumberVC: UIViewController {
         if code == "reset_num" {
             Indicator.stopAnimating()
             self.dismiss(animated: false, completion: nil)
+        }
+        
+        if code == "isnumberwait" {
+            //재설정
+        }
+        
+        
+        if code == "isnumberwait" {
+            let json = resultData as! NSDictionary
+            
+            var arr:[Int] = []
+            
+            let code = json["code"] as! String
+            let num1 = Int(json["num1"] as! String)
+            let num2 = Int(json["num2"] as! String)
+            let num3 = Int(json["num3"] as! String)
+            //            arr = [num1!, num2!, num3!]
+            
+            if num1 != -1 && num1 != nil {
+                arr.append(num1!)
+            }
+            if num2 != -1 && num2 != nil {
+                arr.append(num2!)
+            }
+            if num3 != -1 || num3 != nil {
+                arr.append(num3!)
+            }
+            
+            userPreferences.setValue(arr.count, forKey: "num_count")
+            print(arr)
+            
+            numbers = arr
+            
+            Indicator.stopAnimating()
+            
+        }
+    }
+    
+    override func networkFailed(code: Any) {
+        if let str = code as? String {
+            if str == "isnumberwait" {
+                self.dismiss(animated: false, completion: nil)
+            }
         }
     }
     

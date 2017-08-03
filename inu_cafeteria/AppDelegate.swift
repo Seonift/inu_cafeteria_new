@@ -78,6 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         removeFlag()
         print("socket end")
+        socket.disconnect()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -91,9 +92,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        print("Becomeactive")
         
         if let vc = self.window?.visibleViewController as? KYDrawerController {
-            if vc.mainViewController.childViewControllers[0].isKind(of: MyNumberVC.self) && userPreferences.object(forKey: "socket") != nil {
+            if vc.mainViewController.childViewControllers[0].isKind(of: MyNumberVC.self) {
+//                && userPreferences.object(forKey: "socket") != nil {
                 print("socket restart")
+//                let vc =
                 //여기서 갯수 확인해서 없으면 dismiss 해야함.
+            }
+            
+            if let numvc = vc.mainViewController.childViewControllers[0] as? MyNumberVC {
+                numvc.wakeUp()
             }
             
             if let drawerController = vc.mainViewController.parent as? KYDrawerController {
