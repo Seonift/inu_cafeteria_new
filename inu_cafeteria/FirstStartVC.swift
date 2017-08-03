@@ -309,8 +309,15 @@ extension FirstStartVC {
             let result = resultData as! Bool
             if result == true {
                 print(result)
-                self.showHome()
+                
+                let model = NumberModel(self)
+                model.getCode()
             }
+        }
+        
+        if code == "getcode" {
+            let result = resultData as! NSDictionary
+            self.showHome(result)
         }
     }
     

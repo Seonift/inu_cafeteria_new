@@ -9,6 +9,7 @@
 import UIKit
 import TextImageButton
 import SocketIO
+import Toaster
 
 let url:URL = URL(string: "\(numberURL)pushNumber")!
 let socket = SocketIOClient(socketURL: url, config: [.log(true), .compress])
@@ -42,14 +43,14 @@ class MyNumberVC: UIViewController {
 //        }
 //    }
     
-    var numbers:[Int] = [-1,-1,-1] {
+    var numbers:[Int] = [] {
         didSet {
             if numberL != nil {
-                if numbers[1] == -1 {
+                if numbers.count == 1 {
                     numberL.text = String(numbers[0])
-                } else if numbers[2] == -1 {
+                } else if numbers.count == 2 {
                     numberL.text = "\(String(numbers[0])) \(String(numbers[1]))"
-                } else {
+                } else if numbers.count == 3 {
                     numberL.text = "\(String(numbers[0])) \(String(numbers[1])) \(String(numbers[2]))"
                 }
             }
@@ -57,6 +58,7 @@ class MyNumberVC: UIViewController {
     }
     
     var code:Int = 0
+    var name:String = ""
     
     @IBOutlet weak var image_height: NSLayoutConstraint!
     
@@ -132,10 +134,10 @@ class MyNumberVC: UIViewController {
             print("socket start")
             userPreferences.setValue(true, forKey: "socket")
             userPreferences.setValue(numbers[0], forKey: "num1")
-            if numbers[1] != -1 {
+            if numbers.count == 2 {
                 userPreferences.setValue(numbers[1], forKey: "num2")
             }
-            if numbers[2] != -1 {
+            if numbers.count == 3 {
                 userPreferences.setValue(numbers[2], forKey: "num3")
             }
             userPreferences.setValue(code, forKey: "code")
@@ -168,13 +170,27 @@ class MyNumberVC: UIViewController {
         if code == "logout" {
             logout_ncb()
         }
+        
+        if code == "reset_num" {
+            Indicator.stopAnimating()
+            self.dismiss(animated: false, completion: nil)
+        }
+    }
+    
+    override func networkFailed() {
+        Toast(text: Strings.noServer()).show()
+        
+        Indicator.stopAnimating()
     }
     
     func cancelClicked() {
         let alertController = UIAlertController(title: nil, message: Strings.cancel_num(), preferredStyle: .alert)
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
-            self.dismiss(animated: false, completion: nil)
+            // 소켓 초기화
+            Indicator.startAnimating(activityData)
+            let model = NumberModel(self)
+            model.resetNumber()
         }
         alertController.addAction(ok)
         alertController.addAction(cancel)

@@ -38,6 +38,7 @@ class LoginModel: NetworkModel {
     }
     
     func autologin(){
+        print("autologin")
         let dtoken = userPreferences.string(forKey: "dtoken")!
         let sno = userPreferences.string(forKey: "sno")!
         let params:[String:Any] = [

@@ -16,6 +16,10 @@ let header:[String:String] = [
     "Content-Type" : "application/x-www-form-urlencoded"
 ]
 
+let jsonheader:[String:String] = [
+    "Content-Type" : "application/json"
+]
+
 class NetworkModel {
     
     //뷰컨트롤러로 데이터를 전달해줄 위임자를 나타내주는 변수

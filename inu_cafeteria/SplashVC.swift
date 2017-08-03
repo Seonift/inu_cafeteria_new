@@ -43,8 +43,14 @@ class SplashVC: UIViewController {
         if code == "auto_login" {
             let result = resultData as! Bool
             if result == true {
-                self.showHome()
+                let model = NumberModel(self)
+                model.getCode()
             }
+        }
+        
+        if code == "getcode" {
+            let result = resultData as! NSDictionary
+            self.showHome(result)
         }
     }
     

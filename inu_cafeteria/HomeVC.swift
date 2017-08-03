@@ -26,18 +26,63 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     @IBOutlet weak var titleL: UILabel!
     
     @IBOutlet weak var numberTF: UITextField!
+    @IBOutlet weak var num2TF: UITextField!
+    @IBOutlet weak var num3TF: UITextField!
+    
+    @IBOutlet weak var numAddBtn: UIButton!
+    @IBOutlet weak var num2_height: NSLayoutConstraint!
+    @IBOutlet weak var num3_height: NSLayoutConstraint!
+    let tf_height:CGFloat = 40.0
     
     @IBOutlet weak var confirmBtn: UIButton!
     
-    let names:[String] = ["제1학생식당", "미유", "카페드림 학생식당", "카페드림 도서관", "소담국밥", "김밥천국", "봉구스밥버거"]
+//    let names:[String] = ["제1학생식당", "미유", "카페드림 학생식당", "카페드림 도서관", "소담국밥", "김밥천국", "봉구스밥버거"]
     
     var numberHint:UILabel!
+    
+    var num_count:Int = 1 {
+        //입력할 번호의 갯수
+        didSet {
+            if num_count == 2 {
+                num2_height.constant = tf_height
+            } else if num_count == 3 {
+                num3_height.constant = tf_height
+            }
+            UIView.animate(withDuration: 0.25, delay: 0, options: [], animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
+    @IBAction func numAddClicked(_ sender: Any) {
+        if num_count < 3 {
+            num_count += 1
+        }
+    }
+    
+    var code:NSDictionary = [:] {
+        didSet {
+            names = code.allKeys as! [String]
+            codes = code.allValues as! [String]
+            if titleL != nil {
+                if names.count > 0 {
+                    self.titleL.text = names[0]
+                }
+            }
+            if carouselView != nil {
+                carouselView.reloadData()
+            }
+        }
+    }
+    
+    var names:[String] = []
+    var codes:[String] = []
     
     override func viewDidLoad() {
         
 //        print("token:\(FIRInstanceID.instanceID().token()))")
         
-        self.titleL.text = names[0]
+        
         
         let logoIV = UIImageView(image: UIImage(named: "nav_logo"))
         logoIV.contentMode = .scaleAspectFit
@@ -73,25 +118,29 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         Indicator.startAnimating(activityData)
         let model = NumberModel(self)
         model.isNumberWait()
+        
+//        carouselView.reloadData()
+        print(code)
+        print(names)
+        print(codes)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         numberTF.text = ""
         numberTF.endEditing(true)
         numberHint.isHidden = false
+        
+        num2TF.text = ""
+        num2TF.endEditing(true)
+        num3TF.text = ""
+        num3TF.endEditing(true)
     }
     
     func setupTF(){
-        numberTF.font = UIFont(name: "KoPubDotumPB", size: 24)
-        numberTF.textColor = UIColor(r: 98, g: 150, b: 174)
-        numberTF.backgroundColor = UIColor(rgb: 236)
-        numberTF.layer.cornerRadius = 10
-        numberTF.clipsToBounds = true
-        numberTF.textAlignment = .center
-        numberTF.delegate = self
-        numberTF.contentVerticalAlignment = UIControlContentVerticalAlignment.center
-        numberTF.keyboardType = .numberPad
-        numberTF.addDoneButtonOnKeyboard()
+        setupTextField(numberTF)
+        setupTextField(num2TF)
+        setupTextField(num3TF)
+        
 //        numberTF.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
 //        numberTF.setHint(hint: "주문번호를 입력해주세요.", font: UIFont(name: "KoPubDotumPM", size: 12)!, textcolor: UIColor.untGreyishBrown)
         
@@ -102,6 +151,19 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         numberHint.textAlignment = .center
         numberHint.textColor = UIColor.untGreyishBrown
         numberHint.font = UIFont(name: "KoPubDotumPM", size: 12)
+    }
+    
+    func setupTextField(_ sender:UITextField){
+        sender.font = UIFont(name: "KoPubDotumPB", size: 24)
+        sender.textColor = UIColor(r: 98, g: 150, b: 174)
+        sender.backgroundColor = UIColor(rgb: 236)
+        sender.layer.cornerRadius = 10
+        sender.clipsToBounds = true
+        sender.textAlignment = .center
+        sender.delegate = self
+        sender.contentVerticalAlignment = UIControlContentVerticalAlignment.center
+        sender.keyboardType = .numberPad
+        sender.addDoneButtonOnKeyboard()
     }
     
     func btnClicked(_ sender: UIButton){
@@ -115,15 +177,35 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     }
     
     func confirmClicked(_ sender: UIButton){
-        let number = Int(numberTF.text!)
         if self.numberTF.text == nil || self.numberTF.text?.characters.count == 0 {
             Toast(text: "번호를 입력해주세요.").show()
         } else {
             Indicator.startAnimating(activityData)
             
 //            print(token)
+            
+            let code:Int = Int(codes[carouselView.currentItemIndex])!
+            let number = Int(numberTF.text!)!
             let model = NumberModel(self)
-            model.registerNumber(code: 1, num1: number!, num2: nil, num3: nil)
+            
+            switch self.num_count {
+            case 1:
+                model.registerNumber(code: code, num1: number, num2: nil, num3: nil)
+            case 2:
+                let num2 = Int(num2TF.text!)!
+                model.registerNumber(code: code, num1: number, num2: num2, num3: nil)
+            case 3:
+                let num2 = Int(num2TF.text!)!
+                let num3 = Int(num3TF.text!)!
+                model.registerNumber(code: code, num1: number, num2: num2, num3: num3)
+            default:
+                print()
+            }
+            
+            
+            
+            
+            
 //            model.postNum(num: number!, token: token)
         }
     }
@@ -137,18 +219,58 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     
     //TapGesu
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if (touch.view?.isDescendant(of: self.numberTF))! || (touch.view?.isDescendant(of: self.confirmBtn))! {
+        if (touch.view?.isDescendant(of: self.numberTF))! || (touch.view?.isDescendant(of: self.confirmBtn))! || (touch.view?.isDescendant(of: self.num2TF))! || (touch.view?.isDescendant(of: self.num3TF))! || (touch.view?.isDescendant(of: self.numAddBtn))!{
             return false
         }
         return true
     }
+    
+    func findKeyForValue(value: String, dictionary: NSDictionary) -> Any?
+    {
+        
+        for item in dictionary {
+            if item.value as! String == value {
+                return item.key
+            }
+        }
+        
+        return nil
+    }
+    
+    func getNameFromCode(code: Int) -> String {
+        let name = findKeyForValue(value: String(code), dictionary: self.code) as! String
+        return name
+    }
+    
 }
 
 extension HomeVC {
     override func networkResult(resultData: Any, code: String) {
         if code == "register_num" {
-            let arr = [gino(Int(gsno(numberTF.text))), -1, -1]
-            showNumberVC(1, arr)
+            let index = self.carouselView.currentItemIndex
+            let value = codes[index] //  코드값
+            let code_value = Int(value)
+            let name = getNameFromCode(code: code_value!)
+            
+            var arr:[Int] = []
+//            [gino(Int(gsno(numberTF.text))), -1, -1]
+            
+            switch self.num_count {
+            case 3:
+                arr.append(Int(gsno(num3TF.text))!)
+                fallthrough
+            case 2:
+                arr.append(Int(gsno(num2TF.text))!)
+                fallthrough
+            case 1:
+                arr.append(Int(gsno(numberTF.text))!)
+            default:
+                print("")
+            }
+            arr.reverse()
+            print(arr)
+            
+            showNumberVC(name, code_value!, arr)
         }
         
         if code == "logout" {
@@ -172,12 +294,22 @@ extension HomeVC {
             let num1 = Int(json["num1"] as! String)
             let num2 = Int(json["num2"] as! String)
             let num3 = Int(json["num3"] as! String)
-            arr = [num1!, num2!, num3!]
+//            arr = [num1!, num2!, num3!]
+            
+            if num2 == -1 || num2 == nil {
+                arr.append(num1!)
+            } else if num3 == -1 || num3 == nil {
+                arr.append(num2!)
+            } else {
+                arr.append(num3!)
+            }
             
 //            arr.reverse()
             print(arr)
             Indicator.stopAnimating()
-            showNumberVC(Int(code)!, arr)
+            
+            let name = getNameFromCode(code: Int(code)!)
+            showNumberVC(name, Int(code)!, arr)
 
         }
     }
@@ -188,6 +320,14 @@ extension HomeVC {
                 //번호 못받아올 경우 대처.
             }
         }
+        
+        if let num = code as? Int {
+            if num == 400 {
+                Toast(text: Strings.noServer()).show()
+            }
+        }
+        
+        Indicator.stopAnimating()
     }
     
     override func networkFailed() {
@@ -195,7 +335,7 @@ extension HomeVC {
         Indicator.stopAnimating()
     }
     
-    func showNumberVC(_ code:Int, _ numbers: [Int]){
+    func showNumberVC(_ name:String, _ code:Int, _ numbers: [Int]){
         let sb = UIStoryboard(name: "Main", bundle: nil)
         //            guard let vc = sb.instantiateViewController(withIdentifier: "mynumbervc") as? MyNumberVC else { return }
         guard let vc = sb.instantiateViewController(withIdentifier: "mynumbervcnav") as? DefaultNC else { return }
@@ -210,6 +350,7 @@ extension HomeVC {
         
         mynum.bTitle = gsno(titleL.text)
         mynum.numbers = numbers
+        mynum.name = name
         mynum.code = code
         
         self.present(drawerC, animated: false, completion: nil)
@@ -253,7 +394,8 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
     
     func numberOfItems(in carousel: iCarousel) -> Int {
 //        return 10
-        return names.count
+//        return names.count
+        return code.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
@@ -291,7 +433,14 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
     
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
         self.view.endEditing(true)
-        self.titleL.text = names[carousel.currentItemIndex]
+//        self.titleL.text = names[carousel.currentItemIndex]
+//        if let name = names[carousel.currentItemIndex] as? String {
+//            self.titleL.text = name
+//        }
+        
+        if names.count > carousel.currentItemIndex {
+            self.titleL.text = names[carousel.currentItemIndex]
+        }
     }
 }
 

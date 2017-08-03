@@ -55,16 +55,19 @@ extension UIViewController {
         return (self.tabBarController?.tabBar.frame.origin.y)! < self.view.frame.maxY
     }
     
-    func showHome(){
+    func showHome(_ code: NSDictionary){
         let sb = UIStoryboard(name: "Main", bundle: nil)
         guard let homevc = sb.instantiateViewController(withIdentifier: "homevcnav") as? DefaultNC else { return }
         
         let drawerController = KYDrawerController(drawerDirection: .left, drawerWidth: CGFloats.drawer_width())
         drawerController.mainViewController = homevc
         
+        let hvc = homevc.viewControllers[0] as! HomeVC
+        hvc.code = code
+        
         guard let drawer = sb.instantiateViewController(withIdentifier: "drawervc") as? DrawerVC else { return }
         drawerController.drawerViewController = drawer
-        drawer.delegate = homevc.viewControllers[0] as! HomeVC
+        drawer.delegate = hvc
         
         self.present(drawerController, animated: true, completion: nil)
     }

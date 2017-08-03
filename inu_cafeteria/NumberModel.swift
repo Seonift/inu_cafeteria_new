@@ -33,6 +33,22 @@ class NumberModel: NetworkModel {
 //        }
 //    }
     
+    func getCode(){
+        Alamofire.request("\(numberURL)getCode", method: .get, parameters: nil, headers: nil).responseJSON { res in
+//            print(res.result.value)
+            print("getcode")
+            
+            switch res.result {
+            case .success:
+                let json = res.result.value as? NSDictionary
+//                print(json)
+                self.view.networkResult(resultData: json!, code: "getcode")
+            case .failure:
+                self.view.networkFailed()
+            }
+        }
+    }
+    
     func isNumberWait(){
         print("isnumberwait")
         let token = gsno(FIRInstanceID.instanceID().token())
@@ -46,7 +62,7 @@ class NumberModel: NetworkModel {
             case .success:
                 print("success")
                 let json = res.result.value as? NSDictionary
-//                print(json)
+                print(json)
 //                print(json?.count)
 //                let count = json?.count
                 self.view.networkResult(resultData: json!, code: "isnumberwait")
@@ -57,6 +73,25 @@ class NumberModel: NetworkModel {
             }
 //            print(res.result.value)
             
+        }
+    }
+    
+    func resetNumber(){
+        print("resetNumber")
+        let token = gsno(FIRInstanceID.instanceID().token())
+        print("firebase token:\(token)")
+        let params:[String:Any] = [
+            "fcmtoken" : token
+        ]
+        
+        Alamofire.request("\(numberURL)resetNumber", method: .post, parameters: params, headers: header).response { res in
+            let code = gino(res.response?.statusCode)
+            
+            if code == 200 {
+                self.view.networkResult(resultData: true, code: "reset_num")
+            } else {
+                self.view.networkFailed()
+            }
         }
     }
     
@@ -73,25 +108,25 @@ class NumberModel: NetworkModel {
         ]
         print(params)
         
-        let url:String = "\(numberURL)registerNumber"
-        print(url)
-//        Alamofire.request("\(numberURL)registerNumber", method: .post, parameters: params, headers: header).response { res in
-//            let code = gino(res.response?.statusCode)
-//            print(gino(code))
-////            print(res)
-//            
-//            if code == 200 {
-//                self.view.networkResult(resultData: true, code: "register_num")
-//            } else if code == 400 {
-//                self.view.networkFailed(code: code)
-//            } else {
-//                self.view.networkFailed()
-//            }
-//        }
+//        self.view.networkResult(resultData: true, code: "register_num")
         
-        Alamofire.request(url, method: .post, parameters: params, headers: header).responseJSON { res in
-//            print(res.response?.statusCode)
-            print(res)
+        Alamofire.request("\(numberURL)registerNumber", method: .post, parameters: params, headers: jsonheader).response { res in
+            let code = gino(res.response?.statusCode)
+            print(gino(code))
+//            print(res)
+            
+            if code == 200 {
+                self.view.networkResult(resultData: true, code: "register_num")
+            } else if code == 400 {
+                self.view.networkFailed(code: code)
+            } else {
+                self.view.networkFailed()
+            }
         }
+        
+//        Alamofire.request(url, method: .post, parameters: params, headers: header).responseJSON { res in
+////            print(res.response?.statusCode)
+//            print(res)
+//        }
     }
 }
