@@ -41,7 +41,7 @@ class NumberModel: NetworkModel {
             switch res.result {
             case .success:
                 let json = res.result.value as? NSDictionary
-//                print(json)
+                print(json)
                 self.view.networkResult(resultData: json!, code: "getcode")
             case .failure:
                 self.view.networkFailed()

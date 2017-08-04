@@ -121,7 +121,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
 //            showNumberVC(userPreferences.integer(forKey: "code"), arr)
 //        }
         
-        Indicator.startAnimating(activityData)
+//        Indicator.startAnimating(activityData)
         let model = NumberModel(self)
         model.isNumberWait()
         
