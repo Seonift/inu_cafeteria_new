@@ -12,9 +12,39 @@ import AlamofireObjectMapper
 
 class LoginModel: NetworkModel {
     
+    func stuinfo(){
+        print("stuinfo")
+//        self.view.networkResult(resultData: true, code: "stuinfo")
+        
+        Alamofire.request("\(loginURL)stuinfo", method: .get, parameters: nil, headers: nil)
+//            .responseJSON {
+//            res in
+//            print(res)
+//        }
+            .responseObject { (res:DataResponse<StudentInfo>) in
+            let code = gino(res.response?.statusCode)
+            switch res.result {
+            case .success:
+                if code == 200 {
+                    let result = res.result.value
+                    print(result)
+                    self.view.networkResult(resultData: result, code: "stuinfo")
+                } else if code == 400 {
+                    self.view.networkFailed(code: "stuinfo")
+                }
+            case .failure(let error):
+                print(error)
+                self.view.networkFailed()
+            }
+        }
+    }
+    
     func logout(){
         userPreferences.removeObject(forKey: "auto_login")
         userPreferences.removeObject(forKey: "dtoken")
+        userPreferences.removeObject(forKey: "sno")
+        userPreferences.removeObject(forKey: "major")
+        userPreferences.removeObject(forKey: "name")
         
         let model = FlagModel()
         model.activeBarcode(0)
@@ -67,7 +97,7 @@ class LoginModel: NetworkModel {
     }
     
     func login(_ sno:String, _ pw:String, _ auto:Bool?){
-        userPreferences.setValue(sno, forKey: "sno")
+//        userPreferences.setValue(sno, forKey: "sno")
         userPreferences.setValue(auto, forKey: "auto_login")
         
 //        self.view.networkResult(resultData: true, code: "login")

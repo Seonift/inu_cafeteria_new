@@ -36,6 +36,9 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     
     @IBOutlet weak var confirmBtn: UIButton!
     
+    @IBOutlet weak var carousel_height_const: NSLayoutConstraint!
+    let carousel_height:CGFloat = 170.0
+    
 //    let names:[String] = ["제1학생식당", "미유", "카페드림 학생식당", "카페드림 도서관", "소담국밥", "김밥천국", "봉구스밥버거"]
     
     var numberHint:UILabel!
@@ -79,6 +82,9 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     var codes:[String] = []
     
     override func viewDidLoad() {
+        
+        let model = LoginModel(self)
+        model.stuinfo()
         
 //        print("token:\(FIRInstanceID.instanceID().token()))")
         
@@ -134,6 +140,12 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         num2TF.endEditing(true)
         num3TF.text = ""
         num3TF.endEditing(true)
+        
+        unregisterForKeyboardNotifications()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        registerForKeyboardNotifications()
     }
     
     func setupTF(){
@@ -214,7 +226,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     func handleTap_mainview(_ sender: UITapGestureRecognizer?) {
         print("tap")
         self.numberTF.resignFirstResponder()
-        
+        self.num2TF.resignFirstResponder()
+        self.num3TF.resignFirstResponder()
     }
     
     //TapGesu
@@ -240,6 +253,88 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     func getNameFromCode(code: Int) -> String {
         let name = findKeyForValue(value: String(code), dictionary: self.code) as! String
         return name
+    }
+    
+    func adjustKeyboardHeight(_ show:Bool, _ notification:NSNotification){
+        
+        if let keyboardFrame = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            var userInfo = notification.userInfo!
+            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
+            let changeInHeight = ( keyboardFrame.height ) * (show ? 1 : -1)
+            // let defaul_logo_bottom_constant = self.logo_bottom.constant
+            
+            if show {
+                self.carousel_height_const.constant = 0
+            } else {
+                self.carousel_height_const.constant = carousel_height
+            }
+            
+            
+            UIView.animate(withDuration: animationDuration, animations: {(_) -> Void
+                
+                in
+                
+                if show {
+                    self.topL.isHidden = true
+                    self.leftB.isHidden = true
+                    self.rightB.isHidden = true
+                    self.carouselView.isHidden = true
+                } else {
+                    self.topL.isHidden = false
+                    self.leftB.isHidden = false
+                    self.rightB.isHidden = false
+                    self.carouselView.isHidden = false
+                }
+                
+                self.view.layoutIfNeeded()
+                
+                //logo_bottom -> 로고의 bottom layoutguide constraint (to 최상단뷰)
+                
+//                if show {
+//                    
+//                    self.sopt_logo.isHidden = true
+//                    self.logo_bottom.constant += changeInHeight
+//                    
+//                    if self.logo_bottom.constant > changeInHeight{
+//                        
+//                        self.logo_bottom.constant = changeInHeight
+//                        
+//                    }
+//                    
+//                }
+//                else{
+//                    self.sopt_logo.isHidden = false
+//                    self.logo_bottom.constant += changeInHeight
+//                }
+//                
+                
+                
+                
+            })
+            
+        }//if let keyboardSize
+        
+    }
+    
+    
+    func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    
+    func unregisterForKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func keyboardWillShow(note: NSNotification) {
+        adjustKeyboardHeight(true, note)
+    }
+    
+    func keyboardWillHide(note: NSNotification) {
+        adjustKeyboardHeight(false, note)
     }
     
 }
@@ -297,15 +392,17 @@ extension HomeVC {
 //            arr = [num1!, num2!, num3!]
             
             if num1 != -1 && num1 != nil {
+                print("append num1")
                 arr.append(num1!)
             }
             if num2 != -1 && num2 != nil {
+                print("append num2")
                 arr.append(num2!)
             }
-            if num3 != -1 || num3 != nil {
+            if num3 != -1 && num3 != nil {
+                print("append num3")
                 arr.append(num3!)
             }
-            
             
             
 //            arr.reverse()

@@ -310,9 +310,19 @@ extension FirstStartVC {
             if result == true {
                 print(result)
                 
-                let model = NumberModel(self)
-                model.getCode()
+                let model = LoginModel(self)
+                model.stuinfo()
             }
+        }
+        
+        if code == "stuinfo" {
+            let result = resultData as! StudentInfo
+            userPreferences.setValue(result.sno, forKey: "sno")
+            userPreferences.setValue(result.major, forKey: "major")
+            userPreferences.setValue(result.name, forKey: "name")
+            
+            let model = NumberModel(self)
+            model.getCode()
         }
         
         if code == "getcode" {

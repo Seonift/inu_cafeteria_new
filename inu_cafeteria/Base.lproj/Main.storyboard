@@ -329,6 +329,7 @@
                     <navigationItem key="navigationItem" id="75U-ap-C5S"/>
                     <connections>
                         <outlet property="carouselView" destination="YVV-Iw-bfK" id="GfZ-ya-m7A"/>
+                        <outlet property="carousel_height_const" destination="zdz-c0-mbB" id="rG7-0c-QHY"/>
                         <outlet property="confirmBtn" destination="dcG-SN-BYy" id="Wyr-K8-8vZ"/>
                         <outlet property="leftB" destination="2n3-63-IOn" id="Z3I-Jb-V2c"/>
                         <outlet property="num2TF" destination="dRv-EA-GrP" id="pOd-8q-15J"/>

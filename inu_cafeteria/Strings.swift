@@ -18,6 +18,10 @@ class Strings {
     class func cancel_num() -> String {
         return "주문번호를 초기화하면 알림이 오지 않습니다. 초기화 하시겠습니까?"
     }
+    
+    class func stuinfo_fail() -> String {
+        return "학생 정보를 불러올 수 없습니다. 다시 로그인 해주세요."
+    }
 }
 
 class CGFloats {

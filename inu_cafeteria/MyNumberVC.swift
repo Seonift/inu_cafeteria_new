@@ -194,6 +194,7 @@ class MyNumberVC: UIViewController {
         
         
         if code == "isnumberwait" {
+            print("networkresult:\(code)")
             let json = resultData as! NSDictionary
             
             var arr:[Int] = []
@@ -205,12 +206,15 @@ class MyNumberVC: UIViewController {
             //            arr = [num1!, num2!, num3!]
             
             if num1 != -1 && num1 != nil {
+                print("append num1")
                 arr.append(num1!)
             }
             if num2 != -1 && num2 != nil {
+                print("append num2")
                 arr.append(num2!)
             }
-            if num3 != -1 || num3 != nil {
+            if num3 != -1 && num3 != nil {
+                print("append num3")
                 arr.append(num3!)
             }
             

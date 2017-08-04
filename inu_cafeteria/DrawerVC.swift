@@ -25,13 +25,22 @@ class DrawerVC: UIViewController {
     @IBOutlet weak var barcodeIV: UIImageView!
     
     override func viewDidLoad() {
-        numL.text = "정보통신공학과    \(userPreferences.string(forKey: "sno")!)"
+//        numL.text = "\(userPreferences.string(forKey: "major")!)    \(userPreferences.string(forKey: "sno")!)"
+//        nameL.text = userPreferences.string(forKey: "name")
+        
+        let major = gsno(userPreferences.string(forKey: "major"))
+        let sno = gsno(userPreferences.string(forKey: "sno"))
+        let name = userPreferences.string(forKey: "name")
+        
+        numL.text = "\(major)   \(sno)"
+        nameL.text = name
         
         barcodeBG.layer.cornerRadius = 10.0
         barcodeBG.clipsToBounds = true
         
         setupUI()
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
 //        print("flag")

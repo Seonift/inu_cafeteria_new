@@ -131,7 +131,7 @@ class NumberModel: NetworkModel {
         
 //        self.view.networkResult(resultData: true, code: "register_num")
         
-        Alamofire.request("\(numberURL)registerNumber", method: .post, parameters: params, headers: jsonheader).responseJSON { res in
+        Alamofire.request("\(numberURL)registerNumber", method: .post, parameters: params, headers: header).responseJSON { res in
             let code = gino(res.response?.statusCode)
             print(gino(code))
 //            print(res)
