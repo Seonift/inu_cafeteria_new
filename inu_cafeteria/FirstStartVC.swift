@@ -306,36 +306,56 @@ extension FirstStartVC {
         Indicator.stopAnimating()
         print(code)
         if code == "login" {
-            let result = resultData as! Bool
-            if result == true {
-                print(result)
-                
-                let model = LoginModel(self)
-                model.stuinfo()
-            }
-        }
-        
-        if code == "stuinfo" {
-            let result = resultData as! StudentInfo
-            userPreferences.setValue(result.sno, forKey: "sno")
-            userPreferences.setValue(result.major, forKey: "major")
-            userPreferences.setValue(result.name, forKey: "name")
+//            let result = resultData as! Bool
+//            if result == true {
+//                print(result)
+//                
+//                let model = LoginModel(self)
+//                model.stuinfo()
+//            }
             
-            let model = NumberModel(self)
-            model.getCode()
-        }
-        
-        if code == "getcode" {
-            let result = resultData as! NSDictionary
+            let result = resultData as! [CodeObject]
+            
             self.showHome(result)
         }
+        
+//        if code == "stuinfo" {
+//            let result = resultData as! StudentInfo
+//            userPreferences.setValue(result.sno, forKey: "sno")
+//            userPreferences.setValue(result.major, forKey: "major")
+//            userPreferences.setValue(result.name, forKey: "name")
+//            
+//            let model = NumberModel(self)
+//            model.getCode()
+//        }
+        
+//        if code == "getcode" {
+//            let result = resultData as! NSDictionary
+//            self.showHome(result)
+//        }
     }
     
     override func networkFailed(code: Any) {
         Indicator.stopAnimating()
-        let c = code as! Int
-        if c == 400 {
-            Toast.init(text: "학번/비밀번호를 확인해주세요.").show()
+        
+        if let int = code as? Int {
+            if int == 400 {
+                Toast.init(text: "학번/비밀번호를 확인해주세요.").show()
+            }
+        }
+        
+        if let str = code as? String {
+            if str == "no_barcode" {
+                Toast(text: "바코드 정보 오류. 다시 로그인해주세요.").show()
+            }
+            
+            if str == "no_code" {
+                Toast(text: "식당 정보 오류. 다시 로그인해주세요.").show()
+            }
+            
+            if str == "no_stuinfo" {
+                Toast(text: "학생 정보 오류. 다시 로그인해주세요.").show()
+            }
         }
     }
 }

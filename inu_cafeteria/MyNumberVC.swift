@@ -194,6 +194,8 @@ class MyNumberVC: UIViewController {
         
         
         if code == "isnumberwait" {
+            socket.connect()
+            
             print("networkresult:\(code)")
             let json = resultData as! NSDictionary
             

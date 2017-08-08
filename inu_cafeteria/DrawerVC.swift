@@ -28,7 +28,7 @@ class DrawerVC: UIViewController {
 //        numL.text = "\(userPreferences.string(forKey: "major")!)    \(userPreferences.string(forKey: "sno")!)"
 //        nameL.text = userPreferences.string(forKey: "name")
         
-        let major = gsno(userPreferences.string(forKey: "major"))
+        let major = gsno(userPreferences.string(forKey: "dep"))
         let sno = gsno(userPreferences.string(forKey: "sno"))
         let name = userPreferences.string(forKey: "name")
         

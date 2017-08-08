@@ -63,28 +63,40 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         }
     }
     
-    var code:NSDictionary = [:] {
+//    var code:NSDictionary = [:] {
+//        didSet {
+//            names = code.allKeys as! [String]
+//            codes = code.allValues as! [String]
+//            if titleL != nil {
+//                if names.count > 0 {
+//                    self.titleL.text = names[0]
+//                }
+//            }
+//            if carouselView != nil {
+//                carouselView.reloadData()
+//            }
+//        }
+//    }
+    
+    var codes:[CodeObject] = [] {
         didSet {
-            names = code.allKeys as! [String]
-            codes = code.allValues as! [String]
-            if titleL != nil {
-                if names.count > 0 {
-                    self.titleL.text = names[0]
-                }
-            }
             if carouselView != nil {
                 carouselView.reloadData()
+                
+                if carouselView.currentItemIndex == 0 && self.codes.count > 0 {
+                    self.titleL.text = codes[0].name
+                }
             }
         }
     }
     
-    var names:[String] = []
-    var codes:[String] = []
+//    var names:[String] = []
+//    var codes:[String] = []
     
     override func viewDidLoad() {
         
-        let model = LoginModel(self)
-        model.stuinfo()
+//        let model = LoginModel(self)
+//        model.stuinfo()
         
 //        print("token:\(FIRInstanceID.instanceID().token()))")
         
@@ -122,6 +134,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
 //        }
         
 //        Indicator.startAnimating(activityData)
+        
+        
         let model = NumberModel(self)
         model.isNumberWait()
         
@@ -146,6 +160,10 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     
     override func viewWillAppear(_ animated: Bool) {
         registerForKeyboardNotifications()
+        
+        if self.codes.count > 0 {
+            self.titleL.text = codes[0].name
+        }
     }
     
     func setupTF(){
@@ -196,7 +214,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
             
 //            print(token)
             
-            let code:Int = Int(codes[carouselView.currentItemIndex])!
+//            let code:Int = Int(codes[carouselView.currentItemIndex])!
+            let code = Int(codes[carouselView.currentItemIndex].code!)!
             let number = Int(numberTF.text!)!
             let model = NumberModel(self)
             
@@ -238,22 +257,22 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         return true
     }
     
-    func findKeyForValue(value: String, dictionary: NSDictionary) -> Any?
-    {
-        
-        for item in dictionary {
-            if item.value as! String == value {
-                return item.key
-            }
-        }
-        
-        return nil
-    }
-    
-    func getNameFromCode(code: Int) -> String {
-        let name = findKeyForValue(value: String(code), dictionary: self.code) as! String
-        return name
-    }
+//    func findKeyForValue(value: String, dictionary: NSDictionary) -> Any?
+//    {
+//        
+//        for item in dictionary {
+//            if item.value as! String == value {
+//                return item.key
+//            }
+//        }
+//        
+//        return nil
+//    }
+//    
+//    func getNameFromCode(code: Int) -> String {
+//        let name = findKeyForValue(value: String(code), dictionary: self.code) as! String
+//        return name
+//    }
     
     func adjustKeyboardHeight(_ show:Bool, _ notification:NSNotification){
         
@@ -288,29 +307,6 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
                 }
                 
                 self.view.layoutIfNeeded()
-                
-                //logo_bottom -> 로고의 bottom layoutguide constraint (to 최상단뷰)
-                
-//                if show {
-//                    
-//                    self.sopt_logo.isHidden = true
-//                    self.logo_bottom.constant += changeInHeight
-//                    
-//                    if self.logo_bottom.constant > changeInHeight{
-//                        
-//                        self.logo_bottom.constant = changeInHeight
-//                        
-//                    }
-//                    
-//                }
-//                else{
-//                    self.sopt_logo.isHidden = false
-//                    self.logo_bottom.constant += changeInHeight
-//                }
-//                
-                
-                
-                
             })
             
         }//if let keyboardSize
@@ -343,9 +339,13 @@ extension HomeVC {
     override func networkResult(resultData: Any, code: String) {
         if code == "register_num" {
             let index = self.carouselView.currentItemIndex
-            let value = codes[index] //  코드값
-            let code_value = Int(value)
-            let name = getNameFromCode(code: code_value!)
+//            let value = codes[index] //  코드값
+//            let code_value = Int(value)
+//            let name = getNameFromCode(code: code_value!)
+//            let name = "테스트"
+            
+            let code_value = Int(codes[index].code!)!
+            let name = codes[index].name
             
             var arr:[Int] = []
 //            [gino(Int(gsno(numberTF.text))), -1, -1]
@@ -365,7 +365,7 @@ extension HomeVC {
             arr.reverse()
             print(arr)
             
-            showNumberVC(name, code_value!, arr)
+            showNumberVC(name!, code_value, arr)
         }
         
         if code == "logout" {
@@ -409,7 +409,8 @@ extension HomeVC {
             print(arr)
             Indicator.stopAnimating()
             
-            let name = getNameFromCode(code: Int(code)!)
+//            let name = getNameFromCode(code: Int(code)!)
+            let name = "테스트"
             showNumberVC(name, Int(code)!, arr)
 
         }
@@ -496,7 +497,7 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
     func numberOfItems(in carousel: iCarousel) -> Int {
 //        return 10
 //        return names.count
-        return code.count
+        return codes.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
@@ -539,8 +540,12 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
 //            self.titleL.text = name
 //        }
         
-        if names.count > carousel.currentItemIndex {
-            self.titleL.text = names[carousel.currentItemIndex]
+//        if names.count > carousel.currentItemIndex {
+//            self.titleL.text = names[carousel.currentItemIndex]
+//        }
+        
+        if codes.count > carousel.currentItemIndex {
+            self.titleL.text = codes[carousel.currentItemIndex].name
         }
     }
 }

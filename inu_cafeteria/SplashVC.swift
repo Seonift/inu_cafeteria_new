@@ -41,42 +41,41 @@ class SplashVC: UIViewController {
 //        }
         
         if code == "auto_login" {
-            let result = resultData as! Bool
-            if result == true {
-                let model = LoginModel(self)
-                model.stuinfo()
-            }
-        }
-        
-        if code == "stuinfo" {
-            let result = resultData as! StudentInfo
-            userPreferences.setValue(result.sno, forKey: "sno")
-            userPreferences.setValue(result.major, forKey: "major")
-            userPreferences.setValue(result.name, forKey: "name")
+            let result = resultData as! [CodeObject]
             
-            let model = NumberModel(self)
-            model.getCode()
-        }
-        
-        if code == "getcode" {
-            let result = resultData as! NSDictionary
             self.showHome(result)
         }
     }
     
     override func networkFailed(code: Any) {
-        failAutoLogin()
+        failAutoLogin(code)
     }
     
     override func networkFailed() {
-        failAutoLogin()
+        failAutoLogin(nil)
     }
     
-    func failAutoLogin(){
+    func failAutoLogin(_ code: Any?){
         userPreferences.removeObject(forKey: "auto_login")
         userPreferences.removeObject(forKey: "dtoken")
         
-        Toast(text: "로그인에 실패했습니다.").show()
+        if code == nil {
+            Toast(text: "로그인에 실패했습니다.").show()
+        } else {
+            if let str = code as? String {
+                if str == "no_barcode" {
+                    Toast(text: "바코드 정보 오류. 다시 로그인해주세요.").show()
+                }
+                
+                if str == "no_code" {
+                    Toast(text: "식당 정보 오류. 다시 로그인해주세요.").show()
+                }
+                
+                if str == "no_stuinfo" {
+                    Toast(text: "학생 정보 오류. 다시 로그인해주세요.").show()
+                }
+            }
+        }
         
         let main_storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let main = main_storyboard.instantiateViewController(withIdentifier: "firststartvc") as? FirstStartVC else {return}

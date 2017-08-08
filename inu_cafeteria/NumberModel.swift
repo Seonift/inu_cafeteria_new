@@ -33,21 +33,21 @@ class NumberModel: NetworkModel {
 //        }
 //    }
     
-    func getCode(){
-        Alamofire.request("\(numberURL)getCode", method: .get, parameters: nil, headers: nil).responseJSON { res in
-//            print(res.result.value)
-            print("getcode")
-            
-            switch res.result {
-            case .success:
-                let json = res.result.value as? NSDictionary
-                print(json)
-                self.view.networkResult(resultData: json!, code: "getcode")
-            case .failure:
-                self.view.networkFailed()
-            }
-        }
-    }
+//    func getCode(){
+//        Alamofire.request("\(numberURL)getCode", method: .get, parameters: nil, headers: nil).responseJSON { res in
+////            print(res.result.value)
+//            print("getcode")
+//            
+//            switch res.result {
+//            case .success:
+//                let json = res.result.value as? NSDictionary
+//                print(json)
+//                self.view.networkResult(resultData: json!, code: "getcode")
+//            case .failure:
+//                self.view.networkFailed()
+//            }
+//        }
+//    }
     
     func isNumberWait(){
         print("isnumberwait")
