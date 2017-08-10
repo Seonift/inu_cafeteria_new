@@ -164,10 +164,7 @@ class MyNumberVC: UIViewController {
                         print("msgint:\(msgint)")
                         if self.checkNumCorrect(msgint) == true {
                             //내 번호가 나오면 알림
-                            let systemSoundID:SystemSoundID = 1005
-                            let vib = SystemSoundID(kSystemSoundID_Vibrate)
-                            AudioServicesPlaySystemSound(systemSoundID)
-                            AudioServicesPlaySystemSound(vib)
+                           
                             
                             let alertController = UIAlertController(title: nil, message: Strings.complete_num(), preferredStyle: .alert)
                             let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
@@ -176,6 +173,11 @@ class MyNumberVC: UIViewController {
                             }
                             alertController.addAction(ok)
                             self.present(alertController, animated: true, completion: nil)
+                            
+                            let systemSoundID:SystemSoundID = 1005
+                            let vib = SystemSoundID(kSystemSoundID_Vibrate)
+                            AudioServicesPlaySystemSound(systemSoundID)
+                            AudioServicesPlaySystemSound(vib)
                         } else {
                             self.items.append(msg)
                         }
@@ -190,9 +192,11 @@ class MyNumberVC: UIViewController {
     func checkNumCorrect(_ num:Int) -> Bool{
         print("checkNumCorrect:\(String(num))")
         //번호가 들어왔을때 맞는 번호인지 확인
-        for i in 0...numbers.count-1 {
-            if numbers[i] == num {
-                return true
+        if numbers.count > 0 {
+            for i in 0...numbers.count-1 {
+                if numbers[i] == num {
+                    return true
+                }
             }
         }
         return false
@@ -211,6 +215,8 @@ class MyNumberVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
 //        print("socket end")
         print("viewwilldisapper")
+        
+        numbers.removeAll()
         
 //        userPreferences.removeObject(forKey: "socket")
 //        userPreferences.removeObject(forKey: "num1")

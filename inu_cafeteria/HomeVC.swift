@@ -163,7 +163,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         registerForKeyboardNotifications()
         
         if self.codes.count > 0 {
-            self.titleL.text = codes[0].name
+            self.titleL.text = codes[carouselView.currentItemIndex].name
         }
     }
     
@@ -518,6 +518,10 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
             let url = URL(string: gsno(codes[index].img))
             view.kf.setImage(with: url)
         }
+        
+        view.backgroundColor = .white
+        view.layer.borderColor = UIColor.gray.cgColor
+        view.layer.borderWidth = 1.0
         
         
         return view
