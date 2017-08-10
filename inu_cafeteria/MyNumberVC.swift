@@ -10,11 +10,7 @@ import UIKit
 import TextImageButton
 import SocketIO
 import Toaster
-
-let url:URL = URL(string: "\(numberURL)pushNumber")!
-let socket = SocketIOClient(socketURL: url, config: [.log(true), .compress])
-
-
+import AVFoundation
 
 class MyNumberVC: UIViewController {
     @IBOutlet weak var titleL: UILabel!
@@ -25,8 +21,29 @@ class MyNumberVC: UIViewController {
     @IBOutlet weak var cView: UICollectionView!
     
     let cellId = "NumberCell"
+    let cellId2 = "NumberCell2"
     
-    let items = ["501", "502", "503", "504", "505", "506", "507", "508", "509", "510", "511", "512"]
+    var items: [String] = [] {
+        didSet {
+            if cView != nil {
+                cView.reloadData()
+            }
+            if items.count > 12 {
+                self.start_index += 1
+            }
+        }
+    }
+    
+    var start_index:Int = 0
+//    var queue:[Int] = [] {
+//        didSet {
+//            if cView != nil {
+//                cView.reloadData()
+//            }
+//        }
+//    }
+//    var front:Int = 0
+//    var rear:Int = 0
     
     var bTitle:String = "" {
         didSet {
@@ -78,6 +95,7 @@ class MyNumberVC: UIViewController {
         cView.isScrollEnabled = false
         cView.isUserInteractionEnabled = false
         
+//        cView.register(NumberCell.self, forCellWithReuseIdentifier: cellId2)
         let layout = cView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.minimumInteritemSpacing = DeviceUtil.getWidth(width: 42)
         layout.minimumLineSpacing = DeviceUtil.getHeight(height: 32)
@@ -104,31 +122,17 @@ class MyNumberVC: UIViewController {
         self.view.addConstraint(NSLayoutConstraint(item: cb, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0))
         self.view.addConstraint(NSLayoutConstraint(item: cb, attribute: .bottom, relatedBy: .equal, toItem: self.imageView, attribute: .bottom, multiplier: 1, constant: 0))
         
-        setSocket()
     }
-    
-    func setSocket(){
-        socket.on(clientEvent: .connect) {data, ack in
-            print("socket connected")
-        }
-        
-        socket.on("currentAmount") {data, ack in
-            if let cur = data[0] as? Double {
-                socket.emitWithAck("canUpdate", cur).timingOut(after: 0) {data in
-                    socket.emit("update", ["amount": cur + 2.50])
-                }
-                
-                ack.with("Got your currentAmount", "dude")
-            }
-        }
-    }
-    
     
     override func viewDidAppear(_ animated: Bool) {
         let logoIV = UIImageView(image: UIImage(named: "nav_logo"))
         logoIV.contentMode = .scaleAspectFit
         logoIV.frame = CGRect(x: 0, y: 0, width: 130, height: 21.5)
         self.navigationItem.titleView = logoIV
+        
+//        SocketIOManager.sharedInstance.establishConnection()
+        
+        
         
         //분기를 설정. push가 왔으면 소켓을 설정하지 않고, vc를 닫는다.
 //        if userPreferences.object(forKey: "socket") == nil {
@@ -147,22 +151,73 @@ class MyNumberVC: UIViewController {
 //        }
     }
     
+    func setSocketConnect(){
+        print("setsocket, code:\(String(self.code))")
+        SocketIOManager.sharedInstance.getNumber(code: String(self.code)) { (result) -> Void in
+            DispatchQueue.main.async {
+//                print("receive socket")
+                print(result[0])
+                if let res = result[0] as? NSDictionary {
+//                    print(msg["msg"])
+                    if let msg = res["msg"] as? String {
+                        let msgint = gino(Int(msg))
+                        print("msgint:\(msgint)")
+                        if self.checkNumCorrect(msgint) == true {
+                            //내 번호가 나오면 알림
+                            let systemSoundID:SystemSoundID = 1005
+                            let vib = SystemSoundID(kSystemSoundID_Vibrate)
+                            AudioServicesPlaySystemSound(systemSoundID)
+                            AudioServicesPlaySystemSound(vib)
+                            
+                            let alertController = UIAlertController(title: nil, message: Strings.complete_num(), preferredStyle: .alert)
+                            let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+                                let model = NumberModel(self)
+                                model.isNumberWait()
+                            }
+                            alertController.addAction(ok)
+                            self.present(alertController, animated: true, completion: nil)
+                        } else {
+                            self.items.append(msg)
+                        }
+//                        self.items.enqueue(gsno(msg))
+//                        self.cView.reloadData()
+                    }
+                }
+            }
+        }
+    }
+    
+    func checkNumCorrect(_ num:Int) -> Bool{
+        print("checkNumCorrect:\(String(num))")
+        //번호가 들어왔을때 맞는 번호인지 확인
+        for i in 0...numbers.count-1 {
+            if numbers[i] == num {
+                return true
+            }
+        }
+        return false
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.bTitle = { self.bTitle }()
 //        self.number = { self.number }()
         self.numbers = { self.numbers }()
+        
+        setSocketConnect()
+//        SocketIOManager.sharedInstance.connectToServer()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print("socket end")
+//        print("socket end")
         print("viewwilldisapper")
+        
 //        userPreferences.removeObject(forKey: "socket")
 //        userPreferences.removeObject(forKey: "num1")
 //        userPreferences.removeObject(forKey: "num2")
 //        userPreferences.removeObject(forKey: "num3")
 //        userPreferences.removeObject(forKey: "code")
         
-        socket.disconnect()
     }
     
 //    func close(){
@@ -176,6 +231,8 @@ class MyNumberVC: UIViewController {
         Indicator.startAnimating(activityData)
         let model = NumberModel(self)
         model.isNumberWait()
+        
+        setSocketConnect()
     }
 
     override func networkResult(resultData: Any, code: String) {
@@ -188,13 +245,13 @@ class MyNumberVC: UIViewController {
             self.dismiss(animated: false, completion: nil)
         }
         
-        if code == "isnumberwait" {
-            //재설정
-        }
+//        if code == "isnumberwait" {
+//            //재설정
+//        }
+//        
         
-        
         if code == "isnumberwait" {
-            socket.connect()
+//            connectSocket()
             
             print("networkresult:\(code)")
             let json = resultData as! NSDictionary
@@ -262,18 +319,52 @@ class MyNumberVC: UIViewController {
 extension MyNumberVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+//        return items.count
+        if items.count < 12 {
+            return items.count
+        } else {
+            return 12
+        }
+        
+//        return 12
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! NumberCell
-        cell.label.text = items[indexPath.row]
-        return cell
+        
+        var text:String = ""
+        if items.count > self.start_index + indexPath.row {
+            text = items[self.start_index + indexPath.row]
+        }
+        if indexPath.row < 9 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! NumberCell
+
+            cell.label.text = text
+            
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId2, for: indexPath) as! NumberCell
+            
+            cell.label.text = text
+            
+            cell.isRed = true
+            
+            return cell
+        }
     }
 }
 
 class NumberCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
+    
+    var isRed:Bool = false {
+        didSet {
+            if isRed == true {
+                if label != nil {
+                    label.textColor = UIColor(r: 242, g: 108, b: 79)
+                }
+            }
+        }
+    }
     
     override func awakeFromNib() {
         label.font = UIFont(name: "KoPubDotumPB", size: 24)

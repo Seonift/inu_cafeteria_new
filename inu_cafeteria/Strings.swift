@@ -22,6 +22,10 @@ class Strings {
     class func stuinfo_fail() -> String {
         return "학생 정보를 불러올 수 없습니다. 다시 로그인 해주세요."
     }
+    
+    class func complete_num() -> String {
+        return "주문하신 메뉴가 완료되었습니다. 카운터에서 받아가세요"
+    }
 }
 
 class CGFloats {

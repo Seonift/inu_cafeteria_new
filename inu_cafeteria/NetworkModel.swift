@@ -11,6 +11,8 @@ import UIKit
 //let baseURL = 
 let loginURL = ""
 let numberURL = ""
+let socketURL = ""
+
 
 let header:[String:String] = [
     "Content-Type" : "application/x-www-form-urlencoded"

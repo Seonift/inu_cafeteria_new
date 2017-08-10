@@ -63,6 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         Network().getCookie()
         
+//        SocketIOManager.sharedInstance.establishConnection()
+        
         return true
     }
 
@@ -79,8 +81,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print("Disconnected from FCM.")
         
         removeFlag()
-        print("socket end")
-        socket.disconnect()
+//        print("socket end")
+        
+        SocketIOManager.sharedInstance.closeConnection()
         
         Network().saveCookie()
     }
@@ -95,29 +98,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         Network().getCookie()
         
-//        print("Becomeactive")
+        SocketIOManager.sharedInstance.establishConnection()
         
-        if let vc = self.window?.visibleViewController as? KYDrawerController {
-            if vc.mainViewController.childViewControllers[0].isKind(of: MyNumberVC.self) {
-//                && userPreferences.object(forKey: "socket") != nil {
-                print("socket restart")
-//                let vc =
+        DispatchQueue.main.async {
+            if let vc = self.window?.visibleViewController as? KYDrawerController {
+                //            if vc.mainViewController.childViewControllers[0].isKind(of: MyNumberVC.self) {
+                //                && userPreferences.object(forKey: "socket") != nil {
+                //                print("socket restart")
+                //                SocketIOManager.sharedInstance.establishConnection()
+                //                let vc =
                 //여기서 갯수 확인해서 없으면 dismiss 해야함.
-            }
-            
-            if let numvc = vc.mainViewController.childViewControllers[0] as? MyNumberVC {
-                numvc.wakeUp()
-            }
-            
-            if let drawerController = vc.mainViewController.parent as? KYDrawerController {
-//                drawerController.setDrawerState(.opened, animated: true)
-                if drawerController.drawerState == .opened {
-                    let model = FlagModel()
-                    model.activeBarcode(1)
-                    
+                //            }
+                
+                if let numvc = vc.mainViewController.childViewControllers[0] as? MyNumberVC {
+                    numvc.wakeUp()
+                }
+                
+                if let drawerController = vc.mainViewController.parent as? KYDrawerController {
+                    //                drawerController.setDrawerState(.opened, animated: true)
+                    if drawerController.drawerState == .opened {
+                        let model = FlagModel()
+                        model.activeBarcode(1)
+                        
+                    }
                 }
             }
         }
+        
+//        SocketIOManager.sharedInstance.reconnectConnection()
+        
+//        print("Becomeactive")
+        
+        
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -125,7 +137,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         removeFlag()
         Network().saveCookie()
-        print("socket end")
+//        print("socket end")
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {

@@ -15,6 +15,7 @@ import FirebaseInstanceID
 import FirebaseMessaging
 
 import NVActivityIndicatorView
+import Kingfisher
 
 class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizerDelegate {
     
@@ -219,23 +220,25 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
             let number = Int(numberTF.text!)!
             let model = NumberModel(self)
             
+            var num2 = -1
+            var num3 = -1
+            
             switch self.num_count {
-            case 1:
-                model.registerNumber(code: code, num1: number, num2: nil, num3: nil)
-            case 2:
-                let num2 = Int(num2TF.text!)!
-                model.registerNumber(code: code, num1: number, num2: num2, num3: nil)
             case 3:
-                let num2 = Int(num2TF.text!)!
-                let num3 = Int(num3TF.text!)!
-                model.registerNumber(code: code, num1: number, num2: num2, num3: num3)
+                if num3TF.text != nil && num3TF.text?.characters.count != 0 {
+                    num3 = Int(num3TF.text!)!
+                }
+                fallthrough
+            case 2:
+                if num2TF.text != nil && num2TF.text?.characters.count != 0 {
+                    num2 = Int(num2TF.text!)!
+                }
+                break
             default:
                 print()
             }
             
-            
-            
-            
+            model.registerNumber(code: code, num1: number, num2: num2, num3: num3)
             
 //            model.postNum(num: number!, token: token)
         }
@@ -344,28 +347,30 @@ extension HomeVC {
 //            let name = getNameFromCode(code: code_value!)
 //            let name = "테스트"
             
-            let code_value = Int(codes[index].code!)!
-            let name = codes[index].name
+            let model = NumberModel(self)
+            model.isNumberWait()
             
-            var arr:[Int] = []
-//            [gino(Int(gsno(numberTF.text))), -1, -1]
-            
-            switch self.num_count {
-            case 3:
-                arr.append(Int(gsno(num3TF.text))!)
-                fallthrough
-            case 2:
-                arr.append(Int(gsno(num2TF.text))!)
-                fallthrough
-            case 1:
-                arr.append(Int(gsno(numberTF.text))!)
-            default:
-                print("")
-            }
-            arr.reverse()
-            print(arr)
-            
-            showNumberVC(name!, code_value, arr)
+//            let code_value = Int(codes[index].code!)!
+//            let name = codes[index].name
+//            
+//            var arr:[Int] = []
+//            
+//            switch self.num_count {
+//            case 3:
+//                arr.append(Int(gsno(num3TF.text))!)
+//                fallthrough
+//            case 2:
+//                arr.append(Int(gsno(num2TF.text))!)
+//                fallthrough
+//            case 1:
+//                arr.append(Int(gsno(numberTF.text))!)
+//            default:
+//                print("")
+//            }
+//            arr.reverse()
+//            print(arr)
+//            
+//            showNumberVC(name!, code_value, arr)
         }
         
         if code == "logout" {
@@ -417,16 +422,20 @@ extension HomeVC {
     }
     
     override func networkFailed(code: Any) {
+        print("networkfailed")
         if let str = code as? String {
+            print(str)
             if str == "isnumberwait" {
                 //번호 못받아올 경우 대처.
+                let model = NumberModel(self)
+                model.resetNumber()
             }
         }
         
         if let num = code as? Int {
             if num == 400 {
                 Toast(text: Strings.noServer()).show()
-            }
+            }   
         }
         
         Indicator.stopAnimating()
@@ -505,7 +514,17 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
         view.contentMode = .scaleAspectFit
         view.image = UIImage(named: "home_default")
         
+        if codes.count > index {
+            let url = URL(string: gsno(codes[index].img))
+            view.kf.setImage(with: url)
+        }
+        
+        
         return view
+    }
+    
+    func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
+        print(gsno(codes[index].img))
     }
     
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
