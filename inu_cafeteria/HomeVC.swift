@@ -200,9 +200,9 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     func btnClicked(_ sender: UIButton){
         var index = carouselView.currentItemIndex
         if sender == self.leftB {
-            index += 1
-        } else if sender == self.rightB {
             index -= 1
+        } else if sender == self.rightB {
+            index += 1
         }
         carouselView.scrollToItem(at: index, animated: true)
     }
@@ -512,18 +512,16 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let view = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
         view.contentMode = .scaleAspectFit
-        view.image = UIImage(named: "home_default")
+//        view.image = 
         
         if codes.count > index {
             let url = URL(string: gsno(codes[index].img))
-            view.kf.setImage(with: url)
+            view.kf.setImage(with: url, placeholder: UIImage(named: "home_default"), options: nil, progressBlock: nil, completionHandler: nil)
         }
         
         view.backgroundColor = .white
-        view.layer.borderColor = UIColor.gray.cgColor
-        view.layer.borderWidth = 1.0
-        
-        
+//        view.layer.borderColor = UIColor.gray.cgColor
+//        view.layer.borderWidth = 1.0
         return view
     }
     
