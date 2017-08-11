@@ -122,9 +122,15 @@ class MyNumberVC: UIViewController {
         self.view.addConstraint(NSLayoutConstraint(item: cb, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0))
         self.view.addConstraint(NSLayoutConstraint(item: cb, attribute: .bottom, relatedBy: .equal, toItem: self.imageView, attribute: .bottom, multiplier: 1, constant: 0))
         
+        setSocketConnect()
+        
+        self.numberL.adjustsFontSizeToFitWidth = true
+        self.numberL.minimumScaleFactor = 0.2
+        self.numberL.numberOfLines = 1
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("viewdidappear")
         let logoIV = UIImageView(image: UIImage(named: "nav_logo"))
         logoIV.contentMode = .scaleAspectFit
         logoIV.frame = CGRect(x: 0, y: 0, width: 130, height: 21.5)
@@ -202,21 +208,24 @@ class MyNumberVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("viewwillappear")
         self.bTitle = { self.bTitle }()
-//        self.number = { self.number }()
         self.numbers = { self.numbers }()
-        
-        setSocketConnect()
 //        SocketIOManager.sharedInstance.connectToServer()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        print("viewdiddisappear")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
 //        print("socket end")
         print("viewwilldisapper")
         
-        numbers.removeAll()
-        items.removeAll()
-        start_index = 0
+//        numbers.removeAll()
+//        items.removeAll()
+//        start_index = 0
+        
 //        userPreferences.removeObject(forKey: "socket")
 //        userPreferences.removeObject(forKey: "num1")
 //        userPreferences.removeObject(forKey: "num2")
@@ -374,5 +383,8 @@ class NumberCell: UICollectionViewCell {
     override func awakeFromNib() {
         label.font = UIFont(name: "KoPubDotumPB", size: 24)
         label.textColor = UIColor(r: 98, g: 150, b: 174)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.2
+        label.numberOfLines = 1
     }
 }

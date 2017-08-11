@@ -69,4 +69,8 @@ class SocketIOManager: NSObject {
             completionHandler(dataArray)
         }
     }
+    
+    func removeAll(){
+        socket.removeAllHandlers()
+    }
 }

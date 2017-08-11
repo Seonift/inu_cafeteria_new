@@ -58,15 +58,11 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
             if num_count == 2 {
                 num2_height.constant = tf_height
                 num3_height.constant = 0
-                
-                
-                
             } else if num_count == 3 {
                 num3_height.constant = tf_height
             } else if num_count == 1 {
                 num2_height.constant = 0
-                
-                
+                num3_height.constant = 0
             }
             UIView.animate(withDuration: 0.25, delay: 0, options: [], animations: {
                 self.view.layoutIfNeeded()
@@ -78,6 +74,9 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
                     
                     self.numAddBtn2.isHidden = true
                     self.numMinusBtn2.isHidden = true
+                    
+                    self.numAddBtn3.isHidden = true
+                    self.numMinusBtn3.isHidden = true
                     
                 case 2:
                     self.numAddBtn2.isHidden = false
@@ -188,6 +187,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         let model = NumberModel(self)
         model.isNumberWait()
         
+        SocketIOManager.sharedInstance.removeAll()
 //        carouselView.reloadData()
 //        print(code)
 //        print(names)
@@ -203,6 +203,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         num2TF.endEditing(true)
         num3TF.text = ""
         num3TF.endEditing(true)
+        
+        num_count = 1
         
         unregisterForKeyboardNotifications()
     }
@@ -259,6 +261,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         if self.numberTF.text == nil || self.numberTF.text?.characters.count == 0 {
             Toast(text: "번호를 입력해주세요.").show()
         } else {
+            self.view.endEditing(true)
+            
             Indicator.startAnimating(activityData)
             
             let code = Int(codes[carouselView.currentItemIndex].code!)!
