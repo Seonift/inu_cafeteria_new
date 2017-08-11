@@ -17,6 +17,7 @@ import FirebaseMessaging
 import NVActivityIndicatorView
 import Kingfisher
 
+
 class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var carouselView: iCarousel!
@@ -30,10 +31,16 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     @IBOutlet weak var num2TF: UITextField!
     @IBOutlet weak var num3TF: UITextField!
     
+    @IBOutlet weak var numMinusBtn: UIButton!
     @IBOutlet weak var numAddBtn: UIButton!
     @IBOutlet weak var num2_height: NSLayoutConstraint!
     @IBOutlet weak var num3_height: NSLayoutConstraint!
     let tf_height:CGFloat = 40.0
+    
+    @IBOutlet weak var numAddBtn2: UIButton!
+    @IBOutlet weak var numMinusBtn2: UIButton!
+    @IBOutlet weak var numAddBtn3: UIButton!
+    @IBOutlet weak var numMinusBtn3: UIButton!
     
     @IBOutlet weak var confirmBtn: UIButton!
     
@@ -47,13 +54,50 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     var num_count:Int = 1 {
         //입력할 번호의 갯수
         didSet {
+            print("num_count:\(num_count)")
             if num_count == 2 {
                 num2_height.constant = tf_height
+                num3_height.constant = 0
+                
+                
+                
             } else if num_count == 3 {
                 num3_height.constant = tf_height
+            } else if num_count == 1 {
+                num2_height.constant = 0
+                
+                
             }
             UIView.animate(withDuration: 0.25, delay: 0, options: [], animations: {
                 self.view.layoutIfNeeded()
+                
+                switch self.num_count {
+                case 1:
+                    self.numAddBtn.isHidden = false
+//                    self.numMinusBtn.isHidden = false
+                    
+                    self.numAddBtn2.isHidden = true
+                    self.numMinusBtn2.isHidden = true
+                    
+                case 2:
+                    self.numAddBtn2.isHidden = false
+                    self.numMinusBtn2.isHidden = false
+                    
+                    self.numAddBtn.isHidden = true
+//                    self.numMinusBtn.isHidden = true
+                    
+                    self.numAddBtn3.isHidden = true
+                    self.numMinusBtn3.isHidden = true
+                    
+                case 3:
+                    self.numAddBtn3.isHidden = false
+                    self.numMinusBtn3.isHidden = false
+                    
+                    self.numAddBtn2.isHidden = true
+                    self.numMinusBtn2.isHidden = true
+                default:
+                    print("")
+                }
             })
         }
     }
@@ -61,6 +105,12 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     @IBAction func numAddClicked(_ sender: Any) {
         if num_count < 3 {
             num_count += 1
+        }
+    }
+    
+    @IBAction func numMinusClicked(_ sender: Any) {
+        if num_count > 1 {
+            num_count -= 1
         }
     }
     
@@ -100,8 +150,6 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
 //        model.stuinfo()
         
 //        print("token:\(FIRInstanceID.instanceID().token()))")
-        
-        
         
         let logoIV = UIImageView(image: UIImage(named: "nav_logo"))
         logoIV.contentMode = .scaleAspectFit
@@ -213,9 +261,6 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         } else {
             Indicator.startAnimating(activityData)
             
-//            print(token)
-            
-//            let code:Int = Int(codes[carouselView.currentItemIndex])!
             let code = Int(codes[carouselView.currentItemIndex].code!)!
             let number = Int(numberTF.text!)!
             let model = NumberModel(self)
@@ -239,8 +284,6 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
             }
             
             model.registerNumber(code: code, num1: number, num2: num2, num3: num3)
-            
-//            model.postNum(num: number!, token: token)
         }
     }
     
@@ -259,23 +302,6 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         }
         return true
     }
-    
-//    func findKeyForValue(value: String, dictionary: NSDictionary) -> Any?
-//    {
-//        
-//        for item in dictionary {
-//            if item.value as! String == value {
-//                return item.key
-//            }
-//        }
-//        
-//        return nil
-//    }
-//    
-//    func getNameFromCode(code: Int) -> String {
-//        let name = findKeyForValue(value: String(code), dictionary: self.code) as! String
-//        return name
-//    }
     
     func adjustKeyboardHeight(_ show:Bool, _ notification:NSNotification){
         
@@ -341,36 +367,10 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
 extension HomeVC {
     override func networkResult(resultData: Any, code: String) {
         if code == "register_num" {
-            let index = self.carouselView.currentItemIndex
-//            let value = codes[index] //  코드값
-//            let code_value = Int(value)
-//            let name = getNameFromCode(code: code_value!)
-//            let name = "테스트"
+//            let index = self.carouselView.currentItemIndex
             
             let model = NumberModel(self)
             model.isNumberWait()
-            
-//            let code_value = Int(codes[index].code!)!
-//            let name = codes[index].name
-//            
-//            var arr:[Int] = []
-//            
-//            switch self.num_count {
-//            case 3:
-//                arr.append(Int(gsno(num3TF.text))!)
-//                fallthrough
-//            case 2:
-//                arr.append(Int(gsno(num2TF.text))!)
-//                fallthrough
-//            case 1:
-//                arr.append(Int(gsno(numberTF.text))!)
-//            default:
-//                print("")
-//            }
-//            arr.reverse()
-//            print(arr)
-//            
-//            showNumberVC(name!, code_value, arr)
         }
         
         if code == "logout" {
@@ -556,14 +556,6 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
     
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
         self.view.endEditing(true)
-//        self.titleL.text = names[carousel.currentItemIndex]
-//        if let name = names[carousel.currentItemIndex] as? String {
-//            self.titleL.text = name
-//        }
-        
-//        if names.count > carousel.currentItemIndex {
-//            self.titleL.text = names[carousel.currentItemIndex]
-//        }
         
         if codes.count > carousel.currentItemIndex {
             self.titleL.text = codes[carousel.currentItemIndex].name
@@ -571,6 +563,5 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
     }
 }
 
-//extension HomeVC: ViewCallback {
-//    
-//}
+
+

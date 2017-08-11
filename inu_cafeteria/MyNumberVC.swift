@@ -113,12 +113,12 @@ class MyNumberVC: UIViewController {
         let cb = TextImageButton()
         cb.setAttributedTitle(string, for: .normal)
         cb.setImage(UIImage(named: "mynumber_cancel"), for: .normal)
-        cb.spacing = 5
-        cb.contentEdgeInsets = UIEdgeInsets(top: 11, left: 15, bottom: 11, right: 15) //136 48
+        cb.spacing = 5+15
+        cb.contentEdgeInsets = UIEdgeInsets(top: 11, left: 15+15, bottom: 11, right: 15) //136 48
         cb.addTarget(self, action: #selector(cancelClicked), for: .touchUpInside)
         
         self.view.addSubview(cb)
-        self.view.acwf(width: 136, height: 48, view: cb)
+        self.view.acwf(width: 136+30, height: 48, view: cb)
         self.view.addConstraint(NSLayoutConstraint(item: cb, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0))
         self.view.addConstraint(NSLayoutConstraint(item: cb, attribute: .bottom, relatedBy: .equal, toItem: self.imageView, attribute: .bottom, multiplier: 1, constant: 0))
         
@@ -164,8 +164,6 @@ class MyNumberVC: UIViewController {
                         print("msgint:\(msgint)")
                         if self.checkNumCorrect(msgint) == true {
                             //내 번호가 나오면 알림
-                           
-                            
                             let alertController = UIAlertController(title: nil, message: Strings.complete_num(), preferredStyle: .alert)
                             let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
                                 let model = NumberModel(self)
@@ -217,7 +215,8 @@ class MyNumberVC: UIViewController {
         print("viewwilldisapper")
         
         numbers.removeAll()
-        
+        items.removeAll()
+        start_index = 0
 //        userPreferences.removeObject(forKey: "socket")
 //        userPreferences.removeObject(forKey: "num1")
 //        userPreferences.removeObject(forKey: "num2")
