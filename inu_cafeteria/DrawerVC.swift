@@ -70,8 +70,10 @@ class DrawerVC: UIViewController {
         let string = NSAttributedString(string: "로그아웃", attributes: attributes)
         logoutBtn.setAttributedTitle(string, for: .normal)
         
-        let barcode = userPreferences.string(forKey: "barcode")
-        barcodeIV.image = generateBarcode(from: gsno(barcode))
+        if userPreferences.object(forKey: "barcode") != nil {
+            let barcode = userPreferences.string(forKey: "barcode")
+            barcodeIV.image = generateBarcode(from: gsno(barcode))
+        }
     }
     
     @IBAction func barcodeClicked(_ sender: Any) {

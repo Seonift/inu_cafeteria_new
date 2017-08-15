@@ -56,8 +56,7 @@ class SplashVC: UIViewController {
     }
     
     func failAutoLogin(_ code: Any?){
-        userPreferences.removeObject(forKey: "auto_login")
-        userPreferences.removeObject(forKey: "dtoken")
+        Utility.removeAllUserDefaults()
         
         if code == nil {
             Toast(text: "로그인에 실패했습니다.").show()

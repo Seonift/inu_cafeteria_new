@@ -516,16 +516,28 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let view = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
         view.contentMode = .scaleAspectFit
-//        view.image = 
-        
-        if codes.count > index {
-            let url = URL(string: gsno(codes[index].img))
-            view.kf.setImage(with: url, placeholder: UIImage(named: "home_default"), options: nil, progressBlock: nil, completionHandler: nil)
-        }
         
         view.backgroundColor = .white
+        view.layer.cornerRadius = 5.0
+        view.layer.masksToBounds = true
+        
+        if codes.count > index {
+            let imagename = "s"+gsno(codes[index].code)
+            guard let image = UIImage(named: imagename) else {
+                view.image = UIImage(named: "home_default")
+                return view
+            }
+            view.image = image
+            return view
+            
+//            let url = URL(string: gsno(codes[index].img))
+//            view.kf.setImage(with: url, placeholder: UIImage(named: "home_default"), options: nil, progressBlock: nil, completionHandler: nil)
+        }
+
 //        view.layer.borderColor = UIColor.gray.cgColor
 //        view.layer.borderWidth = 1.0
+        view.image = UIImage(named: "home_default")
+        
         return view
     }
     

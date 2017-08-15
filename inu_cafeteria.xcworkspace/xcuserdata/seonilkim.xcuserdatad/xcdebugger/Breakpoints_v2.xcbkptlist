@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/LoginModel.swift"
-            timestampString = "523871333.559973"
+            timestampString = "524478202.412874"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "login(_:_:_:)"
             landmarkType = "7">
          </BreakpointContent>

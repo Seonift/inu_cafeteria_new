@@ -339,8 +339,11 @@ extension FirstStartVC {
         Indicator.stopAnimating()
         
         if let int = code as? Int {
+            print(int)
             if int == 400 {
-                Toast.init(text: "학번/비밀번호를 확인해주세요.").show()
+                Toast(text: "학번/비밀번호를 확인해주세요.").show()
+            } else if int == 404 {
+                Toast(text: Strings.noServer()).show()
             }
         }
         

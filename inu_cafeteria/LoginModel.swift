@@ -40,11 +40,7 @@ class LoginModel: NetworkModel {
 //    }
     
     func logout(){
-        userPreferences.removeObject(forKey: "auto_login")
-        userPreferences.removeObject(forKey: "dtoken")
-        userPreferences.removeObject(forKey: "sno")
-        userPreferences.removeObject(forKey: "major")
-        userPreferences.removeObject(forKey: "name")
+        Utility.removeAllUserDefaults()
         
         let model = FlagModel()
         model.activeBarcode(0)
@@ -86,6 +82,7 @@ class LoginModel: NetworkModel {
                 if code == 200 {
                     userPreferences.setValue(sno, forKey: "sno")
                     let result = res.result.value
+                    //여기도 바코드 넣기
                     guard let codes = result?.code else {
                         self.view.networkFailed(code: "no_code")
                         return
@@ -160,14 +157,10 @@ class LoginModel: NetworkModel {
                         print("dtoken:\(dtoken)")
                         userPreferences.setValue(dtoken, forKey: "dtoken")
                     }
-//                    if let barcode = result?.login?.barcode {
-//                        
-//                    }
-                    guard let barcode = result?.login?.barcode else {
-                        self.view.networkFailed(code: "no_barcode")
-                        return
+                    if let barcode = result?.login?.barcode {
+                        print("barcode:\(barcode)")
+                        userPreferences.setValue(barcode, forKey: "barcode")
                     }
-                    userPreferences.setValue(barcode, forKey: "barcode")
                     guard let codes = result?.code else {
                         self.view.networkFailed(code: "no_code")
                         return
@@ -179,12 +172,18 @@ class LoginModel: NetworkModel {
                     userPreferences.setValue(stu_info.name, forKey: "name")
                     userPreferences.setValue(stu_info.dep, forKey: "dep")
                     self.view.networkResult(resultData: codes, code: "login")
-                } else if code == 400 {
+                } else {
+//                    if code == 400 {
                     self.view.networkFailed(code: gino(code))
                 }
             case .failure(let error):
                 print(error)
-                self.view.networkFailed()
+//                print("code:\(code)")
+                if code != nil {
+                    self.view.networkFailed(code: gino(code))
+                } else {
+                    self.view.networkFailed()
+                }
             }
             
         }
