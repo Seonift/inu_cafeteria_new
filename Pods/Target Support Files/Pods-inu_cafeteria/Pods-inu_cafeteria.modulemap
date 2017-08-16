@@ -1,0 +1,6 @@
+framework module Pods_inu_cafeteria {
+  umbrella header "Pods-inu_cafeteria-umbrella.h"
+
+  export *
+  module * { export * }
+}
