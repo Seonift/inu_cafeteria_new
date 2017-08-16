@@ -21,8 +21,8 @@ import Kingfisher
 class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var carouselView: iCarousel!
-    @IBOutlet weak var leftB: UIButton!
-    @IBOutlet weak var rightB: UIButton!
+//    @IBOutlet weak var leftB: UIButton!
+//    @IBOutlet weak var rightB: UIButton!
     
     @IBOutlet weak var topL: UILabel!
     @IBOutlet weak var titleL: UILabel!
@@ -159,8 +159,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         carouselView.bounds = carouselView.frame.insetBy(dx: 15, dy: 10)
         carouselView.isPagingEnabled = true
         
-        leftB.addTarget(self, action: #selector(btnClicked(_:)), for: .touchUpInside)
-        rightB.addTarget(self, action: #selector(btnClicked(_:)), for: .touchUpInside)
+//        leftB.addTarget(self, action: #selector(btnClicked(_:)), for: .touchUpInside)
+//        rightB.addTarget(self, action: #selector(btnClicked(_:)), for: .touchUpInside)
         confirmBtn.addTarget(self, action: #selector(confirmClicked(_:)), for: .touchUpInside)
         
         topL.font = UIFont(name: "KoPubDotumPM", size: 12)
@@ -247,15 +247,15 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         sender.addDoneButtonOnKeyboard()
     }
     
-    func btnClicked(_ sender: UIButton){
-        var index = carouselView.currentItemIndex
-        if sender == self.leftB {
-            index -= 1
-        } else if sender == self.rightB {
-            index += 1
-        }
-        carouselView.scrollToItem(at: index, animated: true)
-    }
+//    func btnClicked(_ sender: UIButton){
+//        var index = carouselView.currentItemIndex
+//        if sender == self.leftB {
+//            index -= 1
+//        } else if sender == self.rightB {
+//            index += 1
+//        }
+//        carouselView.scrollToItem(at: index, animated: true)
+//    }
     
     func confirmClicked(_ sender: UIButton){
         if self.numberTF.text == nil || self.numberTF.text?.characters.count == 0 {
@@ -329,13 +329,13 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
                 
                 if show {
                     self.topL.isHidden = true
-                    self.leftB.isHidden = true
-                    self.rightB.isHidden = true
+//                    self.leftB.isHidden = true
+//                    self.rightB.isHidden = true
                     self.carouselView.isHidden = true
                 } else {
                     self.topL.isHidden = false
-                    self.leftB.isHidden = false
-                    self.rightB.isHidden = false
+//                    self.leftB.isHidden = false
+//                    self.rightB.isHidden = false
                     self.carouselView.isHidden = false
                 }
                 
@@ -518,8 +518,8 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
         view.contentMode = .scaleAspectFit
         
         view.backgroundColor = .white
-        view.layer.cornerRadius = 5.0
-        view.layer.masksToBounds = true
+//        view.layer.cornerRadius = 5.0
+//        view.layer.masksToBounds = true
         
         if codes.count > index {
             let imagename = "s"+gsno(codes[index].code)

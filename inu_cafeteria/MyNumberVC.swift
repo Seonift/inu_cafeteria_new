@@ -75,7 +75,18 @@ class MyNumberVC: UIViewController {
         }
     }
     
-    var code:Int = 0
+    var code:Int = 0 {
+        didSet {
+            if imageView != nil {
+                let imagename = "ss"+String(code)
+                guard let image = UIImage(named: imagename) else {
+                    imageView.image = UIImage(named: "mynumber_bg")
+                    return
+                }
+                imageView.image = image
+            }
+        }
+    }
     var name:String = ""
     
     @IBOutlet weak var image_height: NSLayoutConstraint!
@@ -127,6 +138,13 @@ class MyNumberVC: UIViewController {
         self.numberL.adjustsFontSizeToFitWidth = true
         self.numberL.minimumScaleFactor = 0.2
         self.numberL.numberOfLines = 1
+        
+        let imagename = "ss"+String(code)
+        guard let image = UIImage(named: imagename) else {
+            imageView.image = UIImage(named: "mynumber_bg")
+            return
+        }
+        imageView.image = image
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -170,7 +188,7 @@ class MyNumberVC: UIViewController {
                         print("msgint:\(msgint)")
                         if self.checkNumCorrect(msgint) == true {
                             //내 번호가 나오면 알림
-                            let alertController = UIAlertController(title: nil, message: Strings.complete_num(), preferredStyle: .alert)
+                            let alertController = UIAlertController(title: nil, message: "\(Strings.complete_num())\n번호 : \(msgint)", preferredStyle: .alert)
                             let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
                                 let model = NumberModel(self)
                                 model.isNumberWait()

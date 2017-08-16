@@ -2,20 +2,22 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "imgCafedream2.png"
     },
     {
       "idiom" : "universal",
-      "filename" : "s5.jpg",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "imgCafedream2@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "imgCafedream2@3x.png"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "zeplin",
+    "version" : "1"
   }
 }

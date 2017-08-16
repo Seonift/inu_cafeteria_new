@@ -106,6 +106,18 @@ extension UIViewController: ViewCallback {
 //            }
 //        }
         
+        if code == "info" {
+            if let drawerController = navigationController?.parent as? KYDrawerController {
+                drawerController.setDrawerState(.closed, animated: true)
+            }
+            
+            DispatchQueue.main.async {
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                guard let infovc = sb.instantiateViewController(withIdentifier: "infovc") as? InfoVC else {return}
+                self.present(infovc, animated: true, completion: nil)
+            }
+        }
+        
         if code == "logout" {
             
             let alertController = UIAlertController(title: nil, message: Strings.logout(), preferredStyle: .alert)

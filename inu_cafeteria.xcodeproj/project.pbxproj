@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		740689061F4415CE000291DA /* InfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740689051F4415CE000291DA /* InfoVC.swift */; };
 		741BD9181F22453600B56F30 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 741BD9171F22453600B56F30 /* Splash.storyboard */; };
 		741BD91B1F2245DA00B56F30 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741BD91A1F2245DA00B56F30 /* SplashVC.swift */; };
 		742D90011F1CF7A4000B656E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90001F1CF7A4000B656E /* AppDelegate.swift */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		2243B7A300FDCBCAA2CA145C /* Pods-inu_cafeteria.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inu_cafeteria.release.xcconfig"; path = "Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria.release.xcconfig"; sourceTree = "<group>"; };
+		740689051F4415CE000291DA /* InfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoVC.swift; sourceTree = "<group>"; };
 		741BD9171F22453600B56F30 /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		741BD91A1F2245DA00B56F30 /* SplashVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		742D8FFD1F1CF7A4000B656E /* inu_cafeteria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inu_cafeteria.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +202,7 @@
 				742D90511F1E5D3F000B656E /* DrawerVC.swift */,
 				74E4330A1F1F1C230081AE08 /* BarcodeVC.swift */,
 				741BD91A1F2245DA00B56F30 /* SplashVC.swift */,
+				740689051F4415CE000291DA /* InfoVC.swift */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				742D90211F1CF8F8000B656E /* Utility.swift in Sources */,
 				742D90541F1E61CF000B656E /* NumberModel.swift in Sources */,
 				742D90461F1E43E2000B656E /* HomeVC.swift in Sources */,
+				740689061F4415CE000291DA /* InfoVC.swift in Sources */,
 				742D90301F1CF90E000B656E /* ExtTextfield.swift in Sources */,
 				742D90231F1CF8F8000B656E /* Strings.swift in Sources */,
 				742D90441F1E38E8000B656E /* LoginVC.swift in Sources */,

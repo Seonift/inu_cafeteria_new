@@ -19,6 +19,7 @@ class DrawerVC: UIViewController {
     @IBOutlet weak var numL: UILabel!
     
     
+    @IBOutlet weak var infoBtn: UIButton!
     @IBOutlet weak var logoutBtn: UIButton!
     
     @IBOutlet weak var barcodeBG: UIView!
@@ -67,8 +68,11 @@ class DrawerVC: UIViewController {
             NSForegroundColorAttributeName: UIColor(r: 189, g:189, b:183),
             NSFontAttributeName : UIFont(name: "KoPubDotumPB", size: 15)!
         ]
-        let string = NSAttributedString(string: "로그아웃", attributes: attributes)
+        var string = NSAttributedString(string: "로그아웃", attributes: attributes)
         logoutBtn.setAttributedTitle(string, for: .normal)
+        string = NSAttributedString(string: "앱 정보", attributes: attributes)
+        infoBtn.setAttributedTitle(string, for: .normal)
+        
         
         if userPreferences.object(forKey: "barcode") != nil {
             let barcode = userPreferences.string(forKey: "barcode")
@@ -83,4 +87,9 @@ class DrawerVC: UIViewController {
     @IBAction func logoutClicked(_ sender: Any) {
         self.delegate?.passData(resultData: true, code: "logout")
     }
+    
+    @IBAction func infoClicked(_ sender: Any) {
+        self.delegate?.passData(resultData: true, code: "info")
+    }
+    
 }
