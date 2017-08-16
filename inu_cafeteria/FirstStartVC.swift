@@ -37,7 +37,15 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var loginBtn: UIButton!
     
+    @IBOutlet weak var noStudentBtn: UIButton!
     var showLogin:Bool = false
+    
+    @IBAction func noStudentClicked(_ sender: Any) {
+        Indicator.startAnimating(activityData)
+        let model = LoginModel(self)
+        model.no_student()
+    }
+    
     
     @IBAction func loginClicked(_ sender: Any) {
         
@@ -141,11 +149,13 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         self.pwTF.isHidden = false
         self.autoV.isHidden = false
         self.loginBtn.isHidden = false
+        self.noStudentBtn.isHidden = false
         
         self.idTF.alpha = 0
         self.pwTF.alpha = 0
         self.autoV.alpha = 0
         self.loginBtn.alpha = 0
+        self.noStudentBtn.alpha = 0
     }
     
     func setupLogin2(){
@@ -153,6 +163,7 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         self.pwTF.alpha = 1
         self.autoV.alpha = 1
         self.loginBtn.alpha = 1
+        self.noStudentBtn.alpha = 1
     }
     
     func setupLogin3(){
@@ -305,6 +316,13 @@ extension FirstStartVC {
     override func networkResult(resultData: Any, code: String) {
         Indicator.stopAnimating()
         print(code)
+        
+        if code == "no_student" {
+            let result = resultData as! [CodeObject]
+            
+            self.showHome(result, true)
+        }
+        
         if code == "login" {
 //            let result = resultData as! Bool
 //            if result == true {
@@ -316,7 +334,7 @@ extension FirstStartVC {
             
             let result = resultData as! [CodeObject]
             
-            self.showHome(result)
+            self.showHome(result, false)
         }
         
 //        if code == "stuinfo" {

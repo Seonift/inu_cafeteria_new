@@ -135,12 +135,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         
+        if userPreferences.object(forKey: "no_student") != nil {
+            userPreferences.removeObject(forKey: "no_student")
+        }
+        
         removeFlag()
         Network().saveCookie()
 //        print("socket end")
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+//        print("didreceiveremotenotification")
         
         FIRMessaging.messaging().appDidReceiveMessage(userInfo)
         

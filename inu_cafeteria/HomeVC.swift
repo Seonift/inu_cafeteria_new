@@ -39,7 +39,6 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     
     @IBOutlet weak var numAddBtn2: UIButton!
     @IBOutlet weak var numMinusBtn2: UIButton!
-    @IBOutlet weak var numAddBtn3: UIButton!
     @IBOutlet weak var numMinusBtn3: UIButton!
     
     @IBOutlet weak var confirmBtn: UIButton!
@@ -50,6 +49,14 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
 //    let names:[String] = ["제1학생식당", "미유", "카페드림 학생식당", "카페드림 도서관", "소담국밥", "김밥천국", "봉구스밥버거"]
     
     var numberHint:UILabel!
+    
+    var no_student:Bool = false {
+        didSet {
+            if no_student == true {
+                self.navigationItem.leftBarButtonItem = nil
+            }
+        }
+    }
     
     var num_count:Int = 1 {
         //입력할 번호의 갯수
@@ -75,7 +82,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
                     self.numAddBtn2.isHidden = true
                     self.numMinusBtn2.isHidden = true
                     
-                    self.numAddBtn3.isHidden = true
+//                    self.numAddBtn3.isHidden = true
                     self.numMinusBtn3.isHidden = true
                     
                 case 2:
@@ -85,11 +92,11 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
                     self.numAddBtn.isHidden = true
 //                    self.numMinusBtn.isHidden = true
                     
-                    self.numAddBtn3.isHidden = true
+//                    self.numAddBtn3.isHidden = true
                     self.numMinusBtn3.isHidden = true
                     
                 case 3:
-                    self.numAddBtn3.isHidden = false
+//                    self.numAddBtn3.isHidden = false
                     self.numMinusBtn3.isHidden = false
                     
                     self.numAddBtn2.isHidden = true
@@ -188,6 +195,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         model.isNumberWait()
         
         SocketIOManager.sharedInstance.removeAll()
+        
 //        carouselView.reloadData()
 //        print(code)
 //        print(names)
@@ -214,6 +222,10 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         
         if self.codes.count > 0 {
             self.titleL.text = codes[carouselView.currentItemIndex].name
+        }
+        
+        if no_student == true {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "정보", style: .plain, target: self, action: #selector(infoC(_:)))
         }
     }
     
@@ -456,19 +468,23 @@ extension HomeVC {
         guard let vc = sb.instantiateViewController(withIdentifier: "mynumbervcnav") as? DefaultNC else { return }
         let mynum = vc.childViewControllers[0] as! MyNumberVC
         
-        let drawerC = KYDrawerController(drawerDirection: .left, drawerWidth: CGFloats.drawer_width())
-        drawerC.mainViewController = vc
-        
-        guard let drawer = sb.instantiateViewController(withIdentifier: "drawervc") as? DrawerVC else { return }
-        drawerC.drawerViewController = drawer
-        drawer.delegate = mynum
-        
         mynum.bTitle = gsno(titleL.text)
         mynum.numbers = numbers
         mynum.name = name
         mynum.code = code
         
-        self.present(drawerC, animated: false, completion: nil)
+        if userPreferences.object(forKey: "no_student") != nil {
+            self.present(vc, animated: false, completion: nil)
+        } else {
+            let drawerC = KYDrawerController(drawerDirection: .left, drawerWidth: CGFloats.drawer_width())
+            drawerC.mainViewController = vc
+            
+            guard let drawer = sb.instantiateViewController(withIdentifier: "drawervc") as? DrawerVC else { return }
+            drawerC.drawerViewController = drawer
+            drawer.delegate = mynum
+            
+            self.present(drawerC, animated: false, completion: nil)
+        }
     }
 }
 

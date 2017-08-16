@@ -20,6 +20,8 @@ class MyNumberVC: UIViewController {
     
     @IBOutlet weak var cView: UICollectionView!
     
+    private var audioPlayer: AVAudioPlayer?
+    
     let cellId = "NumberCell"
     let cellId2 = "NumberCell2"
     
@@ -190,6 +192,7 @@ class MyNumberVC: UIViewController {
                             //내 번호가 나오면 알림
                             let alertController = UIAlertController(title: nil, message: "\(Strings.complete_num())\n번호 : \(msgint)", preferredStyle: .alert)
                             let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+//                                self.audioPlayer?.stop()
                                 let model = NumberModel(self)
                                 model.isNumberWait()
                             }
@@ -200,6 +203,15 @@ class MyNumberVC: UIViewController {
                             let vib = SystemSoundID(kSystemSoundID_Vibrate)
                             AudioServicesPlaySystemSound(systemSoundID)
                             AudioServicesPlaySystemSound(vib)
+                            
+//                            let url = URL(fileURLWithPath: Bundle.main.path(forResource: "alarm", ofType: "mp3")!)
+//                            try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+//                            try! AVAudioSession.sharedInstance().setActive(true)
+//                            
+//                            try! self.audioPlayer = AVAudioPlayer(contentsOf: url)
+//                            self.audioPlayer?.numberOfLoops = -1
+//                            self.audioPlayer!.prepareToPlay()
+//                            self.audioPlayer!.play()
                         } else {
                             self.items.append(msg)
                         }
@@ -229,6 +241,10 @@ class MyNumberVC: UIViewController {
         print("viewwillappear")
         self.bTitle = { self.bTitle }()
         self.numbers = { self.numbers }()
+        
+        if userPreferences.object(forKey: "no_student") != nil {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "정보", style: .plain, target: self, action: #selector(infoC(_:)))
+        }
 //        SocketIOManager.sharedInstance.connectToServer()
     }
     

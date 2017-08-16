@@ -22,6 +22,8 @@ class Utility {
     static func removeAllUserDefaults() {
         let appDomain = Bundle.main.bundleIdentifier
         userPreferences.removePersistentDomain(forName: appDomain!)
+        
+        userPreferences.set(true, forKey: "not_first")
     }
     
     static func showFont(){

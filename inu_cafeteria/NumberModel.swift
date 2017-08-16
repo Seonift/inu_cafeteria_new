@@ -125,7 +125,8 @@ class NumberModel: NetworkModel {
             "num1" : num1,
             "num2" : num2 ?? -1,
             "num3" : num3 ?? -1,
-            "token" : token
+            "token" : token,
+            "device" : "ios"
         ]
         print(params)
         

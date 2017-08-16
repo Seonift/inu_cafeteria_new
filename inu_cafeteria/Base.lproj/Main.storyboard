@@ -151,6 +151,16 @@
                                     <constraint firstItem="m07-2b-Jfz" firstAttribute="leading" secondItem="8DW-HF-1Zi" secondAttribute="leading" id="sBk-eO-TUR"/>
                                 </constraints>
                             </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAv-8V-vBF">
+                                <rect key="frame" x="113" y="481" width="148" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="나는 학생이 아니에요!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="noStudentClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pDu-En-oYP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -191,12 +201,13 @@
                         <outlet property="logo_top" destination="jLF-0o-zmc" id="0E3-rI-OD7"/>
                         <outlet property="logo_width" destination="OPP-qX-GQy" id="hk1-sf-YEQ"/>
                         <outlet property="moveBtn" destination="4CS-Ze-egT" id="kpK-NU-Ki6"/>
+                        <outlet property="noStudentBtn" destination="uAv-8V-vBF" id="ixM-aZ-nsc"/>
                         <outlet property="pwTF" destination="HSb-GG-lXM" id="KyU-Y7-jlZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="849" y="137"/>
+            <point key="canvasLocation" x="848.79999999999995" y="136.28185907046478"/>
         </scene>
         <!--Data Source-->
         <scene sceneID="vDb-xU-ze4">
@@ -306,17 +317,6 @@
                                     <action selector="numMinusClicked:" destination="WZA-RE-v64" eventType="touchUpInside" id="FXq-oX-qnc"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="An4-mw-jMx">
-                                <rect key="frame" x="310" y="349" width="48" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="48" id="Xu6-aP-cTP"/>
-                                    <constraint firstAttribute="height" constant="48" id="jnc-9u-QjB"/>
-                                </constraints>
-                                <state key="normal" image="btnPlus"/>
-                                <connections>
-                                    <action selector="numAddClicked:" destination="WZA-RE-v64" eventType="touchUpInside" id="X0U-tK-37T"/>
-                                </connections>
-                            </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVg-Rn-CXv">
                                 <rect key="frame" x="15" y="349" width="48" height="48"/>
                                 <constraints>
@@ -343,7 +343,6 @@
                         <constraints>
                             <constraint firstItem="Yal-8D-Ypb" firstAttribute="centerY" secondItem="lHp-4y-teJ" secondAttribute="centerY" id="0XC-w2-AdF"/>
                             <constraint firstItem="dcG-SN-BYy" firstAttribute="top" secondItem="OJo-59-L7h" secondAttribute="bottom" constant="18" id="1k2-UE-rkd"/>
-                            <constraint firstItem="An4-mw-jMx" firstAttribute="leading" secondItem="OJo-59-L7h" secondAttribute="trailing" constant="13" id="995-Nz-xQW"/>
                             <constraint firstItem="IBp-ez-jy3" firstAttribute="centerY" secondItem="dRv-EA-GrP" secondAttribute="centerY" id="Aff-74-Xqi"/>
                             <constraint firstItem="fg3-Ue-ph9" firstAttribute="leading" secondItem="dPH-oS-AOq" secondAttribute="leadingMargin" id="BKp-SV-NfU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fg3-Ue-ph9" secondAttribute="trailing" id="Efq-VJ-psn"/>
@@ -358,7 +357,6 @@
                             <constraint firstItem="OJo-59-L7h" firstAttribute="top" secondItem="dRv-EA-GrP" secondAttribute="bottom" constant="10" id="X0Q-PM-67G"/>
                             <constraint firstItem="iLS-np-lbe" firstAttribute="top" secondItem="YVV-Iw-bfK" secondAttribute="bottom" constant="4" id="ZdZ-0r-T2i"/>
                             <constraint firstItem="dRv-EA-GrP" firstAttribute="top" secondItem="lHp-4y-teJ" secondAttribute="bottom" constant="10" id="aYW-Z2-qbs"/>
-                            <constraint firstItem="An4-mw-jMx" firstAttribute="centerY" secondItem="OJo-59-L7h" secondAttribute="centerY" id="b77-kF-fgg"/>
                             <constraint firstItem="YVV-Iw-bfK" firstAttribute="centerX" secondItem="dPH-oS-AOq" secondAttribute="centerX" id="d3K-qR-5fC"/>
                             <constraint firstItem="lHp-4y-teJ" firstAttribute="top" secondItem="iLS-np-lbe" secondAttribute="bottom" constant="21" id="nWQ-qL-qGS"/>
                             <constraint firstItem="OJo-59-L7h" firstAttribute="centerX" secondItem="dPH-oS-AOq" secondAttribute="centerX" id="nlm-YM-ZLR"/>
@@ -382,7 +380,6 @@
                         <outlet property="num3_height" destination="y8q-jk-vxg" id="tNi-xU-Gom"/>
                         <outlet property="numAddBtn" destination="Yal-8D-Ypb" id="kFh-Vt-d3Q"/>
                         <outlet property="numAddBtn2" destination="gPL-54-FFB" id="5CI-Hg-Sf0"/>
-                        <outlet property="numAddBtn3" destination="An4-mw-jMx" id="pCo-ll-3pe"/>
                         <outlet property="numMinusBtn" destination="Ob5-BV-Zzi" id="39x-qo-vf9"/>
                         <outlet property="numMinusBtn2" destination="IBp-ez-jy3" id="PzC-tH-8gp"/>
                         <outlet property="numMinusBtn3" destination="AVg-Rn-CXv" id="f4q-m3-8e9"/>

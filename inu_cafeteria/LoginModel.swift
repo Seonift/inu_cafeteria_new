@@ -12,6 +12,57 @@ import AlamofireObjectMapper
 
 class LoginModel: NetworkModel {
     
+    func no_student() {
+        print("no_student")
+        
+        Alamofire.request("\(loginURL)getcode").responseObject { (res:DataResponse<InfoObject>) in
+            let code = res.response?.statusCode
+            switch res.result {
+            case .success:
+                print("success")
+                let result = res.result.value
+                if code == 200 {
+                    guard let codes = result?.code else {
+                        self.view.networkFailed(code: "no_code")
+                        return
+                    }
+                    self.view.networkResult(resultData: codes, code: "no_student")
+                } else {
+                    //                    if code == 400 {
+                    self.view.networkFailed(code: gino(code))
+                }
+            case .failure(let error):
+                print(error)
+                //                print("code:\(code)")
+                if code != nil {
+                    self.view.networkFailed(code: gino(code))
+                } else {
+                    self.view.networkFailed()
+                }
+            }
+        }
+    }
+    
+    func message(){
+        print("message")
+        
+        Alamofire.request("\(loginURL)message").responseObject { (res:DataResponse<MessageObject>) in
+            switch res.result {
+            case .success:
+                let val = res.result.value
+                if val?.message != nil && val?.message != "" {
+                    self.view.networkResult(resultData: val, code: "message")
+                } else {
+                    self.view.networkFailed(code: "message")
+                }
+                
+            case .failure(let error):
+                print(error)
+                self.view.networkFailed(code: "message")
+            }
+        }
+    }
+    
 //    func stuinfo(){
 //        print("stuinfo")
 ////        self.view.networkResult(resultData: true, code: "stuinfo")

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		740689061F4415CE000291DA /* InfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740689051F4415CE000291DA /* InfoVC.swift */; };
+		7406890A1F442CDB000291DA /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 740689091F442CDB000291DA /* alarm.mp3 */; };
+		7406890D1F4430D7000291DA /* MessageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7406890C1F4430D7000291DA /* MessageObject.swift */; };
 		741BD9181F22453600B56F30 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 741BD9171F22453600B56F30 /* Splash.storyboard */; };
 		741BD91B1F2245DA00B56F30 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741BD91A1F2245DA00B56F30 /* SplashVC.swift */; };
 		742D90011F1CF7A4000B656E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90001F1CF7A4000B656E /* AppDelegate.swift */; };
@@ -57,6 +59,9 @@
 /* Begin PBXFileReference section */
 		2243B7A300FDCBCAA2CA145C /* Pods-inu_cafeteria.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inu_cafeteria.release.xcconfig"; path = "Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria.release.xcconfig"; sourceTree = "<group>"; };
 		740689051F4415CE000291DA /* InfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoVC.swift; sourceTree = "<group>"; };
+		740689091F442CDB000291DA /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = "<group>"; };
+		7406890B1F442FFC000291DA /* out.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = out.caf; sourceTree = "<group>"; };
+		7406890C1F4430D7000291DA /* MessageObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageObject.swift; sourceTree = "<group>"; };
 		741BD9171F22453600B56F30 /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		741BD91A1F2245DA00B56F30 /* SplashVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		742D8FFD1F1CF7A4000B656E /* inu_cafeteria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inu_cafeteria.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +175,8 @@
 		742D8FFF1F1CF7A4000B656E /* inu_cafeteria */ = {
 			isa = PBXGroup;
 			children = (
+				7406890B1F442FFC000291DA /* out.caf */,
+				740689091F442CDB000291DA /* alarm.mp3 */,
 				742D90121F1CF8A9000B656E /* VC */,
 				742D90321F1CF91D000B656E /* Protocol */,
 				742D90311F1CF91A000B656E /* Network */,
@@ -272,6 +279,7 @@
 			children = (
 				747C105A1F2A388200C195A9 /* LoginObject.swift */,
 				749410A51F39FCCF00399BF2 /* Queue.swift */,
+				7406890C1F4430D7000291DA /* MessageObject.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -350,6 +358,7 @@
 			files = (
 				742D903D1F1CFBBE000B656E /* KoPub Dotum_Pro Bold.otf in Resources */,
 				742D903E1F1CFBBE000B656E /* KoPub Dotum_Pro Light.otf in Resources */,
+				7406890A1F442CDB000291DA /* alarm.mp3 in Resources */,
 				742D903F1F1CFBBE000B656E /* KoPub Dotum_Pro Medium.otf in Resources */,
 				741BD9181F22453600B56F30 /* Splash.storyboard in Resources */,
 				742D900B1F1CF7A4000B656E /* LaunchScreen.storyboard in Resources */,
@@ -432,6 +441,7 @@
 				747C105B1F2A388200C195A9 /* LoginObject.swift in Sources */,
 				742D902B1F1CF90E000B656E /* ExtVC.swift in Sources */,
 				741BD91B1F2245DA00B56F30 /* SplashVC.swift in Sources */,
+				7406890D1F4430D7000291DA /* MessageObject.swift in Sources */,
 				742D901D1F1CF8F8000B656E /* Constraint.swift in Sources */,
 				742D90481F1E441D000B656E /* DefaultNC.swift in Sources */,
 				742D902E1F1CF90E000B656E /* ExtDate.swift in Sources */,

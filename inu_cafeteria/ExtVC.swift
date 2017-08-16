@@ -11,6 +11,12 @@ import Toaster
 import KYDrawerController
 
 extension UIViewController {
+
+    func infoC(_ sender: Any){
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        guard let infovc = sb.instantiateViewController(withIdentifier: "infovc") as? InfoVC else {return}
+        self.present(infovc, animated: true, completion: nil)
+    }
     
     func setStatusBar(_ color:UIColor){
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 500, height: UIApplication.shared.statusBarFrame.size.height))
@@ -55,21 +61,33 @@ extension UIViewController {
         return (self.tabBarController?.tabBar.frame.origin.y)! < self.view.frame.maxY
     }
     
-    func showHome(_ code: [CodeObject]){
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        guard let homevc = sb.instantiateViewController(withIdentifier: "homevcnav") as? DefaultNC else { return }
-        
-        let drawerController = KYDrawerController(drawerDirection: .left, drawerWidth: CGFloats.drawer_width())
-        drawerController.mainViewController = homevc
-        
-        let hvc = homevc.viewControllers[0] as! HomeVC
-        hvc.codes = code
-        
-        guard let drawer = sb.instantiateViewController(withIdentifier: "drawervc") as? DrawerVC else { return }
-        drawerController.drawerViewController = drawer
-        drawer.delegate = hvc
-        
-        self.present(drawerController, animated: true, completion: nil)
+    func showHome(_ code: [CodeObject], _ no_student: Bool){
+        if no_student == true {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            guard let homevc = sb.instantiateViewController(withIdentifier: "homevcnav") as? DefaultNC else { return }
+            
+            let hvc = homevc.viewControllers[0] as! HomeVC
+            hvc.codes = code
+            hvc.no_student = true
+            userPreferences.setValue(true, forKey: "no_student")
+            
+            self.present(homevc, animated: true, completion: nil)
+        } else {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            guard let homevc = sb.instantiateViewController(withIdentifier: "homevcnav") as? DefaultNC else { return }
+            
+            let drawerController = KYDrawerController(drawerDirection: .left, drawerWidth: CGFloats.drawer_width())
+            drawerController.mainViewController = homevc
+            
+            let hvc = homevc.viewControllers[0] as! HomeVC
+            hvc.codes = code
+            
+            guard let drawer = sb.instantiateViewController(withIdentifier: "drawervc") as? DrawerVC else { return }
+            drawerController.drawerViewController = drawer
+            drawer.delegate = hvc
+            
+            self.present(drawerController, animated: true, completion: nil)
+        }
     }
     
     func setupDrawerBtn(){
