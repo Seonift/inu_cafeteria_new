@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TextImageButton
 
 class DrawerVC: UIViewController {
     
@@ -18,9 +19,13 @@ class DrawerVC: UIViewController {
     @IBOutlet weak var nameL: UILabel!
     @IBOutlet weak var numL: UILabel!
     
+    @IBOutlet weak var guideL: UILabel!
     
-    @IBOutlet weak var infoBtn: UIButton!
-    @IBOutlet weak var logoutBtn: UIButton!
+    var infoB: TextImageButton!
+    var logoutB: TextImageButton!
+    
+//    @IBOutlet weak var infoBtn: TextImageButton!
+//    @IBOutlet weak var logoutBtn: TextImageButton!
     
     @IBOutlet weak var barcodeBG: UIView!
     @IBOutlet weak var barcodeIV: UIImageView!
@@ -56,10 +61,10 @@ class DrawerVC: UIViewController {
     }
     
     func setupUI(){
-        imageView.layer.cornerRadius = image_const.constant / 2
-        imageView.clipsToBounds = true
-        imageView.layer.borderColor = UIColor(r: 189, g: 189, b: 183).cgColor
-        imageView.layer.borderWidth = 2.0
+//        imageView.layer.cornerRadius = image_const.constant / 2
+//        imageView.clipsToBounds = true
+//        imageView.layer.borderColor = UIColor(r: 189, g: 189, b: 183).cgColor
+//        imageView.layer.borderWidth = 2.0
         
         nameL.font = UIFont(name: "KoPubDotumPB", size: 18)
         numL.font = UIFont(name: "KoPubDotumPL", size: 15)
@@ -69,14 +74,53 @@ class DrawerVC: UIViewController {
             NSFontAttributeName : UIFont(name: "KoPubDotumPB", size: 15)!
         ]
         var string = NSAttributedString(string: "로그아웃", attributes: attributes)
-        logoutBtn.setAttributedTitle(string, for: .normal)
-        string = NSAttributedString(string: "앱 정보", attributes: attributes)
-        infoBtn.setAttributedTitle(string, for: .normal)
+        logoutB = TextImageButton()
+        self.view.addSubview(logoutB)
+        self.view.acwf(width: 87, height: 24, view: logoutB)
+        self.view.ac_center(item: logoutB, toItem: self.view, origin: "x")
+        self.view.addConstraint(NSLayoutConstraint(item: logoutB, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: -36))
         
+        logoutB.setAttributedTitle(string, for: .normal)
+        logoutB.setImage(UIImage(named: "btnLogout"), for: .normal)
+        logoutB.spacing = 10
+        logoutB.addTarget(self, action: #selector(btnClicked(_:)), for: .touchUpInside)
+        
+        infoB = TextImageButton()
+        self.view.addSubview(infoB)
+        self.view.acwf(width: 78, height: 24, view: infoB)
+        self.view.ac_center(item: infoB, toItem: self.view, origin: "x")
+        self.view.addConstraint(NSLayoutConstraint(item: infoB, attribute: .bottom, relatedBy: .equal, toItem: logoutB, attribute: .top, multiplier: 1, constant: -22))
+        
+        string = NSAttributedString(string: "앱 정보", attributes: attributes)
+        infoB.setAttributedTitle(string, for: .normal)
+        infoB.setImage(UIImage(named: "btnInfo"), for: .normal)
+        infoB.spacing = 10
+        infoB.addTarget(self, action: #selector(btnClicked(_:)), for: .touchUpInside)
+        
+        
+//        string = NSAttributedString(string: "앱 정보", attributes: attributes)
+//        infoBtn.setAttributedTitle(string, for: .normal)
+        
+//        let attributes:[String:Any] = [
+//            NSForegroundColorAttributeName: UIColor.white,
+//            NSFontAttributeName : UIFont(name: "KoPubDotumPB", size: 12)!
+//        ]
+//        let string = NSAttributedString(string: "주문번호 초기화", attributes: attributes)
+//        let cb = TextImageButton()
+//        cb.setAttributedTitle(string, for: .normal)
+//        cb.setImage(UIImage(named: "mynumber_cancel"), for: .normal)
+//        cb.spacing = 5+15
+//        cb.contentEdgeInsets = UIEdgeInsets(top: 11, left: 15+15, bottom: 11, right: 15) //136 48
+//        cb.addTarget(self, action: #selector(cancelClicked), for: .touchUpInside)
+        
+        guideL.font = UIFont(name: "KoPubDotumPL", size: 13)
+        guideL.text = "기숙사 식당에서 조식할인 시간에\n사용하실 수 있습니다."
         
         if userPreferences.object(forKey: "barcode") != nil {
             let barcode = userPreferences.string(forKey: "barcode")
             barcodeIV.image = generateBarcode(from: gsno(barcode))
+            barcodeIV.layer.cornerRadius = 5
+            barcodeIV.clipsToBounds = true
         }
     }
     
@@ -84,12 +128,22 @@ class DrawerVC: UIViewController {
         self.delegate?.passData(resultData: true, code: "barcode")
     }
     
-    @IBAction func logoutClicked(_ sender: Any) {
-        self.delegate?.passData(resultData: true, code: "logout")
+    func btnClicked(_ sender: UIButton){
+        if sender == self.logoutB {
+            self.delegate?.passData(resultData: true, code: "logout")
+        }
+        
+        if sender == self.infoB {
+            self.delegate?.passData(resultData: true, code: "info")
+        }
     }
     
-    @IBAction func infoClicked(_ sender: Any) {
-        self.delegate?.passData(resultData: true, code: "info")
-    }
+//    @IBAction func logoutClicked(_ sender: Any) {
+//        self.delegate?.passData(resultData: true, code: "logout")
+//    }
+//    
+//    @IBAction func infoClicked(_ sender: Any) {
+//        self.delegate?.passData(resultData: true, code: "info")
+//    }
     
 }

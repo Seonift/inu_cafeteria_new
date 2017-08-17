@@ -42,12 +42,17 @@ class SplashVC: UIViewController {
         
         if code == "message" {
             let result = resultData as! MessageObject
-            let alertController = UIAlertController(title: result.title, message: result.message, preferredStyle: .alert)
-            let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+            
+            if result.message != nil && result.message != "" {
+                let alertController = UIAlertController(title: result.title, message: result.message, preferredStyle: .alert)
+                let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+                    self.showMain()
+                }
+                alertController.addAction(ok)
+                self.present(alertController, animated: true, completion: nil)
+            } else {
                 self.showMain()
             }
-            alertController.addAction(ok)
-            self.present(alertController, animated: true, completion: nil)
         }
     }
     

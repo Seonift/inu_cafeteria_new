@@ -225,7 +225,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         }
         
         if no_student == true {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "정보", style: .plain, target: self, action: #selector(infoC(_:)))
+            self.navigationItem.leftBarButtonItem = nil
+//            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "정보", style: .plain, target: self, action: #selector(infoC(_:)))
         }
     }
     

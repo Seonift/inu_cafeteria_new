@@ -50,11 +50,8 @@ class LoginModel: NetworkModel {
             switch res.result {
             case .success:
                 let val = res.result.value
-                if val?.message != nil && val?.message != "" {
-                    self.view.networkResult(resultData: val, code: "message")
-                } else {
-                    self.view.networkFailed(code: "message")
-                }
+                
+                self.view.networkResult(resultData: val, code: "message")
                 
             case .failure(let error):
                 print(error)
@@ -175,6 +172,7 @@ class LoginModel: NetworkModel {
     }
     
     func login(_ sno:String, _ pw:String, _ auto:Bool?){
+        print("login")
 //        userPreferences.setValue(sno, forKey: "sno")
         userPreferences.setValue(auto, forKey: "auto_login")
         

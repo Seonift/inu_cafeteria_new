@@ -243,7 +243,8 @@ class MyNumberVC: UIViewController {
         self.numbers = { self.numbers }()
         
         if userPreferences.object(forKey: "no_student") != nil {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "정보", style: .plain, target: self, action: #selector(infoC(_:)))
+            self.navigationItem.leftBarButtonItem = nil
+//            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "정보", style: .plain, target: self, action: #selector(infoC(_:)))
         }
 //        SocketIOManager.sharedInstance.connectToServer()
     }

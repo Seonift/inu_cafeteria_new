@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/FirstStartVC.swift"
-            timestampString = "524575793.185893"
+            timestampString = "524640199.495299"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "276"
-            endingLineNumber = "276"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
             landmarkName = "animateImage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/LoginModel.swift"
-            timestampString = "524575658.20925"
+            timestampString = "524645739.463004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
             landmarkName = "login(_:_:_:)"
             landmarkType = "7">
          </BreakpointContent>

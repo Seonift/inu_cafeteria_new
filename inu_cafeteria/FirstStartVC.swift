@@ -37,6 +37,7 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var loginBtn: UIButton!
     
+    @IBOutlet weak var noStudentLabel: UILabel!
     @IBOutlet weak var noStudentBtn: UIButton!
     var showLogin:Bool = false
     
@@ -87,8 +88,6 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         }
         
         
-        idTF.text = "201101720"
-        pwTF.text = "@"
         animateImage()
     }
     
@@ -119,6 +118,16 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         moveBtn.addGestureRecognizer(tap)
         
         autoB.isUserInteractionEnabled = false
+        
+        noStudentLabel.font = UIFont(name: "KoPubDotumPM", size: 12)
+        
+        let attributes:[String:Any] = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName : UIFont(name: "KoPubDotumPB", size: 15)!,
+            NSUnderlineStyleAttributeName : NSUnderlineStyle.styleSingle.rawValue
+        ]
+        let string = NSAttributedString(string: "비회원 로그인", attributes: attributes)
+        noStudentBtn.setAttributedTitle(string, for: .normal)
     }
     
     func setupFirstStart(){
@@ -150,12 +159,14 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         self.autoV.isHidden = false
         self.loginBtn.isHidden = false
         self.noStudentBtn.isHidden = false
+        self.noStudentLabel.isHidden = false
         
         self.idTF.alpha = 0
         self.pwTF.alpha = 0
         self.autoV.alpha = 0
         self.loginBtn.alpha = 0
         self.noStudentBtn.alpha = 0
+        self.noStudentLabel.alpha = 0
     }
     
     func setupLogin2(){
@@ -164,6 +175,7 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         self.autoV.alpha = 1
         self.loginBtn.alpha = 1
         self.noStudentBtn.alpha = 1
+        self.noStudentLabel.alpha = 1
     }
     
     func setupLogin3(){
