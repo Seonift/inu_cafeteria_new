@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -634,7 +634,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gcz-MA-m99" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3920.8000000000002" y="950.37481259370327"/>
+            <point key="canvasLocation" x="4860" y="950.37481259370327"/>
         </scene>
         <!--DefaultNC-->
         <scene sceneID="uDY-Ps-UoV">
@@ -739,6 +739,66 @@
             </objects>
             <point key="canvasLocation" x="1972" y="951.27436281859082"/>
         </scene>
+        <!--CsrVC-->
+        <scene sceneID="FZL-Kw-siJ">
+            <objects>
+                <viewController storyboardIdentifier="csrvc" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VcJ-OW-J0d" customClass="CsrVC" customModule="inu_cafeteria" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6zC-RU-Pod"/>
+                        <viewControllerLayoutGuide type="bottom" id="Iyg-5a-eH2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jIK-GB-xpI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="무엇을 도와드릴까요?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lud-yj-gjR">
+                                <rect key="frame" x="0.0" y="91" width="375" height="22"/>
+                                <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="20"/>
+                                <color key="textColor" red="0.34901960784313724" green="0.34509803921568627" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ylN-vS-xly">
+                                <rect key="frame" x="26.5" y="129" width="322" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="ROt-jG-We0"/>
+                                    <constraint firstAttribute="width" constant="322" id="e3V-3t-06E"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vT0-gd-sbm">
+                                <rect key="frame" x="127.5" y="209" width="120" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="iSe-98-To0"/>
+                                    <constraint firstAttribute="height" constant="50" id="nQ6-fk-CbW"/>
+                                </constraints>
+                                <state key="normal" image="btnSend"/>
+                                <state key="selected" image="btnSend_Clicked"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="vT0-gd-sbm" firstAttribute="centerX" secondItem="jIK-GB-xpI" secondAttribute="centerX" id="5eK-a3-PiI"/>
+                            <constraint firstAttribute="trailing" secondItem="Lud-yj-gjR" secondAttribute="trailing" id="79N-5s-RUo"/>
+                            <constraint firstItem="ylN-vS-xly" firstAttribute="top" secondItem="6zC-RU-Pod" secondAttribute="bottom" constant="65" id="7dd-Oc-pbF"/>
+                            <constraint firstItem="ylN-vS-xly" firstAttribute="centerX" secondItem="jIK-GB-xpI" secondAttribute="centerX" id="8r2-Cr-sPO"/>
+                            <constraint firstItem="Lud-yj-gjR" firstAttribute="leading" secondItem="jIK-GB-xpI" secondAttribute="leading" id="CFC-GB-da9"/>
+                            <constraint firstItem="vT0-gd-sbm" firstAttribute="top" secondItem="ylN-vS-xly" secondAttribute="bottom" constant="29" id="FpP-TS-GdA"/>
+                            <constraint firstItem="Lud-yj-gjR" firstAttribute="top" secondItem="6zC-RU-Pod" secondAttribute="bottom" constant="27" id="lXd-SK-gSh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="MPK-CS-WGZ"/>
+                    <connections>
+                        <outlet property="sendBtn" destination="vT0-gd-sbm" id="48Z-8h-ZgA"/>
+                        <outlet property="textField" destination="ylN-vS-xly" id="V1x-zb-Rgh"/>
+                        <outlet property="titleL" destination="Lud-yj-gjR" id="fcg-kX-e47"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ObY-2H-wSP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3848.8000000000002" y="949.47526236881572"/>
+        </scene>
         <!--InfoVC-->
         <scene sceneID="RPR-VR-zeA">
             <objects>
@@ -823,7 +883,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="신재문" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBn-cV-hkC">
-                                        <rect key="frame" x="108.5" y="118" width="48" height="20"/>
+                                        <rect key="frame" x="108.5" y="118" width="47" height="20"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="18"/>
                                         <color key="textColor" red="0.34901960780000002" green="0.34509803919999998" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -835,7 +895,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김선일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gla-Ds-Ide">
-                                        <rect key="frame" x="288" y="118" width="48" height="20"/>
+                                        <rect key="frame" x="288" y="118" width="47" height="20"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="18"/>
                                         <color key="textColor" red="0.34901960780000002" green="0.34509803919999998" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -847,7 +907,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="권순재" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xq-QC-b8S">
-                                        <rect key="frame" x="108.5" y="258" width="48" height="20"/>
+                                        <rect key="frame" x="108.5" y="258" width="47" height="20"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="18"/>
                                         <color key="textColor" red="0.34901960780000002" green="0.34509803919999998" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -859,7 +919,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이가윤" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iff-9m-V1j">
-                                        <rect key="frame" x="288" y="258" width="48" height="20"/>
+                                        <rect key="frame" x="288" y="258" width="47" height="20"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="18"/>
                                         <color key="textColor" red="0.34901960780000002" green="0.34509803919999998" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -871,7 +931,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김진웅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1F-In-LtC">
-                                        <rect key="frame" x="109" y="398" width="48" height="20"/>
+                                        <rect key="frame" x="109" y="398" width="47" height="20"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="18"/>
                                         <color key="textColor" red="0.34901960780000002" green="0.34509803919999998" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -967,6 +1027,24 @@
             </objects>
             <point key="canvasLocation" x="3920.8000000000002" y="135.38230884557723"/>
         </scene>
+        <!--DefaultNC-->
+        <scene sceneID="xwY-3m-3E3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4u8-jD-QW1" customClass="DefaultNC" customModule="inu_cafeteria" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2we-SF-AtI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VcJ-OW-J0d" kind="relationship" relationship="rootViewController" id="BHI-3R-iAx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lqB-vq-6Jf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2909.5999999999999" y="949.47526236881572"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bg1" width="375" height="667"/>
@@ -974,6 +1052,8 @@
         <image name="btnBack" width="48" height="48"/>
         <image name="btnMinus" width="48" height="48"/>
         <image name="btnPlus" width="48" height="48"/>
+        <image name="btnSend" width="120" height="50"/>
+        <image name="btnSend_Clicked" width="120" height="50"/>
         <image name="firststart_arrow" width="24" height="24"/>
         <image name="home_input" width="120" height="50"/>
         <image name="imgGayoon" width="63" height="110"/>

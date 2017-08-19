@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,6 +46,8 @@
 		742D90521F1E5D3F000B656E /* DrawerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90511F1E5D3F000B656E /* DrawerVC.swift */; };
 		742D90541F1E61CF000B656E /* NumberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90531F1E61CF000B656E /* NumberModel.swift */; };
 		745E68C21F21CA6600D0C0A5 /* IndicatorClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745E68C11F21CA6600D0C0A5 /* IndicatorClass.swift */; };
+		74676FA31F47CA13008EAF66 /* CsrVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74676FA21F47CA13008EAF66 /* CsrVC.swift */; };
+		74676FA51F47D1B2008EAF66 /* CsrModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74676FA41F47D1B2008EAF66 /* CsrModel.swift */; };
 		747C10541F231F4700C195A9 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747C10531F231F4700C195A9 /* LoginModel.swift */; };
 		747C10581F248BD500C195A9 /* Barcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747C10571F248BD500C195A9 /* Barcode.swift */; };
 		747C105B1F2A388200C195A9 /* LoginObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747C105A1F2A388200C195A9 /* LoginObject.swift */; };
@@ -103,6 +105,8 @@
 		742D90511F1E5D3F000B656E /* DrawerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerVC.swift; sourceTree = "<group>"; };
 		742D90531F1E61CF000B656E /* NumberModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberModel.swift; sourceTree = "<group>"; };
 		745E68C11F21CA6600D0C0A5 /* IndicatorClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorClass.swift; sourceTree = "<group>"; };
+		74676FA21F47CA13008EAF66 /* CsrVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CsrVC.swift; sourceTree = "<group>"; };
+		74676FA41F47D1B2008EAF66 /* CsrModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CsrModel.swift; sourceTree = "<group>"; };
 		747C10531F231F4700C195A9 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		747C10571F248BD500C195A9 /* Barcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Barcode.swift; sourceTree = "<group>"; };
 		747C105A1F2A388200C195A9 /* LoginObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginObject.swift; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 				742D90131F1CF8C1000B656E /* FirstStartVC.swift */,
 				742D90431F1E38E8000B656E /* LoginVC.swift */,
 				742D90451F1E43E2000B656E /* HomeVC.swift */,
+				74676FA21F47CA13008EAF66 /* CsrVC.swift */,
 				742D904F1F1E53AC000B656E /* MyNumberVC.swift */,
 				742D90471F1E441D000B656E /* DefaultNC.swift */,
 				742D90511F1E5D3F000B656E /* DrawerVC.swift */,
@@ -252,6 +257,7 @@
 				747C10531F231F4700C195A9 /* LoginModel.swift */,
 				747C105C1F2A3B9F00C195A9 /* FlagModel.swift */,
 				749410A31F39CEEB00399BF2 /* SocketIOManager.swift */,
+				74676FA41F47D1B2008EAF66 /* CsrModel.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -334,7 +340,7 @@
 				};
 			};
 			buildConfigurationList = 742D8FF81F1CF7A4000B656E /* Build configuration list for PBXProject "inu_cafeteria" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -441,8 +447,10 @@
 				747C105B1F2A388200C195A9 /* LoginObject.swift in Sources */,
 				742D902B1F1CF90E000B656E /* ExtVC.swift in Sources */,
 				741BD91B1F2245DA00B56F30 /* SplashVC.swift in Sources */,
+				74676FA51F47D1B2008EAF66 /* CsrModel.swift in Sources */,
 				7406890D1F4430D7000291DA /* MessageObject.swift in Sources */,
 				742D901D1F1CF8F8000B656E /* Constraint.swift in Sources */,
+				74676FA31F47CA13008EAF66 /* CsrVC.swift in Sources */,
 				742D90481F1E441D000B656E /* DefaultNC.swift in Sources */,
 				742D902E1F1CF90E000B656E /* ExtDate.swift in Sources */,
 				742D90351F1CF931000B656E /* NetworkModel.swift in Sources */,
