@@ -25,6 +25,15 @@ class DrawerVC: UIViewController {
     var logoutB: TextImageButton!
     var csrB: TextImageButton!
     
+    @IBOutlet weak var nameL_top: NSLayoutConstraint!
+    @IBOutlet weak var numL_top: NSLayoutConstraint!
+    @IBOutlet weak var logo_Top: NSLayoutConstraint!
+    @IBOutlet weak var barcode_top_const: NSLayoutConstraint!
+    @IBOutlet weak var guideL_top_const: NSLayoutConstraint!
+    
+    @IBOutlet weak var barcode_width: NSLayoutConstraint!
+    @IBOutlet weak var barcode_height: NSLayoutConstraint!
+    
 //    @IBOutlet weak var infoBtn: TextImageButton!
 //    @IBOutlet weak var logoutBtn: TextImageButton!
     
@@ -67,6 +76,7 @@ class DrawerVC: UIViewController {
 //        imageView.layer.borderColor = UIColor(r: 189, g: 189, b: 183).cgColor
 //        imageView.layer.borderWidth = 2.0
         
+        
         nameL.font = UIFont(name: "KoPubDotumPB", size: 18)
         numL.font = UIFont(name: "KoPubDotumPL", size: 15)
         
@@ -90,7 +100,7 @@ class DrawerVC: UIViewController {
         self.view.addSubview(infoB)
         self.view.acwf(width: 78, height: 24, view: infoB)
         self.view.ac_center(item: infoB, toItem: self.view, origin: "x")
-        self.view.addConstraint(NSLayoutConstraint(item: infoB, attribute: .bottom, relatedBy: .equal, toItem: logoutB, attribute: .top, multiplier: 1, constant: -22))
+       
         
         string = NSAttributedString(string: "앱 정보", attributes: attributes)
         infoB.setAttributedTitle(string, for: .normal)
@@ -106,8 +116,29 @@ class DrawerVC: UIViewController {
         self.view.addSubview(csrB)
         self.view.acwf(width: 86, height: 23, view: csrB)
         self.view.ac_center(item: csrB, toItem: self.view, origin: "x")
-        self.view.addConstraint(NSLayoutConstraint(item: csrB, attribute: .bottom, relatedBy: .equal, toItem: infoB, attribute: .top, multiplier: 1, constant: -23))
+        
         csrB.addTarget(self, action: #selector(btnClicked(_:)), for: .touchUpInside)
+        
+        
+        if DeviceUtil.smallerThanSE() == true {
+            print("smaller than se")
+            barcode_top_const.constant = barcode_top_const.constant / 2
+            guideL_top_const.constant = guideL_top_const.constant / 2
+            barcode_width.constant = barcode_width.constant * 0.75
+            barcode_height.constant = barcode_height.constant * 0.75
+            logo_Top.constant = logo_Top.constant / 2
+            numL_top.constant = numL_top.constant / 2
+            nameL_top.constant = nameL_top.constant / 2
+            
+            
+            self.view.addConstraint(NSLayoutConstraint(item: infoB, attribute: .bottom, relatedBy: .equal, toItem: logoutB, attribute: .top, multiplier: 1, constant: -22/2))
+            self.view.addConstraint(NSLayoutConstraint(item: csrB, attribute: .bottom, relatedBy: .equal, toItem: infoB, attribute: .top, multiplier: 1, constant: -23/2))
+        } else {
+            self.view.addConstraint(NSLayoutConstraint(item: infoB, attribute: .bottom, relatedBy: .equal, toItem: logoutB, attribute: .top, multiplier: 1, constant: -22))
+            self.view.addConstraint(NSLayoutConstraint(item: csrB, attribute: .bottom, relatedBy: .equal, toItem: infoB, attribute: .top, multiplier: 1, constant: -23))
+        }
+        
+        self.view.layoutIfNeeded()
         
         
 //        string = NSAttributedString(string: "앱 정보", attributes: attributes)

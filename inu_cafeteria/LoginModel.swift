@@ -12,6 +12,24 @@ import AlamofireObjectMapper
 
 class LoginModel: NetworkModel {
     
+    func notice() {
+        print("notice")
+        
+        
+        Alamofire.request("\(loginURL)notice").responseObject { (res:DataResponse<Notices>) in
+            switch res.result {
+            case .success:
+                let val = res.result.value
+                
+                self.view.networkResult(resultData: val, code: "notice")
+                
+            case .failure(let error):
+                print(error)
+                self.view.networkFailed(code: "notice")
+            }
+        }
+    }
+    
     func no_student() {
         print("no_student")
         
@@ -43,23 +61,23 @@ class LoginModel: NetworkModel {
         }
     }
     
-    func message(){
-        print("message")
-        
-        Alamofire.request("\(loginURL)message").responseObject { (res:DataResponse<MessageObject>) in
-            switch res.result {
-            case .success:
-                let val = res.result.value
-                
-                self.view.networkResult(resultData: val, code: "message")
-                
-            case .failure(let error):
-                print(error)
-                self.view.networkFailed(code: "message")
-            }
-        }
-    }
-    
+//    func message(){
+//        print("message")
+//        
+//        Alamofire.request("\(loginURL)message").responseObject { (res:DataResponse<MessageObject>) in
+//            switch res.result {
+//            case .success:
+//                let val = res.result.value
+//                
+//                self.view.networkResult(resultData: val, code: "message")
+//                
+//            case .failure(let error):
+//                print(error)
+//                self.view.networkFailed(code: "message")
+//            }
+//        }
+//    }
+//    
 //    func stuinfo(){
 //        print("stuinfo")
 ////        self.view.networkResult(resultData: true, code: "stuinfo")
@@ -194,6 +212,7 @@ class LoginModel: NetworkModel {
         
         Alamofire.request("\(loginURL)postlogin", method: .post, parameters: params, headers: header).responseObject { (res: DataResponse<InfoObject>) in
             let code = res.response?.statusCode
+            print("code:\(code)")
             
             switch res.result {
             case .success:
@@ -226,6 +245,7 @@ class LoginModel: NetworkModel {
                     self.view.networkFailed(code: gino(code))
                 }
             case .failure(let error):
+                print("failure")
                 print(error)
 //                print("code:\(code)")
                 if code != nil {

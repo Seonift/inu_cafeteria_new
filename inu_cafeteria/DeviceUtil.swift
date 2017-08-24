@@ -72,6 +72,20 @@ class DeviceUtil: NSObject {
         return -1
     }
     
+    static func smallerThanSE() -> Bool {
+        self.screenSize = UIScreen.main.bounds
+        self.screenWidth = screenSize.width
+        self.screenHeight = screenSize.height
+        
+        if screenHeight <= 568 {
+            
+            return true
+            //iphone 5,5s,SE
+        }
+        
+        return false
+    }
+    
 }
 
 

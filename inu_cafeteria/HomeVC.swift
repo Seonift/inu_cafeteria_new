@@ -21,8 +21,8 @@ import Kingfisher
 class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var carouselView: iCarousel!
-//    @IBOutlet weak var leftB: UIButton!
-//    @IBOutlet weak var rightB: UIButton!
+    @IBOutlet weak var leftB: UIButton!
+    @IBOutlet weak var rightB: UIButton!
     
     @IBOutlet weak var topL: UILabel!
     @IBOutlet weak var titleL: UILabel!
@@ -61,50 +61,52 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     var num_count:Int = 1 {
         //입력할 번호의 갯수
         didSet {
-            print("num_count:\(num_count)")
-            if num_count == 2 {
-                num2_height.constant = tf_height
-                num3_height.constant = 0
-            } else if num_count == 3 {
-                num3_height.constant = tf_height
-            } else if num_count == 1 {
-                num2_height.constant = 0
-                num3_height.constant = 0
-            }
-            UIView.animate(withDuration: 0.25, delay: 0, options: [], animations: {
-                self.view.layoutIfNeeded()
-                
-                switch self.num_count {
-                case 1:
-                    self.numAddBtn.isHidden = false
-//                    self.numMinusBtn.isHidden = false
-                    
-                    self.numAddBtn2.isHidden = true
-                    self.numMinusBtn2.isHidden = true
-                    
-//                    self.numAddBtn3.isHidden = true
-                    self.numMinusBtn3.isHidden = true
-                    
-                case 2:
-                    self.numAddBtn2.isHidden = false
-                    self.numMinusBtn2.isHidden = false
-                    
-                    self.numAddBtn.isHidden = true
-//                    self.numMinusBtn.isHidden = true
-                    
-//                    self.numAddBtn3.isHidden = true
-                    self.numMinusBtn3.isHidden = true
-                    
-                case 3:
-//                    self.numAddBtn3.isHidden = false
-                    self.numMinusBtn3.isHidden = false
-                    
-                    self.numAddBtn2.isHidden = true
-                    self.numMinusBtn2.isHidden = true
-                default:
-                    print("")
+            if DeviceUtil.smallerThanSE() == false {
+                print("num_count:\(num_count)")
+                if num_count == 2 {
+                    num2_height.constant = tf_height
+                    num3_height.constant = 0
+                } else if num_count == 3 {
+                    num3_height.constant = tf_height
+                } else if num_count == 1 {
+                    num2_height.constant = 0
+                    num3_height.constant = 0
                 }
-            })
+                UIView.animate(withDuration: 0.25, delay: 0, options: [], animations: {
+                    self.view.layoutIfNeeded()
+                    
+                    switch self.num_count {
+                    case 1:
+                        self.numAddBtn.isHidden = false
+                        //                    self.numMinusBtn.isHidden = false
+                        
+                        self.numAddBtn2.isHidden = true
+                        self.numMinusBtn2.isHidden = true
+                        
+                        //                    self.numAddBtn3.isHidden = true
+                        self.numMinusBtn3.isHidden = true
+                        
+                    case 2:
+                        self.numAddBtn2.isHidden = false
+                        self.numMinusBtn2.isHidden = false
+                        
+                        self.numAddBtn.isHidden = true
+                        //                    self.numMinusBtn.isHidden = true
+                        
+                        //                    self.numAddBtn3.isHidden = true
+                        self.numMinusBtn3.isHidden = true
+                        
+                    case 3:
+                        //                    self.numAddBtn3.isHidden = false
+                        self.numMinusBtn3.isHidden = false
+                        
+                        self.numAddBtn2.isHidden = true
+                        self.numMinusBtn2.isHidden = true
+                    default:
+                        print("")
+                    }
+                })
+            }
         }
     }
     
@@ -166,8 +168,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         carouselView.bounds = carouselView.frame.insetBy(dx: 15, dy: 10)
         carouselView.isPagingEnabled = true
         
-//        leftB.addTarget(self, action: #selector(btnClicked(_:)), for: .touchUpInside)
-//        rightB.addTarget(self, action: #selector(btnClicked(_:)), for: .touchUpInside)
+        leftB.addTarget(self, action: #selector(btnClicked(_:)), for: .touchUpInside)
+        rightB.addTarget(self, action: #selector(btnClicked(_:)), for: .touchUpInside)
         confirmBtn.addTarget(self, action: #selector(confirmClicked(_:)), for: .touchUpInside)
         
         topL.font = UIFont(name: "KoPubDotumPM", size: 12)
@@ -180,6 +182,10 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         self.view.addGestureRecognizer(tap)
         
         setupDrawerBtn()
+        
+        if DeviceUtil.smallerThanSE() == true {
+            self.numAddBtn.isHidden = true
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -260,15 +266,15 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         sender.addDoneButtonOnKeyboard()
     }
     
-//    func btnClicked(_ sender: UIButton){
-//        var index = carouselView.currentItemIndex
-//        if sender == self.leftB {
-//            index -= 1
-//        } else if sender == self.rightB {
-//            index += 1
-//        }
-//        carouselView.scrollToItem(at: index, animated: true)
-//    }
+    func btnClicked(_ sender: UIButton){
+        var index = carouselView.currentItemIndex
+        if sender == self.leftB {
+            index -= 1
+        } else if sender == self.rightB {
+            index += 1
+        }
+        carouselView.scrollToItem(at: index, animated: true)
+    }
     
     func confirmClicked(_ sender: UIButton){
         if self.numberTF.text == nil || self.numberTF.text?.characters.count == 0 {

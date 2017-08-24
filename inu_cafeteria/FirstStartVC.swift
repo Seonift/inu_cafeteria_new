@@ -47,6 +47,13 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         model.no_student()
     }
     
+    @IBOutlet weak var idTF_top: NSLayoutConstraint!
+    @IBOutlet weak var pwTF_top: NSLayoutConstraint!
+    @IBOutlet weak var auto_top: NSLayoutConstraint!
+    @IBOutlet weak var loginB_top: NSLayoutConstraint!
+    @IBOutlet weak var nsB_top: NSLayoutConstraint!
+    @IBOutlet weak var nsL_top: NSLayoutConstraint!
+    
     
     @IBAction func loginClicked(_ sender: Any) {
         
@@ -142,12 +149,33 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func setupLogin1(){
-        self.logo_width.constant = 220.0
-        self.logo_height.constant = 71.4
         self.view.removeConstraint(logo_leading)
         self.view.ac_center(item: logoIV, toItem: self.view, origin: "x")
-        self.logo_top.constant = 143.6
         
+        if DeviceUtil.smallerThanSE() {
+            self.logo_top.constant = 143.6 / 2
+            self.idTF_top.constant = self.idTF_top.constant / 2
+            self.pwTF_top.constant = self.pwTF_top.constant / 2
+            self.auto_top.constant = self.auto_top.constant / 2
+            self.loginB_top.constant = self.loginB_top.constant / 2
+            self.nsB_top.constant = self.nsB_top.constant / 2
+            self.nsL_top.constant = self.nsL_top.constant / 2
+            
+//            @IBOutlet weak var idTF_top: NSLayoutConstraint!
+//            @IBOutlet weak var pwTF_top: NSLayoutConstraint!
+//            @IBOutlet weak var auto_top: NSLayoutConstraint!
+//            @IBOutlet weak var loginB_top: NSLayoutConstraint!
+//            @IBOutlet weak var nsB_top: NSLayoutConstraint!
+//            @IBOutlet weak var nsL_top: NSLayoutConstraint!
+//            
+//            
+            
+            
+        } else {
+            self.logo_width.constant = 220.0
+            self.logo_height.constant = 71.4
+            self.logo_top.constant = 143.6
+        }
 //        l1.isHidden = true
 //        l2.isHidden = true
         labelV.isHidden = true

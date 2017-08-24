@@ -12,6 +12,7 @@
 		7406890D1F4430D7000291DA /* MessageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7406890C1F4430D7000291DA /* MessageObject.swift */; };
 		741BD9181F22453600B56F30 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 741BD9171F22453600B56F30 /* Splash.storyboard */; };
 		741BD91B1F2245DA00B56F30 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741BD91A1F2245DA00B56F30 /* SplashVC.swift */; };
+		742B988B1F4F315900EDFC76 /* NoticeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742B988A1F4F315900EDFC76 /* NoticeObject.swift */; };
 		742D90011F1CF7A4000B656E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90001F1CF7A4000B656E /* AppDelegate.swift */; };
 		742D90061F1CF7A4000B656E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 742D90041F1CF7A4000B656E /* Main.storyboard */; };
 		742D90081F1CF7A4000B656E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 742D90071F1CF7A4000B656E /* Assets.xcassets */; };
@@ -66,6 +67,7 @@
 		7406890C1F4430D7000291DA /* MessageObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageObject.swift; sourceTree = "<group>"; };
 		741BD9171F22453600B56F30 /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		741BD91A1F2245DA00B56F30 /* SplashVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
+		742B988A1F4F315900EDFC76 /* NoticeObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeObject.swift; sourceTree = "<group>"; };
 		742D8FFD1F1CF7A4000B656E /* inu_cafeteria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inu_cafeteria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		742D90001F1CF7A4000B656E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		742D90051F1CF7A4000B656E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				747C105A1F2A388200C195A9 /* LoginObject.swift */,
 				749410A51F39FCCF00399BF2 /* Queue.swift */,
 				7406890C1F4430D7000291DA /* MessageObject.swift */,
+				742B988A1F4F315900EDFC76 /* NoticeObject.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				747C10541F231F4700C195A9 /* LoginModel.swift in Sources */,
 				742D901E1F1CF8F8000B656E /* Unwrapper.swift in Sources */,
 				742D90201F1CF8F8000B656E /* Shadow.swift in Sources */,
+				742B988B1F4F315900EDFC76 /* NoticeObject.swift in Sources */,
 				742D902D1F1CF90E000B656E /* ExtUIImage.swift in Sources */,
 				749410A61F39FCCF00399BF2 /* Queue.swift in Sources */,
 				742D901F1F1CF8F8000B656E /* DeviceUtil.swift in Sources */,

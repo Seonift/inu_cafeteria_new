@@ -22,7 +22,7 @@ class SplashVC: UIViewController {
         //서버 접속 불가일 때랑 인터넷 연결 안될경우 예외처리 필요함
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             let model = LoginModel(self)
-            model.message()
+            model.notice()
         }//DispatchQueue.main.async
     }
     
@@ -40,11 +40,18 @@ class SplashVC: UIViewController {
             self.showHome(result, false)
         }
         
-        if code == "message" {
-            let result = resultData as! MessageObject
+        if code == "notice" {
+            let result = resultData as! Notices
             
-            if result.message != nil && result.message != "" {
-                let alertController = UIAlertController(title: result.title, message: result.message, preferredStyle: .alert)
+            if result.all?.message != nil && result.all?.message != "" {
+                let alertController = UIAlertController(title: result.all?.title, message: result.all?.message, preferredStyle: .alert)
+                let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+                    self.showMain()
+                }
+                alertController.addAction(ok)
+                self.present(alertController, animated: true, completion: nil)
+            } else if result.ios?.message != nil && result.ios?.message != "" {
+                let alertController = UIAlertController(title: result.ios?.title, message: result.ios?.message, preferredStyle: .alert)
                 let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
                     self.showMain()
                 }
@@ -53,6 +60,12 @@ class SplashVC: UIViewController {
             } else {
                 self.showMain()
             }
+            
+//            print(result)
+//            if result.message != nil && result.message != "" {
+//            } else {
+//                self.showMain()
+//            }
         }
     }
     
@@ -94,7 +107,7 @@ class SplashVC: UIViewController {
                     Toast(text: "학생 정보 오류. 다시 로그인해주세요.").show()
                 }
                 
-                if str == "message" {
+                if str == "notice" {
                     self.showMain()
                 }
             }

@@ -14,6 +14,7 @@ class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var sendBtn: UIButton!
     
+    @IBOutlet weak var tf_width: NSLayoutConstraint!
     
     override func viewDidLoad() {
         
@@ -40,6 +41,10 @@ class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate 
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap_mainview(_:)))
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
+        
+        if DeviceUtil.smallerThanSE() == true {
+            tf_width.constant = tf_width.constant * 0.75
+        }
     }
     
     func sendClicked(_ sender: UIButton) {
