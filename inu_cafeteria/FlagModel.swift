@@ -16,13 +16,17 @@ class FlagModel {
         if (value == 1 && (userPreferences.integer(forKey: "barcode_flag") == 0 || userPreferences.object(forKey: "barcode_flag") == nil)) || value == 0{
             userPreferences.setValue(value, forKey: "barcode_flag")
             print("activebarcode:\(value)")
+            
+            guard let barcode = userPreferences.string(forKey: "barcode") else { return }
+            
             let params:[String:Any] = [
-                "flag" : value
+                "flag" : value,
+                "barcode" : barcode
             ]
             
             Alamofire.request("\(loginURL)activeBarcode", method: .post, parameters: params, headers: header).response { res in
                 //            print(res)
-                print(res.response?.statusCode)
+                print("code:\(res.response?.statusCode)")
             }
         }
     }

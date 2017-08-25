@@ -16,7 +16,7 @@ class LoginModel: NetworkModel {
         print("notice")
         
         
-        Alamofire.request("\(loginURL)notice").responseObject { (res:DataResponse<Notices>) in
+        Alamofire.request("\(loginURL)server_message.json").responseObject { (res:DataResponse<Notices>) in
             switch res.result {
             case .success:
                 let val = res.result.value
