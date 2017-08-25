@@ -159,10 +159,6 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         
 //        print("token:\(FIRInstanceID.instanceID().token()))")
         
-        let logoIV = UIImageView(image: UIImage(named: "nav_logo"))
-        logoIV.contentMode = .scaleAspectFit
-        logoIV.frame = CGRect(x: 0, y: 0, width: 130, height: 21.5)
-        self.navigationItem.titleView = logoIV
         
         carouselView.type = .rotary
         carouselView.bounds = carouselView.frame.insetBy(dx: 15, dy: 10)
@@ -202,6 +198,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         
         SocketIOManager.sharedInstance.removeAll()
         
+        setTitleView()
+        
 //        carouselView.reloadData()
 //        print(code)
 //        print(names)
@@ -221,6 +219,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         num_count = 1
         
         unregisterForKeyboardNotifications()
+        
+        self.navigationItem.titleView = nil
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -234,6 +234,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
             self.navigationItem.leftBarButtonItem = nil
 //            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "정보", style: .plain, target: self, action: #selector(infoC(_:)))
         }
+        
+//        setTitleView()
     }
     
     func setupTF(){

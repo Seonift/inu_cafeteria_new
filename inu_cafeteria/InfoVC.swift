@@ -16,7 +16,6 @@ class InfoVC:UIViewController {
 //    let names = ["신재문", "김선일", "권순재", "이가윤", "김진웅"]
 //    let images = ["imgJaemoon", "imgSunil", "imgSoonjae", "imgGayoon", "imgJinwoong"]
     
-    
     @IBOutlet weak var p1: UILabel!
     @IBOutlet weak var p2: UILabel!
     @IBOutlet weak var p3: UILabel!
@@ -58,6 +57,46 @@ class InfoVC:UIViewController {
 //        layout.minimumLineSpacing = 30
 //        cView.collectionViewLayout = layout
         
+        
+    }
+}
+
+class InfoVC2: UIViewController {
+    
+    @IBOutlet weak var verLabel: UILabel!
+    @IBOutlet weak var p1: UILabel!
+    @IBOutlet weak var p2: UILabel!
+    @IBOutlet weak var p3: UILabel!
+    @IBOutlet weak var p4: UILabel!
+    @IBOutlet weak var p5: UILabel!
+    
+    @IBOutlet weak var n1: UILabel!
+    @IBOutlet weak var n2: UILabel!
+    @IBOutlet weak var n5: UILabel!
+    @IBOutlet weak var n4: UILabel!
+    @IBOutlet weak var n3: UILabel!
+    
+    @IBAction func backClicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewDidLoad() {
+        verLabel.font = UIFont(name: "KoPubDotumPB", size: 15)
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            self.verLabel.text = "버전 : \(version)"
+        }
+        
+        p1.font = UIFont(name: "KoPubDotumPL", size: 13)
+        p2.font = UIFont(name: "KoPubDotumPL", size: 13)
+        p3.font = UIFont(name: "KoPubDotumPL", size: 13)
+        p4.font = UIFont(name: "KoPubDotumPL", size: 13)
+        p5.font = UIFont(name: "KoPubDotumPL", size: 13)
+        
+        n1.font = UIFont(name: "KoPubDotumPB", size: 18)
+        n2.font = UIFont(name: "KoPubDotumPB", size: 18)
+        n3.font = UIFont(name: "KoPubDotumPB", size: 18)
+        n4.font = UIFont(name: "KoPubDotumPB", size: 18)
+        n5.font = UIFont(name: "KoPubDotumPB", size: 18)
         
     }
 }

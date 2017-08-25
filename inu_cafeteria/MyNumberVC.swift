@@ -151,10 +151,9 @@ class MyNumberVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         print("viewdidappear")
-        let logoIV = UIImageView(image: UIImage(named: "nav_logo"))
-        logoIV.contentMode = .scaleAspectFit
-        logoIV.frame = CGRect(x: 0, y: 0, width: 130, height: 21.5)
-        self.navigationItem.titleView = logoIV
+        
+        setTitleView()
+        
         
 //        SocketIOManager.sharedInstance.establishConnection()
         
@@ -247,6 +246,8 @@ class MyNumberVC: UIViewController {
 //            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "정보", style: .plain, target: self, action: #selector(infoC(_:)))
         }
 //        SocketIOManager.sharedInstance.connectToServer()
+        
+//        setTitleView()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

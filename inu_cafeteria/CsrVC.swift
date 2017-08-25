@@ -18,10 +18,10 @@ class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate 
     
     override func viewDidLoad() {
         
-        let logoIV = UIImageView(image: UIImage(named: "nav_logo"))
-        logoIV.contentMode = .scaleAspectFit
-        logoIV.frame = CGRect(x: 0, y: 0, width: 130, height: 21.5)
-        self.navigationItem.titleView = logoIV
+//        let logoIV = UIImageView(image: UIImage(named: "nav_logo"))
+//        logoIV.contentMode = .scaleAspectFit
+//        logoIV.frame = CGRect(x: 0, y: 0, width: 130, height: 21.5)
+//        self.navigationItem.titleView = logoIV
         
         
         titleL.font = UIFont(name: "KoPubDotumPB", size: 20)
@@ -45,6 +45,10 @@ class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate 
         if DeviceUtil.smallerThanSE() == true {
             tf_width.constant = tf_width.constant * 0.75
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        setTitleView()
     }
     
     func sendClicked(_ sender: UIButton) {

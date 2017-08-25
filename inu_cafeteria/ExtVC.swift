@@ -12,10 +12,17 @@ import KYDrawerController
 
 extension UIViewController {
 
-    func infoC(_ sender: Any){
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        guard let infovc = sb.instantiateViewController(withIdentifier: "infovc") as? InfoVC else {return}
-        self.present(infovc, animated: true, completion: nil)
+//    func infoC(_ sender: Any){
+//        let sb = UIStoryboard(name: "Main", bundle: nil)
+//        guard let infovc = sb.instantiateViewController(withIdentifier: "infovc") as? InfoVC else {return}
+//        self.present(infovc, animated: true, completion: nil)
+//    }
+    
+    func setTitleView(){
+        let logoIV = UIImageView(image: UIImage(named: "nav_logo"))
+        logoIV.contentMode = .scaleAspectFit
+        logoIV.frame = CGRect(x: 0, y: 0, width: 130, height: 21.5)
+        self.navigationItem.titleView = logoIV
     }
     
     func setStatusBar(_ color:UIColor){
@@ -143,8 +150,14 @@ extension UIViewController: ViewCallback {
             
             DispatchQueue.main.async {
                 let sb = UIStoryboard(name: "Main", bundle: nil)
-                guard let infovc = sb.instantiateViewController(withIdentifier: "infovc") as? InfoVC else {return}
-                self.present(infovc, animated: true, completion: nil)
+                
+                if DeviceUtil.smallerThanSE() {
+                    guard let infovc = sb.instantiateViewController(withIdentifier: "infovc2") as? InfoVC2 else {return}
+                    self.present(infovc, animated: true, completion: nil)
+                } else {
+                    guard let infovc = sb.instantiateViewController(withIdentifier: "infovc") as? InfoVC else {return}
+                    self.present(infovc, animated: true, completion: nil)
+                }
             }
         }
         

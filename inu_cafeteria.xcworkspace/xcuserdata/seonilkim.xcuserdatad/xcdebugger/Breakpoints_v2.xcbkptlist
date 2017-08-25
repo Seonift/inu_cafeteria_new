@@ -120,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/SplashVC.swift"
-            timestampString = "525284055.901321"
+            timestampString = "525284514.497061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "networkResult(resultData:code:)"
             landmarkType = "7">
          </BreakpointContent>
