@@ -16,7 +16,7 @@ class Strings {
     }
     
     class func cancel_num() -> String {
-        return "주문번호를 초기화하면 알림이 오지 않습니다. 초기화 하시겠습니까?"
+        return "대기번호를 초기화하면 알림이 오지 않습니다. 초기화 하시겠습니까?"
     }
     
     class func stuinfo_fail() -> String {

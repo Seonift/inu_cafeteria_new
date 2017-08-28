@@ -122,7 +122,7 @@ class MyNumberVC: UIViewController {
             NSForegroundColorAttributeName: UIColor.white,
             NSFontAttributeName : UIFont(name: "KoPubDotumPB", size: 12)!
         ]
-        let string = NSAttributedString(string: "주문번호 초기화", attributes: attributes)
+        let string = NSAttributedString(string: "대기번호 초기화", attributes: attributes)
         let cb = TextImageButton()
         cb.setAttributedTitle(string, for: .normal)
         cb.setImage(UIImage(named: "mynumber_cancel"), for: .normal)

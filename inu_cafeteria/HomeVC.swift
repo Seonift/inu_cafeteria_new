@@ -249,7 +249,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         numberHint = UILabel(frame: numberTF.bounds)
         numberTF.addSubview(numberHint)
 //        label.backgroundColor = .black
-        numberHint.text = "주문번호를 입력해주세요."
+        numberHint.text = "대기번호를 입력해주세요."
         numberHint.textAlignment = .center
         numberHint.textColor = UIColor.untGreyishBrown
         numberHint.font = UIFont(name: "KoPubDotumPM", size: 12)
