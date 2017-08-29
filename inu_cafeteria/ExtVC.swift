@@ -9,6 +9,7 @@
 import UIKit
 import Toaster
 import KYDrawerController
+import Alamofire
 
 extension UIViewController {
 

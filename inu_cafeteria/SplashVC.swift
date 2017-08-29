@@ -22,7 +22,8 @@ class SplashVC: UIViewController {
         //서버 접속 불가일 때랑 인터넷 연결 안될경우 예외처리 필요함
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
             let model = LoginModel(self)
-            model.notice()
+            model.version()
+//            model.notice()
         }//DispatchQueue.main.async
     }
     
@@ -33,6 +34,28 @@ class SplashVC: UIViewController {
 //                self.showHome()
 //            }
 //        }
+        
+        if code == "version" {
+            
+            let result = resultData as! Bool
+            
+            if result == true {
+                let alertController = UIAlertController(title: "업데이트", message: Strings.update(), preferredStyle: .alert)
+                let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+                    let url = URL(fileURLWithPath: "https://itunes.apple.com/us/app/inu-cafeteria/id1272600111?l=ko&ls=1&mt=8")
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url)
+                    } else {
+                        UIApplication.shared.openURL(url)
+                    }
+                }
+                alertController.addAction(ok)
+                self.present(alertController, animated: true, completion: nil)
+            } else {
+                let model = LoginModel(self)
+                model.notice()
+            }
+        }
         
         if code == "auto_login" {
             let result = resultData as! [CodeObject]
@@ -109,6 +132,16 @@ class SplashVC: UIViewController {
                 
                 if str == "notice" {
                     self.showMain()
+                }
+                
+                if str == "version" {
+                    let alertController = UIAlertController(title: "오류", message: "버전 정보를 받아오는 데 실패했습니다. 다시 시도해주세요.", preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "재시도", style: .default) { res -> Void in
+                        let model = LoginModel(self)
+                        model.version()
+                    }
+                    alertController.addAction(ok)
+                    self.present(alertController, animated: true, completion: nil)
                 }
             }
         }

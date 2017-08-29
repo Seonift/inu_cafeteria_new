@@ -12,6 +12,34 @@ import AlamofireObjectMapper
 
 class LoginModel: NetworkModel {
     
+    func version(){
+        print("version")
+        
+        Alamofire.request("\(loginURL)version", method: .post, parameters: nil, headers: header).responseJSON { res in
+            switch res.result {
+            case .success:
+                let val = res.result.value as! NSDictionary
+                guard let storever = val["ios"] as? String else {
+                    self.view.networkFailed(code: "version")
+                    return
+                }
+                
+                let currentv = gsno(Bundle.main.versionNumber)
+                
+                if storever.compare(currentv, options: .numeric) == .orderedDescending {
+                    //업데이트 필요
+                    self.view.networkResult(resultData: true, code: "version")
+                } else {
+                    self.view.networkResult(resultData: false, code: "version")
+                }
+                
+            case .failure(let error):
+                print(error)
+                self.view.networkFailed(code: "version")
+            }
+        }
+    }
+    
     func notice() {
         print("notice")
         

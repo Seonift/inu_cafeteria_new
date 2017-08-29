@@ -26,6 +26,10 @@ class Strings {
     class func complete_num() -> String {
         return "주문하신 메뉴가 완료되었습니다. 카운터에서 받아가세요"
     }
+    
+    class func update() -> String {
+        return "스토어에 새 버전이 올라왔습니다. 업데이트해주세요."
+    }
 }
 
 class CGFloats {

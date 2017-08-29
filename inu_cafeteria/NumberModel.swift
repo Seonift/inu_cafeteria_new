@@ -51,7 +51,7 @@ class NumberModel: NetworkModel {
     
     func isNumberWait(){
         print("isnumberwait")
-        let token = gsno(FIRInstanceID.instanceID().token())
+        let token = gsno(InstanceID.instanceID().token())
         let params:[String:Any] = [
             "fcmtoken" : token
         ]
@@ -84,7 +84,7 @@ class NumberModel: NetworkModel {
     
     func resetNumber(){
         print("resetNumber")
-        let token = gsno(FIRInstanceID.instanceID().token())
+        let token = gsno(InstanceID.instanceID().token())
         print("firebase token:\(token)")
         let params:[String:Any] = [
             "fcmtoken" : token
@@ -118,7 +118,7 @@ class NumberModel: NetworkModel {
     
     func registerNumber(code: Int, num1: Int, num2: Int?, num3: Int?){
         print("registerNumber")
-        let token = gsno(FIRInstanceID.instanceID().token())
+        let token = gsno(InstanceID.instanceID().token())
         print("firebase token:\(token)")
         let params:[String:Any] = [
             "code" : code,

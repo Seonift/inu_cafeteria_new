@@ -49,6 +49,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Siren.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Socket.IO-Client-Swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -64,10 +69,20 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>nanopb.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2E5A433D2B17859F4EE39E0D659F6DA7</key>
+		<key>10AD4B689C48C13426E5FB564A7F8F2A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>26B670694C59F0B5FACE6D769DE99253</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +97,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>394048017508E0D44283D718BB0A949C</key>
+		<key>3C3F06B791FE7DAEA9181EACD8C07579</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,17 +112,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7F7BB228A2D2299F62B4641AB377A16B</key>
+		<key>7BB88CB4A4EE4AF53695D1C0227926C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>92203621A32FF904E61117BD33F71739</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,7 +132,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E049B75CAAC1B42BF00EE8D1780F7158</key>
+		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EB15C87869B1781B8FB7D31388F355C4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EE06201CA7265184CD0E137FCA4C5A23</key>
 		<dict>
 			<key>primary</key>
 			<true/>

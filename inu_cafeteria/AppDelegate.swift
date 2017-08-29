@@ -12,12 +12,14 @@ import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 import KYDrawerController
+//import Siren
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
 
 //    https://www.youtube.com/watch?v=pVtIVfJJ35w
 //    https://www.appcoda.com/firebase-push-notifications/
+    
     
     var window: UIWindow?
     
@@ -30,6 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        application.registerUserNotificationSettings(settings)
 //        application.registerForRemoteNotifications()
         
+//        let siren = Siren.shared
+//        siren.alertType = Siren.AlertType.force
+////        siren.showAlertAfterCurrentVersionHasBeenReleasedForDays = 0 
+//        siren.checkVersion(checkType: .immediately)
+        
         
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -39,7 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 options: authOptions,
                 completionHandler: {_, _ in })
             // For iOS 10 data message (sent via FCM
-            FIRMessaging.messaging().remoteMessageDelegate = self
+//            Messaging.messaging().remoteMessageDelegate = self
+            Messaging.messaging().delegate = self
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
@@ -48,9 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         application.registerForRemoteNotifications()
         
-        FIRApp.configure()
+        FirebaseApp.configure()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.tokenRefreshNotification(notification:)), name: .firInstanceIDTokenRefresh, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.tokenRefreshNotification(notification:)), name: .MessagingRegistrationTokenRefreshed, object: nil)
         
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -67,6 +75,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         return true
     }
+    
+    
+    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        print("New FCM Token received : \(fcmToken)")
+    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -77,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        FIRMessaging.messaging().disconnect()
+        Messaging.messaging().disconnect()
         print("Disconnected from FCM.")
         
         removeFlag()
@@ -90,6 +103,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        
+//        Siren.shared.checkVersion(checkType: .immediately)
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -125,6 +140,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         }
         
+//        Siren.shared.checkVersion(checkType: .daily)
+        
 //        SocketIOManager.sharedInstance.reconnectConnection()
         
 //        print("Becomeactive")
@@ -148,7 +165,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
 //        print("didreceiveremotenotification")
         
-        FIRMessaging.messaging().appDidReceiveMessage(userInfo)
+        Messaging.messaging().appDidReceiveMessage(userInfo)
         
         
         //푸시 메시지 클릭했을 때 이벤트
@@ -166,16 +183,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.prod)
+        InstanceID.instanceID().setAPNSToken(deviceToken, type: InstanceIDAPNSTokenType.prod)
     }
     
-    func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
+    func application(received remoteMessage: MessagingRemoteMessage) {
         print(remoteMessage.appData)
     }
     
     func tokenRefreshNotification(notification: NSNotification) {
         // NOTE: It can be nil here
-        if let refreshedToken = FIRInstanceID.instanceID().token() {
+        if let refreshedToken = InstanceID.instanceID().token() {
             print("InstanceID token: \(refreshedToken)")
         }
         connectToFcm()
@@ -183,14 +200,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func connectToFcm() {
         // Won't connect since there is no token
-        guard FIRInstanceID.instanceID().token() != nil else {
+        guard InstanceID.instanceID().token() != nil else {
             return
         }
         
         // Disconnect previous FCM connection if it exists.
-        FIRMessaging.messaging().disconnect()
+        Messaging.messaging().disconnect()
         
-        FIRMessaging.messaging().connect { (error) in
+        Messaging.messaging().connect { (error) in
             if error != nil {
                 print("Unable to connect with FCM. \(error)")
             } else {
