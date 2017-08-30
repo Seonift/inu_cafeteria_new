@@ -16,6 +16,4 @@ target 'inu_cafeteria' do
   pod 'NVActivityIndicatorView'
   pod 'Socket.IO-Client-Swift', '~> 10.2.0' # Or latest version
   pod "TextImageButton"
-  pod 'Kingfisher'
-  pod 'Siren'
 end

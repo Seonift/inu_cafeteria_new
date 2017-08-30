@@ -15,8 +15,6 @@ import FirebaseInstanceID
 import FirebaseMessaging
 
 import NVActivityIndicatorView
-import Kingfisher
-
 
 class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizerDelegate {
     
@@ -53,7 +51,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     var no_student:Bool = false {
         didSet {
             if no_student == true {
-                self.navigationItem.leftBarButtonItem = nil
+                setupLeftBtn()
             }
         }
     }
@@ -160,6 +158,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
 //        print("token:\(FIRInstanceID.instanceID().token()))")
         
         
+        setTitleView()
+        
         carouselView.type = .rotary
         carouselView.bounds = carouselView.frame.insetBy(dx: 15, dy: 10)
         carouselView.isPagingEnabled = true
@@ -231,11 +231,26 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         }
         
         if no_student == true {
-            self.navigationItem.leftBarButtonItem = nil
+            setupLeftBtn()
+//            self.navigationItem.leftBarButtonItem = nil
 //            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "정보", style: .plain, target: self, action: #selector(infoC(_:)))
         }
         
 //        setTitleView()
+    }
+    
+    func setupLeftBtn(){
+        //왼쪽에 드로워 대신 뒤로가기 버튼
+        
+        let backBtn = UIButton(type: .custom)
+        backBtn.setImage(UIImage(named: "btnBack"), for: .normal)
+        backBtn.frame = CGRect(x: 0, y: 0, width: 48, height: 48)
+        backBtn.addTarget(self, action: #selector(finish), for: .touchUpInside)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backBtn)
+    }
+    
+    func finish(){
+        self.dismiss(animated: true, completion: nil)
     }
     
     func setupTF(){

@@ -69,7 +69,7 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         print("id:\(idTF.text!), pw:\(pwTF.text!)")
     }
     
-    let bgArr:[UIImage] = [UIImage(named: "bg1")!, UIImage(named: "bg2")!, UIImage(named: "bg3")!]
+    let bgArr:[UIImage] = [UIImage(named: "bg1")!, UIImage(named: "bg2")!]
     var index = 0
     let animationDuration:TimeInterval = 1
     let switchingInterval:TimeInterval = 3

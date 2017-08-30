@@ -90,7 +90,7 @@
                                 <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_logo" translatesAutoresizingMaskIntoConstraints="NO" id="U3z-F3-TD0">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="U3z-F3-TD0">
                                 <rect key="frame" x="27" y="104" width="148" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="2sa-h3-L1Z"/>
@@ -460,13 +460,13 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내 대기번호" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3p0-YC-49y">
-                                        <rect key="frame" x="0.0" y="75" width="414" height="16.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="75" width="414" height="17.666666666666657"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VwB-TY-zUC">
-                                        <rect key="frame" x="0.0" y="97.666666666666657" width="414" height="60.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="98.666666666666671" width="414" height="60.666666666666643"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="55"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -702,19 +702,19 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김진웅" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJd-rm-oJe">
-                                <rect key="frame" x="0.0" y="190" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="191" width="414" height="20"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="18"/>
                                 <color key="textColor" red="0.34901960780000002" green="0.34509803919999998" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNr-Wh-2Lf">
-                                <rect key="frame" x="0.0" y="155" width="414" height="16.666666666666657"/>
+                                <rect key="frame" x="0.0" y="155" width="414" height="17.666666666666657"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="15"/>
                                 <color key="textColor" red="0.34901960784313724" green="0.34509803921568627" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pgi-Bh-8ax">
-                                <rect key="frame" x="117" y="268" width="180" height="150"/>
+                                <rect key="frame" x="117" y="269" width="180" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uNa-Wa-oHA">
                                         <rect key="frame" x="5" y="5" width="170" height="140"/>
@@ -731,7 +731,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="기숙사 식당에서 조식할인 시간에 사용하실 수 있습니다" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVa-dL-Neb">
-                                <rect key="frame" x="24.666666666666657" y="438" width="365" height="21"/>
+                                <rect key="frame" x="24.666666666666657" y="439" width="365" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.34901960784313724" green="0.34509803921568627" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1321,5 +1321,6 @@
         <image name="login_cbox" width="18" height="18"/>
         <image name="login_logo" width="219" height="70"/>
         <image name="mynumber_bg" width="375" height="251"/>
+        <image name="splash_logo" width="249" height="79"/>
     </resources>
 </document>
