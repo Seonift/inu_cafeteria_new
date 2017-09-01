@@ -466,7 +466,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VwB-TY-zUC">
-                                        <rect key="frame" x="0.0" y="98.666666666666671" width="414" height="60.666666666666643"/>
+                                        <rect key="frame" x="0.0" y="98.666666666666643" width="414" height="64.333333333333357"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="55"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -604,13 +604,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="홍길동" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2SE-Qe-ZvW">
-                                <rect key="frame" x="0.0" y="229" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="229" width="414" height="21"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="18"/>
                                 <color key="textColor" red="0.34901960784313724" green="0.34509803921568627" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="디자인학부 201101720" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeI-X8-dSM">
-                                <rect key="frame" x="0.0" y="264" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="265" width="414" height="21"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="18"/>
                                 <color key="textColor" red="0.34901960780000002" green="0.34509803919999998" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -669,7 +669,7 @@
             <objects>
                 <navigationController storyboardIdentifier="homevcnav" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="c5E-pD-zBj" customClass="DefaultNC" customModule="inu_cafeteria" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hqh-cV-SOp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hqh-cV-SOp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -787,7 +787,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="무엇을 도와드릴까요?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lud-yj-gjR">
-                                <rect key="frame" x="0.0" y="91" width="414" height="22"/>
+                                <rect key="frame" x="0.0" y="91" width="414" height="23.333333333333329"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="20"/>
                                 <color key="textColor" red="0.34901960784313724" green="0.34509803921568627" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -853,7 +853,7 @@
                                     <constraint firstAttribute="height" constant="180" id="Bli-yC-aMw"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_logo" translatesAutoresizingMaskIntoConstraints="NO" id="kBj-BM-tII">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="kBj-BM-tII">
                                 <rect key="frame" x="107" y="70" width="200" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="2JT-iR-CbS"/>
@@ -1065,7 +1065,7 @@
                                     <constraint firstAttribute="height" constant="150" id="5CA-B7-EHe"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_logo" translatesAutoresizingMaskIntoConstraints="NO" id="RaF-qM-Nzy">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="RaF-qM-Nzy">
                                 <rect key="frame" x="136.33333333333331" y="61" width="141.33333333333331" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="Y2W-mE-mC2"/>
@@ -1265,7 +1265,7 @@
             <objects>
                 <navigationController storyboardIdentifier="mynumbervcnav" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="I67-mL-ZxD" customClass="DefaultNC" customModule="inu_cafeteria" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="leT-29-tx3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="leT-29-tx3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1283,7 +1283,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4u8-jD-QW1" customClass="DefaultNC" customModule="inu_cafeteria" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2we-SF-AtI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2we-SF-AtI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1319,7 +1319,6 @@
         <image name="login_btn" width="120" height="50"/>
         <image name="login_btn_clicked" width="120" height="50"/>
         <image name="login_cbox" width="18" height="18"/>
-        <image name="login_logo" width="219" height="70"/>
         <image name="mynumber_bg" width="375" height="251"/>
         <image name="splash_logo" width="249" height="79"/>
     </resources>
