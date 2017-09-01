@@ -602,6 +602,7 @@
 				CODE_SIGN_ENTITLEMENTS = inu_cafeteria/inu_cafeteria.entitlements;
 				DEVELOPMENT_TEAM = AANGG4Q668;
 				INFOPLIST_FILE = inu_cafeteria/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "appcenter.inu.ac.kr.inu-cafeteria";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -620,6 +621,7 @@
 				CODE_SIGN_ENTITLEMENTS = inu_cafeteria/inu_cafeteria.entitlements;
 				DEVELOPMENT_TEAM = AANGG4Q668;
 				INFOPLIST_FILE = inu_cafeteria/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "appcenter.inu.ac.kr.inu-cafeteria";
 				PRODUCT_NAME = "$(TARGET_NAME)";
