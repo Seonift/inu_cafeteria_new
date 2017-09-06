@@ -11,7 +11,10 @@ import TextImageButton
 
 class DrawerVC: UIViewController {
     
+    @IBOutlet weak var titleL: UILabel!
+    
     var delegate:ViewCallback?
+    @IBOutlet weak var no_internet_label: UILabel!
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var image_const: NSLayoutConstraint!
@@ -25,8 +28,9 @@ class DrawerVC: UIViewController {
     var logoutB: TextImageButton!
     var csrB: TextImageButton!
     
-    @IBOutlet weak var nameL_top: NSLayoutConstraint!
-    @IBOutlet weak var numL_top: NSLayoutConstraint!
+    @IBOutlet weak var titleL_top: NSLayoutConstraint!
+//    @IBOutlet weak var nameL_top: NSLayoutConstraint!
+//    @IBOutlet weak var numL_top: NSLayoutConstraint!
     @IBOutlet weak var logo_Top: NSLayoutConstraint!
     @IBOutlet weak var barcode_top_const: NSLayoutConstraint!
     @IBOutlet weak var guideL_top_const: NSLayoutConstraint!
@@ -60,14 +64,14 @@ class DrawerVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
 //        print("flag")
-        let model = FlagModel()
+        let model = FlagModel(self)
         model.activeBarcode(1)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
 //        print("flag end")
-        let model = FlagModel()
-        model.activeBarcode(0)
+        let model = FlagModel2()
+        model.deactiveBarcode(0)
     }
     
     func setupUI(){
@@ -76,9 +80,14 @@ class DrawerVC: UIViewController {
 //        imageView.layer.borderColor = UIColor(r: 189, g: 189, b: 183).cgColor
 //        imageView.layer.borderWidth = 2.0
         
+        no_internet_label.font = UIFont(name: "KoPubDotumPB", size: 24)
+        no_internet_label.text = "인터넷 연결을\n체크해주세요!"
+        no_internet_label.isHidden = true
         
-        nameL.font = UIFont(name: "KoPubDotumPB", size: 18)
-        numL.font = UIFont(name: "KoPubDotumPL", size: 15)
+        titleL.font = UIFont(name: "KoPubDotumPB", size: 18)
+        
+        nameL.font = UIFont(name: "KoPubDotumPB", size: 30)
+        numL.font = UIFont(name: "KoPubDotumPB", size: 16)
         
         let attributes:[String:Any] = [
             NSForegroundColorAttributeName: UIColor(r: 189, g:189, b:183),
@@ -89,7 +98,7 @@ class DrawerVC: UIViewController {
         self.view.addSubview(logoutB)
         self.view.acwf(width: 87, height: 24, view: logoutB)
         self.view.ac_center(item: logoutB, toItem: self.view, origin: "x")
-        self.view.addConstraint(NSLayoutConstraint(item: logoutB, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: -36))
+        self.view.addConstraint(NSLayoutConstraint(item: logoutB, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: -27))
         
         logoutB.setAttributedTitle(string, for: .normal)
         logoutB.setImage(UIImage(named: "btnLogout"), for: .normal)
@@ -122,20 +131,21 @@ class DrawerVC: UIViewController {
         
         if DeviceUtil.smallerThanSE() == true {
             print("smaller than se")
+            titleL_top.constant = titleL_top.constant / 2
             barcode_top_const.constant = barcode_top_const.constant / 2
             guideL_top_const.constant = guideL_top_const.constant / 2
             barcode_width.constant = barcode_width.constant * 0.75
             barcode_height.constant = barcode_height.constant * 0.75
             logo_Top.constant = logo_Top.constant / 2
-            numL_top.constant = numL_top.constant / 2
-            nameL_top.constant = nameL_top.constant / 2
+//            numL_top.constant = numL_top.constant / 2
+//            nameL_top.constant = nameL_top.constant / 2
             
             
-            self.view.addConstraint(NSLayoutConstraint(item: infoB, attribute: .bottom, relatedBy: .equal, toItem: logoutB, attribute: .top, multiplier: 1, constant: -22/2))
-            self.view.addConstraint(NSLayoutConstraint(item: csrB, attribute: .bottom, relatedBy: .equal, toItem: infoB, attribute: .top, multiplier: 1, constant: -23/2))
+            self.view.addConstraint(NSLayoutConstraint(item: infoB, attribute: .bottom, relatedBy: .equal, toItem: logoutB, attribute: .top, multiplier: 1, constant: -34.5/2))
+            self.view.addConstraint(NSLayoutConstraint(item: csrB, attribute: .bottom, relatedBy: .equal, toItem: infoB, attribute: .top, multiplier: 1, constant: -34.5/2))
         } else {
-            self.view.addConstraint(NSLayoutConstraint(item: infoB, attribute: .bottom, relatedBy: .equal, toItem: logoutB, attribute: .top, multiplier: 1, constant: -22))
-            self.view.addConstraint(NSLayoutConstraint(item: csrB, attribute: .bottom, relatedBy: .equal, toItem: infoB, attribute: .top, multiplier: 1, constant: -23))
+            self.view.addConstraint(NSLayoutConstraint(item: infoB, attribute: .bottom, relatedBy: .equal, toItem: logoutB, attribute: .top, multiplier: 1, constant: -34.5))
+            self.view.addConstraint(NSLayoutConstraint(item: csrB, attribute: .bottom, relatedBy: .equal, toItem: infoB, attribute: .top, multiplier: 1, constant: -34.5))
         }
         
         self.view.layoutIfNeeded()
@@ -159,12 +169,7 @@ class DrawerVC: UIViewController {
         guideL.font = UIFont(name: "KoPubDotumPL", size: 13)
         guideL.text = "기숙사 식당에서 조식할인 시간에\n사용하실 수 있습니다."
         
-        if userPreferences.object(forKey: "barcode") != nil {
-            let barcode = userPreferences.string(forKey: "barcode")
-            barcodeIV.image = generateBarcode(from: gsno(barcode))
-            barcodeIV.layer.cornerRadius = 5
-            barcodeIV.clipsToBounds = true
-        }
+        
     }
     
     @IBAction func barcodeClicked(_ sender: Any) {
@@ -193,4 +198,42 @@ class DrawerVC: UIViewController {
 //        self.delegate?.passData(resultData: true, code: "info")
 //    }
     
+    func setBarcode(){
+        if userPreferences.object(forKey: "barcode") != nil {
+            no_internet_label.isHidden = true
+            barcodeIV.isHidden = false
+            let barcode = userPreferences.string(forKey: "barcode")
+            barcodeIV.image = generateBarcode(from: gsno(barcode))
+            barcodeIV.layer.cornerRadius = 5
+            barcodeIV.clipsToBounds = true
+        }
+    }
+    
+    func removeBarcode(){
+        barcodeIV.isHidden = true
+        no_internet_label.isHidden = false
+        no_internet_label.layer.cornerRadius = 5
+        no_internet_label.clipsToBounds = true
+    }
+    
+}
+
+extension DrawerVC {
+    override func networkResult(resultData: Any, code: String) {
+        if code == "activebarcode" {
+            if let code = resultData as? Int {
+                if code == 1 {
+                    setBarcode()
+                }
+            }
+        }
+    }
+    
+    override func networkFailed(code: Any) {
+        if let str = code as? String {
+            if str == "activebarcode" {
+                removeBarcode()
+            }
+        }
+    }
 }

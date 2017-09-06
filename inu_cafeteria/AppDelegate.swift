@@ -132,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 if let drawerController = vc.mainViewController.parent as? KYDrawerController {
                     //                drawerController.setDrawerState(.opened, animated: true)
                     if drawerController.drawerState == .opened {
-                        let model = FlagModel()
+                        let model = FlagModel(drawerController.drawerViewController!)
                         model.activeBarcode(1)
                         
                     }
@@ -217,8 +217,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func removeFlag(){
-        let model = FlagModel()
-        model.activeBarcode(0)
+        let model = FlagModel2()
+        model.deactiveBarcode(0)
     }
     
 //    func connectToFcm() {

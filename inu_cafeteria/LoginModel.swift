@@ -136,8 +136,8 @@ class LoginModel: NetworkModel {
     func logout(){
         Utility.removeAllUserDefaults()
         
-        let model = FlagModel()
-        model.activeBarcode(0)
+        let model = FlagModel2()
+        model.deactiveBarcode(0)
         
         DispatchQueue.main.async {
             Alamofire.request("\(loginURL)logout", method: .post, parameters: nil).response { res in

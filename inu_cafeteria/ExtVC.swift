@@ -171,6 +171,7 @@ extension UIViewController: ViewCallback {
                     drawerController.setDrawerState(.closed, animated: true)
                 }
                 
+                
                 let model = LoginModel(self)
                 model.logout()
             }
