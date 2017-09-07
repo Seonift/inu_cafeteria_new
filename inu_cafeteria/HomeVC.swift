@@ -541,7 +541,16 @@ extension HomeVC: UITextFieldDelegate {
         let aSet = NSCharacterSet(charactersIn:"0123456789").inverted
         let compSepByCharInSet = string.components(separatedBy: aSet)
         let numberFiltered = compSepByCharInSet.joined(separator: "")
-        return string == numberFiltered
+        
+        if string == numberFiltered {
+            let currentString:NSString = (textField.text ?? "") as NSString
+            let newString = currentString.replacingCharacters(in: range, with: string)
+            return newString.characters.count <= 4
+        }
+        
+        return false
+        
+//        return string == numberFiltered
     }
 }
 
