@@ -66,29 +66,55 @@ class SplashVC: UIViewController {
         if code == "notice" {
             let result = resultData as! Notices
             
-            if result.all?.message != nil && result.all?.message != "" {
-                let alertController = UIAlertController(title: result.all?.title, message: result.all?.message, preferredStyle: .alert)
-                let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
-                    self.showMain()
-                }
-                alertController.addAction(ok)
-                self.present(alertController, animated: true, completion: nil)
-            } else if result.ios?.message != nil && result.ios?.message != "" {
-                let alertController = UIAlertController(title: result.ios?.title, message: result.ios?.message, preferredStyle: .alert)
-                let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
-                    self.showMain()
-                }
-                alertController.addAction(ok)
-                self.present(alertController, animated: true, completion: nil)
+            
+            if userPreferences.object(forKey: "notice") == nil || !isDateToday(userPreferences.object(forKey: "notice") as! Date) {
+                //저장된 날짜가 없으면 다이얼로그 출력
+                //오늘 보인적이 없으면 보이기
+                showDialog(result)
             } else {
                 self.showMain()
             }
             
-//            print(result)
-//            if result.message != nil && result.message != "" {
-//            } else {
-//                self.showMain()
-//            }
+        }
+    }
+    
+    func isDateToday(_ date: Date) -> Bool {
+        //true면 오늘 날짜
+        let today = Date()
+        
+        if Calendar.current.compare(date, to: today, toGranularity: .day) == .orderedSame {
+            return true
+        }
+        return false
+    }
+    
+    func showDialog(_ result: Notices){
+        if result.all?.message != nil && result.all?.message != "" {
+            let alertController = UIAlertController(title: result.all?.title, message: result.all?.message, preferredStyle: .alert)
+            let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+                self.showMain()
+            }
+            let ok2 = UIAlertAction(title: "오늘하루안보기", style: .default) { res -> Void in
+                userPreferences.setValue(Date(), forKey: "notice")
+                self.showMain()
+            }
+            alertController.addAction(ok)
+            alertController.addAction(ok2)
+            self.present(alertController, animated: true, completion: nil)
+        } else if result.ios?.message != nil && result.ios?.message != "" {
+            let alertController = UIAlertController(title: result.ios?.title, message: result.ios?.message, preferredStyle: .alert)
+            let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+                self.showMain()
+            }
+            let ok2 = UIAlertAction(title: "오늘하루안보기", style: .default) { res -> Void in
+                userPreferences.setValue(Date(), forKey: "notice")
+                self.showMain()
+            }
+            alertController.addAction(ok)
+            alertController.addAction(ok2)
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            self.showMain()
         }
     }
     
