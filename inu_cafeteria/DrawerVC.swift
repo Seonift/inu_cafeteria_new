@@ -52,11 +52,11 @@ class DrawerVC: UIViewController {
         }
     }
     
-    var current_bright:CGFloat = 1.0 {
-        didSet {
-            print("current_bright:\(current_bright)")
-        }
-    }
+//    var current_bright:CGFloat = 1.0 {
+//        didSet {
+//            print("current_bright:\(current_bright)")
+//        }
+//    }
     
     override func viewDidLoad() {
 //        numL.text = "\(userPreferences.string(forKey: "major")!)    \(userPreferences.string(forKey: "sno")!)"
@@ -74,7 +74,7 @@ class DrawerVC: UIViewController {
         
         setupUI()
         
-        current_bright = UIScreen.main.brightness
+//        current_bright = UIScreen.main.brightness
     }
     
     
@@ -82,13 +82,9 @@ class DrawerVC: UIViewController {
 //        print("flag")
         let model = FlagModel(self)
         model.activeBarcode(1)
-//        if UIScreen.main.brightness != 1.0 {
-//            
-//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.current_bright = UIScreen.main.brightness
         UIScreen.main.brightness = CGFloat(1.0)
     }
     
@@ -96,7 +92,10 @@ class DrawerVC: UIViewController {
 //        print("flag end")
         let model = FlagModel2()
         model.deactiveBarcode(0)
-        UIScreen.main.brightness = self.current_bright
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        UIScreen.main.brightness = CGFloat(userPreferences.float(forKey: "brightness"))
     }
     
     func setupUI(){

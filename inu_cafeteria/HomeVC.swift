@@ -221,6 +221,12 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         unregisterForKeyboardNotifications()
         
         self.navigationItem.titleView = nil
+//        print("homevc willdisappear")
+        userPreferences.setValue(UIScreen.main.brightness, forKey: "brightness")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+//        print("homevc diddisappear")
     }
     
     override func viewWillAppear(_ animated: Bool) {
