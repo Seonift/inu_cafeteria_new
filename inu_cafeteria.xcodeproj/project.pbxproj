@@ -56,13 +56,12 @@
 		749410A41F39CEEB00399BF2 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749410A31F39CEEB00399BF2 /* SocketIOManager.swift */; };
 		749410A61F39FCCF00399BF2 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749410A51F39FCCF00399BF2 /* Queue.swift */; };
 		74AF6E421F556C36007D335B /* ExtBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AF6E411F556C36007D335B /* ExtBundle.swift */; };
-		74D2D2831FA1E0C800173C9F /* ServerString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D2D2821FA1E0C800173C9F /* ServerString.swift */; };
+		74D2D2871FA1F65200173C9F /* ServerString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D2D2861FA1F65200173C9F /* ServerString.swift */; };
 		74E4330B1F1F1C230081AE08 /* BarcodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4330A1F1F1C230081AE08 /* BarcodeVC.swift */; };
-		EE675D3C3CBA6DD98E62C7C6 /* Pods_inu_cafeteria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB53F6A7C5EE08F3F06A529 /* Pods_inu_cafeteria.framework */; };
+		7E91784456ABDDF911BADEA1 /* Pods_inu_cafeteria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B97708B4DC864FE96285DEC5 /* Pods_inu_cafeteria.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2243B7A300FDCBCAA2CA145C /* Pods-inu_cafeteria.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inu_cafeteria.release.xcconfig"; path = "Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria.release.xcconfig"; sourceTree = "<group>"; };
 		740689051F4415CE000291DA /* InfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoVC.swift; sourceTree = "<group>"; };
 		740689091F442CDB000291DA /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = "<group>"; };
 		7406890B1F442FFC000291DA /* out.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = out.caf; sourceTree = "<group>"; };
@@ -118,10 +117,11 @@
 		749410A31F39CEEB00399BF2 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		749410A51F39FCCF00399BF2 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		74AF6E411F556C36007D335B /* ExtBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtBundle.swift; sourceTree = "<group>"; };
-		74D2D2821FA1E0C800173C9F /* ServerString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerString.swift; sourceTree = "<group>"; };
+		74D2D2861FA1F65200173C9F /* ServerString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerString.swift; sourceTree = "<group>"; };
 		74E4330A1F1F1C230081AE08 /* BarcodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeVC.swift; sourceTree = "<group>"; };
-		8CB53F6A7C5EE08F3F06A529 /* Pods_inu_cafeteria.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_inu_cafeteria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CAC391EA048ECBD595D9E381 /* Pods-inu_cafeteria.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inu_cafeteria.debug.xcconfig"; path = "Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria.debug.xcconfig"; sourceTree = "<group>"; };
+		B97708B4DC864FE96285DEC5 /* Pods_inu_cafeteria.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_inu_cafeteria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF0202FE6AA040955AE40818 /* Pods-inu_cafeteria.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inu_cafeteria.release.xcconfig"; path = "Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria.release.xcconfig"; sourceTree = "<group>"; };
+		FD9123509F171BC6CE7AF9F7 /* Pods-inu_cafeteria.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inu_cafeteria.debug.xcconfig"; path = "Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				742D904E1F1E497E000B656E /* QuartzCore.framework in Frameworks */,
-				EE675D3C3CBA6DD98E62C7C6 /* Pods_inu_cafeteria.framework in Frameworks */,
+				7E91784456ABDDF911BADEA1 /* Pods_inu_cafeteria.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,18 +141,9 @@
 			isa = PBXGroup;
 			children = (
 				742D904D1F1E497E000B656E /* QuartzCore.framework */,
-				8CB53F6A7C5EE08F3F06A529 /* Pods_inu_cafeteria.framework */,
+				B97708B4DC864FE96285DEC5 /* Pods_inu_cafeteria.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		59EF53CE0F9A6A056A306F1C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CAC391EA048ECBD595D9E381 /* Pods-inu_cafeteria.debug.xcconfig */,
-				2243B7A300FDCBCAA2CA145C /* Pods-inu_cafeteria.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		741BD9191F22456A00B56F30 /* Storyboard */ = {
@@ -169,8 +160,8 @@
 			children = (
 				742D8FFF1F1CF7A4000B656E /* inu_cafeteria */,
 				742D8FFE1F1CF7A4000B656E /* Products */,
-				59EF53CE0F9A6A056A306F1C /* Pods */,
 				52DFDF437E936AF629C3C19F /* Frameworks */,
+				C46951481A210072B50405DB /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -265,7 +256,7 @@
 				747C105C1F2A3B9F00C195A9 /* FlagModel.swift */,
 				749410A31F39CEEB00399BF2 /* SocketIOManager.swift */,
 				74676FA41F47D1B2008EAF66 /* CsrModel.swift */,
-				74D2D2821FA1E0C800173C9F /* ServerString.swift */,
+				74D2D2861FA1F65200173C9F /* ServerString.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -299,6 +290,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		C46951481A210072B50405DB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FD9123509F171BC6CE7AF9F7 /* Pods-inu_cafeteria.debug.xcconfig */,
+				DF0202FE6AA040955AE40818 /* Pods-inu_cafeteria.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -306,12 +306,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 742D900F1F1CF7A4000B656E /* Build configuration list for PBXNativeTarget "inu_cafeteria" */;
 			buildPhases = (
-				B7092C1950EB8AD6F6A114CC /* [CP] Check Pods Manifest.lock */,
+				4AB11F5332C8FABA82BBEE4B /* [CP] Check Pods Manifest.lock */,
 				742D8FF91F1CF7A4000B656E /* Sources */,
 				742D8FFA1F1CF7A4000B656E /* Frameworks */,
 				742D8FFB1F1CF7A4000B656E /* Resources */,
-				DEA326F19448FD24DA144683 /* [CP] Embed Pods Frameworks */,
-				8713666049F64F236536BFA4 /* [CP] Copy Pods Resources */,
+				8670EB7D885B59C1522323E8 /* [CP] Embed Pods Frameworks */,
+				15CD266AE6FC212759288D69 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -386,7 +386,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8713666049F64F236536BFA4 /* [CP] Copy Pods Resources */ = {
+		15CD266AE6FC212759288D69 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -401,7 +401,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-inu_cafeteria/Pods-inu_cafeteria-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B7092C1950EB8AD6F6A114CC /* [CP] Check Pods Manifest.lock */ = {
+		4AB11F5332C8FABA82BBEE4B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -419,7 +419,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DEA326F19448FD24DA144683 /* [CP] Embed Pods Frameworks */ = {
+		8670EB7D885B59C1522323E8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -505,7 +505,7 @@
 				742D902D1F1CF90E000B656E /* ExtUIImage.swift in Sources */,
 				749410A61F39FCCF00399BF2 /* Queue.swift in Sources */,
 				742D901F1F1CF8F8000B656E /* DeviceUtil.swift in Sources */,
-				74D2D2831FA1E0C800173C9F /* ServerString.swift in Sources */,
+				74D2D2871FA1F65200173C9F /* ServerString.swift in Sources */,
 				742D90011F1CF7A4000B656E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -627,7 +627,7 @@
 		};
 		742D90101F1CF7A4000B656E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CAC391EA048ECBD595D9E381 /* Pods-inu_cafeteria.debug.xcconfig */;
+			baseConfigurationReference = FD9123509F171BC6CE7AF9F7 /* Pods-inu_cafeteria.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -646,7 +646,7 @@
 		};
 		742D90111F1CF7A4000B656E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2243B7A300FDCBCAA2CA145C /* Pods-inu_cafeteria.release.xcconfig */;
+			baseConfigurationReference = DF0202FE6AA040955AE40818 /* Pods-inu_cafeteria.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
