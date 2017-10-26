@@ -62,7 +62,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
-            endingLineNumber = "29">
+            endingLineNumber = "29"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -158,6 +160,22 @@
             startingLineNumber = "27"
             endingLineNumber = "27"
             landmarkName = "version()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "inu_cafeteria/NetworkModel.swift"
+            timestampString = "528442827.372965"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "init(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

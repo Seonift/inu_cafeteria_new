@@ -49,6 +49,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Starscream.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>TextImageButton.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -66,67 +71,6 @@
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>230A17648E7210F12E1FE9BD2EC768D2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2F5622F3B18DF497981AB58C6D1FC72F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3EDFE4052B5DE7D509935AC0774CB135</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>553D0E63F3BD51D61CB2750D30F3CE64</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>556E5F974144E3D5ADE6A8377D232D5B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7AF8670FDECF80EFCAA3D04318C4B4D1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8684D5E9C1C558B53AFD2429A913A15B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9016149FC3686D0F56CD50CF2F46079F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9502FB01641FBABB78522037E882757B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C5B80060FE8C664DF08841000F41D515</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>

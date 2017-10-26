@@ -9,9 +9,9 @@
 import UIKit
 
 //let baseURL = 
-let loginURL = ""
-let numberURL = ""
-let socketURL = ""
+let loginURL = String.loginURL()
+let numberURL = String.numberURL()
+let socketURL = String.socketURL()
 
 
 let header:[String:String] = [

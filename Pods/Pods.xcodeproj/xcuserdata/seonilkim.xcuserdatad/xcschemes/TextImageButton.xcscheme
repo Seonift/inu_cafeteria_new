@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '230A17648E7210F12E1FE9BD2EC768D2'
+               BlueprintIdentifier = '887B5BD1B584142AB26D9C9237CF3259'
                BlueprintName = 'TextImageButton'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'TextImageButton.framework'>
