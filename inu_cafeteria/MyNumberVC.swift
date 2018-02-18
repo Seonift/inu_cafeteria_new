@@ -9,7 +9,7 @@
 import UIKit
 import TextImageButton
 import SocketIO
-import Toaster
+import Toast_Swift
 import AVFoundation
 
 class MyNumberVC: UIViewController {
@@ -24,6 +24,11 @@ class MyNumberVC: UIViewController {
     
     let cellId = "NumberCell"
     let cellId2 = "NumberCell2"
+    
+    lazy var model:NumberModel = {
+        let model = NumberModel(self)
+        return model
+    }()
     
     var items: [String] = [] {
         didSet {
@@ -118,9 +123,9 @@ class MyNumberVC: UIViewController {
 //        imageView.addGestureRecognizer(tap)
 //        imageView.isUserInteractionEnabled = true
         
-        let attributes:[String:Any] = [
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName : UIFont(name: "KoPubDotumPB", size: 12)!
+        let attributes = [
+            NSAttributedStringKey.foregroundColor: UIColor.white,
+            NSAttributedStringKey.font : UIFont(name: "KoPubDotumPB", size: 12)!
         ]
         let string = NSAttributedString(string: "대기번호 초기화", attributes: attributes)
         let cb = TextImageButton()
@@ -189,14 +194,19 @@ class MyNumberVC: UIViewController {
                         print("msgint:\(msgint)")
                         if self.checkNumCorrect(msgint) == true {
                             //내 번호가 나오면 알림
-                            let alertController = UIAlertController(title: nil, message: "\(Strings.complete_num())\n번호 : \(msgint)", preferredStyle: .alert)
-                            let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
-//                                self.audioPlayer?.stop()
-                                let model = NumberModel(self)
-                                model.isNumberWait()
-                            }
-                            alertController.addAction(ok)
-                            self.present(alertController, animated: true, completion: nil)
+                            
+                            let alert = CustomAlert.okAlert(message: "\(String.complete_num)\n번호 : \(msgint)", positiveAction: { action in
+                                self.model.isNumberWait()
+                            })
+                            self.present(alert, animated: true, completion: nil)
+                            
+//                            let alertController = UIAlertController(title: nil, message: , preferredStyle: .alert)
+//                            let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+//                                self.model.isNumberWait()
+//                            }
+//                            alertController.addAction(ok)
+//                            alertController.view.tintColor = UIColor.cftBrightSkyBlue
+//                            self.present(alertController, animated: true, completion: nil)
                             
                             let systemSoundID:SystemSoundID = 1005
                             let vib = SystemSoundID(kSystemSoundID_Vibrate)
@@ -251,22 +261,10 @@ class MyNumberVC: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        print("viewdiddisappear")
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-//        print("socket end")
-        print("viewwilldisapper")
-        
-//        numbers.removeAll()
-//        items.removeAll()
-//        start_index = 0
-        
-//        userPreferences.removeObject(forKey: "socket")
-//        userPreferences.removeObject(forKey: "num1")
-//        userPreferences.removeObject(forKey: "num2")
-//        userPreferences.removeObject(forKey: "num3")
-//        userPreferences.removeObject(forKey: "code")
         
     }
     
@@ -279,13 +277,33 @@ class MyNumberVC: UIViewController {
         print("wakeup")
         
         Indicator.startAnimating(activityData)
-        let model = NumberModel(self)
         model.isNumberWait()
         
         setSocketConnect()
     }
+    
+    @objc func cancelClicked() {
+        
+        let alert = CustomAlert.alert(message: String.cancel_num, positiveAction: { action in
+            // 소켓 초기화
+            Indicator.startAnimating(activityData)
+            self.model.resetNumber()
+        })
+        self.present(alert, animated: true, completion: nil)
+        
+//        let alertController = UIAlertController(title: nil, message: String.cancel_num, preferredStyle: .alert)
+//        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+//        let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+//
+//        }
+//        alertController.addAction(ok)
+//        alertController.addAction(cancel)
+//        self.present(alertController, animated: true, completion: nil)
+    }
+}
 
-    override func networkResult(resultData: Any, code: String) {
+extension MyNumberVC: NetworkCallback {
+    func networkResult(resultData: Any, code: String) {
         if code == "logout" {
             logout_ncb()
         }
@@ -295,20 +313,20 @@ class MyNumberVC: UIViewController {
             self.dismiss(animated: false, completion: nil)
         }
         
-//        if code == "isnumberwait" {
-//            //재설정
-//        }
-//        
+        //        if code == "isnumberwait" {
+        //            //재설정
+        //        }
+        //
         
         if code == "isnumberwait" {
-//            connectSocket()
+            //            connectSocket()
             
             print("networkresult:\(code)")
             let json = resultData as! NSDictionary
             
             var arr:[Int] = []
             
-            let code = json["code"] as! String
+            let _ = json["code"] as! String
             let num1 = Int(json["num1"] as! String)
             let num2 = Int(json["num2"] as! String)
             let num3 = Int(json["num3"] as! String)
@@ -337,7 +355,7 @@ class MyNumberVC: UIViewController {
         }
     }
     
-    override func networkFailed(code: Any) {
+    func networkFailed(code: Any) {
         if let str = code as? String {
             if str == "isnumberwait" {
                 self.dismiss(animated: false, completion: nil)
@@ -345,24 +363,9 @@ class MyNumberVC: UIViewController {
         }
     }
     
-    override func networkFailed() {
-        Toast(text: Strings.noServer()).show()
-        
+    func networkFailed() {
+        self.view.makeToast(String.noServer)
         Indicator.stopAnimating()
-    }
-    
-    func cancelClicked() {
-        let alertController = UIAlertController(title: nil, message: Strings.cancel_num(), preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
-            // 소켓 초기화
-            Indicator.startAnimating(activityData)
-            let model = NumberModel(self)
-            model.resetNumber()
-        }
-        alertController.addAction(ok)
-        alertController.addAction(cancel)
-        self.present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -402,6 +405,24 @@ extension MyNumberVC: UICollectionViewDelegate, UICollectionViewDataSource {
         }
     }
 }
+
+//extension MyNumberVC: ViewCallback {
+//    func passData(resultData: Any, code: String) {
+//        print(code)
+//        
+//        if code == "csr" {
+//            showCsr()
+//        }
+//        
+//        if code == "info" {
+//            showInfo()
+//        }
+//        
+//        if code == "logout" {
+//            logOut(self)
+//        }
+//    }
+//}
 
 class NumberCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!

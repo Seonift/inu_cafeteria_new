@@ -20,7 +20,7 @@ class LoginModel: NetworkModel {
             case .success:
                 let val = res.result.value as! NSDictionary
                 guard let storever = val["ios"] as? String else {
-                    self.view.networkFailed(code: "version")
+                    self.view?.networkFailed(code: "version")
                     return
                 }
                 
@@ -28,14 +28,14 @@ class LoginModel: NetworkModel {
                 
                 if storever.compare(currentv, options: .numeric) == .orderedDescending {
                     //업데이트 필요
-                    self.view.networkResult(resultData: true, code: "version")
+                    self.view?.networkResult(resultData: true, code: "version")
                 } else {
-                    self.view.networkResult(resultData: false, code: "version")
+                    self.view?.networkResult(resultData: false, code: "version")
                 }
                 
             case .failure(let error):
                 print(error)
-                self.view.networkFailed(code: "version")
+                self.view?.networkFailed(code: "version")
             }
         }
     }
@@ -47,13 +47,17 @@ class LoginModel: NetworkModel {
         Alamofire.request("\(loginURL)server_message.json").responseObject { (res:DataResponse<Notices>) in
             switch res.result {
             case .success:
-                let val = res.result.value
+                if let val = res.result.value {
+                    self.view?.networkResult(resultData: val, code: "notice")
+                } else {
+                    self.view?.networkFailed(code: "notice")
+                }
                 
-                self.view.networkResult(resultData: val, code: "notice")
+                
                 
             case .failure(let error):
                 print(error)
-                self.view.networkFailed(code: "notice")
+                self.view?.networkFailed(code: "notice")
             }
         }
     }
@@ -69,21 +73,21 @@ class LoginModel: NetworkModel {
                 let result = res.result.value
                 if code == 200 {
                     guard let codes = result?.code else {
-                        self.view.networkFailed(code: "no_code")
+                        self.view?.networkFailed(code: "no_code")
                         return
                     }
-                    self.view.networkResult(resultData: codes, code: "no_student")
+                    self.view?.networkResult(resultData: codes, code: "no_student")
                 } else {
                     //                    if code == 400 {
-                    self.view.networkFailed(code: gino(code))
+                    self.view?.networkFailed(code: gino(code))
                 }
             case .failure(let error):
                 print(error)
                 //                print("code:\(code)")
                 if code != nil {
-                    self.view.networkFailed(code: gino(code))
+                    self.view?.networkFailed(code: gino(code))
                 } else {
-                    self.view.networkFailed()
+                    self.view?.networkFailed()
                 }
             }
         }
@@ -97,18 +101,18 @@ class LoginModel: NetworkModel {
 //            case .success:
 //                let val = res.result.value
 //                
-//                self.view.networkResult(resultData: val, code: "message")
+//                self.view?.networkResult(resultData: val, code: "message")
 //                
 //            case .failure(let error):
 //                print(error)
-//                self.view.networkFailed(code: "message")
+//                self.view?.networkFailed(code: "message")
 //            }
 //        }
 //    }
 //    
 //    func stuinfo(){
 //        print("stuinfo")
-////        self.view.networkResult(resultData: true, code: "stuinfo")
+////        self.view?.networkResult(resultData: true, code: "stuinfo")
 //        
 //        Alamofire.request("\(loginURL)stuinfo", method: .get, parameters: nil, headers: nil)
 ////            .responseJSON {
@@ -122,13 +126,13 @@ class LoginModel: NetworkModel {
 //                if code == 200 {
 //                    let result = res.result.value
 //                    print(result)
-//                    self.view.networkResult(resultData: result, code: "stuinfo")
+//                    self.view?.networkResult(resultData: result, code: "stuinfo")
 //                } else if code == 400 {
-//                    self.view.networkFailed(code: "stuinfo")
+//                    self.view?.networkFailed(code: "stuinfo")
 //                }
 //            case .failure(let error):
 //                print(error)
-//                self.view.networkFailed()
+//                self.view?.networkFailed()
 //            }
 //        }
 //    }
@@ -136,7 +140,7 @@ class LoginModel: NetworkModel {
     func logout(){
         Utility.removeAllUserDefaults()
         
-        let model = FlagModel2()
+        let model = FlagModel()
         model.deactiveBarcode(0)
         
         DispatchQueue.main.async {
@@ -146,11 +150,11 @@ class LoginModel: NetworkModel {
                 print(code)
                 
                 if code == 200 {
-                    self.view.networkResult(resultData: true, code: "logout")
+                    self.view?.networkResult(resultData: true, code: "logout")
                 } else if code == 400 {
-                    self.view.networkFailed(code: code)
+                    self.view?.networkFailed(code: code)
                 } else {
-                    self.view.networkFailed()
+                    self.view?.networkFailed()
                 }
             }
         }
@@ -178,22 +182,22 @@ class LoginModel: NetworkModel {
                     let result = res.result.value
                     //여기도 바코드 넣기
                     guard let codes = result?.code else {
-                        self.view.networkFailed(code: "no_code")
+                        self.view?.networkFailed(code: "no_code")
                         return
                     }
                     guard let stu_info = result?.stu_info else {
-                        self.view.networkFailed(code: "no_stuinfo")
+                        self.view?.networkFailed(code: "no_stuinfo")
                         return
                     }
                     userPreferences.setValue(stu_info.name, forKey: "name")
                     userPreferences.setValue(stu_info.dep, forKey: "dep")
-                    self.view.networkResult(resultData: codes, code: "auto_login")
+                    self.view?.networkResult(resultData: codes, code: "auto_login")
                 } else if code == 400 {
-                    self.view.networkFailed(code: gino(code))
+                    self.view?.networkFailed(code: gino(code))
                 }
             case .failure(let error):
                 print(error)
-                self.view.networkFailed()
+                self.view?.networkFailed()
             }
             
         }
@@ -208,11 +212,11 @@ class LoginModel: NetworkModel {
 //                    userPreferences.setValue(barcode, forKey: "barcode")
 //                    print("barcode:\(barcode)")
 //                }
-//                self.view.networkResult(resultData: true, code: "auto_login")
+//                self.view?.networkResult(resultData: true, code: "auto_login")
 //            } else if code == 400 {
-//                self.view.networkFailed(code: code)
+//                self.view?.networkFailed(code: code)
 //            } else {
-//                self.view.networkFailed()
+//                self.view?.networkFailed()
 //            }
 //        }
     }
@@ -222,7 +226,7 @@ class LoginModel: NetworkModel {
 //        userPreferences.setValue(sno, forKey: "sno")
         userPreferences.setValue(auto, forKey: "auto_login")
         
-//        self.view.networkResult(resultData: true, code: "login")
+//        self.view?.networkResult(resultData: true, code: "login")
         
         var autoS:String = ""
         if auto == true {
@@ -258,28 +262,28 @@ class LoginModel: NetworkModel {
                         userPreferences.setValue(barcode, forKey: "barcode")
                     }
                     guard let codes = result?.code else {
-                        self.view.networkFailed(code: "no_code")
+                        self.view?.networkFailed(code: "no_code")
                         return
                     }
                     guard let stu_info = result?.stu_info else {
-                        self.view.networkFailed(code: "no_stuinfo")
+                        self.view?.networkFailed(code: "no_stuinfo")
                         return
                     }
                     userPreferences.setValue(stu_info.name, forKey: "name")
                     userPreferences.setValue(stu_info.dep, forKey: "dep")
-                    self.view.networkResult(resultData: codes, code: "login")
+                    self.view?.networkResult(resultData: codes, code: "login")
                 } else {
 //                    if code == 400 {
-                    self.view.networkFailed(code: gino(code))
+                    self.view?.networkFailed(code: gino(code))
                 }
             case .failure(let error):
                 print("failure")
                 print(error)
 //                print("code:\(code)")
                 if code != nil {
-                    self.view.networkFailed(code: gino(code))
+                    self.view?.networkFailed(code: gino(code))
                 } else {
-                    self.view.networkFailed()
+                    self.view?.networkFailed()
                 }
             }
             
@@ -303,13 +307,13 @@ class LoginModel: NetworkModel {
 //                        print("barcode:\(barcode)")
 //                        userPreferences.setValue(barcode, forKey: "barcode")
 //                    }
-//                    self.view.networkResult(resultData: true, code: "login")
+//                    self.view?.networkResult(resultData: true, code: "login")
 //                } else if code == 400 {
-//                    self.view.networkFailed(code: gino(code))
+//                    self.view?.networkFailed(code: gino(code))
 //                }
 //            case .failure(let error):
 //                print(error)
-//                self.view.networkFailed()
+//                self.view?.networkFailed()
 //            }
 //
 //            
@@ -340,11 +344,11 @@ class LoginModel: NetworkModel {
 //            OperationQueue.main.addOperation({ () -> Void in
 //                if dataString == "false" {
 //                    
-//                    self.view.networkFailed(code: "400")
+//                    self.view?.networkFailed(code: "400")
 //                    
 //                } else {
 //                    
-//                    self.view.networkResult(resultData: true, code: "login")
+//                    self.view?.networkResult(resultData: true, code: "login")
 //                }
 //            })
 //            

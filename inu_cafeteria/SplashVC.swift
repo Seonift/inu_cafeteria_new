@@ -8,11 +8,16 @@
 
 import UIKit
 import KYDrawerController
-import Toaster
+import Toast_Swift
 
-class SplashVC: UIViewController {
+class SplashVC: UIViewController, NetworkCallback {
     
     var delayInSeconds = 2.0
+    
+    lazy var loginModel:LoginModel = {
+        let model = LoginModel(self)
+        return model
+    }()
     
     override func viewDidLoad() {
         
@@ -21,39 +26,37 @@ class SplashVC: UIViewController {
         
         //서버 접속 불가일 때랑 인터넷 연결 안될경우 예외처리 필요함
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            let model = LoginModel(self)
-            model.version()
+            self.loginModel.version()
 //            model.notice()
         }//DispatchQueue.main.async
     }
     
-    override func networkResult(resultData: Any, code: String) {
-//        if code == "login" {
-//            let result = resultData as! Bool
-//            if result == true {
-//                self.showHome()
-//            }
-//        }
+    func networkResult(resultData: Any, code: String) {
         
         if code == "version" {
             
             let result = resultData as! Bool
             
             if result == true {
-                let alertController = UIAlertController(title: "업데이트", message: Strings.update(), preferredStyle: .alert)
-                let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
-                    let url = URL(fileURLWithPath: "https://itunes.apple.com/us/app/inu-cafeteria/id1272600111?l=ko&ls=1&mt=8")
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(url)
-                    } else {
-                        UIApplication.shared.openURL(url)
+                let alert = CustomAlert.okAlert(title: "업데이트", message: String.update, positiveAction: { action in
+                    if let url = URL(string: "itms://itunes.apple.com/kr/app/id1336050737?mt=8"), UIApplication.shared.canOpenURL(url) {
+                        if #available(iOS 10.0, *) {
+                            UIApplication.shared.open(url)
+                        } else {
+                            // Fallback on earlier versions
+                            UIApplication.shared.openURL(url)
+                        }
                     }
-                }
-                alertController.addAction(ok)
-                self.present(alertController, animated: true, completion: nil)
+                })
+                self.present(alert, animated: true, completion: nil)
+//                let alertController = UIAlertController(title: "업데이트", message: String.update, preferredStyle: .alert)
+//                let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+//
+//                }
+//                alertController.addAction(ok)
+//                self.present(alertController, animated: true, completion: nil)
             } else {
-                let model = LoginModel(self)
-                model.notice()
+                loginModel.notice()
             }
         }
         
@@ -90,46 +93,60 @@ class SplashVC: UIViewController {
     
     func showDialog(_ result: Notices){
         if result.all?.message != nil && result.all?.message != "" {
-            let alertController = UIAlertController(title: result.all?.title, message: result.all?.message, preferredStyle: .alert)
-            let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+            let alert = CustomAlert.noticeAlert(title: result.all?.title, message: result.all?.message, firstAction: { action in
                 self.showMain()
-            }
-            let ok2 = UIAlertAction(title: "오늘하루안보기", style: .default) { res -> Void in
+            }, secondAction: { action in
                 userPreferences.setValue(Date(), forKey: "notice")
                 self.showMain()
-            }
-            alertController.addAction(ok)
-            alertController.addAction(ok2)
-            self.present(alertController, animated: true, completion: nil)
+            })
+            self.present(alert, animated: true, completion: nil)
+            
+//            let alertController = UIAlertController(title: result.all?.title, message: result.all?.message, preferredStyle: .alert)
+//            let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+//
+//            }
+//            let ok2 = UIAlertAction(title: "오늘하루안보기", style: .default) { res -> Void in
+//
+//            }
+//            alertController.addAction(ok)
+//            alertController.addAction(ok2)
+//            self.present(alertController, animated: true, completion: nil)
         } else if result.ios?.message != nil && result.ios?.message != "" {
-            let alertController = UIAlertController(title: result.ios?.title, message: result.ios?.message, preferredStyle: .alert)
-            let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
+            let alert = CustomAlert.noticeAlert(title: result.ios?.title, message: result.ios?.message, firstAction: { action in
                 self.showMain()
-            }
-            let ok2 = UIAlertAction(title: "오늘하루안보기", style: .default) { res -> Void in
+            }, secondAction: { action in
                 userPreferences.setValue(Date(), forKey: "notice")
                 self.showMain()
-            }
-            alertController.addAction(ok)
-            alertController.addAction(ok2)
-            self.present(alertController, animated: true, completion: nil)
+            })
+            self.present(alert, animated: true, completion: nil)
+            
+//            let alertController = UIAlertController(title: result.ios?.title, message: result.ios?.message, preferredStyle: .alert)
+//            let ok = UIAlertAlet ok = UIAlertAction(title: first, style: .default, handler: firstAction)ction(title: "확인", style: .default) { res -> Void in
+//                self.showMain()
+//            }
+//            let ok2 = UIAlertAction(title: "오늘하루안보기", style: .default) { res -> Void in
+//                userPreferences.setValue(Date(), forKey: "notice")
+//                self.showMain()
+//            }
+//            alertController.addAction(ok)
+//            alertController.addAction(ok2)
+//            self.present(alertController, animated: true, completion: nil)
         } else {
             self.showMain()
         }
     }
     
-    override func networkFailed(code: Any) {
+    func networkFailed(code: Any) {
         failAutoLogin(code)
     }
     
-    override func networkFailed() {
+    func networkFailed() {
         failAutoLogin(nil)
     }
     
     func showMain(){
         if userPreferences.bool(forKey: "auto_login") == true && userPreferences.object(forKey: "dtoken") != nil {
-            let model = LoginModel(self)
-            model.autologin()
+            loginModel.autologin()
         } else {
             let main_storyboard = UIStoryboard(name: "Main", bundle: nil)
             guard let main = main_storyboard.instantiateViewController(withIdentifier: "firststartvc") as? FirstStartVC else {return}
@@ -141,19 +158,19 @@ class SplashVC: UIViewController {
         Utility.removeAllUserDefaults()
         
         if code == nil {
-            Toast(text: "로그인에 실패했습니다.").show()
+            self.view.makeToast(String.login_failed)
         } else {
             if let str = code as? String {
                 if str == "no_barcode" {
-                    Toast(text: "바코드 정보 오류. 다시 로그인해주세요.").show()
+                    self.view.makeToast(String.no_barcode)
                 }
                 
                 if str == "no_code" {
-                    Toast(text: "식당 정보 오류. 다시 로그인해주세요.").show()
+                    self.view.makeToast(String.no_code)
                 }
                 
                 if str == "no_stuinfo" {
-                    Toast(text: "학생 정보 오류. 다시 로그인해주세요.").show()
+                    self.view.makeToast(String.no_stuinfo)
                 }
                 
                 if str == "notice" {
@@ -161,13 +178,19 @@ class SplashVC: UIViewController {
                 }
                 
                 if str == "version" {
-                    let alertController = UIAlertController(title: "오류", message: "버전 정보를 받아오는 데 실패했습니다. 다시 시도해주세요.", preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "재시도", style: .default) { res -> Void in
+                    let alert = CustomAlert.okAlert(positive: "재시도", title: "오류", message: String.fail_version, positiveAction: { action in
                         let model = LoginModel(self)
                         model.version()
-                    }
-                    alertController.addAction(ok)
-                    self.present(alertController, animated: true, completion: nil)
+                    })
+                    self.present(alert, animated: true, completion: nil)
+//                    let alertController = UIAlertController(title: "오류", message: , preferredStyle: .alert)
+//                    let ok = UIAlertAction(title: "재시도", style: .default) { res -> Void in
+//
+//                    }
+//                    alertController.addAction(ok)
+//                    self.present(alertController, animated: true, completion: nil)
+                    
+                    
                 }
             }
         }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Toaster
+import Toast_Swift
 
 class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
     @IBOutlet weak var titleL: UILabel!
@@ -24,14 +24,12 @@ class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate 
 //        self.navigationItem.titleView = logoIV
         
         
-        titleL.font = UIFont(name: "KoPubDotumPB", size: 20)
-        
         textField.backgroundColor = .white
         textField.layer.borderWidth = 1.0
         textField.layer.borderColor = UIColor(r: 189, g: 189, b: 183).cgColor
         textField.textColor = UIColor.untGreyishBrown
         textField.font = UIFont(name: "KoPubDotumPL", size: 15)
-        textField.setHint(hint: "문의하실 내용을 적어주세요.", font: UIFont(name: "KoPubDotumPL", size: 15)!, textcolor: UIColor(r: 189, g: 189, b: 183))
+//        textField.setHint(hint: "문의하실 내용을 적어주세요.", font: UIFont(name: "KoPubDotumPL", size: 15)!, textcolor: UIColor(r: 189, g: 189, b: 183))
         textField.layer.cornerRadius = 5.0
         textField.textAlignment = .center
         textField.delegate = self
@@ -51,9 +49,9 @@ class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate 
         setTitleView()
     }
     
-    func sendClicked(_ sender: UIButton) {
+    @objc func sendClicked(_ sender: UIButton) {
         if textField.text == nil || textField.text == "" {
-            Toast(text: "문의내용이 입력되지 않았습니다").show()
+            self.view.makeToast(String.noContents)
         } else {
             self.textField.endEditing(true)
             let model = CsrModel(self)
@@ -76,7 +74,7 @@ class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate 
     }
     
     //resignFirsReponder
-    func handleTap_mainview(_ sender: UITapGestureRecognizer?) {
+    @objc func handleTap_mainview(_ sender: UITapGestureRecognizer?) {
         print("tap")
         self.textField.resignFirstResponder()
     }
@@ -90,15 +88,19 @@ class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate 
     }
 }
 
-extension CsrVC {
-    override func networkResult(resultData: Any, code: String) {
+extension CsrVC:NetworkCallback {
+    func networkResult(resultData: Any, code: String) {
         if code == "errormsg" {
-            Toast(text: "문의사항이 접수되었습니다").show()
+            self.view.makeToast(String.csrSuc)
             self.navigationController?.popViewController(animated: true)
         }
     }
     
-    override func networkFailed() {
-        Toast(text: Strings.noServer()).show()
+    func networkFailed(code: Any) {
+        
+    }
+    
+    func networkFailed() {
+        self.view.makeToast(String.noServer)
     }
 }

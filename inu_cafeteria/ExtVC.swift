@@ -7,9 +7,12 @@
 //
 
 import UIKit
-import Toaster
+import Toast_Swift
 import KYDrawerController
 import Alamofire
+
+let MAIN = UIStoryboard(name: "Main", bundle: nil)
+let SPLASH = UIStoryboard(name: "Splash", bundle: nil)
 
 extension UIViewController {
 
@@ -84,7 +87,7 @@ extension UIViewController {
             let sb = UIStoryboard(name: "Main", bundle: nil)
             guard let homevc = sb.instantiateViewController(withIdentifier: "homevcnav") as? DefaultNC else { return }
             
-            let drawerController = KYDrawerController(drawerDirection: .left, drawerWidth: CGFloats.drawer_width())
+            let drawerController = KYDrawerController(drawerDirection: .left, drawerWidth: CGFloat.drawer_width)
             drawerController.mainViewController = homevc
             
             let hvc = homevc.viewControllers[0] as! HomeVC
@@ -92,7 +95,7 @@ extension UIViewController {
             
             guard let drawer = sb.instantiateViewController(withIdentifier: "drawervc") as? DrawerVC else { return }
             drawerController.drawerViewController = drawer
-            drawer.delegate = hvc
+//            drawer.delegate = hvc
             
             self.present(drawerController, animated: true, completion: nil)
         }
@@ -108,109 +111,37 @@ extension UIViewController {
         self.navigationItem.leftBarButtonItem = lB
     }
     
-    func showDrawer(_ sender: UIButton){
+    @objc func showDrawer(_ sender: UIButton){
         if let drawerController = navigationController?.parent as? KYDrawerController {
             drawerController.setDrawerState(.opened, animated: true)
         }
     }
 }
-
-extension UIViewController: ViewCallback {
-    func passData(resultData: Any, code: String) {
-        print(code)
-        
-//        if code == "barcode" {
-//            
-//            if let drawerController = navigationController?.parent as? KYDrawerController {
-//                drawerController.setDrawerState(.closed, animated: true)
-//            }
-//            
-//            DispatchQueue.main.async {
-//                let sb = UIStoryboard(name: "Main", bundle: nil)
-//                guard let barcodevc = sb.instantiateViewController(withIdentifier: "barcodevc") as? BarcodeVC else {return}
-//                self.navigationController?.pushViewController(barcodevc, animated: true)
-//            }
-//        }
-        
-        if code == "csr" {
-            if let drawerController = navigationController?.parent as? KYDrawerController {
-                drawerController.setDrawerState(.closed, animated: true)
-            }
-            
-            DispatchQueue.main.async {
-                let sb = UIStoryboard(name: "Main", bundle: nil)
-                guard let csrvc = sb.instantiateViewController(withIdentifier: "csrvc") as? CsrVC else {return}
-                self.navigationController?.pushViewController(csrvc, animated: true)
-            }
-        }
-        
-        if code == "info" {
-            if let drawerController = navigationController?.parent as? KYDrawerController {
-                drawerController.setDrawerState(.closed, animated: true)
-            }
-            
-            DispatchQueue.main.async {
-                let sb = UIStoryboard(name: "Main", bundle: nil)
-                
-                if DeviceUtil.smallerThanSE() {
-                    guard let infovc = sb.instantiateViewController(withIdentifier: "infovc2") as? InfoVC2 else {return}
-                    self.present(infovc, animated: true, completion: nil)
-                } else {
-                    guard let infovc = sb.instantiateViewController(withIdentifier: "infovc") as? InfoVC else {return}
-                    self.present(infovc, animated: true, completion: nil)
-                }
-            }
-        }
-        
-        if code == "logout" {
-            
-            let alertController = UIAlertController(title: nil, message: Strings.logout(), preferredStyle: .alert)
-            let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-            let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
-                if let drawerController = self.navigationController?.parent as? KYDrawerController {
-                    drawerController.setDrawerState(.closed, animated: true)
-                }
-                
-                
-                let model = LoginModel(self)
-                model.logout()
-            }
-            alertController.addAction(ok)
-            alertController.addAction(cancel)
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
-}
-
-extension UIViewController: NetworkCallback {
+extension UIViewController {
     
     func logout_ncb(){
         DispatchQueue.main.async {
             if (self.presentingViewController?.isKind(of: FirstStartVC.self))! {
                 self.dismiss(animated: true, completion: nil)
             } else {
-                //                    print("nonono!!")
-                let sb = UIStoryboard(name: "Main", bundle: nil)
-                guard let loginvc = sb.instantiateViewController(withIdentifier: "firststartvc") as? FirstStartVC else {return}
-                
+                guard let loginvc = MAIN.instantiateViewController(withIdentifier: "firststartvc") as? FirstStartVC else {return}
                 loginvc.showLogin = true
-                
-                self.present(loginvc, animated: false, completion: nil)
+                UIApplication.shared.keyWindow?.rootViewController = loginvc
             }
         }
     }
     
-    func networkResult(resultData: Any, code: String) {
-        print(code)
-        
-    }
-
-    func networkFailed(code: Any) {
-        
-    }
-    
-    func networkFailed() {
-        Indicator.stopAnimating()
-        Toast(text: "서버에 접속할 수 없습니다.").show()
-    }
+//    func networkResult(resultData: Any, code: String) {
+//        print(code)
+//
+//    }
+//
+//    func networkFailed(code: Any) {
+//
+//    }
+//
+//    func networkFailed() {
+//        Indicator.stopAnimating()
+//        Toast(text: "서버에 접속할 수 없습니다.").show()
+//    }
 }

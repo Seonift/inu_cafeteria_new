@@ -8,7 +8,8 @@
 
 import UIKit
 import KYDrawerController
-import Toaster
+import Toast_Swift
+import Device
 
 class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     
@@ -20,9 +21,14 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var moveBtn: UIView!
     
-    @IBOutlet weak var logo_width: NSLayoutConstraint!
-    @IBOutlet weak var logo_height: NSLayoutConstraint!
-    @IBOutlet weak var logo_leading: NSLayoutConstraint!
+//    @IBOutlet weak var logo_width: NSLayoutConstraint!
+//    @IBOutlet weak var logo_height: NSLayoutConstraint!
+//    @IBOutlet weak var logo_leading: NSLayoutConstraint!
+    
+    @IBOutlet weak var logo_width2: NSLayoutConstraint!
+    @IBOutlet weak var logo_height2: NSLayoutConstraint!
+    @IBOutlet weak var logo_leading2: NSLayoutConstraint!
+    
     @IBOutlet weak var logo_top: NSLayoutConstraint!
     @IBOutlet weak var logoIV: UIImageView!
     
@@ -99,7 +105,11 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
+        unregisterForKeyboardNotifications()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        registerForKeyboardNotifications()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -128,11 +138,11 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         
         noStudentLabel.font = UIFont(name: "KoPubDotumPM", size: 12)
         
-        let attributes:[String:Any] = [
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName : UIFont(name: "KoPubDotumPB", size: 15)!,
-            NSUnderlineStyleAttributeName : NSUnderlineStyle.styleSingle.rawValue
-        ]
+        let attributes: [NSAttributedStringKey : Any] = [
+            NSAttributedStringKey.foregroundColor: UIColor.white,
+            NSAttributedStringKey.font : UIFont(name: "KoPubDotumPB", size: 15)!,
+            NSAttributedStringKey.underlineStyle : NSUnderlineStyle.styleSingle.rawValue
+            ]
         let string = NSAttributedString(string: "비회원 로그인", attributes: attributes)
         noStudentBtn.setAttributedTitle(string, for: .normal)
     }
@@ -149,33 +159,39 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func setupLogin1(){
-        self.view.removeConstraint(logo_leading)
+//        self.view.removeConstraint(logo_leading)
+        self.view.removeConstraint(logo_leading2)
         self.view.ac_center(item: logoIV, toItem: self.view, origin: "x")
         
-        if DeviceUtil.smallerThanSE() {
-            self.logo_top.constant = 143.6 / 2
-            self.idTF_top.constant = self.idTF_top.constant / 2
-            self.pwTF_top.constant = self.pwTF_top.constant / 2
-            self.auto_top.constant = self.auto_top.constant / 2
-            self.loginB_top.constant = self.loginB_top.constant / 2
-            self.nsB_top.constant = self.nsB_top.constant / 2
-            self.nsL_top.constant = self.nsL_top.constant / 2
-            
-//            @IBOutlet weak var idTF_top: NSLayoutConstraint!
-//            @IBOutlet weak var pwTF_top: NSLayoutConstraint!
-//            @IBOutlet weak var auto_top: NSLayoutConstraint!
-//            @IBOutlet weak var loginB_top: NSLayoutConstraint!
-//            @IBOutlet weak var nsB_top: NSLayoutConstraint!
-//            @IBOutlet weak var nsL_top: NSLayoutConstraint!
-//            
-//            
-            
-            
-        } else {
-            self.logo_width.constant = 220.0
-            self.logo_height.constant = 71.4
-            self.logo_top.constant = 143.6
-        }
+//        if DeviceUtil.smallerThanSE() {
+//            self.logo_top.constant = 143.6 / 2
+//            self.idTF_top.constant = self.idTF_top.constant / 2
+//            self.pwTF_top.constant = self.pwTF_top.constant / 2
+//            self.auto_top.constant = self.auto_top.constant / 2
+//            self.loginB_top.constant = self.loginB_top.constant / 2
+//            self.nsB_top.constant = self.nsB_top.constant / 2
+//            self.nsL_top.constant = self.nsL_top.constant / 2
+//
+////            @IBOutlet weak var idTF_top: NSLayoutConstraint!
+////            @IBOutlet weak var pwTF_top: NSLayoutConstraint!
+////            @IBOutlet weak var auto_top: NSLayoutConstraint!
+////            @IBOutlet weak var loginB_top: NSLayoutConstraint!
+////            @IBOutlet weak var nsB_top: NSLayoutConstraint!
+////            @IBOutlet weak var nsL_top: NSLayoutConstraint!
+////
+////
+//
+//
+//        } else {
+//            self.logo_width.constant = 220.0
+//            self.logo_height.constant = 71.4
+//            self.logo_top.constant = 143.6
+        
+        logo_top = logo_top.setMultiplier(multiplier: 144/333.5)
+        logo_width2 = logo_width2.setMultiplier(multiplier: 220/375)
+        logo_height2 = logo_height2.setMultiplier(multiplier: 143.6/667)
+        
+//        }
 //        l1.isHidden = true
 //        l2.isHidden = true
         labelV.isHidden = true
@@ -217,7 +233,7 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         self.autoV.addGestureRecognizer(checkTap)
     }
     
-    func cBoxClicked(_ sender:UITapGestureRecognizer?){
+    @objc func cBoxClicked(_ sender:UITapGestureRecognizer?){
         if self.autoB.isSelected == false {
             self.autoB.isSelected = true
         } else {
@@ -228,7 +244,7 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     //resignFirsReponder
-    func handleTap_mainview(_ sender: UITapGestureRecognizer?) {
+    @objc func handleTap_mainview(_ sender: UITapGestureRecognizer?) {
         print("tap")
         self.idTF.resignFirstResponder()
         self.pwTF.resignFirstResponder()
@@ -325,7 +341,7 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         self.index = self.index < self.bgArr.count - 1 ? self.index + 1 : 0
     }
     
-    func moveLogin(_ sender: UITapGestureRecognizer?) {
+    @objc func moveLogin(_ sender: UITapGestureRecognizer?) {
         print("movelogin")
         self.moveBtn.removeGestureRecognizer(tap)
         
@@ -341,7 +357,40 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
             })
             
         })
+    }
     
+    func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    
+    func unregisterForKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc func keyboardWillShow(note: NSNotification) {
+        if let keyboardSize = (note.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+            let duration = note.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double {
+            if keyboardSize.height == 0.0 {
+                return
+            }
+            logo_top = logo_top.setMultiplier(multiplier: 1/333.5)
+            UIView.animate(withDuration: duration, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
+    @objc func keyboardWillHide(note: NSNotification) {
+        if let duration = note.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double {
+            logo_top = logo_top.setMultiplier(multiplier: 144/333.5)
+            UIView.animate(withDuration: duration, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+        
     }
 }
 
@@ -352,8 +401,8 @@ extension FirstStartVC: UITextFieldDelegate{
     }
 }
 
-extension FirstStartVC {
-    override func networkResult(resultData: Any, code: String) {
+extension FirstStartVC:NetworkCallback {
+    func networkResult(resultData: Any, code: String) {
         Indicator.stopAnimating()
         print(code)
         
@@ -393,31 +442,35 @@ extension FirstStartVC {
 //        }
     }
     
-    override func networkFailed(code: Any) {
+    func networkFailed(code: Any) {
         Indicator.stopAnimating()
         
         if let int = code as? Int {
             print(int)
             if int == 400 {
-                Toast(text: "학번/비밀번호를 확인해주세요.").show()
+                self.view.makeToast(String.checkId)
             } else if int == 404 {
-                Toast(text: Strings.noServer()).show()
+                self.view.makeToast(String.noServer)
             }
         }
         
         if let str = code as? String {
             if str == "no_barcode" {
-                Toast(text: "바코드 정보 오류. 다시 로그인해주세요.").show()
+                self.view.makeToast(.no_barcode)
             }
             
             if str == "no_code" {
-                Toast(text: "식당 정보 오류. 다시 로그인해주세요.").show()
+                self.view.makeToast(.no_code)
             }
             
             if str == "no_stuinfo" {
-                Toast(text: "학생 정보 오류. 다시 로그인해주세요.").show()
+                self.view.makeToast(.no_stuinfo)
             }
         }
+    }
+    
+    func networkFailed() {
+        
     }
 }
 
@@ -428,7 +481,7 @@ class LoginTF:UITextField {
         
         self.font = UIFont(name: "KoPubDotumPM", size: 16)
         self.textColor = UIColor.white
-        let attributes:[String:Any] = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "KoPubDotumPM", size: 16)!]
+        let attributes:[NSAttributedStringKey:Any] = [.foregroundColor: UIColor.white, .font: UIFont(name: "KoPubDotumPM", size: 16)!]
         self.attributedPlaceholder = NSAttributedString(string: self.placeholder!, attributes: attributes)
         
         self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
@@ -439,10 +492,11 @@ class LoginTF:UITextField {
     
     func setBorder(){
         let border = CALayer()
-        let width:CGFloat = 2.0
+        let height:CGFloat = 2.0
+        let width = Device.getWidth(width: 200)
         border.borderColor = UIColor.white.cgColor
-        border.frame = CGRect(x: 5, y: self.frame.size.height - width, width: self.frame.size.width-10, height: self.frame.size.height)
-        border.borderWidth = width
+        border.frame = CGRect(x: 5, y: self.frame.size.height - height, width: width, height: self.frame.size.height)
+        border.borderWidth = height
         self.layer.addSublayer(border)
         self.layer.masksToBounds = true
     }
@@ -456,5 +510,34 @@ class CheckBox:UIButton {
         let unselected = UIImage(named: "login_cbox_no")
         self.setImage(selected, for: .selected)
         self.setImage(unselected, for: .normal)
+    }
+}
+
+extension NSLayoutConstraint {
+    /**
+     Change multiplier constraint
+     
+     - parameter multiplier: CGFloat
+     - returns: NSLayoutConstraint
+     */
+    func setMultiplier(multiplier:CGFloat) -> NSLayoutConstraint {
+        
+        NSLayoutConstraint.deactivate([self])
+        
+        let newConstraint = NSLayoutConstraint(
+            item: firstItem!,
+            attribute: firstAttribute,
+            relatedBy: relation,
+            toItem: secondItem,
+            attribute: secondAttribute,
+            multiplier: multiplier,
+            constant: constant)
+        
+        newConstraint.priority = priority
+        newConstraint.shouldBeArchived = self.shouldBeArchived
+        newConstraint.identifier = self.identifier
+        
+        NSLayoutConstraint.activate([newConstraint])
+        return newConstraint
     }
 }

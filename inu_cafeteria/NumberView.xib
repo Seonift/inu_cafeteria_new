@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="KoPub Dotum_Pro Bold.otf">
+            <string>KoPubDotumPB</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NumberView" customModule="inu_cafeteria" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="NQ5-gf-JRJ"/>
+                <outlet property="minusBtn" destination="KBB-kf-adv" id="mK6-6G-PUc"/>
+                <outlet property="plusBtn" destination="Vtb-WO-krU" id="UHb-4I-pM4"/>
+                <outlet property="textField" destination="sDd-8X-aJC" id="NHq-iH-pfu"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="330" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="주문번호를 입력해주세요" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sDd-8X-aJC">
+                    <rect key="frame" x="50" y="0.0" width="230" height="40"/>
+                    <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="0.51000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="gDc-gn-gXe"/>
+                    </constraints>
+                    <color key="textColor" red="0.38431372549999998" green="0.58823529409999997" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="24"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vtb-WO-krU">
+                    <rect key="frame" x="290" y="0.0" width="40" height="40"/>
+                    <state key="normal" image="btnPlus"/>
+                </button>
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBB-kf-adv">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                    <state key="normal" image="btnMinus"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Vtb-WO-krU" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="1L3-yJ-eCt"/>
+                <constraint firstItem="KBB-kf-adv" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="C5A-0Y-U3T"/>
+                <constraint firstItem="sDd-8X-aJC" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="F5A-ZC-vwc"/>
+                <constraint firstItem="sDd-8X-aJC" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="J3D-bz-k67"/>
+                <constraint firstItem="KBB-kf-adv" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="URs-Be-379"/>
+                <constraint firstItem="KBB-kf-adv" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="UzB-F6-eBl"/>
+                <constraint firstItem="Vtb-WO-krU" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="height" id="ZmB-pg-zWn"/>
+                <constraint firstItem="Vtb-WO-krU" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="gXP-jJ-mhW"/>
+                <constraint firstItem="KBB-kf-adv" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="height" id="kiS-9E-COZ"/>
+                <constraint firstItem="sDd-8X-aJC" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="230:330" id="lUT-Xh-FFX"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Vtb-WO-krU" secondAttribute="trailing" id="pea-mb-s2f"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btnMinus" width="48" height="48"/>
+        <image name="btnPlus" width="48" height="48"/>
+    </resources>
+</document>

@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        let firstVC = storyboard.instantiateViewController(withIdentifier: "firststartvc")
         let sb = UIStoryboard(name: "Splash", bundle: nil)
-        let firstVC = sb.instantiateViewController(withIdentifier: "splashvc")
+        guard let firstVC = sb.instantiateViewController(withIdentifier: "splashvc") as? SplashVC else { return true }
         self.window?.rootViewController = firstVC
         self.window?.makeKeyAndVisible()
         
@@ -132,9 +132,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 if let drawerController = vc.mainViewController.parent as? KYDrawerController {
                     //                drawerController.setDrawerState(.opened, animated: true)
                     if drawerController.drawerState == .opened {
-                        let model = FlagModel(drawerController.drawerViewController!)
-                        model.activeBarcode(1)
-                        
+                        if let vc = drawerController.drawerViewController as? DrawerVC {
+                            let model = FlagModel(vc)
+                            model.activeBarcode(1)
+                        }
                     }
                 }
             }
@@ -190,7 +191,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print(remoteMessage.appData)
     }
     
-    func tokenRefreshNotification(notification: NSNotification) {
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // 앱 켜져있을 때 푸시 알림 올 경우
+        completionHandler([.alert, .sound, .badge])
+    }
+    
+    
+    @objc func tokenRefreshNotification(notification: NSNotification) {
         // NOTE: It can be nil here
         if let refreshedToken = InstanceID.instanceID().token() {
             print("InstanceID token: \(refreshedToken)")
@@ -217,7 +225,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func removeFlag(){
-        let model = FlagModel2()
+        let model = FlagModel()
         model.deactiveBarcode(0)
     }
     

@@ -11,8 +11,8 @@ import UIKit
 extension UITextField {
     func setHint(hint:String, font:UIFont, textcolor:UIColor) {
         let attributes = [
-            NSForegroundColorAttributeName: textcolor,
-            NSFontAttributeName : font
+            NSAttributedStringKey.foregroundColor: textcolor,
+            NSAttributedStringKey.font : font
         ]
         attributedPlaceholder = NSAttributedString(string: hint, attributes:attributes)
     }
@@ -33,7 +33,7 @@ extension UITextField {
     
     // Function called when done button pressed
     // Put manually put under action
-    func doneButtonAction() {
+    @objc func doneButtonAction() {
         self.resignFirstResponder() // Desselect
     }
     

@@ -25,10 +25,10 @@ class NumberModel: NetworkModel {
 //            case .success:
 //                print(params)
 //                print(res.result.value)
-//                self.view.networkResult(resultData: true, code: "postnum")
+//                self.view?.networkResult(resultData: true, code: "postnum")
 //            case .failure(let error):
 //                print(error)
-//                self.view.networkFailed(code: gino(res.response?.statusCode))
+//                self.view?.networkFailed(code: gino(res.response?.statusCode))
 //            }
 //        }
 //    }
@@ -42,9 +42,9 @@ class NumberModel: NetworkModel {
 //            case .success:
 //                let json = res.result.value as? NSDictionary
 //                print(json)
-//                self.view.networkResult(resultData: json!, code: "getcode")
+//                self.view?.networkResult(resultData: json!, code: "getcode")
 //            case .failure:
-//                self.view.networkFailed()
+//                self.view?.networkFailed()
 //            }
 //        }
 //    }
@@ -68,14 +68,14 @@ class NumberModel: NetworkModel {
 //                print(json?.count)
 //                let count = json?.count
                 if code == 200 {
-                    self.view.networkResult(resultData: json!, code: "isnumberwait")
+                    self.view?.networkResult(resultData: json!, code: "isnumberwait")
                 } else if code == 400 {
-                    self.view.networkFailed(code: "isnumberwait")
+                    self.view?.networkFailed(code: "isnumberwait")
                 }
             case .failure(let error):
                 print("failure")
                 print(error)
-                self.view.networkFailed(code: "isnumberwait")
+                self.view?.networkFailed(code: "isnumberwait")
             }
 //            print(res.result.value)
             
@@ -94,9 +94,9 @@ class NumberModel: NetworkModel {
             let code = gino(res.response?.statusCode)
             
             if code == 200 {
-                self.view.networkResult(resultData: true, code: "reset_num")
+                self.view?.networkResult(resultData: true, code: "reset_num")
             } else {
-                self.view.networkFailed()
+                self.view?.networkFailed()
             }
         }
     }
@@ -130,7 +130,7 @@ class NumberModel: NetworkModel {
         ]
         print(params)
         
-//        self.view.networkResult(resultData: true, code: "register_num")
+//        self.view?.networkResult(resultData: true, code: "register_num")
         
         Alamofire.request("\(numberURL)registerNumber", method: .post, parameters: params, headers: header).responseJSON { res in
             let code = gino(res.response?.statusCode)
@@ -138,11 +138,11 @@ class NumberModel: NetworkModel {
 //            print(res)
             
             if code == 200 {
-                self.view.networkResult(resultData: true, code: "register_num")
+                self.view?.networkResult(resultData: true, code: "register_num")
             } else if code == 400 {
-                self.view.networkFailed(code: code)
+                self.view?.networkFailed(code: code)
             } else {
-                self.view.networkFailed()
+                self.view?.networkFailed()
             }
         }
         

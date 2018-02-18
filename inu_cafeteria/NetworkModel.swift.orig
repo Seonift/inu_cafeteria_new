@@ -8,18 +8,10 @@
 
 import UIKit
 
-//let baseURL = 
-let loginURL = String.loginURL
-let numberURL = String.numberURL
-let socketURL = String.socketURL
-
+let baseURL = ""
 
 let header:[String:String] = [
     "Content-Type" : "application/x-www-form-urlencoded"
-]
-
-let jsonheader:[String:String] = [
-    "Content-Type" : "application/json"
 ]
 
 class NetworkModel {
@@ -27,15 +19,19 @@ class NetworkModel {
     //뷰컨트롤러로 데이터를 전달해줄 위임자를 나타내주는 변수
     
     //callbackDelegate
-    var view : NetworkCallback?
+    var view : NetworkCallback
     
     
     init(_ vc : NetworkCallback){
         self.view = vc
     }
     
-    init() { }
+<<<<<<< HEAD
+    let baseURL = ""
     
+    
+=======
+>>>>>>> b0db521... 소켓 적용 직전
 //    //옵셔널 String을 해제하는데 값이 nil이면 ""을 반환
 //    func gsno(_ data: String?) -> String {
 //        guard let str = data else {

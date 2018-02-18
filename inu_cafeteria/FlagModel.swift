@@ -28,20 +28,18 @@ class FlagModel: NetworkModel {
                 //            print(res)
 //                print("code:\(res.response?.statusCode)")
                 guard let code = res.response?.statusCode else {
-                    self.view.networkFailed(code: "activebarcode")
+                    self.view?.networkFailed(code: "activebarcode")
                     return
                 }
                 if code == 200 {
-                    self.view.networkResult(resultData: value, code: "activebarcode")
+                    self.view?.networkResult(resultData: value, code: "activebarcode")
                 } else {
-                    self.view.networkFailed(code: "activebarcode")
+                    self.view?.networkFailed(code: "activebarcode")
                 }
             }
         }
     }
-}
-
-class FlagModel2 {
+    
     func deactiveBarcode(_ value: Int){
         if (value == 1 && (userPreferences.integer(forKey: "barcode_flag") == 0 || userPreferences.object(forKey: "barcode_flag") == nil)) || value == 0{
             userPreferences.setValue(value, forKey: "barcode_flag")
@@ -56,8 +54,11 @@ class FlagModel2 {
             
             Alamofire.request("\(loginURL)activeBarcode", method: .post, parameters: params, headers: header).response { res in
                 //            print(res)
-                print("code:\(res.response?.statusCode)")
+                if let code = res.response?.statusCode {
+                    print("code : \(code)")
+                }
             }
         }
     }
 }
+

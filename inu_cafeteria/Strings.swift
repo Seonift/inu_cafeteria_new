@@ -6,34 +6,74 @@
 //  Copyright © 2017년 SeonIl Kim. All rights reserved.
 //
 
-class Strings {
-    class func noServer() -> String {
+import Device
+
+extension String {
+    
+    static var noServer:String {
         return "서버에 접속할 수 없습니다."
     }
     
-    class func logout() -> String {
+    static var logout:String {
         return "정말 로그아웃 하시겠습니까?"
     }
     
-    class func cancel_num() -> String {
+    static var cancel_num:String {
         return "대기번호를 초기화하면 알림이 오지 않습니다. 초기화 하시겠습니까?"
     }
     
-    class func stuinfo_fail() -> String {
+    static var stuinfo_fail:String {
         return "학생 정보를 불러올 수 없습니다. 다시 로그인 해주세요."
     }
     
-    class func complete_num() -> String {
+    static var complete_num:String {
         return "주문하신 메뉴가 완료되었습니다. 카운터에서 받아가세요"
     }
     
-    class func update() -> String {
+    static var update:String {
         return "스토어에 새 버전이 올라왔습니다. 업데이트해주세요."
+    }
+    
+    static var login_failed:String {
+        return  "로그인에 실패했습니다."
+    }
+    
+    static var no_barcode:String {
+        return "바코드 정보 오류. 다시 로그인해주세요."
+    }
+    
+    static var no_code:String {
+        return "식당 정보 오류. 다시 로그인해주세요."
+    }
+    
+    static var no_stuinfo:String {
+        return "학생 정보 오류. 다시 로그인해주세요."
+    }
+    
+    static var appStore:String {
+        return "itms://itunes.apple.com/kr/app/id1272600111"
+    }
+    
+    static var csrSuc:String {
+        return "문의사항이 접수되었습니다"
+    }
+    
+    static var checkId:String {
+        return "학번/비밀번호를 확인해주세요."
+    }
+    
+    static var noContents:String {
+        return "내용이 입력되지 않았습니다"
+    }
+    
+    static var fail_version:String {
+        return "버전 정보를 받아오는 데 실패했습니다. 다시 시도해주세요."
     }
 }
 
-class CGFloats {
-    class func drawer_width() -> CGFloat {
-        return 240.0
+extension CGFloat {
+    static var drawer_width:CGFloat {
+//        return 240.0
+        return Device.getWidth(width: 240)
     }
 }

@@ -14,11 +14,11 @@ class CsrModel: NetworkModel {
     func errormsg(msg: String){
         
         guard let sno = userPreferences.string(forKey: "sno") else {
-            self.view.networkFailed()
+            self.view?.networkFailed()
             return
         }
 //        guard let name = userPreferences.string(forKey: "name") else {
-//            self.view.networkFailed()
+//            self.view?.networkFailed()
 //            return
 //        }
         
@@ -32,9 +32,9 @@ class CsrModel: NetworkModel {
             
             let code = res.response?.statusCode
             if code == 200 {
-                self.view.networkResult(resultData: true, code: "errormsg")
+                self.view?.networkResult(resultData: true, code: "errormsg")
             } else {
-                self.view.networkFailed()
+                self.view?.networkFailed()
             }
         }
         

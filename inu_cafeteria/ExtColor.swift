@@ -30,6 +30,10 @@ extension UIColor {
         return UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1.0)
     }
     
+    @nonobjc class var cftBrightSkyBlue: UIColor {
+        return UIColor(red: 0.0, green: 183.0 / 255.0, blue: 238.0 / 255.0, alpha: 1.0)
+    }
+    
     convenience init(r: CGFloat, g: CGFloat, b: CGFloat){
         self.init(red: r / 255, green: g / 255, blue: b / 255, alpha : 1.0)
     }
