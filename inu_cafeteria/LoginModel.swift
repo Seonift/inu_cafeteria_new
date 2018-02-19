@@ -139,10 +139,8 @@ class LoginModel: NetworkModel {
     
     func logout(){
         Utility.removeAllUserDefaults()
-        
         let model = FlagModel()
         model.deactiveBarcode(0)
-        
         DispatchQueue.main.async {
             Alamofire.request("\(loginURL)logout", method: .post, parameters: nil).response { res in
                 //            print(res)
@@ -150,7 +148,7 @@ class LoginModel: NetworkModel {
                 print(code)
                 
                 if code == 200 {
-                    self.view?.networkResult(resultData: true, code: "logout")
+                    self.view?.networkResult(resultData: true, code: "logout")    
                 } else if code == 400 {
                     self.view?.networkFailed(code: code)
                 } else {

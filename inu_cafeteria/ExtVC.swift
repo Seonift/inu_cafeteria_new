@@ -73,32 +73,38 @@ extension UIViewController {
     }
     
     func showHome(_ code: [CodeObject], _ no_student: Bool){
-        if no_student == true {
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            guard let homevc = sb.instantiateViewController(withIdentifier: "homevcnav") as? DefaultNC else { return }
-            
-            let hvc = homevc.viewControllers[0] as! HomeVC
-            hvc.codes = code
-            hvc.no_student = true
+//        if no_student {
+//            let sb = UIStoryboard(name: "Main", bundle: nil)
+//            guard let homevc = sb.instantiateViewController(withIdentifier: "homevcnav") as? DefaultNC else { return }
+//            
+//            let hvc = homevc.viewControllers[0] as! HomeVC
+//            hvc.codes = code
+//            hvc.no_student = true
+//            
+//            self.present(homevc, animated: true, completion: nil)
+//        } else {
+//           
+//        }
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        guard let homevc = sb.instantiateViewController(withIdentifier: "homevcnav") as? DefaultNC else { return }
+        
+        let drawerController = KYDrawerController(drawerDirection: .left, drawerWidth: CGFloat.drawer_width)
+        drawerController.mainViewController = homevc
+        
+        let hvc = homevc.viewControllers[0] as! HomeVC
+        hvc.codes = code
+        
+        guard let drawer = sb.instantiateViewController(withIdentifier: "drawervc") as? DrawerVC else { return }
+        drawerController.drawerViewController = drawer
+        
+        if no_student {
             userPreferences.setValue(true, forKey: "no_student")
-            
-            self.present(homevc, animated: true, completion: nil)
-        } else {
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            guard let homevc = sb.instantiateViewController(withIdentifier: "homevcnav") as? DefaultNC else { return }
-            
-            let drawerController = KYDrawerController(drawerDirection: .left, drawerWidth: CGFloat.drawer_width)
-            drawerController.mainViewController = homevc
-            
-            let hvc = homevc.viewControllers[0] as! HomeVC
-            hvc.codes = code
-            
-            guard let drawer = sb.instantiateViewController(withIdentifier: "drawervc") as? DrawerVC else { return }
-            drawerController.drawerViewController = drawer
-//            drawer.delegate = hvc
-            
-            self.present(drawerController, animated: true, completion: nil)
+            drawer.nonClient()
+            hvc.nonClient = true
         }
+        
+        self.present(drawerController, animated: true, completion: nil)
     }
     
     func setupDrawerBtn(){

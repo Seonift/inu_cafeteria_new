@@ -38,7 +38,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     
 //    let names:[String] = ["제1학생식당", "미유", "카페드림 학생식당", "카페드림 도서관", "소담국밥", "김밥천국", "봉구스밥버거"]
     
-    var no_student:Bool = false
+//    var no_student:Bool = false
     
     lazy var numberModel:NumberModel = {
         return NumberModel(self)
@@ -47,6 +47,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     lazy var loginModel:LoginModel = {
         return LoginModel(self)
     }()
+    
+    var nonClient:Bool = false // true면 비회원모드
     
     var num_count:Int = 1 {
         // 입력할 번호의 갯수
@@ -164,9 +166,9 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         
         setupDrawerBtn()
         
-        if no_student == true {
-            setupLeftBtn()
-        }
+//        if no_student == true {
+//            setupLeftBtn()
+//        }
         
         numView1.commonInit(index: 0, parent: self)
         numView2.commonInit(index: 1, parent: self)
@@ -215,23 +217,23 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
             self.titleL.text = codes[carouselView.currentItemIndex].name
         }
         
-        if no_student == true {
-            setupLeftBtn()
-        }
+//        if no_student == true {
+//            setupLeftBtn()
+//        }
     }
     
-    func setupLeftBtn(){
-        //왼쪽에 드로워 대신 뒤로가기 버튼
-        let backBtn = UIButton(type: .custom)
-        backBtn.setImage(UIImage(named: "btnBack"), for: .normal)
-        backBtn.frame = CGRect(x: 0, y: 0, width: 18, height: 18)
-        backBtn.addTarget(self, action: #selector(finish), for: .touchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backBtn)
-    }
+//    func setupLeftBtn(){
+//        //왼쪽에 드로워 대신 뒤로가기 버튼
+//        let backBtn = UIButton(type: .custom)
+//        backBtn.setImage(UIImage(named: "btnBack"), for: .normal)
+//        backBtn.frame = CGRect(x: 0, y: 0, width: 18, height: 18)r
+//        backBtn.addTarget(self, action: #selector(finish), for: .touchUpInside)
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backBtn)
+//    }
     
-    @objc func finish(){
-        self.dismiss(animated: true, completion: nil)
-    }
+//    @objc func finish(){
+//        self.dismiss(animated: true, completion: nil)
+//    }
     
     @objc func moreClicked(_ sender: UIBarButtonItem){
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -243,12 +245,19 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
             guard let vc = MAIN.instantiateViewController(withIdentifier: "infovc") as? InfoVC else { return }
             self.present(vc, animated: true, completion: nil)
         }))
-        alert.addAction(UIAlertAction(title: "로그아웃", style: .default, handler: { action in
-            let alertC = CustomAlert.alert(message: String.logout, positiveAction: { action in
-                self.loginModel.logout()
-            })
-            self.present(alertC, animated: true, completion: nil)
-        }))
+        if !nonClient {
+            alert.addAction(UIAlertAction(title: "로그아웃", style: .default, handler: { action in
+                let alertC = CustomAlert.alert(message: String.logout, positiveAction: { action in
+                    self.loginModel.logout()
+                })
+                self.present(alertC, animated: true, completion: nil)
+            }))
+        } else {
+            alert.addAction(UIAlertAction(title: "나가기", style: .default, handler: { action in
+                Utility.removeAllUserDefaults()
+                self.dismiss(animated: true, completion: nil)
+            }))
+        }
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         alert.view.tintColor = UIColor.cftBrightSkyBlue
         self.present(alert, animated: true, completion: nil)

@@ -19,7 +19,11 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     
     @IBOutlet weak var noInternetLabel: UILabel!
     
+    @IBOutlet weak var noLoginLabel: UILabel!
+    @IBOutlet weak var contentLabel: UILabel!
+    
     @IBOutlet weak var infoView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var pageControl: VerticalPageControl!
     @IBOutlet weak var adView: FSPagerView! {
@@ -29,6 +33,8 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     }
     
     let imageURL = [
+       "",
+       "",
        "",
        "",
        ""
@@ -96,6 +102,15 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         }
     }
     
+    func nonClient() {
+        // 비회원 모드
+        
+        titleLabel.textColor = UIColor(r:56, g:177, b:228, a:0.6)
+        noLoginLabel.isHidden = false
+        barcodeIV.isHidden = true
+        contentLabel.isHidden = true
+    }
+    
     func numberOfItems(in pagerView: FSPagerView) -> Int {
         return imageURL.count
     }
@@ -103,7 +118,7 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: cellId, at: index)
         cell.imageView?.contentMode = .scaleAspectFit
-        cell.imageView?.kf.setImage(with: URL(string: imageURL[index])!)
+//        cell.imageView?.kf.setImage(with: URL(string: imageURL[index])!)
         cell.contentView.layer.shadowRadius = 0
         return cell
     }
