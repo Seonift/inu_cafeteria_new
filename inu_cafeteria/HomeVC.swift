@@ -17,6 +17,8 @@ import Device
 
 class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizerDelegate {
     
+    var activeField: UITextField?
+    
     @IBOutlet weak var carouselView: iCarousel!
     
     @IBOutlet weak var topL: UILabel!
@@ -32,9 +34,9 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     
     @IBOutlet weak var confirmBtn: UIButton!
     
-    @IBOutlet weak var dummy1_Const: NSLayoutConstraint!
-    @IBOutlet weak var dummy2_Const: NSLayoutConstraint!
-    @IBOutlet weak var dummy3_Const: NSLayoutConstraint!
+    @IBOutlet var dummy1_Const: NSLayoutConstraint!
+    @IBOutlet var dummy2_Const: NSLayoutConstraint!
+    @IBOutlet var dummy3_Const: NSLayoutConstraint!
     
 //    let names:[String] = ["제1학생식당", "미유", "카페드림 학생식당", "카페드림 도서관", "소담국밥", "김밥천국", "봉구스밥버거"]
     
@@ -145,30 +147,24 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     
     override func viewDidLoad() {
         setupUI()
+        
+       print(self.scrollView.frame.height)
+        print(self.scrollView.subviews[0].frame.height)
     }
     
     func setupUI(){
-        setTitleView()
         
         carouselView.type = .rotary
         carouselView.bounds = carouselView.frame.insetBy(dx: 15, dy: 10)
         carouselView.isPagingEnabled = true
         
-        confirmBtn.addTarget(self, action: #selector(confirmClicked(_:)), for: .touchUpInside)
+//        confirmBtn.addTarget(self, action: #selector(confirmClicked(_:)), for: .touchUpInside)
         confirmBtn.layer.cornerRadius = 22
         confirmBtn.clipsToBounds = true
         confirmBtn.layer.borderColor = UIColor(rgb: 170).cgColor
         confirmBtn.layer.borderWidth = 0.8
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap_mainview(_:)))
-        tap.delegate = self
-        self.view.addGestureRecognizer(tap)
-        
         setupDrawerBtn()
-        
-//        if no_student == true {
-//            setupLeftBtn()
-//        }
         
         numView1.commonInit(index: 0, parent: self)
         numView2.commonInit(index: 1, parent: self)
@@ -211,29 +207,14 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setTitleView()
+        
         registerForKeyboardNotifications()
         
         if self.codes.count > 0 {
             self.titleL.text = codes[carouselView.currentItemIndex].name
         }
-        
-//        if no_student == true {
-//            setupLeftBtn()
-//        }
     }
-    
-//    func setupLeftBtn(){
-//        //왼쪽에 드로워 대신 뒤로가기 버튼
-//        let backBtn = UIButton(type: .custom)
-//        backBtn.setImage(UIImage(named: "btnBack"), for: .normal)
-//        backBtn.frame = CGRect(x: 0, y: 0, width: 18, height: 18)r
-//        backBtn.addTarget(self, action: #selector(finish), for: .touchUpInside)
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backBtn)
-//    }
-    
-//    @objc func finish(){
-//        self.dismiss(animated: true, completion: nil)
-//    }
     
     @objc func moreClicked(_ sender: UIBarButtonItem){
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -280,6 +261,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     
     @objc func confirmClicked(_ sender: UIButton){
         
+        
+        
 //        if self.numberTF.text == nil || self.numberTF.text?.count == 0 {
 //            self.view.makeToast("번호를 입력해주세요.")
 //        } else {
@@ -314,21 +297,21 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     }
     
     //resignFirsReponder
-    @objc func handleTap_mainview(_ sender: UITapGestureRecognizer?) {
-//        print("tap")
-        self.numView1.textField.resignFirstResponder()
-        self.numView2.textField.resignFirstResponder()
-        self.numView3.textField.resignFirstResponder()
-        self.scrollView.setContentOffset(.zero, animated: true)
-    }
-    
-    //TapGesu
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if (touch.view?.isDescendant(of: numView1))! || (touch.view?.isDescendant(of: numView2))! || (touch.view?.isDescendant(of: numView3))! || (touch.view?.isDescendant(of: confirmBtn))! {
-            return false
-        }
-        return true
-    }
+//    @objc func handleTap_mainview(_ sender: UITapGestureRecognizer?) {
+////        print("tap")
+////        self.numView1.textField.resignFirstResponder()
+////        self.numView2.textField.resignFirstResponder()
+////        self.numView3.textField.resignFirstResponder()
+////        self.scrollView.setContentOffset(.zero, animated: true)
+//    }
+//
+//    //TapGesu
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+//        if (touch.view?.isDescendant(of: numView1))! || (touch.view?.isDescendant(of: numView2))! || (touch.view?.isDescendant(of: numView3))! || (touch.view?.isDescendant(of: confirmBtn))! {
+//            return true
+//        }
+//        return false
+//    }
     
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -348,7 +331,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
                 return
             }
             
-            self.scrollView.isScrollEnabled = true
+//            self.scrollView.isScrollEnabled = true
             
             UIView.animate(withDuration: duration, animations: {
                 self.view.layoutIfNeeded()
@@ -359,12 +342,82 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     @objc func keyboardWillHide(note: NSNotification) {
         if let duration = note.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double {
 //            self.tableView_bottomConst.constant = 0
-            self.scrollView.isScrollEnabled = false
+//            self.scrollView.isScrollEnabled = false
             UIView.animate(withDuration: duration, animations: {
                 self.view.layoutIfNeeded()
             })
         }
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showNumber" {
+            if let dest = segue.destination as? NumberVC {
+                dest.navigationItem.setHidesBackButton(true, animated: false)
+                dest.setTitleView()
+                
+                var nums:[Int] = []
+                switch num_count {
+                case 3:
+                    if let value = numView3.textField.text, let integer = Int(value) {
+                        nums.append(integer)
+                    }
+                    fallthrough
+                case 2:
+                    if let value = numView2.textField.text, let integer = Int(value) {
+                        nums.append(integer)
+                    }
+                    fallthrough
+                case 1:
+                    if let value = numView1.textField.text, let integer = Int(value) {
+                        nums.append(integer)
+                    }
+                default:
+                    print()
+                }
+                nums = nums.reversed()
+                
+//                let code = self.carouselView.currentItemIndex
+                let code = 1
+                dest.commonInit(code: code, numbers: nums)
+                dest.setupDrawerBtn()
+            }
+        }
+    }
+    
+//    override func performSegue(withIdentifier identifier: String, sender: Any?) {
+//        if identifier == "showNumber" {
+//            print(sender)
+//        }
+//    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "showNumber" {
+            switch self.num_count {
+            case 3:
+                if self.numView3.textField.text == nil || self.numView3.textField.text == "" {
+                    self.view.makeToast(String.noNumber)
+                    return false
+                }
+                fallthrough
+            case 2:
+                if self.numView2.textField.text == nil || self.numView2.textField.text == "" {
+                    self.view.makeToast(String.noNumber)
+                    return false
+                }
+                fallthrough
+            case 1:
+                if self.numView1.textField.text == nil || self.numView1.textField.text == "" {
+                    self.view.makeToast(String.noNumber)
+                    return false
+                }
+            default:
+                print()
+            }
+            return true
+        } else {
+            return true
+        }
     }
 }
 
@@ -493,6 +546,14 @@ extension HomeVC: UITextFieldDelegate {
 //        }
 //    }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.activeField = textField
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.activeField = nil
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         self.scrollView.setContentOffset(.zero, animated: true)
@@ -563,6 +624,10 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
     
     func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
         print(gsno(codes[index].img))
+        
+        guard let vc = MAIN.instantiateViewController(withIdentifier: "menuvc") as? MenuVC else { return }
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true, completion: nil)
     }
     
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {

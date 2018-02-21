@@ -66,6 +66,10 @@ extension String {
         return "내용이 입력되지 않았습니다"
     }
     
+    static var noNumber:String {
+        return "번호를 입력해주세요."
+    }
+    
     static var fail_version:String {
         return "버전 정보를 받아오는 데 실패했습니다. 다시 시도해주세요."
     }

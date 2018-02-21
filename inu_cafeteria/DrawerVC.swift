@@ -22,10 +22,24 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     @IBOutlet weak var noLoginLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     
+    @IBOutlet weak var dotView: DottedLineView!
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var pageControl: VerticalPageControl!
+//    @IBOutlet weak var pageControl: FSPageControl!
+    
+    lazy var pageControl: FSPageControl = {
+        let pageControl = FSPageControl(frame: .zero)
+        pageControl.numberOfPages = imageURL.count
+        pageControl.currentPage = 0
+        pageControl.setFillColor(UIColor.cftBrightSkyBlue, for: .selected)
+        pageControl.setFillColor(UIColor(rgb: 201), for: .normal)
+        pageControl.setPath(UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: 6.5, height: 6.5)), for: .normal)
+        pageControl.setPath(UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: 6.5, height: 6.5)), for: .selected)
+        pageControl.interitemSpacing = 4.5
+//        pageControl.backgroundColor = .blue
+        return pageControl
+    }()
     @IBOutlet weak var adView: FSPagerView! {
         didSet {
             self.adView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: cellId)
@@ -46,6 +60,7 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     }()
     
     private let cellId = "Cell"
+    private var _nonClient:Bool = false
 
     override func viewDidLoad() {
         setupUI()
@@ -53,14 +68,19 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     
     override func viewWillAppear(_ animated: Bool) {
         flagModel.activeBarcode(1)
+        adView.automaticSlidingInterval = 3.0
     }
     
     override func viewDidAppear(_ animated: Bool) {
         UIScreen.main.brightness = CGFloat(1.0)
+        
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         flagModel.deactiveBarcode(0)
+        adView.automaticSlidingInterval = 0
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -68,7 +88,6 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     }
     
     func setupUI(){
-        adView.automaticSlidingInterval = 3.0
         adView.isInfinite = true
         adView.itemSize = adView.frame.size
         adView.scrollDirection = .vertical
@@ -80,12 +99,29 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         infoView.layer.shadowColor = UIColor(r: 7, g:0, b: 2).cgColor
         infoView.layer.shadowOffset = CGSize(width: 1.5, height: 0)
         infoView.layer.shadowRadius = infoView.layer.cornerRadius
-        pageControl.selectIndicator(index: 0)
         if let sno = userPreferences.string(forKey: "sno") {
             idLabel.text = sno
         } else {
             idLabel.text = ""
         }
+        self.view.addSubview(pageControl)
+        
+        
+//        let x = adView.frame.origin.x + adView.frame.width + Device.getWidth(width: 10)
+//        pageControl.frame = CGRect(x: x, y: 0, width: 6.5, height: adView.frame.height)
+//        pageControl.center.y = adView.center.y
+        
+        
+        let width:CGFloat = 6.5
+        let height:CGFloat = Device.getHeight(height: 284.5)
+        let x:CGFloat = Device.getWidth(width: 27.5 + 185.5 + 10) - height + width
+        let y:CGFloat = Device.getHeight(height: 28 + 45.5 + 287.5)
+        pageControl.frame.size = CGSize(width: width, height: height)
+        pageControl.transform = CGAffineTransform(rotationAngle: .pi / 2)
+        pageControl.frame.origin = CGPoint(x: x, y: y)
+        
+//        pageControl.layer.position = CGPoint(x: x, y: y)
+        
     }
     
     func setupBarcode(_ value: Bool){
@@ -94,21 +130,31 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
                 barcodeIV.image = generateBarcode(from: barcode)
             } else {
                 barcodeIV.isHidden = true
-                noInternetLabel.isHidden = false
+                if !_nonClient {
+                    noInternetLabel.isHidden = false
+                }
             }
         } else {
             barcodeIV.isHidden = true
-            noInternetLabel.isHidden = false
+            if !_nonClient {
+                noInternetLabel.isHidden = false
+            }
         }
     }
     
     func nonClient() {
         // 비회원 모드
         
+        _nonClient = true
+        
         titleLabel.textColor = UIColor(r:56, g:177, b:228, a:0.6)
         noLoginLabel.isHidden = false
+        
         barcodeIV.isHidden = true
+        noInternetLabel.isHidden = true
         contentLabel.isHidden = true
+        dotView.isHidden = true
+        idLabel.isHidden = true
     }
     
     func numberOfItems(in pagerView: FSPagerView) -> Int {
@@ -119,6 +165,20 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: cellId, at: index)
         cell.imageView?.contentMode = .scaleAspectFit
 //        cell.imageView?.kf.setImage(with: URL(string: imageURL[index])!)
+        switch index {
+        case 0:
+            cell.backgroundColor = .red
+        case 1:
+            cell.backgroundColor = .blue
+        case 2:
+            cell.backgroundColor = .green
+        case 3:
+            cell.backgroundColor = .gray
+        default:
+            cell.backgroundColor = UIColor.purple
+        }
+        
+        
         cell.contentView.layer.shadowRadius = 0
         return cell
     }
@@ -129,11 +189,26 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         pagerView.deselectItem(at: index, animated: false)
+        
+        if let drawer = parent as? KYDrawerController {
+            drawer.setDrawerState(.closed, animated: true)
+        }
+        
+        guard let vc = MAIN.instantiateViewController(withIdentifier: "advc") as? AdVC else { return }
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.items = imageURL
+        vc.firstIndex = index
+        self.present(vc, animated: true, completion: nil)
     }
     
     func pagerView(_ pagerView: FSPagerView, willDisplay cell: FSPagerViewCell, forItemAt index: Int) {
-        pageControl.selectIndicator(index: index)
+        pageControl.currentPage = index
         print(index)
+    }
+    
+    func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
+        pageControl.currentPage = targetIndex
+        print(targetIndex)
     }
     
 }

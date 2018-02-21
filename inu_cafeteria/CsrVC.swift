@@ -8,6 +8,7 @@
 
 import UIKit
 import Toast_Swift
+import Device
 
 class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
     @IBOutlet weak var titleL: UILabel!
@@ -15,28 +16,34 @@ class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate 
     @IBOutlet weak var sendBtn: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var table_heightConst: NSLayoutConstraint!
     
     private let cellId = "CsrCell"
     
     var items:[Int] = [1,2,3,4,5]
     
-    @IBOutlet weak var tableView_topConst: NSLayoutConstraint!
+//    @IBOutlet weak var tableView_topConst: NSLayoutConstraint!
     var tableView_flipped:Bool = true
     @IBAction func flipClicked(_ sender: Any) {
         guard let sender = sender as? UIButton else { return }
         tableView_flipped = !tableView_flipped
         if tableView_flipped {
             // 접기
-            sender.setTitle("더보기", for: .normal)
-            tableView_topConst = tableView_topConst.setMultiplier(multiplier: 222/667)
+            setDefaultTableViewHeight()
         } else {
             // 펴기
-            sender.setTitle("접기", for: .normal)
-            tableView_topConst = tableView_topConst.setMultiplier(multiplier: 60/667)
+            table_heightConst.constant = 49 + Device.getHeight(height: 294)
 //            60:667
         }
+        
         UIView.animate(withDuration: 0.25, animations: {
             self.view.layoutIfNeeded()
+        }, completion: { _ in
+            if self.tableView_flipped {
+                sender.setTitle("더보기", for: .normal)
+            } else {
+                sender.setTitle("접기", for: .normal)
+            }
         })
     }
     
@@ -61,9 +68,23 @@ class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate 
         tableView.tableFooterView = UIView()
         tableView.allowsSelection = false
         tableView.separatorColor = UIColor(rgb: 170)
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        setDefaultTableViewHeight()
+        self.view.layoutIfNeeded()
+    }
+    
+    func setDefaultTableViewHeight(){
+        // 테이블뷰 기본 크기
+        let rect = tableView.rectForRow(at: IndexPath(row: 0, section: 0))
+        table_heightConst.constant = 49 + rect.height
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         setTitleView()
     }
     
@@ -121,11 +142,11 @@ extension CsrVC: UITableViewDelegate, UITableViewDataSource {
         let df = DateFormatter()
         df.dateFormat = "yyyy MM dd"
         if indexPath.row == 0 {
-            cell.commonInit(day: df.date(from: "2018 02 17")!)
+            cell.commonInit(day: df.date(from: "2018 02 17")!, content : "- 버그를 수정했어요.\r\r- 학생정보가 변경됐어요.\r\r- 문의하기, 앱 정보, 로그아웃 창이 새로 생겼어요.")
         } else if indexPath.row == 1 {
-            cell.commonInit(day: df.date(from: "2017 11 01")!)
+            cell.commonInit(day: df.date(from: "2017 11 01")!, content : "- 버그를 수정했어요.")
         } else {
-            cell.commonInit(day: df.date(from: "2016 01 01")!)
+            cell.commonInit(day: df.date(from: "2016 01 01")!, content : "- 버그를 수정했어요.\r- 학생정보가 변경됐어요.")
         }
         
         return cell
@@ -143,9 +164,9 @@ extension CsrVC: UITableViewDelegate, UITableViewDataSource {
         return 49.0
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 117.0
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 117.0
+//    }
 }
 
 extension CsrVC:NetworkCallback {
