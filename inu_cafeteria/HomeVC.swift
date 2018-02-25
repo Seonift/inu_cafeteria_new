@@ -421,9 +421,6 @@ extension HomeVC: NetworkCallback {
         self.view.makeToast(String.noServer)
     }
     
-    func showNumberVC(_ name:String, _ code:Int, _ numbers: [Int]){
-    }
-    
     func showNumVC(code: Int, title:String, numbers: [Int], bgimg: String?=nil) {
         guard let vc = MAIN.instantiateViewController(withIdentifier: "numbervc") as? NumberVC else { return }
         vc.commonInit(code: code, title: title, numbers: numbers)
@@ -514,7 +511,9 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
             } else {
                 if let url = URL(string: "\(BASE_URL + item.img)") {
                     view.kf.setImage(with: url) { (_, error, _, _) in
-                        view.image = UIImage(named: "home_default")
+                        if let _ = error {
+                            view.image = UIImage(named: "home_default")
+                        }
                     }
                 }
             }

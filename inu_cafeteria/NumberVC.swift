@@ -132,8 +132,10 @@ class NumberVC: UIViewController {
             }
             if let url = URL(string: "\(BASE_URL + bgimg)") {
                 titleIV.kf.setImage(with: url) { (_, error, _, _) in
-                    self.titleIV.image = nil
-                    self.titleIV.backgroundColor = UIColor(r: 54, g: 46, b:43)
+                    if let _ = error {
+                        self.titleIV.image = nil
+                        self.titleIV.backgroundColor = UIColor(r: 54, g: 46, b:43)
+                    }
                 }
             }
         }
