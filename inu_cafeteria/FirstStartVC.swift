@@ -123,6 +123,8 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         registerForKeyboardNotifications()
+        
+        self.noStudent = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {

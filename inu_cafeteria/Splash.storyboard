@@ -47,7 +47,7 @@
                             <constraint firstItem="IPb-K9-4qX" firstAttribute="centerX" secondItem="WmH-s4-a7H" secondAttribute="centerX" id="gXL-gt-Xe0"/>
                             <constraint firstItem="OtB-ov-71B" firstAttribute="top" secondItem="0pY-Q1-60e" secondAttribute="bottom" constant="201" id="kAr-mP-hvE"/>
                             <constraint firstItem="h3T-p4-vEs" firstAttribute="top" secondItem="WmH-s4-a7H" secondAttribute="top" id="q08-Fq-Yy5"/>
-                            <constraint firstItem="Orx-A1-uP9" firstAttribute="top" secondItem="h3T-p4-vEs" secondAttribute="bottom" id="ypN-Va-012"/>
+                            <constraint firstAttribute="bottom" secondItem="h3T-p4-vEs" secondAttribute="bottom" id="ypN-Va-012"/>
                             <constraint firstItem="h3T-p4-vEs" firstAttribute="leading" secondItem="WmH-s4-a7H" secondAttribute="leading" id="zXL-5g-BB6"/>
                         </constraints>
                     </view>

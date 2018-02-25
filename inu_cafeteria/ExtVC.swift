@@ -99,7 +99,7 @@ extension UIViewController {
         return (self.tabBarController?.tabBar.frame.origin.y)! < self.view.frame.maxY
     }
     
-    func showHome(_ code: [CafeCode], _ no_student: Bool){
+    func showHome(_ code: [CafeCode], _ no_student: Bool = false){
         let sb = UIStoryboard(name: "Main", bundle: nil)
         guard let homenav = sb.instantiateViewController(withIdentifier: "homevcnav") as? DefaultNC, let hvc = homenav.viewControllers[0] as? HomeVC, let drawer = sb.instantiateViewController(withIdentifier: "drawervc") as? DrawerVC else { return }
         

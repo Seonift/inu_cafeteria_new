@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ToL-ge-6XC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ToL-ge-6XC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -42,7 +42,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="YjT-4t-crP" firstAttribute="top" secondItem="deM-Ru-QPC" secondAttribute="bottom" constant="201" id="1KS-8E-Sot"/>
-                            <constraint firstItem="4j9-ce-eak" firstAttribute="top" secondItem="aaQ-SP-n1w" secondAttribute="bottom" id="8px-td-SRT"/>
+                            <constraint firstAttribute="bottom" secondItem="aaQ-SP-n1w" secondAttribute="bottom" id="8px-td-SRT"/>
                             <constraint firstItem="Wf4-GK-wVf" firstAttribute="centerX" secondItem="o4b-8v-2dw" secondAttribute="centerX" id="AmH-pA-nop"/>
                             <constraint firstItem="aaQ-SP-n1w" firstAttribute="top" secondItem="o4b-8v-2dw" secondAttribute="top" id="CyJ-WC-vyv"/>
                             <constraint firstAttribute="trailing" secondItem="aaQ-SP-n1w" secondAttribute="trailing" id="Fas-ha-pU8"/>
@@ -58,7 +58,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg2" width="375" height="666"/>
+        <image name="bg2" width="375" height="667"/>
         <image name="splash_logo" width="249" height="79"/>
         <image name="splash_text2" width="195" height="15"/>
     </resources>
