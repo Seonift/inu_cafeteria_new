@@ -376,6 +376,7 @@ extension HomeVC: NetworkCallback {
             if let result = resultData as? VerObject {
                 guard let csrvc = MAIN.instantiateViewController(withIdentifier: "csrvc") as? CsrVC else { return }
                 csrvc.log = result.ios?.log
+                csrvc.parentVC = self
                 self.navigationController?.pushViewController(csrvc, animated: true)
             }
         }
@@ -399,6 +400,7 @@ extension HomeVC: NetworkCallback {
         
         if code == loginModel._version {
             guard let csrvc = MAIN.instantiateViewController(withIdentifier: "csrvc") as? CsrVC else { return }
+            csrvc.parentVC = self
             self.navigationController?.pushViewController(csrvc, animated: true)
         }
         

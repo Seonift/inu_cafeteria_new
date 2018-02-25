@@ -13,8 +13,8 @@ class SocketIOManager {
     static let sharedInstance = SocketIOManager()
     
     
-    var manager:SocketManager?
-    var socket:SocketIOClient?
+    private var manager:SocketManager?
+    private var socket:SocketIOClient?
     
     init() {
         if let url = URL(string: BASE_URL) {

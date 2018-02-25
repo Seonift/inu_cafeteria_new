@@ -11,6 +11,10 @@ import Toast_Swift
 import Device
 
 class CsrVC: UIViewController, UIGestureRecognizerDelegate {
+    // 문의하기
+    
+    var parentVC:UIViewController?
+    
     @IBOutlet weak var titleL: UILabel!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var sendBtn: UIButton!
@@ -188,7 +192,7 @@ extension CsrVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if scrollView == tableView {
             self.lastKnowContentOfsset = scrollView.contentOffset.y
         }
@@ -202,7 +206,7 @@ extension CsrVC: UITableViewDelegate, UITableViewDataSource {
 extension CsrVC:NetworkCallback {
     func networkResult(resultData: Any, code: String) {
         if code == model._errormsg {
-            self.view.makeToast(String.csrSuc)
+            if let parent = parentVC { parent.view.makeToast(String.csrSuc) }
             self.navigationController?.popViewController(animated: true)
         }
     }
