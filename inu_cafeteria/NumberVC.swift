@@ -161,25 +161,23 @@ class NumberVC: UIViewController {
     }
     
     func setSocketConnect(){
-        print("setsocket, code:\(String(self.code))")
+        log.debug("setSocket, code:\(self.code)")
         SocketIOManager.sharedInstance.getNumber(code: String(self.code)) { (result) -> Void in
             DispatchQueue.main.async {
-                print(result[0])
-                if let res = result[0] as? NSDictionary {
-                    if let msg = res["msg"] as? String, let msgint = Int(msg) {
-                        log.info("msgint:\(msgint)")
-                        self.items.append(msg)
-                        if self.checkNumCorrect(msgint) == true {
-                            //내 번호가 나오면 알림
-                            let alert = CustomAlert.okAlert(message: "\(String.complete_num)\n번호 : \(msgint)", positiveAction: { action in
-                                self.model.isNumberWait()
-                            })
-                            self.present(alert, animated: true, completion: nil)
-                            let systemSoundID:SystemSoundID = 1005
-                            let vib = SystemSoundID(kSystemSoundID_Vibrate)
-                            AudioServicesPlaySystemSound(systemSoundID)
-                            AudioServicesPlaySystemSound(vib)
-                        }
+                if let res = result.first as? NSDictionary, let msg = res["msg"] as? String, let msgint = Int(msg) {
+                    log.info("msgint:\(msgint)")
+                    self.items.append(msg)
+                    if self.checkNumCorrect(msgint) == true {
+                        //내 번호가 나오면 알림
+                        let alert = CustomAlert.okAlert(message: "\(String.complete_num)\n번호 : \(msgint)", positiveAction: { action in
+                            self.model.isNumberWait()
+                        })
+                        self.present(alert, animated: true, completion: nil)
+                        
+                        let systemSoundID:SystemSoundID = 1005
+                        let vib = SystemSoundID(kSystemSoundID_Vibrate)
+                        AudioServicesPlaySystemSound(systemSoundID)
+                        AudioServicesPlaySystemSound(vib)
                     }
                 }
             }

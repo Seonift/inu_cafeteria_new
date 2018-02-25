@@ -69,6 +69,8 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        adView.itemSize = adView.frame.size
+        
         flagModel.activeBarcode(1)
         adView.automaticSlidingInterval = 5.0
         if adItems.count == 0 {
@@ -105,7 +107,6 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     
     func setupUI(){
         adView.isInfinite = true
-        adView.itemSize = adView.frame.size
         adView.scrollDirection = .vertical
         
         infoView.layer.cornerRadius = Device.getWidth(width: 12)
