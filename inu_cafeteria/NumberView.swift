@@ -14,6 +14,32 @@ class NumberView: UIView {
     @IBOutlet weak var plusBtn: UIButton!
     @IBOutlet weak var minusBtn: UIButton!
     
+    override var isHidden: Bool {
+        didSet {
+            if isHidden {
+                if let textField = self.textField {
+                    textField.text = ""
+                    textField.resignFirstResponder()
+                }
+            } else {
+                if let textField = self.textField {
+                    DispatchQueue.main.async {
+                        textField.becomeFirstResponder()
+                    }
+                }
+            }
+        }
+    }
+    
+    var number:Int? {
+        get {
+            if let text = textField.text, text.count != 0, let num = Int(text) {
+                return num
+            }
+            return nil
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

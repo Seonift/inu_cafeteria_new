@@ -10,7 +10,7 @@ import UIKit
 import Toast_Swift
 import Device
 
-class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
+class CsrVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var titleL: UILabel!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var sendBtn: UIButton!
@@ -20,12 +20,19 @@ class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate 
     
     private let cellId = "CsrCell"
     
-    var items:[Int] = [1,2,3,4,5]
+    var log:[VerObject.VersionHistory]?
+    
+    private var lastKnowContentOfsset:CGFloat = 0
+    
+    lazy var model:CsrModel = {
+        return CsrModel(self)
+    }()
     
 //    @IBOutlet weak var tableView_topConst: NSLayoutConstraint!
+    
+    var headerView:CsrHeaderCell?
     var tableView_flipped:Bool = true
     @IBAction func flipClicked(_ sender: Any) {
-        guard let sender = sender as? UIButton else { return }
         tableView_flipped = !tableView_flipped
         if tableView_flipped {
             // 접기
@@ -39,10 +46,11 @@ class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate 
         UIView.animate(withDuration: 0.25, animations: {
             self.view.layoutIfNeeded()
         }, completion: { _ in
+            guard let header = self.headerView else { return }
             if self.tableView_flipped {
-                sender.setTitle("더보기", for: .normal)
+                header.flipBtn.setTitle("더보기", for: .normal)
             } else {
-                sender.setTitle("접기", for: .normal)
+                header.flipBtn.setTitle("접기", for: .normal)
             }
         })
     }
@@ -70,6 +78,8 @@ class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate 
         tableView.separatorColor = UIColor(rgb: 170)
         tableView.rowHeight = UITableViewAutomaticDimension
         
+        addToolBar(textField: textField)
+        
         setDefaultTableViewHeight()
         self.view.layoutIfNeeded()
     }
@@ -86,15 +96,18 @@ class CsrVC: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate 
     
     override func viewWillAppear(_ animated: Bool) {
         setTitleView()
+        
+        if log == nil {
+            tableView.isHidden = true
+        }
     }
     
     @objc func sendClicked(_ sender: UIButton) {
-        if textField.text == nil || textField.text == "" {
-            self.view.makeToast(String.noContents)
+        if let text = textField.text, text != "" {
+            self.textField.resignFirstResponder()
+            model.errormsg(msg: text)
         } else {
-            self.textField.endEditing(true)
-            let model = CsrModel(self)
-            model.errormsg(msg: gsno(textField.text))
+            self.view.makeToast(String.noContents)
         }
     }
     
@@ -133,27 +146,25 @@ extension CsrVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        if let count = log?.count {
+            return count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CsrCell
        
-        let df = DateFormatter()
-        df.dateFormat = "yyyy MM dd"
-        if indexPath.row == 0 {
-            cell.commonInit(day: df.date(from: "2018 02 17")!, content : "- 버그를 수정했어요.\r\r- 학생정보가 변경됐어요.\r\r- 문의하기, 앱 정보, 로그아웃 창이 새로 생겼어요.")
-        } else if indexPath.row == 1 {
-            cell.commonInit(day: df.date(from: "2017 11 01")!, content : "- 버그를 수정했어요.")
-        } else {
-            cell.commonInit(day: df.date(from: "2016 01 01")!, content : "- 버그를 수정했어요.\r- 학생정보가 변경됐어요.")
+        if let log = log {
+            cell.commonInit(item: log[indexPath.row])
         }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return tableView.dequeueReusableCell(withIdentifier: "header")
+        self.headerView = tableView.dequeueReusableCell(withIdentifier: "header") as! CsrHeaderCell
+        return self.headerView
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -164,6 +175,25 @@ extension CsrVC: UITableViewDelegate, UITableViewDataSource {
         return 49.0
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == tableView {
+            if (self.lastKnowContentOfsset < scrollView.contentOffset.y) {
+                // moved to top
+                if tableView_flipped { flipClicked(tableView) }
+            } else if (self.lastKnowContentOfsset > scrollView.contentOffset.y) {
+                // moved to bottom
+            } else {
+                // didn't move
+            }
+        }
+    }
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        if scrollView == tableView {
+            self.lastKnowContentOfsset = scrollView.contentOffset.y
+        }
+    }
+
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return 117.0
 //    }
@@ -171,14 +201,16 @@ extension CsrVC: UITableViewDelegate, UITableViewDataSource {
 
 extension CsrVC:NetworkCallback {
     func networkResult(resultData: Any, code: String) {
-        if code == "errormsg" {
+        if code == model._errormsg {
             self.view.makeToast(String.csrSuc)
             self.navigationController?.popViewController(animated: true)
         }
     }
     
-    func networkFailed(code: Any) {
-        
+    func networkFailed(errorMsg: String, code: String) {
+        if code == model._errormsg {
+            self.view.makeToast("오류")
+        }
     }
     
     func networkFailed() {
@@ -196,23 +228,40 @@ class CsrCell: UITableViewCell {
         self.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
     }
     
-    func commonInit(ver: String = "", day: Date, content: String = ""){
+    func commonInit(item: VerObject.VersionHistory){
+        let df = DateFormatter()
+        df.dateFormat = "yyyyMMdd"
         
-        verLabel.text = "v\(ver)"
+        verLabel.text = "v\(item.version)"
+        var content = ""
+        for item in item.info {
+            content += "\(item)\r"
+        }
+        content = content.trimmingCharacters(in: .whitespacesAndNewlines)
         contentLabel.text = content
         
         let today = Date()
-        let dayValue = today.days(from: day)
-        if dayValue <= 30 {
-            dayLabel.text = "\(dayValue)일전"
-        } else {
-            let monthValue = today.months(from: day)
-            if monthValue <= 12 {
-                dayLabel.text = "\(monthValue)개월전"
+        if let updateDate = df.date(from: item.date) {
+            let dayValue = today.days(from: updateDate)
+            if dayValue <= 30 {
+                dayLabel.text = "\(dayValue)일전"
             } else {
-                let yearValue = today.years(from: day)
-                dayLabel.text = "\(yearValue)년전"
+                let monthValue = today.months(from: updateDate)
+                if monthValue <= 12 {
+                    dayLabel.text = "\(monthValue)개월전"
+                } else {
+                    let yearValue = today.years(from: updateDate)
+                    dayLabel.text = "\(yearValue)년전"
+                }
             }
+        } else {
+            dayLabel.text = ""
         }
     }
+}
+
+class CsrHeaderCell: UITableViewCell {
+    @IBOutlet weak var label: UIButton!
+    @IBOutlet weak var flipBtn: UIButton!
+    
 }

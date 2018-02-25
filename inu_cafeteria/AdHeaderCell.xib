@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="KoPub Dotum_Pro Bold.otf">
+            <string>KoPubDotumPB</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="95" id="KGk-i7-Jjw" customClass="AdHeaderCell" customModule="inu_cafeteria" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="293.5" height="95"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="293.5" height="94.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QgG-F9-6S8">
+                        <rect key="frame" x="30" y="22.5" width="219" height="47"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="piT-z3-cm8"/>
+                        </constraints>
+                        <string key="text">2018 평창동계올림픽대회
+G-500 FESTIVAL</string>
+                        <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="21"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="QgG-F9-6S8" secondAttribute="bottom" constant="25" id="1O5-LZ-SiX"/>
+                    <constraint firstItem="QgG-F9-6S8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="centerX" multiplier="30:146.75" id="EZJ-eY-Jw1"/>
+                    <constraint firstItem="QgG-F9-6S8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22.5" id="yeR-zq-p7x"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="bottomConst" destination="1O5-LZ-SiX" id="2b1-Eu-Rax"/>
+                <outlet property="label" destination="QgG-F9-6S8" id="bqD-4c-WOd"/>
+                <outlet property="topConst" destination="yeR-zq-p7x" id="Ytm-NG-fwD"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

@@ -14,6 +14,32 @@ import Alamofire
 let MAIN = UIStoryboard(name: "Main", bundle: nil)
 let SPLASH = UIStoryboard(name: "Splash", bundle: nil)
 
+extension UIViewController: UITextFieldDelegate{
+    func addToolBar(textField: UITextField){
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor.cftBrightSkyBlue
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
+        let spaceBtn = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        var doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "donePressed")
+//        var cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelPressed")
+//        var spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        toolBar.setItems([spaceBtn, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        toolBar.sizeToFit()
+        
+        textField.delegate = self
+        textField.inputAccessoryView = toolBar
+    }
+    @objc func donePressed(){
+        view.endEditing(true)
+    }
+    @objc func cancelPressed(){
+        view.endEditing(true) // or do something
+    }
+}
+
 extension UIViewController {
 
 //    func infoC(_ sender: Any){
@@ -72,36 +98,20 @@ extension UIViewController {
         return (self.tabBarController?.tabBar.frame.origin.y)! < self.view.frame.maxY
     }
     
-    func showHome(_ code: [CodeObject], _ no_student: Bool){
-//        if no_student {
-//            let sb = UIStoryboard(name: "Main", bundle: nil)
-//            guard let homevc = sb.instantiateViewController(withIdentifier: "homevcnav") as? DefaultNC else { return }
-//            
-//            let hvc = homevc.viewControllers[0] as! HomeVC
-//            hvc.codes = code
-//            hvc.no_student = true
-//            
-//            self.present(homevc, animated: true, completion: nil)
-//        } else {
-//           
-//        }
-        
+    func showHome(_ code: [CafeCode], _ no_student: Bool){
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        guard let homevc = sb.instantiateViewController(withIdentifier: "homevcnav") as? DefaultNC else { return }
+        guard let homenav = sb.instantiateViewController(withIdentifier: "homevcnav") as? DefaultNC, let hvc = homenav.viewControllers[0] as? HomeVC, let drawer = sb.instantiateViewController(withIdentifier: "drawervc") as? DrawerVC else { return }
         
-        let drawerController = KYDrawerController(drawerDirection: .left, drawerWidth: CGFloat.drawer_width)
-        drawerController.mainViewController = homevc
-        
-        let hvc = homevc.viewControllers[0] as! HomeVC
         hvc.codes = code
         
-        guard let drawer = sb.instantiateViewController(withIdentifier: "drawervc") as? DrawerVC else { return }
+        let drawerController = KYDrawerController(drawerDirection: .left, drawerWidth: CGFloat.drawer_width)
+        drawerController.mainViewController = homenav
         drawerController.drawerViewController = drawer
         
         if no_student {
-            userPreferences.setValue(true, forKey: "no_student")
             drawer.nonClient()
             hvc.nonClient = true
+            userPreferences.removeAllUserDefaults()
         }
         
         self.present(drawerController, animated: true, completion: nil)
@@ -125,15 +135,14 @@ extension UIViewController {
 }
 extension UIViewController {
     
-    func logout_ncb(){
-        DispatchQueue.main.async {
-            if (self.presentingViewController?.isKind(of: FirstStartVC.self))! {
-                self.dismiss(animated: true, completion: nil)
-            } else {
-                guard let loginvc = MAIN.instantiateViewController(withIdentifier: "firststartvc") as? FirstStartVC else {return}
-                loginvc.showLogin = true
-                UIApplication.shared.keyWindow?.rootViewController = loginvc
-            }
+    func goLogin(){
+        // 로그아웃 했을 경우 로그인 페이지로 귀환
+        if (self.presentingViewController?.isKind(of: FirstStartVC.self))! {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            guard let loginvc = MAIN.instantiateViewController(withIdentifier: "firststartvc") as? FirstStartVC else {return}
+            loginvc.showLogin = true
+            UIApplication.shared.keyWindow?.rootViewController = loginvc
         }
     }
     

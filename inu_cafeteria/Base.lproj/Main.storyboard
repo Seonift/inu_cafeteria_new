@@ -548,11 +548,11 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYj-TZ-Vdq" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="365" width="375" height="9"/>
+                                                <rect key="frame" x="0.0" y="365" width="375" height="9.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WbI-y6-g0O" customClass="NumberView" customModule="inu_cafeteria" customModuleProvider="target">
-                                                <rect key="frame" x="22" y="374" width="330" height="40"/>
+                                                <rect key="frame" x="22" y="374.5" width="330" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="HUi-Fm-EyB"/>
@@ -572,9 +572,6 @@
                                                 <state key="normal" title="입력">
                                                     <color key="titleColor" red="0.0" green="0.71764705882352942" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
-                                                <connections>
-                                                    <segue destination="78V-QJ-bRD" kind="show" identifier="showNumber" id="5Tp-cp-fpn"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -589,7 +586,6 @@
                                             <constraint firstItem="YVV-Iw-bfK" firstAttribute="top" secondItem="INu-fH-1gv" secondAttribute="bottom" id="Ap8-fP-VKQ"/>
                                             <constraint firstItem="dcG-SN-BYy" firstAttribute="top" secondItem="TUG-Dt-Ypn" secondAttribute="bottom" id="Bvv-GB-ppS"/>
                                             <constraint firstAttribute="trailing" secondItem="fg3-Ue-ph9" secondAttribute="trailing" id="EjW-4f-WxS"/>
-                                            <constraint firstItem="uYj-TZ-Vdq" firstAttribute="height" secondItem="Afs-MY-BFw" secondAttribute="height" id="GIx-Rb-ths"/>
                                             <constraint firstItem="fg3-Ue-ph9" firstAttribute="leading" secondItem="jyB-T4-XJF" secondAttribute="leading" id="H2q-hW-LSN"/>
                                             <constraint firstItem="TUG-Dt-Ypn" firstAttribute="leading" secondItem="jyB-T4-XJF" secondAttribute="leading" id="H37-w6-6A0"/>
                                             <constraint firstItem="DIj-bt-jLh" firstAttribute="top" secondItem="f0J-em-69Z" secondAttribute="bottom" id="Ip5-S8-dLi"/>
@@ -603,6 +599,7 @@
                                             <constraint firstItem="YVV-Iw-bfK" firstAttribute="centerX" secondItem="jyB-T4-XJF" secondAttribute="centerX" id="ap8-V0-GP4"/>
                                             <constraint firstItem="f0J-em-69Z" firstAttribute="top" secondItem="iLS-np-lbe" secondAttribute="bottom" id="b8P-yo-sVK"/>
                                             <constraint firstAttribute="trailing" secondItem="DzX-0v-g0R" secondAttribute="trailing" id="cIG-Or-Qcb"/>
+                                            <constraint firstItem="uYj-TZ-Vdq" firstAttribute="height" secondItem="Afs-MY-BFw" secondAttribute="height" id="ce8-B3-9oX"/>
                                             <constraint firstAttribute="trailing" secondItem="f0J-em-69Z" secondAttribute="trailing" id="coD-O8-v6E"/>
                                             <constraint firstItem="uYj-TZ-Vdq" firstAttribute="leading" secondItem="jyB-T4-XJF" secondAttribute="leading" id="fpB-yK-e1d"/>
                                             <constraint firstItem="iLS-np-lbe" firstAttribute="centerX" secondItem="jyB-T4-XJF" secondAttribute="centerX" id="gLp-hU-JXw"/>
@@ -628,27 +625,27 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="fg3-Ue-ph9" firstAttribute="top" secondItem="Va2-v8-O9g" secondAttribute="centerY" multiplier="28:301.5" id="579-aV-aV6"/>
+                                    <constraint firstItem="fg3-Ue-ph9" firstAttribute="top" secondItem="jyB-T4-XJF" secondAttribute="centerY" multiplier="28:301.5" id="579-aV-aV6"/>
                                     <constraint firstItem="jyB-T4-XJF" firstAttribute="leading" secondItem="Va2-v8-O9g" secondAttribute="leading" id="Hmw-lb-YN9"/>
                                     <constraint firstAttribute="trailing" secondItem="jyB-T4-XJF" secondAttribute="trailing" id="JKE-bj-81p"/>
-                                    <constraint firstAttribute="bottom" secondItem="jyB-T4-XJF" secondAttribute="bottom" id="MLj-h4-ean"/>
-                                    <constraint firstItem="YVV-Iw-bfK" firstAttribute="height" secondItem="Va2-v8-O9g" secondAttribute="height" multiplier="170:603" id="UbG-3Q-bJr"/>
+                                    <constraint firstItem="YVV-Iw-bfK" firstAttribute="height" secondItem="jyB-T4-XJF" secondAttribute="height" multiplier="170:603" id="UbG-3Q-bJr"/>
                                     <constraint firstItem="jyB-T4-XJF" firstAttribute="width" secondItem="Va2-v8-O9g" secondAttribute="width" id="VAg-tr-xtt"/>
-                                    <constraint firstItem="DzX-0v-g0R" firstAttribute="height" secondItem="Va2-v8-O9g" secondAttribute="height" multiplier="7:603" id="VjC-hb-vdQ"/>
-                                    <constraint firstItem="INu-fH-1gv" firstAttribute="height" secondItem="Va2-v8-O9g" secondAttribute="height" multiplier="12:603" id="Xny-rY-tSD"/>
+                                    <constraint firstItem="DzX-0v-g0R" firstAttribute="height" secondItem="jyB-T4-XJF" secondAttribute="height" multiplier="7:603" id="VjC-hb-vdQ"/>
+                                    <constraint firstItem="INu-fH-1gv" firstAttribute="height" secondItem="jyB-T4-XJF" secondAttribute="height" multiplier="12:603" id="Xny-rY-tSD"/>
                                     <constraint firstItem="jyB-T4-XJF" firstAttribute="top" secondItem="Va2-v8-O9g" secondAttribute="top" id="fCm-iA-v8L"/>
+                                    <constraint firstAttribute="bottom" secondItem="jyB-T4-XJF" secondAttribute="bottom" priority="1" placeholder="YES" id="gEY-pE-Sgb"/>
                                     <constraint firstItem="jyB-T4-XJF" firstAttribute="height" secondItem="Va2-v8-O9g" secondAttribute="height" priority="1" placeholder="YES" id="sdn-lW-Mkq"/>
-                                    <constraint firstItem="f0J-em-69Z" firstAttribute="height" secondItem="Va2-v8-O9g" secondAttribute="height" multiplier="23:603" id="xFG-zC-lch"/>
-                                    <constraint firstItem="TUG-Dt-Ypn" firstAttribute="height" secondItem="Va2-v8-O9g" secondAttribute="height" multiplier="27:603" id="xOS-tz-q6g"/>
-                                    <constraint firstItem="Afs-MY-BFw" firstAttribute="height" secondItem="Va2-v8-O9g" secondAttribute="height" multiplier="9:603" id="zwW-cy-N2P"/>
+                                    <constraint firstItem="f0J-em-69Z" firstAttribute="height" secondItem="jyB-T4-XJF" secondAttribute="height" multiplier="23:603" id="xFG-zC-lch"/>
+                                    <constraint firstItem="TUG-Dt-Ypn" firstAttribute="height" secondItem="jyB-T4-XJF" secondAttribute="height" multiplier="27:603" id="xOS-tz-q6g"/>
+                                    <constraint firstItem="Afs-MY-BFw" firstAttribute="height" secondItem="jyB-T4-XJF" secondAttribute="height" multiplier="9:603" id="zwW-cy-N2P"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Va2-v8-O9g" secondAttribute="trailing" id="Dl1-3k-lSZ"/>
-                            <constraint firstItem="35e-Zw-Fc8" firstAttribute="top" secondItem="Va2-v8-O9g" secondAttribute="bottom" id="Q7l-FZ-LOw"/>
-                            <constraint firstItem="35e-Zw-Fc8" firstAttribute="top" secondItem="jyB-T4-XJF" secondAttribute="bottom" id="jd6-mW-OOi"/>
+                            <constraint firstAttribute="bottom" secondItem="Va2-v8-O9g" secondAttribute="bottom" id="Q7l-FZ-LOw"/>
+                            <constraint firstItem="jyB-T4-XJF" firstAttribute="height" secondItem="dPH-oS-AOq" secondAttribute="height" multiplier="603:667" id="ZWf-eT-a5I"/>
                             <constraint firstItem="Va2-v8-O9g" firstAttribute="top" secondItem="1ox-Oa-P1d" secondAttribute="bottom" id="ls2-WP-PCp"/>
                             <constraint firstItem="Va2-v8-O9g" firstAttribute="leading" secondItem="dPH-oS-AOq" secondAttribute="leading" id="rph-KW-3Ag"/>
                         </constraints>
@@ -657,6 +654,7 @@
                     <connections>
                         <outlet property="carouselView" destination="YVV-Iw-bfK" id="GfZ-ya-m7A"/>
                         <outlet property="confirmBtn" destination="dcG-SN-BYy" id="Wyr-K8-8vZ"/>
+                        <outlet property="contentView" destination="jyB-T4-XJF" id="63q-gs-NiL"/>
                         <outlet property="dummy1_Const" destination="47y-w7-JA2" id="Omb-UN-gaF"/>
                         <outlet property="dummy2_Const" destination="0wK-01-KGm" id="4IP-g3-vJx"/>
                         <outlet property="dummy3_Const" destination="75U-nm-wVi" id="IJz-lH-fJz"/>
@@ -664,6 +662,7 @@
                         <outlet property="numView2" destination="Q3Y-9e-T6p" id="2b5-u9-ea1"/>
                         <outlet property="numView3" destination="WbI-y6-g0O" id="C59-Vx-xHe"/>
                         <outlet property="scrollView" destination="Va2-v8-O9g" id="lQY-xb-6bt"/>
+                        <outlet property="scroll_bottomConst" destination="Q7l-FZ-LOw" id="YVU-od-fwy"/>
                         <outlet property="titleL" destination="iLS-np-lbe" id="Rn5-Nl-ztw"/>
                         <outlet property="topL" destination="fg3-Ue-ph9" id="B44-IJ-HCV"/>
                     </connections>
@@ -691,13 +690,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="369" height="190.5"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="학생식당" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VFw-r0-ucr">
-                                        <rect key="frame" x="28.5" y="22" width="86" height="27"/>
+                                        <rect key="frame" x="28.5" y="22" width="85" height="27"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="24.5"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yxi-1Z-nm4" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
-                                        <rect key="frame" x="28" y="49" width="86.5" height="5.5"/>
+                                        <rect key="frame" x="28" y="49" width="85.5" height="5.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내 주문번호" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="i9I-fJ-HJU">
@@ -721,7 +720,7 @@
                                             <action selector="backClicked:" destination="78V-QJ-bRD" eventType="touchUpInside" id="XA9-Ka-8xw"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lne-Lt-f78">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lne-Lt-f78">
                                         <rect key="frame" x="28" y="87" width="297" height="77"/>
                                         <attributedString key="attributedText">
                                             <fragment content="527">
@@ -1135,7 +1134,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8J-Me-dNm">
-                                        <rect key="frame" x="39" y="162.5" width="129.5" height="40"/>
+                                        <rect key="frame" x="40" y="162.5" width="128" height="42"/>
                                         <string key="text">기숙사 식당 조식할인 시간,
 사범대 점심,저녁시간에
 사용하실 수 있습니다.</string>
@@ -1144,7 +1143,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="201101720" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="bwP-zc-Pfp">
-                                        <rect key="frame" x="29" y="235.5" width="147" height="32"/>
+                                        <rect key="frame" x="29" y="233.5" width="147" height="34"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="29"/>
                                         <color key="textColor" red="0.21960784310000001" green="0.69411764710000001" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1168,7 +1167,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로그인 후 할인을 이용하실 수 있습니다." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REc-6K-BP5">
-                                        <rect key="frame" x="42" y="136.5" width="122.5" height="31"/>
+                                        <rect key="frame" x="43" y="134.5" width="121" height="33"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="14"/>
                                         <color key="textColor" red="0.58431372549019611" green="0.58431372549019611" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1397,13 +1396,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="무엇을 도와드릴까요?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="Lud-yj-gjR">
-                                <rect key="frame" x="92.5" y="88.5" width="190" height="25"/>
+                                <rect key="frame" x="92.5" y="88.5" width="190" height="24.5"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="22"/>
                                 <color key="textColor" red="0.38431372549019605" green="0.38431372549019605" blue="0.38431372549019605" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="문의하실 내용을 적어주세요." textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ylN-vS-xly">
-                                <rect key="frame" x="29" y="138" width="317" height="39"/>
+                                <rect key="frame" x="29" y="137.5" width="317" height="39"/>
                                 <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="ROt-jG-We0"/>
@@ -1413,11 +1412,11 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebl-a6-vFl" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
-                                <rect key="frame" x="16" y="113" width="343" height="25"/>
+                                <rect key="frame" x="16" y="112.5" width="343" height="25"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qQl-sb-qRv">
-                                <rect key="frame" x="124.5" y="199.5" width="125.5" height="49.5"/>
+                                <rect key="frame" x="124.5" y="199" width="125.5" height="49.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125.5" id="CsP-FX-y1H"/>
@@ -1429,7 +1428,7 @@
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1HV-ED-qB3" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
-                                <rect key="frame" x="16" y="177" width="343" height="22.5"/>
+                                <rect key="frame" x="16" y="176.5" width="343" height="22.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VDI-0P-xd1">
@@ -1439,7 +1438,7 @@
                                     <constraint firstAttribute="height" constant="166" id="BPm-fR-Vz3"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" rowHeight="49" id="mHK-Rl-dh7">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" rowHeight="49" id="mHK-Rl-dh7" customClass="CsrHeaderCell" customModule="inu_cafeteria" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="360" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mHK-Rl-dh7" id="j4T-fq-q3D">
@@ -1447,7 +1446,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="답변" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEl-CF-Idu">
-                                                    <rect key="frame" x="15.5" y="12" width="40.5" height="25.5"/>
+                                                    <rect key="frame" x="15.5" y="11.5" width="40" height="25.5"/>
                                                     <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="23"/>
                                                     <color key="textColor" red="0.38431372549019605" green="0.38431372549019605" blue="0.38431372549019605" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1485,6 +1484,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="flipBtn" destination="fLW-Et-CEP" id="UDQ-Xg-RCP"/>
+                                            <outlet property="label" destination="fLW-Et-CEP" id="lQv-Qy-Fwh"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CsrCell" rowHeight="117" id="Lcx-pG-zDn" customClass="CsrCell" customModule="inu_cafeteria" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="77" width="360" height="117"/>
@@ -1494,7 +1497,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v1.21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgb-8E-Olh">
-                                                    <rect key="frame" x="16" y="8.5" width="33" height="15"/>
+                                                    <rect key="frame" x="16" y="8.5" width="32" height="15"/>
                                                     <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1626,7 +1629,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="신재문" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6VU-R7-5Pl">
-                                <rect key="frame" x="108.5" y="298" width="48" height="20"/>
+                                <rect key="frame" x="108.5" y="298" width="47" height="20"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="18"/>
                                 <color key="textColor" red="0.34901960784313724" green="0.34509803921568627" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1645,7 +1648,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김선일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TkE-rn-X2p">
-                                <rect key="frame" x="289.5" y="298" width="48" height="20"/>
+                                <rect key="frame" x="289.5" y="298" width="47" height="20"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="18"/>
                                 <color key="textColor" red="0.34901960780000002" green="0.34509803919999998" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1664,7 +1667,7 @@
                                 <rect key="frame" x="33" y="348" width="76" height="110"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="권순재" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHw-ZW-lao">
-                                <rect key="frame" x="108.5" y="438" width="48" height="20"/>
+                                <rect key="frame" x="108.5" y="438" width="47" height="20"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="18"/>
                                 <color key="textColor" red="0.34901960780000002" green="0.34509803919999998" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1682,7 +1685,7 @@
                                 <rect key="frame" x="33" y="488" width="62" height="110"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김진웅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7g-GM-fr2">
-                                <rect key="frame" x="108.5" y="578" width="47.5" height="20"/>
+                                <rect key="frame" x="108.5" y="578" width="47" height="20"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="18"/>
                                 <color key="textColor" red="0.34901960780000002" green="0.34509803919999998" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1698,7 +1701,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이가윤" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43U-x7-ask">
-                                <rect key="frame" x="289.5" y="438" width="48" height="20"/>
+                                <rect key="frame" x="289.5" y="438" width="47" height="20"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="18"/>
                                 <color key="textColor" red="0.34901960780000002" green="0.34509803919999998" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2009,12 +2012,12 @@ Cg
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ho9-Gb-gfV" customClass="FSPagerView" customModule="FSPagerView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MVT-4U-8PI" customClass="iCarousel">
                                 <rect key="frame" x="0.0" y="92.5" width="375" height="450.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="d7s-JJ-DNE" id="O4j-va-aJq"/>
-                                    <outlet property="delegate" destination="d7s-JJ-DNE" id="kcc-0r-Ndj"/>
+                                    <outlet property="dataSource" destination="d7s-JJ-DNE" id="4OI-38-UZq"/>
+                                    <outlet property="delegate" destination="d7s-JJ-DNE" id="dtf-xl-MZp"/>
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="An7-Ay-zEm">
@@ -2045,39 +2048,45 @@ Cg
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbI-BO-yDi">
                                 <rect key="frame" x="283.5" y="582" width="70" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="bE6-Ah-HCI"/>
-                                    <constraint firstAttribute="height" constant="70" id="hVw-MU-Bgs"/>
-                                </constraints>
                                 <state key="normal" image="icLink"/>
                                 <connections>
                                     <action selector="linkClicked:" destination="d7s-JJ-DNE" eventType="touchUpInside" id="w5h-sT-oxp"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="상세정보를 보려면 이미지를 탭하세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GnE-fE-Zpp">
+                                <rect key="frame" x="112.5" y="592" width="151.5" height="11"/>
+                                <fontDescription key="fontDescription" name="KoPubDotumPL" family="KoPubDotum_Pro" pointSize="10"/>
+                                <color key="textColor" red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="6K6-z5-Rso" secondAttribute="trailing" id="16g-XF-in0"/>
-                            <constraint firstAttribute="trailing" secondItem="ho9-Gb-gfV" secondAttribute="trailing" id="4Uv-Tn-LWE"/>
                             <constraint firstItem="tbS-xP-oSa" firstAttribute="top" secondItem="6K6-z5-Rso" secondAttribute="bottom" id="6zo-MV-Cr0"/>
                             <constraint firstItem="An7-Ay-zEm" firstAttribute="top" secondItem="vzb-Qf-QvN" secondAttribute="centerY" multiplier="23:333.5" id="FjF-cW-CE5"/>
+                            <constraint firstItem="MVT-4U-8PI" firstAttribute="height" secondItem="vzb-Qf-QvN" secondAttribute="height" multiplier="450.5:667" id="HSj-8W-052"/>
                             <constraint firstItem="6K6-z5-Rso" firstAttribute="height" secondItem="vzb-Qf-QvN" secondAttribute="height" multiplier="25:667" id="HU1-yB-uoS"/>
+                            <constraint firstAttribute="trailing" secondItem="MVT-4U-8PI" secondAttribute="trailing" id="MNa-fW-v1C"/>
                             <constraint firstAttribute="trailing" secondItem="mbI-BO-yDi" secondAttribute="trailing" multiplier="375:353.5" id="McW-9P-OZz"/>
                             <constraint firstItem="6K6-z5-Rso" firstAttribute="leading" secondItem="vzb-Qf-QvN" secondAttribute="leading" id="MpK-fQ-o6P"/>
-                            <constraint firstItem="ho9-Gb-gfV" firstAttribute="leading" secondItem="vzb-Qf-QvN" secondAttribute="leading" id="Q0z-ez-rky"/>
-                            <constraint firstItem="ho9-Gb-gfV" firstAttribute="top" secondItem="vzb-Qf-QvN" secondAttribute="centerY" multiplier="92.5:333.5" id="Z3a-5V-4uQ"/>
+                            <constraint firstItem="GnE-fE-Zpp" firstAttribute="centerX" secondItem="vzb-Qf-QvN" secondAttribute="centerX" id="VSD-7N-L3i"/>
+                            <constraint firstItem="mbI-BO-yDi" firstAttribute="height" secondItem="vzb-Qf-QvN" secondAttribute="height" multiplier="70:667" id="Xg6-2w-eSB"/>
                             <constraint firstItem="tbS-xP-oSa" firstAttribute="centerX" secondItem="vzb-Qf-QvN" secondAttribute="centerX" id="aHy-h3-qKL"/>
                             <constraint firstItem="tbS-xP-oSa" firstAttribute="leading" secondItem="vzb-Qf-QvN" secondAttribute="leadingMargin" id="duJ-r3-bqV"/>
-                            <constraint firstItem="ho9-Gb-gfV" firstAttribute="height" secondItem="vzb-Qf-QvN" secondAttribute="height" multiplier="450.5:667" id="gf1-xy-9bC"/>
+                            <constraint firstItem="6K6-z5-Rso" firstAttribute="top" secondItem="MVT-4U-8PI" secondAttribute="bottom" id="iUM-mc-9Iw"/>
+                            <constraint firstAttribute="bottom" secondItem="GnE-fE-Zpp" secondAttribute="bottom" multiplier="667:603" id="k5P-58-8SH"/>
+                            <constraint firstItem="MVT-4U-8PI" firstAttribute="top" secondItem="vzb-Qf-QvN" secondAttribute="centerY" multiplier="92.5:333.5" id="pQj-bc-um4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tbS-xP-oSa" secondAttribute="trailing" id="pb8-La-QST"/>
-                            <constraint firstItem="6K6-z5-Rso" firstAttribute="top" secondItem="ho9-Gb-gfV" secondAttribute="bottom" id="rT3-5t-TRc"/>
+                            <constraint firstItem="mbI-BO-yDi" firstAttribute="width" secondItem="vzb-Qf-QvN" secondAttribute="width" multiplier="70:375" id="prz-q5-utD"/>
                             <constraint firstItem="y55-OY-ois" firstAttribute="top" secondItem="mbI-BO-yDi" secondAttribute="bottom" constant="15" id="uH9-4U-Jdq"/>
+                            <constraint firstItem="MVT-4U-8PI" firstAttribute="leading" secondItem="vzb-Qf-QvN" secondAttribute="leading" id="wHL-Dp-RP8"/>
                             <constraint firstItem="An7-Ay-zEm" firstAttribute="leading" secondItem="vzb-Qf-QvN" secondAttribute="leading" id="ydt-g1-fr1"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="carouselView" destination="MVT-4U-8PI" id="m2b-mb-Wpt"/>
                         <outlet property="pageControl" destination="tbS-xP-oSa" id="g43-zq-bvX"/>
-                        <outlet property="pagerView" destination="ho9-Gb-gfV" id="Nf6-gj-tCT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZOK-7E-C2R" userLabel="First Responder" sceneMemberID="firstResponder"/>

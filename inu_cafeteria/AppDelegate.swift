@@ -12,7 +12,10 @@ import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 import KYDrawerController
-//import Siren
+import SwiftyBeaver
+
+let log = SwiftyBeaver.self
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
@@ -25,6 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let console = ConsoleDestination()
+        log.addDestination(console)
+        
         
 //        FIRApp.configure()
 //        
@@ -93,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Messaging.messaging().disconnect()
         print("Disconnected from FCM.")
         
-        removeFlag()
+//        removeFlag()
 //        print("socket end")
         
         SocketIOManager.sharedInstance.closeConnection()
@@ -114,56 +121,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Network().getCookie()
         
         SocketIOManager.sharedInstance.establishConnection()
-        
-        DispatchQueue.main.async {
-            if let vc = self.window?.visibleViewController as? KYDrawerController {
-                //            if vc.mainViewController.childViewControllers[0].isKind(of: MyNumberVC.self) {
-                //                && userPreferences.object(forKey: "socket") != nil {
-                //                print("socket restart")
-                //                SocketIOManager.sharedInstance.establishConnection()
-                //                let vc =
-                //여기서 갯수 확인해서 없으면 dismiss 해야함.
-                //            }
-                
-                if let numvc = vc.mainViewController.childViewControllers[0] as? MyNumberVC {
-                    numvc.wakeUp()
-                }
-                
-                if let drawerController = vc.mainViewController.parent as? KYDrawerController {
-                    //                drawerController.setDrawerState(.opened, animated: true)
-                    if drawerController.drawerState == .opened {
-                        if let vc = drawerController.drawerViewController as? DrawerVC {
-                            let model = FlagModel(vc)
-                            model.activeBarcode(1)
-                        }
-                    }
-                }
-            }
-        }
-        
-//        Siren.shared.checkVersion(checkType: .daily)
-        
-//        SocketIOManager.sharedInstance.reconnectConnection()
-        
-//        print("Becomeactive")
-        
-        
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         
-        if userPreferences.object(forKey: "no_student") != nil {
-            userPreferences.removeObject(forKey: "no_student")
-        }
-        
-        removeFlag()
+//        removeFlag()
         Network().saveCookie()
 //        print("socket end")
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
+        log.info("reset!!!")
 //        print("didreceiveremotenotification")
         
         Messaging.messaging().appDidReceiveMessage(userInfo)
@@ -171,11 +141,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         //푸시 메시지 클릭했을 때 이벤트
         UIApplication.shared.applicationIconBadgeNumber = 0
-        userPreferences.set(false, forKey: "socket")
-        userPreferences.removeObject(forKey: "code")
-        userPreferences.removeObject(forKey: "num1")
-        userPreferences.removeObject(forKey: "num2")
-        userPreferences.removeObject(forKey: "num3")
+        
+//        userPreferences.set(false, forKey: "socket")
+//        userPreferences.removeObject(forKey: "code")
+//        userPreferences.removeObject(forKey: "num1")
+//        userPreferences.removeObject(forKey: "num2")
+//        userPreferences.removeObject(forKey: "num3")
         
 //        let dict = userInfo["aps"] as! NSDictionary
 //        let message = dict["alert"]
@@ -224,11 +195,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
-    func removeFlag(){
-        let model = FlagModel()
-        model.deactiveBarcode(0)
-    }
-    
 //    func connectToFcm() {
 //        FIRMessaging.messaging().connect { (error) in
 //            if (error != nil) {
@@ -241,23 +207,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 }
 
-public extension UIWindow {
-    public var visibleViewController: UIViewController? {
-        return UIWindow.getVisibleViewControllerFrom(self.rootViewController)
-    }
-    
-    public static func getVisibleViewControllerFrom(_ vc: UIViewController?) -> UIViewController? {
-        if let nc = vc as? UINavigationController {
-            return UIWindow.getVisibleViewControllerFrom(nc.visibleViewController)
-        } else if let tc = vc as? UITabBarController {
-            return UIWindow.getVisibleViewControllerFrom(tc.selectedViewController)
-        } else {
-            if let pvc = vc?.presentedViewController {
-                return UIWindow.getVisibleViewControllerFrom(pvc)
-            } else {
-                return vc
-            }
-        }
-    }
-}
+//public extension UIWindow {
+//    public var visibleViewController: UIViewController? {
+//        return UIWindow.getVisibleViewControllerFrom(self.rootViewController)
+//    }
+//
+//    public static func getVisibleViewControllerFrom(_ vc: UIViewController?) -> UIViewController? {
+//        if let nc = vc as? UINavigationController {
+//            return UIWindow.getVisibleViewControllerFrom(nc.visibleViewController)
+//        } else if let tc = vc as? UITabBarController {
+//            return UIWindow.getVisibleViewControllerFrom(tc.selectedViewController)
+//        } else {
+//            if let pvc = vc?.presentedViewController {
+//                return UIWindow.getVisibleViewControllerFrom(pvc)
+//            } else {
+//                return vc
+//            }
+//        }
+//    }
+//}
 

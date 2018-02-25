@@ -19,4 +19,5 @@ target 'inu_cafeteria' do
   pod "Device", '~> 3.0.3'
   pod 'Kingfisher', '~> 4.0'
   pod 'FSPagerView'
+  pod 'SwiftyBeaver'
 end

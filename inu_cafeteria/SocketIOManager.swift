@@ -9,60 +9,66 @@
 import UIKit
 import SocketIO
 
-class SocketIOManager: NSObject {
+class SocketIOManager {
     static let sharedInstance = SocketIOManager()
     
-    let socket = SocketManager(socketURL: URL(string: socketURL)!).defaultSocket
     
-    override init() {
-        super.init()
+    var manager:SocketManager?
+    var socket:SocketIOClient?
+    
+    init() {
+        if let url = URL(string: BASE_URL) {
+            log.info("socket url : \(url)")
+            manager = SocketManager(socketURL: url)
+            socket = manager?.defaultSocket
+        }
     }
     
     func establishConnection(){
-        print("establishSocket")
-        
-//        if socket.status == .disconnected {
-//            print("socket reconnect")
-//            socket.reconnect()
-//        } else {
-//            print("socket connect")
-            socket.connect()
-//        }
-        print("socket status:\(socket.status.rawValue)")
-//        print(socket)
-//        print("Hello")
-//        print("socket status:\(socket.status.hashValue)")
+        log.info("establishSocket")
+        socket?.connect()
+
+        if socket?.status == .connected {
+            log.info("socket connected")
+        } else {
+            log.info("socket disconnected")
+        }
     }
     
 //    func reconnectConnection(){
 //        print("reconnectSocket")
-//        socket.reconnect()
+//        socket?.reconnect()
 //    }
     
     func closeConnection(){
-//        print("closeSocket")
-        print("disconnect current socket!!!!")
-        socket.disconnect()
-        socket.removeAllHandlers()
-        print("socket status:\(socket.status.rawValue)")
-//        print("socket status:\(socket.status.hashValue)")
+        log.info("closeSocket")
+        socket?.disconnect()
+        socket?.removeAllHandlers()
+        log.info("socket status : \(self.socket?.status.description)")
     }
     
     func connectToServer(){
-//        socket.emit("connectUser", "name")
+//        socket?.emit("connectUser", "name")
         print("emit socket")
-//        socket.emit("1", "1")
-        socket.emit("news", "hello world")
+//        socket?.emit("1", "1")
+        socket?.emit("news", "hello world")
 //        if userPreferences.object(forKey: "sno") != nil {
 //            let sno = userPreferences.string(forKey: "sno")!
-//            socket.emit("connect_ios", sno)
+//            socket?.emit("connect_ios", sno)
 //        } else {
-//            socket.emit("connect_ios", "")
+//            socket?.emit("connect_ios", "")
 //        }
     }
     
     func getNumber(code: String, completionHandler: @escaping (_ messageInfo: [Any]) -> Void) {
-        socket.on(code) { (dataArray, socketAck) -> Void in
+        
+        if socket?.status == .connected {
+            log.info("socket connected")
+        } else {
+            log.info("socket disconnected")
+        }
+        
+        socket?.on(code) { (dataArray, socketAck) -> Void in
 //            print(dataArray)
 //            print(socketAck)
 //            print("getnumber:\(code)")
@@ -71,6 +77,6 @@ class SocketIOManager: NSObject {
     }
     
     func removeAll(){
-        socket.removeAllHandlers()
+        socket?.removeAllHandlers()
     }
 }

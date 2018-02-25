@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-let userPreferences = UserDefaults.standard
 // "id" : id. String
 // "pw" : pw. String
 // "auto_login" : 자동로그인 여부. Bool
@@ -19,12 +18,7 @@ let userPreferences = UserDefaults.standard
 
 class Utility {
     
-    static func removeAllUserDefaults() {
-        let appDomain = Bundle.main.bundleIdentifier
-        userPreferences.removePersistentDomain(forName: appDomain!)
-        
-        userPreferences.set(true, forKey: "not_first")
-    }
+   
     
     static func showFont(){
 //        KoPubDotum_Pro

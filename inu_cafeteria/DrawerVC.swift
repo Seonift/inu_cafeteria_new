@@ -26,18 +26,17 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     
-//    @IBOutlet weak var pageControl: FSPageControl!
+    //    @IBOutlet weak var pageControl: FSPageControl!
     
     lazy var pageControl: FSPageControl = {
         let pageControl = FSPageControl(frame: .zero)
-        pageControl.numberOfPages = imageURL.count
         pageControl.currentPage = 0
         pageControl.setFillColor(UIColor.cftBrightSkyBlue, for: .selected)
         pageControl.setFillColor(UIColor(rgb: 201), for: .normal)
         pageControl.setPath(UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: 6.5, height: 6.5)), for: .normal)
         pageControl.setPath(UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: 6.5, height: 6.5)), for: .selected)
         pageControl.interitemSpacing = 4.5
-//        pageControl.backgroundColor = .blue
+        //        pageControl.backgroundColor = .blue
         return pageControl
     }()
     @IBOutlet weak var adView: FSPagerView! {
@@ -46,45 +45,62 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         }
     }
     
-    let imageURL = [
-       "",
-       "",
-       "",
-       "",
-       ""
-    ]
+    var adItems:[AdObject] = []
+    
+//    var imageURL = ["" ,"", "", "", ""]
     
     lazy var flagModel:FlagModel = {
         let model = FlagModel(self)
         return model
     }()
     
+    lazy var networkModel:NetworkModel = {
+        let model = NetworkModel(self)
+        return model
+    }()
+    
     private let cellId = "Cell"
     private var _nonClient:Bool = false
-
+    
     override func viewDidLoad() {
         setupUI()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         flagModel.activeBarcode(1)
-        adView.automaticSlidingInterval = 3.0
+        adView.automaticSlidingInterval = 5.0
+        if adItems.count == 0 {
+            networkModel.ads()
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(comebackForeground), name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: .UIApplicationDidEnterBackground, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         UIScreen.main.brightness = CGFloat(1.0)
-        
-        
-        
+    }
+    
+    @objc func comebackForeground(){
+        flagModel.activeBarcode(1)
+    }
+    
+    @objc func enterBackground(){
+        flagModel.activeBarcode(0)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        flagModel.deactiveBarcode(0)
+        flagModel.activeBarcode(0)
         adView.automaticSlidingInterval = 0
+        
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        UIScreen.main.brightness = CGFloat(userPreferences.float(forKey: "brightness"))
+        UIScreen.main.brightness = userPreferences.getBrightness()
     }
     
     func setupUI(){
@@ -99,7 +115,9 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         infoView.layer.shadowColor = UIColor(r: 7, g:0, b: 2).cgColor
         infoView.layer.shadowOffset = CGSize(width: 1.5, height: 0)
         infoView.layer.shadowRadius = infoView.layer.cornerRadius
-        if let sno = userPreferences.string(forKey: "sno") {
+        
+        
+        if let sno = userPreferences.getSNO() {
             idLabel.text = sno
         } else {
             idLabel.text = ""
@@ -107,9 +125,9 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         self.view.addSubview(pageControl)
         
         
-//        let x = adView.frame.origin.x + adView.frame.width + Device.getWidth(width: 10)
-//        pageControl.frame = CGRect(x: x, y: 0, width: 6.5, height: adView.frame.height)
-//        pageControl.center.y = adView.center.y
+        //        let x = adView.frame.origin.x + adView.frame.width + Device.getWidth(width: 10)
+        //        pageControl.frame = CGRect(x: x, y: 0, width: 6.5, height: adView.frame.height)
+        //        pageControl.center.y = adView.center.y
         
         
         let width:CGFloat = 6.5
@@ -120,13 +138,13 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         pageControl.transform = CGAffineTransform(rotationAngle: .pi / 2)
         pageControl.frame.origin = CGPoint(x: x, y: y)
         
-//        pageControl.layer.position = CGPoint(x: x, y: y)
+        //        pageControl.layer.position = CGPoint(x: x, y: y)
         
     }
     
     func setupBarcode(_ value: Bool){
         if value {
-            if let barcode = userPreferences.string(forKey: "barcode"){
+            if let barcode = userPreferences.getBarcode() {
                 barcodeIV.image = generateBarcode(from: barcode)
             } else {
                 barcodeIV.isHidden = true
@@ -158,28 +176,15 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     }
     
     func numberOfItems(in pagerView: FSPagerView) -> Int {
-        return imageURL.count
+        return adItems.count
     }
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: cellId, at: index)
         cell.imageView?.contentMode = .scaleAspectFit
-//        cell.imageView?.kf.setImage(with: URL(string: imageURL[index])!)
-        switch index {
-        case 0:
-            cell.backgroundColor = .red
-        case 1:
-            cell.backgroundColor = .blue
-        case 2:
-            cell.backgroundColor = .green
-        case 3:
-            cell.backgroundColor = .gray
-        default:
-            cell.backgroundColor = UIColor.purple
-        }
-        
-        
+        cell.imageView?.kf.setImage(with: URL(string: "\(BASE_URL)/\(adItems[index].img)")!)
         cell.contentView.layer.shadowRadius = 0
+        
         return cell
     }
     
@@ -196,7 +201,7 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         
         guard let vc = MAIN.instantiateViewController(withIdentifier: "advc") as? AdVC else { return }
         vc.modalPresentationStyle = .overCurrentContext
-        vc.items = imageURL
+        vc.adItems = self.adItems
         vc.firstIndex = index
         self.present(vc, animated: true, completion: nil)
     }
@@ -215,19 +220,38 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
 
 extension DrawerVC: NetworkCallback {
     func networkResult(resultData: Any, code: String) {
-        if code == "activebarcode" {
-            if let code = resultData as? Int {
-                if code == 1 { setupBarcode(true) }
+//        if code == "activebarcode" {
+//            if let code = resultData as? Int {
+//                if code == 1 { setupBarcode(true) }
+//            }
+//        }
+        
+        log.info(code)
+        if code == flagModel._activeBarcode {
+            if let result = resultData as? Bool, result {
+                setupBarcode(true)
             }
+        }
+        
+        if code == networkModel._ads {
+            if let result = resultData as? [AdObject] {
+                self.adItems = result.filter { $0.title != "" }
+            }
+            adView.reloadData()
+            pageControl.numberOfPages = adItems.count
         }
     }
     
-    func networkFailed(code: Any) {
-        if let str = code as? String {
-            if str == "activebarcode" {
-                setupBarcode(false)
-            }
+    func networkFailed(errorMsg: String, code: String) {
+        log.info(code)
+        
+        if code == flagModel._activeBarcode {
+            setupBarcode(false)
         }
+        
+//        if code == "activebarcode" {
+//            setupBarcode(false)
+//        }
     }
     
     func networkFailed() {

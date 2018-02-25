@@ -32,7 +32,7 @@ class CustomAlert:NSObject {
         return alertController
     }
     
-    static func noticeAlert(title: String? = nil, message: String? = nil, first: String = "확인", second: String = "오늘하루안보기", firstAction:((UIAlertAction) -> Void)? = nil, secondAction:((UIAlertAction) -> Void)? = nil) -> UIAlertController {
+    static func noticeAlert(title: String? = nil, message: String? = nil, first: String = "확인", second: String = "다시보지않기", firstAction:((UIAlertAction) -> Void)? = nil, secondAction:((UIAlertAction) -> Void)? = nil) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let ok = UIAlertAction(title: first, style: .default, handler: firstAction)
         let ok2 = UIAlertAction(title: second, style: .default, handler: secondAction)

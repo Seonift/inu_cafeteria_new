@@ -13,6 +13,8 @@ import Device
 
 class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     
+    // 첫 시작 가이드, 로그인 VC
+    
     @IBOutlet weak var l1: UILabel!
     @IBOutlet weak var l2: UILabel!
     @IBOutlet weak var l3: UILabel!
@@ -48,9 +50,8 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     var showLogin:Bool = false
     
     @IBAction func noStudentClicked(_ sender: Any) {
-        Indicator.startAnimating(activityData)
-        let model = LoginModel(self)
-        model.no_student()
+        self.noStudent = true
+        loginModel.cafecode()
     }
     
     @IBOutlet weak var idTF_top: NSLayoutConstraint!
@@ -60,29 +61,44 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var nsB_top: NSLayoutConstraint!
     @IBOutlet weak var nsL_top: NSLayoutConstraint!
     
+    lazy var loginModel:LoginModel = {
+        let model = LoginModel(self)
+        return model
+    }()
+    
     
     @IBAction func loginClicked(_ sender: Any) {
-        
-        Indicator.startAnimating(activityData)
-        let model = LoginModel(self)
-        var auto:Bool!
-        if autoB.isSelected {
-            auto = true
-        } else {
-            auto = false
+        if let sno = idTF.text, let pw = pwTF.text {
+            if sno == "" || pw == "" {
+                self.view.makeToast(String.checkId)
+                return
+            }
+            loginModel.login(sno: sno, pw: pw, auto: autoB.isSelected)
         }
-        model.login(idTF.text!, pwTF.text!, auto)
-        print("id:\(idTF.text!), pw:\(pwTF.text!)")
     }
     
-    let bgArr:[UIImage] = [UIImage(named: "bg1")!, UIImage(named: "bg2")!]
+    let bgArr:[UIImage?] = [UIImage(named: "bg1"), UIImage(named: "bg2")]
     var index = 0
     let animationDuration:TimeInterval = 1
     let switchingInterval:TimeInterval = 3
     
-    var tap:UITapGestureRecognizer!
-    var mainTap:UITapGestureRecognizer!
-    var checkTap:UITapGestureRecognizer!
+    lazy var tap:UITapGestureRecognizer = {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(moveLogin(_:)))
+        tap.delegate = self
+        return tap
+    }()
+    lazy var mainTap:UITapGestureRecognizer = {
+        let mainTap = UITapGestureRecognizer(target: self, action: #selector(handleTap_mainview(_:)))
+        mainTap.delegate = self
+        return mainTap
+    }()
+    lazy var checkTap:UITapGestureRecognizer = {
+        let checkTap = UITapGestureRecognizer(target: self, action: #selector(cBoxClicked(_:)))
+        checkTap.delegate = self
+        return checkTap
+    }()
+    
+    var noStudent:Bool = false // true면 비회원로그인
     
     override func viewDidLoad() {
         
@@ -94,12 +110,9 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         
 //        userPreferences.removeObject(forKey: "not_first")
         
-        if userPreferences.bool(forKey: "not_first") == true {
+        if !userPreferences.isFirstStart() {
             setupLogin()
-        } else {
-            userPreferences.set(true, forKey: "not_first")
         }
-        
         
         animateImage()
     }
@@ -129,9 +142,10 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         idTF.delegate = self
         pwTF.delegate = self
         
+        addToolBar(textField: idTF)
+        addToolBar(textField: pwTF)
+        
         moveBtn.isUserInteractionEnabled = true
-        tap = UITapGestureRecognizer(target: self, action: #selector(moveLogin(_:)))
-        tap.delegate = self
         moveBtn.addGestureRecognizer(tap)
         
         autoB.isUserInteractionEnabled = false
@@ -147,11 +161,6 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         noStudentBtn.setAttributedTitle(string, for: .normal)
     }
     
-    func setupFirstStart(){
-        
-        
-    }
-    
     func setupLogin(){
         setupLogin1()
         setupLogin2()
@@ -159,41 +168,12 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func setupLogin1(){
-//        self.view.removeConstraint(logo_leading)
         self.view.removeConstraint(logo_leading2)
         self.view.ac_center(item: logoIV, toItem: self.view, origin: "x")
-        
-//        if DeviceUtil.smallerThanSE() {
-//            self.logo_top.constant = 143.6 / 2
-//            self.idTF_top.constant = self.idTF_top.constant / 2
-//            self.pwTF_top.constant = self.pwTF_top.constant / 2
-//            self.auto_top.constant = self.auto_top.constant / 2
-//            self.loginB_top.constant = self.loginB_top.constant / 2
-//            self.nsB_top.constant = self.nsB_top.constant / 2
-//            self.nsL_top.constant = self.nsL_top.constant / 2
-//
-////            @IBOutlet weak var idTF_top: NSLayoutConstraint!
-////            @IBOutlet weak var pwTF_top: NSLayoutConstraint!
-////            @IBOutlet weak var auto_top: NSLayoutConstraint!
-////            @IBOutlet weak var loginB_top: NSLayoutConstraint!
-////            @IBOutlet weak var nsB_top: NSLayoutConstraint!
-////            @IBOutlet weak var nsL_top: NSLayoutConstraint!
-////
-////
-//
-//
-//        } else {
-//            self.logo_width.constant = 220.0
-//            self.logo_height.constant = 71.4
-//            self.logo_top.constant = 143.6
-        
         logo_top = logo_top.setMultiplier(multiplier: 144/333.5)
         logo_width2 = logo_width2.setMultiplier(multiplier: 220/375)
         logo_height2 = logo_height2.setMultiplier(multiplier: 143.6/667)
         
-//        }
-//        l1.isHidden = true
-//        l2.isHidden = true
         labelV.isHidden = true
         l3.isHidden = true
         moveBtn.isHidden = true
@@ -223,12 +203,7 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func setupLogin3(){
-        mainTap = UITapGestureRecognizer(target: self, action: #selector(handleTap_mainview(_:)))
-        mainTap.delegate = self
         self.view.addGestureRecognizer(mainTap)
-        
-        checkTap = UITapGestureRecognizer(target: self, action: #selector(cBoxClicked(_:)))
-        checkTap.delegate = self
         self.autoV.isUserInteractionEnabled = true
         self.autoV.addGestureRecognizer(checkTap)
     }
@@ -334,7 +309,9 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         let transition = CATransition()
         transition.type = kCATransitionFade
         self.bgIV.layer.add(transition, forKey: kCATransition)
-        self.bgIV.image = self.bgArr[self.index]
+        if self.index < self.bgArr.count {
+            self.bgIV.image = self.bgArr[self.index]
+        }
         
         CATransaction.commit()
         
@@ -394,9 +371,9 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     }
 }
 
-extension FirstStartVC: UITextFieldDelegate{
+extension FirstStartVC {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
+        textField.resignFirstResponder()
         return false
     }
 }
@@ -406,24 +383,23 @@ extension FirstStartVC:NetworkCallback {
         Indicator.stopAnimating()
         print(code)
         
-        if code == "no_student" {
-            let result = resultData as! [CodeObject]
+        if code == loginModel._login {
             
-            self.showHome(result, true)
+            if let result = resultData as? LoginObject {
+                if let token = result.token {
+                    userPreferences.saveToken(token: token)
+                }
+                if let barcode = result.barcode {
+                    userPreferences.saveBarcode(barcode: barcode)
+                    loginModel.cafecode()
+                }
+            }
         }
         
-        if code == "login" {
-//            let result = resultData as! Bool
-//            if result == true {
-//                print(result)
-//                
-//                let model = LoginModel(self)
-//                model.stuinfo()
-//            }
-            
-            let result = resultData as! [CodeObject]
-            
-            self.showHome(result, false)
+        if code == loginModel._cafecode {
+            if let result = resultData as? [CafeCode] {
+                self.showHome(result, self.noStudent)
+            }
         }
         
 //        if code == "stuinfo" {
@@ -442,35 +418,50 @@ extension FirstStartVC:NetworkCallback {
 //        }
     }
     
-    func networkFailed(code: Any) {
+    func networkFailed(errorMsg: String, code: String) {
         Indicator.stopAnimating()
+        self.view.makeToast(errorMsg)
         
-        if let int = code as? Int {
-            print(int)
-            if int == 400 {
-                self.view.makeToast(String.checkId)
-            } else if int == 404 {
-                self.view.makeToast(String.noServer)
-            }
-        }
-        
-        if let str = code as? String {
-            if str == "no_barcode" {
-                self.view.makeToast(.no_barcode)
-            }
-            
-            if str == "no_code" {
-                self.view.makeToast(.no_code)
-            }
-            
-            if str == "no_stuinfo" {
-                self.view.makeToast(.no_stuinfo)
-            }
-        }
+//        if code == loginModel._login {
+//
+//        }
+//
+//        if code == loginModel._cafecode {
+//
+//        }
     }
     
+//    func networkFailed(code: Any) {
+//        Indicator.stopAnimating()
+//
+//        if code
+//
+//        if let int = code as? Int {
+//            print(int)
+//            if int == 400 {
+//                self.view.makeToast(String.checkId)
+//            } else if int == 404 {
+//                self.view.makeToast(String.noServer)
+//            }
+//        }
+//
+//        if let str = code as? String {
+//            if str == "no_barcode" {
+//                self.view.makeToast(.no_barcode)
+//            }
+//
+//            if str == "no_code" {
+//                self.view.makeToast(.no_code)
+//            }
+//
+//            if str == "no_stuinfo" {
+//                self.view.makeToast(.no_stuinfo)
+//            }
+//        }
+//    }
+    
     func networkFailed() {
-        
+        self.view.makeToast(.noServer)
     }
 }
 
@@ -510,34 +501,5 @@ class CheckBox:UIButton {
         let unselected = UIImage(named: "login_cbox_no")
         self.setImage(selected, for: .selected)
         self.setImage(unselected, for: .normal)
-    }
-}
-
-extension NSLayoutConstraint {
-    /**
-     Change multiplier constraint
-     
-     - parameter multiplier: CGFloat
-     - returns: NSLayoutConstraint
-     */
-    func setMultiplier(multiplier:CGFloat) -> NSLayoutConstraint {
-        
-        NSLayoutConstraint.deactivate([self])
-        
-        let newConstraint = NSLayoutConstraint(
-            item: firstItem!,
-            attribute: firstAttribute,
-            relatedBy: relation,
-            toItem: secondItem,
-            attribute: secondAttribute,
-            multiplier: multiplier,
-            constant: constant)
-        
-        newConstraint.priority = priority
-        newConstraint.shouldBeArchived = self.shouldBeArchived
-        newConstraint.identifier = self.identifier
-        
-        NSLayoutConstraint.activate([newConstraint])
-        return newConstraint
     }
 }

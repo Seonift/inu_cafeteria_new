@@ -8,15 +8,39 @@
 
 import UIKit
 import Device
+import SocketIO
+import AVFoundation
 
 class NumberVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleIV: UIImageView!
     
-    var numbers:[Int] = []
-    var code:Int = 0
+    private var audioPlayer: AVAudioPlayer?
     
-    var items:[Int] = [5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000]
+    var start_index:Int = 0 // 출력 시작하는 index
+    var items:[String] = [] {
+        didSet {
+            if collectionView != nil {
+                collectionView.reloadData()
+            }
+            if items.count > 12 {
+                self.start_index += 1
+            }
+        }
+    }
+    
+    var inputNumbers:[Int] = []
+    
+    var code:Int = 0
+    var cafeTitle:String = ""
+    var bgimg:String?
+    
+    lazy var model:NumberModel = {
+        let model = NumberModel(self)
+        return model
+    }()
+    
+//    var items:[Int] = [5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000]
     
     @IBOutlet weak var numLabel1: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -25,7 +49,12 @@ class NumberVC: UIViewController {
     
     @IBOutlet weak var content: UIView!
     @IBAction func backClicked(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        let alert = CustomAlert.alert(message: String.cancel_num, positiveAction: { action in
+            // 소켓 초기화
+            Indicator.startAnimating(activityData)
+            self.model.resetNumber()
+        })
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -36,18 +65,46 @@ class NumberVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        setSocketConnect()
+        model.isNumberWait()
+        
+       setData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(comebackForeground), name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: .UIApplicationDidEnterBackground, object: nil)
+
+    }
+    
+    @objc func comebackForeground() {
+        setSocketConnect()
+        model.isNumberWait()
+    }
+    
+    @objc func enterBackground(){
+        SocketIOManager.sharedInstance.removeAll()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        SocketIOManager.sharedInstance.removeAll()
+        
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+    }
+    
+    func setData(){
+        // 번호와 타이틀 설정
         var attrs:[NSMutableAttributedString] = []
-        switch numbers.count {
+        switch inputNumbers.count {
         case 3:
-            let n3 = NSMutableAttributedString(string: " \(numbers[2])", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, .font: UIFont.KoPubDotum(type: .L, size: 42.5)])
+            let n3 = NSMutableAttributedString(string: " \(inputNumbers[2])", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, .font: UIFont.KoPubDotum(type: .L, size: 24)])
             attrs.append(n3)
             fallthrough
         case 2:
-            let n2 = NSMutableAttributedString(string: " \(numbers[1])", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, .font: UIFont.KoPubDotum(type: .L, size: 42.5)])
+            let n2 = NSMutableAttributedString(string: "\r\(inputNumbers[1])", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, .font: UIFont.KoPubDotum(type: .L, size: 24)])
             attrs.append(n2)
             fallthrough
         case 1:
-            let n1 = NSMutableAttributedString(string: "\(numbers[0])", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, .font: UIFont.KoPubDotum(type: .L, size: 70)])
+            let n1 = NSMutableAttributedString(string: "\(inputNumbers[0])", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, .font: UIFont.KoPubDotum(type: .L, size: 55)])
             attrs.append(n1)
         default:
             print()
@@ -59,21 +116,25 @@ class NumberVC: UIViewController {
         }
         numLabel1.attributedText = result
         
-        switch code {
-        case 1:
-            titleLabel.text = "학생식당"
-        default:
-            print()
-        }
+        titleLabel.text = cafeTitle
         
         let imagename = "sss"+String(code)
-        guard let image = UIImage(named: imagename) else {
-            titleIV.image = UIImage(named: "mynumber_bg")
-            titleIV.image = nil
-            titleIV.backgroundColor = UIColor(r: 54, g: 46, b:43)
-            return
+//
+        if let image = UIImage(named: imagename) {
+            titleIV.image = image
+        } else {
+            guard let bgimg = self.bgimg else {
+                titleIV.image = nil
+                titleIV.backgroundColor = UIColor(r: 54, g: 46, b:43)
+                return
+            }
+            if let url = URL(string: "\(BASE_URL + bgimg)") {
+                titleIV.kf.setImage(with: url) { (_, error, _, _) in
+                    self.titleIV.image = nil
+                    self.titleIV.backgroundColor = UIColor(r: 54, g: 46, b:43)
+                }
+            }
         }
-        titleIV.image = image
     }
     
     func setupUI() {
@@ -85,12 +146,66 @@ class NumberVC: UIViewController {
         layout.minimumInteritemSpacing = (Device.getWidth(width: 302) - (55 * 4)) / 3
         layout.minimumLineSpacing = Device.getHeight(height: 45)
         collectionView.collectionViewLayout = layout
+        
+        collectionView.isUserInteractionEnabled = true
     }
     
-    func commonInit(code: Int, numbers: [Int]) {
+    func commonInit(code: Int, title:String, numbers: [Int]) {
         self.code = code
-        self.numbers = numbers
+        self.cafeTitle = title
+        self.inputNumbers = numbers
     }
+    
+    func setSocketConnect(){
+        print("setsocket, code:\(String(self.code))")
+        SocketIOManager.sharedInstance.getNumber(code: String(self.code)) { (result) -> Void in
+            DispatchQueue.main.async {
+                print(result[0])
+                if let res = result[0] as? NSDictionary {
+                    if let msg = res["msg"] as? String, let msgint = Int(msg) {
+                        log.info("msgint:\(msgint)")
+                        self.items.append(msg)
+                        if self.checkNumCorrect(msgint) == true {
+                            //내 번호가 나오면 알림
+                            let alert = CustomAlert.okAlert(message: "\(String.complete_num)\n번호 : \(msgint)", positiveAction: { action in
+                                self.model.isNumberWait()
+                            })
+                            self.present(alert, animated: true, completion: nil)
+                            let systemSoundID:SystemSoundID = 1005
+                            let vib = SystemSoundID(kSystemSoundID_Vibrate)
+                            AudioServicesPlaySystemSound(systemSoundID)
+                            AudioServicesPlaySystemSound(vib)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func checkNumCorrect(_ num:Int) -> Bool{
+        print("checkNumCorrect:\(String(num))")
+        //번호가 들어왔을때 맞는 번호인지 확인
+        if inputNumbers.count > 0 {
+            for item in inputNumbers {
+                if item == num {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+//    func wakeUp(){
+//        //background에서 복귀
+//        print("wakeup")
+//
+//        Indicator.startAnimating(activityData)
+//        model.isNumberWait()
+//
+//        setSocketConnect()
+//    }
+    
+    
     
     // 아래 밖 여백 53 - 43.5 = 9.5
     
@@ -108,19 +223,116 @@ extension NumberVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
+        if items.count < 12 {
+            return items.count
+        } else {
+            return 12
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! NumCell
-        
-        cell.label.text = "\(items[indexPath.row])"
         cell.backgroundColor = .white
+        
+        guard let text = items[safe: self.start_index + indexPath.row] else {
+            cell.label.text = ""
+            return cell
+        }
+        cell.label.text = text
+        if indexPath.row >= 9 {
+            cell.label.textColor = UIColor.cftBrightSkyBlue
+        } else {
+            cell.label.textColor = UIColor(rgb: 125)
+        }
+        
         return cell
         
     }
 }
 
+extension NumberVC: NetworkCallback {
+    func networkResult(resultData: Any, code: String) {
+        print(code)
+        Indicator.stopAnimating()
+        
+//        if code == "reset_nusadfm" {
+//            Indicator.stopAnimating()
+//            self.navigationController?.popViewController(animated: true)
+//        }
+        
+        if code == model._isNumberWait {
+            guard let result = resultData as? WaitNumber else { return }
+            
+            if result.num.count != self.inputNumbers.count {
+                // 갔다 온 사이에 변화가 있으면
+                self.inputNumbers = result._num
+                setData()
+            }
+        }
+        
+        if code == model._resetNumber {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+//        if code == "isnumberwait123" {
+//            let json = resultData as! NSDictionary
+//
+//            var arr:[Int] = []
+//
+//            let _ = json["code"] as! String
+//            let num1 = Int(json["num1"] as! String)
+//            let num2 = Int(json["num2"] as! String)
+//            let num3 = Int(json["num3"] as! String)
+//            //            arr = [num1!, num2!, num3!]
+//
+//            if num1 != -1 && num1 != nil {
+//                print("append num1")
+//                arr.append(num1!)
+//            }
+//            if num2 != -1 && num2 != nil {
+//                print("append num2")
+//                arr.append(num2!)
+//            }
+//            if num3 != -1 && num3 != nil {
+//                print("append num3")
+//                arr.append(num3!)
+//            }
+//
+//            userPreferences.setValue(arr.count, forKey: "num_count")
+//            print(arr)
+//
+//            inputNumbers = arr
+//
+//            Indicator.stopAnimating()
+//        }
+    }
+    
+    func networkFailed(errorMsg: String, code: String) {
+        Indicator.stopAnimating()
+        
+        if code == model._isNumberWait {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        if code == model._resetNumber {
+            self.view.makeToast(errorMsg)
+        }
+    }
+    
+    func networkFailed() {
+        self.view.makeToast(String.noServer)
+        Indicator.stopAnimating()
+    }
+}
+
 class NumCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
+}
+
+extension Collection {
+    
+    /// Returns the element at the specified index iff it is within bounds, otherwise nil.
+    subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
 }

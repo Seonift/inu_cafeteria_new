@@ -14,6 +14,7 @@ import FirebaseInstanceID
 import FirebaseMessaging
 import NVActivityIndicatorView
 import Device
+import ObjectMapper
 
 class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizerDelegate {
     
@@ -25,6 +26,8 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     @IBOutlet weak var titleL: UILabel!
     
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var scroll_bottomConst: NSLayoutConstraint!
+    @IBOutlet weak var contentView: UIView!
     
     let tf_height:CGFloat = 40.0
     
@@ -38,9 +41,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     @IBOutlet var dummy2_Const: NSLayoutConstraint!
     @IBOutlet var dummy3_Const: NSLayoutConstraint!
     
-//    let names:[String] = ["제1학생식당", "미유", "카페드림 학생식당", "카페드림 도서관", "소담국밥", "김밥천국", "봉구스밥버거"]
-    
-//    var no_student:Bool = false
+    var menus:NSDictionary?
     
     lazy var numberModel:NumberModel = {
         return NumberModel(self)
@@ -48,6 +49,10 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     
     lazy var loginModel:LoginModel = {
         return LoginModel(self)
+    }()
+    
+    lazy var networkModel:NetworkModel = {
+        return NetworkModel(self)
     }()
     
     var nonClient:Bool = false // true면 비회원모드
@@ -61,6 +66,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
                 dummy2_Const.isActive = false
                 dummy3_Const.isActive = false
                 self.numView2.isHidden = true
+                self.numView3.isHidden = true
             case 2:
                 dummy1_Const.isActive = false
                 dummy2_Const.isActive = true
@@ -100,35 +106,9 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         }
     }
     
-//    @IBAction func numAddClicked(_ sender: Any) {
-//        if num_count < 3 {
-//            num_count += 1
-//        }
-//    }
-//
-//    @IBAction func numMinusClicked(_ sender: Any) {
-//        if num_count > 1 {
-//            num_count -= 1
-//        }
-//    }
-    
-//    var code:NSDictionary = [:] {
-//        didSet {
-//            names = code.allKeys as! [String]
-//            codes = code.allValues as! [String]
-//            if titleL != nil {
-//                if names.count > 0 {
-//                    self.titleL.text = names[0]
-//                }
-//            }
-//            if carouselView != nil {
-//                carouselView.reloadData()
-//            }
-//        }
-//    }
-    
-    var codes:[CodeObject] = [] {
+    var codes:[CafeCode] = [] {
         didSet {
+            codes = codes.sorted(by: { $0.order < $1.order })
             if carouselView != nil {
                 carouselView.reloadData()
                 
@@ -148,7 +128,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     override func viewDidLoad() {
         setupUI()
         
-       print(self.scrollView.frame.height)
+        print(self.scrollView.frame.height)
         print(self.scrollView.subviews[0].frame.height)
     }
     
@@ -158,7 +138,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         carouselView.bounds = carouselView.frame.insetBy(dx: 15, dy: 10)
         carouselView.isPagingEnabled = true
         
-//        confirmBtn.addTarget(self, action: #selector(confirmClicked(_:)), for: .touchUpInside)
+        confirmBtn.addTarget(self, action: #selector(confirmClicked(_:)), for: .touchUpInside)
         confirmBtn.layer.cornerRadius = 22
         confirmBtn.clipsToBounds = true
         confirmBtn.layer.borderColor = UIColor(rgb: 170).cgColor
@@ -174,8 +154,13 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         numView2.minusBtn.addTarget(self, action: #selector(addClicked(_:)), for: .touchUpInside)
         numView3.minusBtn.addTarget(self, action: #selector(addClicked(_:)), for: .touchUpInside)
         
+        addToolBar(textField: numView1.textField)
+        addToolBar(textField: numView2.textField)
+        addToolBar(textField: numView3.textField)
         
         self.navigationItem.rightBarButtonItem = moreButton
+        
+        scrollView.contentSize = contentView.frame.size
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -198,12 +183,12 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         unregisterForKeyboardNotifications()
         
         self.navigationItem.titleView = nil
-//        print("homevc willdisappear")
-        userPreferences.setValue(UIScreen.main.brightness, forKey: "brightness")
+        //        print("homevc willdisappear")
+        userPreferences.saveBrightness()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-//        print("homevc diddisappear")
+        //        print("homevc diddisappear")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -214,13 +199,16 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         if self.codes.count > 0 {
             self.titleL.text = codes[carouselView.currentItemIndex].name
         }
+        
+        if menus == nil {
+            networkModel.foodplan()
+        }
     }
     
     @objc func moreClicked(_ sender: UIBarButtonItem){
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "문의하기", style: .default, handler: { action in
-            guard let csrvc = MAIN.instantiateViewController(withIdentifier: "csrvc") as? CsrVC else { return }
-            self.navigationController?.pushViewController(csrvc, animated: true)
+            self.loginModel.version()
         }))
         alert.addAction(UIAlertAction(title: "앱 정보", style: .default, handler: { action in
             guard let vc = MAIN.instantiateViewController(withIdentifier: "infovc") as? InfoVC else { return }
@@ -235,7 +223,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
             }))
         } else {
             alert.addAction(UIAlertAction(title: "나가기", style: .default, handler: { action in
-                Utility.removeAllUserDefaults()
+                userPreferences.removeAllUserDefaults()
                 self.dismiss(animated: true, completion: nil)
             }))
         }
@@ -260,58 +248,58 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     }
     
     @objc func confirmClicked(_ sender: UIButton){
-        
-        
-        
-//        if self.numberTF.text == nil || self.numberTF.text?.count == 0 {
-//            self.view.makeToast("번호를 입력해주세요.")
-//        } else {
-//            self.view.endEditing(true)
-//
-//            Indicator.startAnimating(activityData)
-//
-//            let code = Int(codes[carouselView.currentItemIndex].code!)!
-//            let number = Int(numberTF.text!)!
-////            let model = NumberModel(self)
-//
-//            var num2 = -1
-//            var num3 = -1
-//
-//            switch self.num_count {
-//            case 3:
-//                if num3TF.text != nil && num3TF.text?.count != 0 {
-//                    num3 = Int(num3TF.text!)!
-//                }
-//                fallthrough
-//            case 2:
-//                if num2TF.text != nil && num2TF.text?.count != 0 {
-//                    num2 = Int(num2TF.text!)!
-//                }
-//                break
-//            default:
-//                print()
-//            }
-//
-//            numberModel.registerNumber(code: code, num1: number, num2: num2, num3: num3)
-//        }
+        if let item = codes[safe: carouselView.currentItemIndex] {
+            
+            if !item.alarm {
+                self.view.makeToast(String.noAlarm)
+                return
+            }
+            
+            var nums:[Int] = []
+            
+            switch num_count {
+            case 3:
+                if let num = numView3.number {
+                    nums.append(num)
+                }
+                fallthrough
+            case 2:
+                if let num = numView2.number {
+                    nums.append(num)
+                }
+                fallthrough
+            case 1:
+                if let num = numView1.number {
+                    nums.append(num)
+                } else {
+                    self.view.makeToast(String.noNumber)
+                    return
+                }
+            default:
+                print()
+            }
+            nums = nums.reversed()
+            
+            numberModel.registerNumber(code: item._no, nums: nums)
+        }
     }
     
     //resignFirsReponder
-//    @objc func handleTap_mainview(_ sender: UITapGestureRecognizer?) {
-////        print("tap")
-////        self.numView1.textField.resignFirstResponder()
-////        self.numView2.textField.resignFirstResponder()
-////        self.numView3.textField.resignFirstResponder()
-////        self.scrollView.setContentOffset(.zero, animated: true)
-//    }
-//
-//    //TapGesu
-//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-//        if (touch.view?.isDescendant(of: numView1))! || (touch.view?.isDescendant(of: numView2))! || (touch.view?.isDescendant(of: numView3))! || (touch.view?.isDescendant(of: confirmBtn))! {
-//            return true
-//        }
-//        return false
-//    }
+    //    @objc func handleTap_mainview(_ sender: UITapGestureRecognizer?) {
+    ////        print("tap")
+    ////        self.numView1.textField.resignFirstResponder()
+    ////        self.numView2.textField.resignFirstResponder()
+    ////        self.numView3.textField.resignFirstResponder()
+    ////        self.scrollView.setContentOffset(.zero, animated: true)
+    //    }
+    //
+    //    //TapGesu
+    //    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+    //        if (touch.view?.isDescendant(of: numView1))! || (touch.view?.isDescendant(of: numView2))! || (touch.view?.isDescendant(of: numView3))! || (touch.view?.isDescendant(of: confirmBtn))! {
+    //            return true
+    //        }
+    //        return false
+    //    }
     
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -330,221 +318,126 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
             if keyboardSize.height == 0.0 {
                 return
             }
-            
-//            self.scrollView.isScrollEnabled = true
-            
+            scroll_bottomConst.constant = keyboardSize.height
             UIView.animate(withDuration: duration, animations: {
                 self.view.layoutIfNeeded()
+                if let field = self.activeField {
+                    self.scrollView.contentOffset = CGPoint(x: 0, y: field.frame.origin.y)
+                }
+            }, completion: { _ in
+                self.scrollView.contentSize = self.contentView.frame.size
             })
         }
     }
     
     @objc func keyboardWillHide(note: NSNotification) {
         if let duration = note.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double {
-//            self.tableView_bottomConst.constant = 0
-//            self.scrollView.isScrollEnabled = false
+            scroll_bottomConst.constant = 0
             UIView.animate(withDuration: duration, animations: {
+                self.scrollView.contentOffset = .zero
                 self.view.layoutIfNeeded()
+            }, completion: { _ in
+                self.scrollView.contentSize = self.contentView.frame.size
             })
-        }
-        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showNumber" {
-            if let dest = segue.destination as? NumberVC {
-                dest.navigationItem.setHidesBackButton(true, animated: false)
-                dest.setTitleView()
-                
-                var nums:[Int] = []
-                switch num_count {
-                case 3:
-                    if let value = numView3.textField.text, let integer = Int(value) {
-                        nums.append(integer)
-                    }
-                    fallthrough
-                case 2:
-                    if let value = numView2.textField.text, let integer = Int(value) {
-                        nums.append(integer)
-                    }
-                    fallthrough
-                case 1:
-                    if let value = numView1.textField.text, let integer = Int(value) {
-                        nums.append(integer)
-                    }
-                default:
-                    print()
-                }
-                nums = nums.reversed()
-                
-//                let code = self.carouselView.currentItemIndex
-                let code = 1
-                dest.commonInit(code: code, numbers: nums)
-                dest.setupDrawerBtn()
-            }
-        }
-    }
-    
-//    override func performSegue(withIdentifier identifier: String, sender: Any?) {
-//        if identifier == "showNumber" {
-//            print(sender)
-//        }
-//    }
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "showNumber" {
-            switch self.num_count {
-            case 3:
-                if self.numView3.textField.text == nil || self.numView3.textField.text == "" {
-                    self.view.makeToast(String.noNumber)
-                    return false
-                }
-                fallthrough
-            case 2:
-                if self.numView2.textField.text == nil || self.numView2.textField.text == "" {
-                    self.view.makeToast(String.noNumber)
-                    return false
-                }
-                fallthrough
-            case 1:
-                if self.numView1.textField.text == nil || self.numView1.textField.text == "" {
-                    self.view.makeToast(String.noNumber)
-                    return false
-                }
-            default:
-                print()
-            }
-            return true
-        } else {
-            return true
         }
     }
 }
 
 extension HomeVC: NetworkCallback {
+    
     func networkResult(resultData: Any, code: String) {
-        if code == "register_num" {
-//            let index = self.carouselView.currentItemIndex
+        log.info(code)
+        Indicator.stopAnimating()
+        
+        if code == loginModel._logout {
+            goLogin()
+        }
+        
+        if code == numberModel._isNumberWait {
+            guard let result = resultData as? WaitNumber else { return }
             
+            let cafes = codes.filter { $0.no == result.cafecode }
+            if let item = cafes.first {
+                showNumVC(code: item._no, title: item.name, numbers: result._num, bgimg: item.bgimg)
+            }
+        }
+        
+        if code == numberModel._registerNumber {
             numberModel.isNumberWait()
         }
         
-        if code == "logout" {
-            logout_ncb()
+        if code == networkModel._foodplan {
+            if let result = resultData as? NSDictionary {
+                self.menus = result
+            }
         }
         
-        if code == "isnumberwait" {
-            let json = resultData as! NSDictionary
-            
-//            let arr = [userPreferences.integer(forKey: "num1"), userPreferences.integer(forKey: "num2"), userPreferences.integer(forKey: "num3")]
-//            showNumberVC(userPreferences.integer(forKey: "code"), arr)
-
-            var arr:[Int] = []
-            
-            if json.count == 0 || json.count == 1 {
-                Indicator.stopAnimating()
-                return
+        if code == loginModel._version {
+            if let result = resultData as? VerObject {
+                guard let csrvc = MAIN.instantiateViewController(withIdentifier: "csrvc") as? CsrVC else { return }
+                csrvc.log = result.ios?.log
+                self.navigationController?.pushViewController(csrvc, animated: true)
             }
-            
-            let code = json["code"] as! String
-            let num1 = Int(json["num1"] as! String)
-            let num2 = Int(json["num2"] as! String)
-            let num3 = Int(json["num3"] as! String)
-//            arr = [num1!, num2!, num3!]
-            
-            if num1 != -1 && num1 != nil {
-                print("append num1")
-                arr.append(num1!)
-            }
-            if num2 != -1 && num2 != nil {
-                print("append num2")
-                arr.append(num2!)
-            }
-            if num3 != -1 && num3 != nil {
-                print("append num3")
-                arr.append(num3!)
-            }
-            
-            
-//            arr.reverse()
-            print(arr)
-            Indicator.stopAnimating()
-            
-//            let name = getNameFromCode(code: Int(code)!)
-            let name = "테스트"
-            showNumberVC(name, Int(code)!, arr)
-
         }
     }
     
-    func networkFailed(code: Any) {
-        print("networkfailed")
-        if let str = code as? String {
-            print(str)
-            if str == "isnumberwait" {
-                //번호 못받아올 경우 대처.
-                numberModel.resetNumber()
-            }
-        }
-        
-        if let num = code as? Int {
-            if num == 400 {
-                self.view.makeToast(String.noServer)
-            }   
-        }
-        
+    func networkFailed(errorMsg: String, code: String) {
+        log.info(code)
         Indicator.stopAnimating()
+        
+        if code == loginModel._logout {
+            self.view.makeToast("다시 시도해주세요.")
+        }
+        
+        if code == numberModel._isNumberWait {
+            numberModel.resetNumber()
+        }
+        
+        if code == numberModel._registerNumber {
+            self.view.makeToast(errorMsg)
+        }
+        
+        if code == loginModel._version {
+            guard let csrvc = MAIN.instantiateViewController(withIdentifier: "csrvc") as? CsrVC else { return }
+            self.navigationController?.pushViewController(csrvc, animated: true)
+        }
+        
+        //        if code == "isnumberwait" {
+        //            //번호 못받아올 경우 대처.
+        //            numberModel.resetNumber()
+        //        }
+        //
+        //        if code == "register_num" {
+        //            self.view.makeToast(String.noServer)
+        //        }
     }
     
     func networkFailed() {
-        self.view.makeToast(String.noServer)
+        log.info("")
         Indicator.stopAnimating()
+        
+        self.view.makeToast(String.noServer)
     }
     
     func showNumberVC(_ name:String, _ code:Int, _ numbers: [Int]){
-        guard let vc = MAIN.instantiateViewController(withIdentifier: "mynumbervcnav") as? DefaultNC else { return }
-        let mynum = vc.childViewControllers[0] as! MyNumberVC
+    }
+    
+    func showNumVC(code: Int, title:String, numbers: [Int], bgimg: String?=nil) {
+        guard let vc = MAIN.instantiateViewController(withIdentifier: "numbervc") as? NumberVC else { return }
+        vc.commonInit(code: code, title: title, numbers: numbers)
         
-        mynum.bTitle = gsno(titleL.text)
-        mynum.numbers = numbers
-        mynum.name = name
-        mynum.code = code
+        vc.navigationItem.setHidesBackButton(true, animated: false)
+        vc.setTitleView()
+        vc.setupDrawerBtn()
         
+        if let bgimg = bgimg, bgimg != "" { vc.bgimg = bgimg }
         
-        if userPreferences.object(forKey: "no_student") != nil {
-            self.present(vc, animated: false, completion: nil)
-        } else {
-            let drawerC = KYDrawerController(drawerDirection: .left, drawerWidth: CGFloat.drawer_width)
-            drawerC.mainViewController = vc
-            
-            guard let drawer = MAIN.instantiateViewController(withIdentifier: "drawervc") as? DrawerVC else { return }
-            drawerC.drawerViewController = drawer
-//            drawer.delegate = mynum
-            
-            self.present(drawerC, animated: false, completion: nil)
-        }
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
 }
 
-extension HomeVC: UITextFieldDelegate {
-    
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        numberHint.isHidden = true
-//    }
-//
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        if textField.text == "" || textField.text?.count == 0 {
-//            numberHint.isHidden = false
-//        }
-//    }
-
-//    func textFieldDidChange(_ textField: UITextField){
-//        if textField.text != "" || textField.text?.characters.count != 0 {
-//            numberHint.isHidden = true
-//        } else {
-//            numberHint.isHidden = false
-//        }
-//    }
+extension HomeVC {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeField = textField
@@ -574,7 +467,7 @@ extension HomeVC: UITextFieldDelegate {
         
         return false
         
-//        return string == numberFiltered
+        //        return string == numberFiltered
     }
 }
 
@@ -583,7 +476,7 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
     func numberOfItems(in carousel: iCarousel) -> Int {
         return codes.count
     }
-
+    
     func carouselItemWidth(_ carousel: iCarousel) -> CGFloat {
         return Device.getWidth(width: 150)
     }
@@ -596,8 +489,10 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
         view.layer.cornerRadius = 5.0
         view.layer.masksToBounds = true
         
+        let item = codes[index]
+        
         //44 45
-        if true {
+        if item.menu != -1 {
             let imageView = UIImageView(image: UIImage(named: "icMenu"))
             imageView.contentMode = .scaleAspectFit
             let _width = Device.getWidth(width: 44)
@@ -605,34 +500,52 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
             let x = width - _width - Device.getWidth(width: 5)
             let y = width - _height - Device.getWidth(width: 5)
             imageView.frame = CGRect(x: x, y: y, width: _width, height: _height)
-//            imageView.setShadow(_width / 2, color: .gray)
             view.addSubview(imageView)
         }
         
         if codes.count > index {
-            let imagename = "s"+gsno(codes[index].code)
-            guard let image = UIImage(named: imagename) else {
-                view.image = UIImage(named: "home_default")
+            let imagename = "s\(codes[index].no)"
+            
+            if let image = UIImage(named: imagename) {
+                view.image = image
                 return view
+            } else {
+                if let url = URL(string: "\(BASE_URL + item.img)") {
+                    view.kf.setImage(with: url) { (_, error, _, _) in
+                        view.image = UIImage(named: "home_default")
+                    }
+                }
             }
-            view.image = image
-            return view
         }
-        view.image = UIImage(named: "home_default")
         return view
     }
     
     func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
-        print(gsno(codes[index].img))
+        numView1.textField.resignFirstResponder()
+        numView2.textField.resignFirstResponder()
+        numView3.textField.resignFirstResponder()
         
-        guard let vc = MAIN.instantiateViewController(withIdentifier: "menuvc") as? MenuVC else { return }
-        vc.modalPresentationStyle = .overCurrentContext
-        self.present(vc, animated: true, completion: nil)
+        if codes[index].menu != -1 && carousel.currentItemIndex == index {
+            guard let vc = MAIN.instantiateViewController(withIdentifier: "menuvc") as? MenuVC else { return }
+            vc.modalPresentationStyle = .overCurrentContext
+            let code = codes[index]._no
+            vc.code = code
+            if let menus = menus {
+                print(menus)
+                if let json = menus.value(forKey: "\(String(code))") as? NSArray {
+                    print(json)
+                    if let plan = Mapper<FoodMenu>().mapArray(JSONObject: json) {
+                        vc.foodPlan = plan
+                    }
+                }
+            }
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
         if option == iCarouselOption.spacing {
-//            print(value)
+            //            print(value)
             return value * 1.6
         }
         

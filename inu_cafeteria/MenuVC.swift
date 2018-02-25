@@ -16,6 +16,20 @@ class MenuVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableView_bottomConst: NSLayoutConstraint!
     
+//    var foodplan:[FoodObject.Food] = [] {
+//        didSet {
+//            foodplan = foodplan.sorted(by: { $0.type1 < $1.type1 })
+//        }
+//    }
+    
+    var foodPlan:[FoodMenu] = [] {
+        didSet {
+            foodPlan = foodPlan.sorted(by: { $0.title < $1.title })
+        }
+    }
+    
+    var code:Int = -1
+    
     private let cellId = "MenuCell"
     
     override func viewDidLoad() {
@@ -31,6 +45,7 @@ class MenuVC: UIViewController {
         
         bottomConst.constant = -Device.getHeight(height: 40)
         
+        tableView.tableFooterView = UIView()
         tableView.estimatedRowHeight = 48
         tableView.rowHeight = UITableViewAutomaticDimension
 //        384:379
@@ -68,26 +83,31 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.foodPlan.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MenuCell
         
-        switch indexPath.row {
-        case 0:
-            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "차돌순두부찌개(조식) 피망잡채&꽃빵 건파래볶음 열무된장무침 배추김치 3,000원 636kcal\r치즈닭갈비/삼겹살김치찌개 계란말이 맛살야채볶음 열무된장무침 배추김치 4,000 732/712kcal\r훈제오리철판구이(2인)")
-        case 1:
-            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "돈까스야끼파스타 크림스프 양배추샐러드 단무지 배추김치 3,500원 683kcal\r소불고기새싹비빔밤 미역국 배추김치 3,000원 707kcal")
-        case 2:
-            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "")
-        case 3:
-            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "삼겹살스테이크 도리아(불닭)\r치즈오븐스파게티(토마토)\r빠네파스타\r날치알베이컨파스타 불고기샐러드 닭가슴살샐러드\r훈제연어샐러드")
-        case 4:
-            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "")
-        default:
-            print()
-        }
+        let item = foodPlan[indexPath.row]
+        cell.commonInit(menu: item)
+//        let item = foodplan[indexPath.row]
+//        cell.commonInit(corner: item.type1, menu: item.menu)
+        
+//        switch indexPath.row {
+//        case 0:
+//            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "차돌순두부찌개(조식) 피망잡채&꽃빵 건파래볶음 열무된장무침 배추김치 3,000원 636kcal\r치즈닭갈비/삼겹살김치찌개 계란말이 맛살야채볶음 열무된장무침 배추김치 4,000 732/712kcal\r훈제오리철판구이(2인)")
+//        case 1:
+//            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "돈까스야끼파스타 크림스프 양배추샐러드 단무지 배추김치 3,500원 683kcal\r소불고기새싹비빔밤 미역국 배추김치 3,000원 707kcal")
+//        case 2:
+//            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "")
+//        case 3:
+//            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "삼겹살스테이크 도리아(불닭)\r치즈오븐스파게티(토마토)\r빠네파스타\r날치알베이컨파스타 불고기샐러드 닭가슴살샐러드\r훈제연어샐러드")
+//        case 4:
+//            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "")
+//        default:
+//            print()
+//        }
         
         return cell
     }
@@ -115,14 +135,15 @@ class MenuCell: UITableViewCell {
         self.contentView.addConstraint(bottomConst)
         self.contentView.layoutIfNeeded()
         self.separatorInset = UIEdgeInsetsMake(0, 2, 0, 2)
+        self.selectionStyle = .none
     }
     
-    func commonInit(corner: String, menu: String) {
-        self.cornerLabel.text = corner
-        self.menuLabel.text = menu
+    func commonInit(menu: FoodMenu){
+        self.cornerLabel.text = menu.title
+        self.menuLabel.text = menu.menu
         
-        if menu.isEmpty {
-//            corner_topConst.isActive = false
+        if menu.menu.isEmpty {
+            //            corner_topConst.isActive = false
             let const = NSLayoutConstraint(item: cornerLabel, attribute: .centerY, relatedBy: .equal, toItem: self.contentView, attribute: .centerY, multiplier: 1, constant: 0)
             const.priority = UILayoutPriority(rawValue: 1000)
             self.contentView.addConstraint(const)

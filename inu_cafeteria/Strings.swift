@@ -73,6 +73,18 @@ extension String {
     static var fail_version:String {
         return "버전 정보를 받아오는 데 실패했습니다. 다시 시도해주세요."
     }
+    
+    static var noToken:String {
+        return "토큰이 만료되었습니다. 다시 로그인해주세요."
+    }
+    
+    static var dbERROR:String {
+        return "서버 DB 오류"
+    }
+    
+    static var noAlarm:String {
+        return "해당 식당은 알림을 지원하지 않습니다."
+    }
 }
 
 extension CGFloat {

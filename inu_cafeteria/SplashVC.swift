@@ -10,7 +10,7 @@ import UIKit
 import KYDrawerController
 import Toast_Swift
 
-class SplashVC: UIViewController, NetworkCallback {
+class SplashVC: UIViewController {
     
     var delayInSeconds = 2.0
     
@@ -21,132 +21,25 @@ class SplashVC: UIViewController, NetworkCallback {
     
     override func viewDidLoad() {
         
-//        userPreferences.set(false, forKey: "auto_login")
-        
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         //서버 접속 불가일 때랑 인터넷 연결 안될경우 예외처리 필요함
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            self.loginModel.version()
-//            model.notice()
-        }//DispatchQueue.main.async
-    }
-    
-    func networkResult(resultData: Any, code: String) {
-        
-        if code == "version" {
-            
-            let result = resultData as! Bool
-            
-            if result == true {
-                let alert = CustomAlert.okAlert(title: "업데이트", message: String.update, positiveAction: { action in
-                    if let url = URL(string: "itms://itunes.apple.com/kr/app/id1336050737?mt=8"), UIApplication.shared.canOpenURL(url) {
-                        if #available(iOS 10.0, *) {
-                            UIApplication.shared.open(url)
-                        } else {
-                            // Fallback on earlier versions
-                            UIApplication.shared.openURL(url)
-                        }
-                    }
+            if Reachability.isConnectedToNetwork() {
+                self.loginModel.version()
+            } else {
+                let alert = CustomAlert.okAlert(positive: "재시도", title: "오류", message: "인터넷 연결을 확인해주세요.", positiveAction: { _ in
+                    self.loginModel.version()
                 })
                 self.present(alert, animated: true, completion: nil)
-//                let alertController = UIAlertController(title: "업데이트", message: String.update, preferredStyle: .alert)
-//                let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
-//
-//                }
-//                alertController.addAction(ok)
-//                self.present(alertController, animated: true, completion: nil)
-            } else {
-                loginModel.notice()
             }
         }
-        
-        if code == "auto_login" {
-            let result = resultData as! [CodeObject]
-            
-            self.showHome(result, false)
-        }
-        
-        if code == "notice" {
-            let result = resultData as! Notices
-            
-            
-            if userPreferences.object(forKey: "notice") == nil || !isDateToday(userPreferences.object(forKey: "notice") as! Date) {
-                //저장된 날짜가 없으면 다이얼로그 출력
-                //오늘 보인적이 없으면 보이기
-                showDialog(result)
-            } else {
-                self.showMain()
-            }
-            
-        }
     }
     
-    func isDateToday(_ date: Date) -> Bool {
-        //true면 오늘 날짜
-        let today = Date()
-        
-        if Calendar.current.compare(date, to: today, toGranularity: .day) == .orderedSame {
-            return true
-        }
-        return false
-    }
-    
-    func showDialog(_ result: Notices){
-        if result.all?.message != nil && result.all?.message != "" {
-            let alert = CustomAlert.noticeAlert(title: result.all?.title, message: result.all?.message, firstAction: { action in
-                self.showMain()
-            }, secondAction: { action in
-                userPreferences.setValue(Date(), forKey: "notice")
-                self.showMain()
-            })
-            self.present(alert, animated: true, completion: nil)
-            
-//            let alertController = UIAlertController(title: result.all?.title, message: result.all?.message, preferredStyle: .alert)
-//            let ok = UIAlertAction(title: "확인", style: .default) { res -> Void in
-//
-//            }
-//            let ok2 = UIAlertAction(title: "오늘하루안보기", style: .default) { res -> Void in
-//
-//            }
-//            alertController.addAction(ok)
-//            alertController.addAction(ok2)
-//            self.present(alertController, animated: true, completion: nil)
-        } else if result.ios?.message != nil && result.ios?.message != "" {
-            let alert = CustomAlert.noticeAlert(title: result.ios?.title, message: result.ios?.message, firstAction: { action in
-                self.showMain()
-            }, secondAction: { action in
-                userPreferences.setValue(Date(), forKey: "notice")
-                self.showMain()
-            })
-            self.present(alert, animated: true, completion: nil)
-            
-//            let alertController = UIAlertController(title: result.ios?.title, message: result.ios?.message, preferredStyle: .alert)
-//            let ok = UIAlertAlet ok = UIAlertAction(title: first, style: .default, handler: firstAction)ction(title: "확인", style: .default) { res -> Void in
-//                self.showMain()
-//            }
-//            let ok2 = UIAlertAction(title: "오늘하루안보기", style: .default) { res -> Void in
-//                userPreferences.setValue(Date(), forKey: "notice")
-//                self.showMain()
-//            }
-//            alertController.addAction(ok)
-//            alertController.addAction(ok2)
-//            self.present(alertController, animated: true, completion: nil)
-        } else {
-            self.showMain()
-        }
-    }
-    
-    func networkFailed(code: Any) {
-        failAutoLogin(code)
-    }
-    
-    func networkFailed() {
-        failAutoLogin(nil)
-    }
-    
-    func showMain(){
-        if userPreferences.bool(forKey: "auto_login") == true && userPreferences.object(forKey: "dtoken") != nil {
-            loginModel.autologin()
+    func showLogin(){
+        if userPreferences.isToken() {
+            loginModel.login()
         } else {
             let main_storyboard = UIStoryboard(name: "Main", bundle: nil)
             guard let main = main_storyboard.instantiateViewController(withIdentifier: "firststartvc") as? FirstStartVC else {return}
@@ -154,49 +47,174 @@ class SplashVC: UIViewController, NetworkCallback {
         }
     }
     
-    func failAutoLogin(_ code: Any?){
-        Utility.removeAllUserDefaults()
+//    func failAutoLogin(_ code: String?){
+//        userPreferences.removeAllUserDefaults()
+//
+//        if code == nil {
+//            self.view.makeToast(String.login_failed)
+//        } else {
+//            if code == "no_barcode" {
+//                self.view.makeToast(String.no_barcode)
+//            }
+//
+//            if code == "no_code" {
+//                self.view.makeToast(String.no_code)
+//            }
+//
+//            if code == "no_stuinfo" {
+//                self.view.makeToast(String.no_stuinfo)
+//            }
+//
+//            if code == "notice" {
+//                self.showLogin()
+//            }
+//
+//            if code == "version" {
+//                let alert = CustomAlert.okAlert(positive: "재시도", title: "오류", message: String.fail_version, positiveAction: { action in
+//                    let model = LoginModel(self)
+//                    model.version()
+//                })
+//                self.present(alert, animated: true, completion: nil)
+//
+//            }
+//        }
+//
+//        let main_storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        guard let main = main_storyboard.instantiateViewController(withIdentifier: "firststartvc") as? FirstStartVC else {return}
+//        self.present(main, animated: true, completion: nil)
+//    }
+}
+
+extension SplashVC: NetworkCallback {
+    
+    func networkResult(resultData: Any, code: String) {
+        log.info(code)
+        Indicator.stopAnimating()
         
-        if code == nil {
-            self.view.makeToast(String.login_failed)
-        } else {
-            if let str = code as? String {
-                if str == "no_barcode" {
-                    self.view.makeToast(String.no_barcode)
-                }
-                
-                if str == "no_code" {
-                    self.view.makeToast(String.no_code)
-                }
-                
-                if str == "no_stuinfo" {
-                    self.view.makeToast(String.no_stuinfo)
-                }
-                
-                if str == "notice" {
-                    self.showMain()
-                }
-                
-                if str == "version" {
-                    let alert = CustomAlert.okAlert(positive: "재시도", title: "오류", message: String.fail_version, positiveAction: { action in
-                        let model = LoginModel(self)
-                        model.version()
+        if code == loginModel._version {
+            if let result = resultData as? VerObject,
+                let latest = result.ios?.latest, let current = Bundle.main.versionNumber, let log = result.ios?.log {
+                if latest.compare(current, options: .numeric) == .orderedDescending {
+                   // 업데이트 필요
+                    let alert = CustomAlert.okAlert(title: "업데이트", message: String.update, positiveAction: { action in
+                        if let url = URL(string: String.appStore), UIApplication.shared.canOpenURL(url) {
+                            if #available(iOS 10.0, *) {
+                                UIApplication.shared.open(url)
+                            } else {
+                                // Fallback on earlier versions
+                                UIApplication.shared.openURL(url)
+                            }
+                        }
                     })
                     self.present(alert, animated: true, completion: nil)
-//                    let alertController = UIAlertController(title: "오류", message: , preferredStyle: .alert)
-//                    let ok = UIAlertAction(title: "재시도", style: .default) { res -> Void in
-//
-//                    }
-//                    alertController.addAction(ok)
-//                    self.present(alertController, animated: true, completion: nil)
-                    
-                    
+                } else {
+                    // 최신 버전
+                    self.loginModel.notice()
                 }
             }
         }
         
-        let main_storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let main = main_storyboard.instantiateViewController(withIdentifier: "firststartvc") as? FirstStartVC else {return}
-        self.present(main, animated: true, completion: nil)
+        if code == loginModel._notice {
+            guard let result = resultData as? NoticeObject,
+                let all = result.all, let ios = result.ios else { return }
+            
+            if let id = all.isVaild(), userPreferences.allNoticeCheck(id: id) {
+                // 전체 공지가 있으면 전체 공지 출력
+                let alert = CustomAlert.noticeAlert(title: all.title, message: all.message, firstAction: { action in
+                    self.showLogin()
+                }, secondAction: { action in
+                    // 하루 보지 않기
+                    userPreferences.setAllNoticeId(id: id)
+                    self.showLogin()
+                })
+                self.present(alert, animated: true, completion: nil)
+            } else if let id = ios.isVaild(), userPreferences.iOSNoticeCheck(id: id) {
+                let alert = CustomAlert.noticeAlert(title: ios.title, message: ios.message, firstAction: { action in
+                    self.showLogin()
+                }, secondAction: { action in
+                    // 하루 보지 않기
+                    userPreferences.setiOSNoticeId(id: id)
+                    self.showLogin()
+                })
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                self.showLogin()
+            }
+        }
+        
+        if code == loginModel._login {
+            loginModel.cafecode()
+        }
+        
+        if code == loginModel._logout {
+            self.showLogin()
+        }
+        
+        if code == loginModel._cafecode {
+            guard let result = resultData as? [CafeCode] else {return}
+            showHome(result, false)
+        }
+        
+//        if code == "auto_login" {
+//            let result = resultData as! [CodeObject]
+//
+//            self.showHome(result, false)
+//        }
+        
+//        if code == "notice" {
+//            let result = resultData as! Notices
+//
+//
+//            if userPreferences.object(forKey: "notice") == nil || !isDateToday(userPreferences.object(forKey: "notice") as! Date) {
+//                //저장된 날짜가 없으면 다이얼로그 출력
+//                //오늘 보인적이 없으면 보이기
+//                showDialog(result)
+//            } else {
+//                self.showLogin()
+//            }
+//
+//        }
     }
+    
+    func networkFailed(errorMsg: String, code: String) {
+        log.info(code)
+        Indicator.stopAnimating()
+        
+        if code == loginModel._version {
+            let alert = CustomAlert.okAlert(positive: "재시도", title: "오류", message: errorMsg, positiveAction: { _ in
+                self.loginModel.version()
+            })
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        if code == loginModel._notice {
+            self.showLogin()
+        }
+        
+        if code == loginModel._login {
+            self.view.makeToast(errorMsg)
+            loginModel.logout()
+        }
+        
+        if code == loginModel._logout {
+            self.showLogin()
+        }
+        
+        if code == loginModel._cafecode {
+            self.view.makeToast(errorMsg)
+        }
+        
+        
+//        failAutoLogin(code)
+    }
+    
+    
+    func networkFailed() {
+        log.info("")
+        Indicator.stopAnimating()
+        
+//        failAutoLogin(nil)
+        self.view.makeToast(String.noServer)
+    }
+    
 }

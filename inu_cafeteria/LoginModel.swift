@@ -9,89 +9,9 @@
 import UIKit
 import Alamofire
 import AlamofireObjectMapper
+import ObjectMapper
 
 class LoginModel: NetworkModel {
-    
-    func version(){
-        print("version")
-        
-        Alamofire.request("\(loginURL)version", method: .post, parameters: nil, headers: header).responseJSON { res in
-            switch res.result {
-            case .success:
-                let val = res.result.value as! NSDictionary
-                guard let storever = val["ios"] as? String else {
-                    self.view?.networkFailed(code: "version")
-                    return
-                }
-                
-                let currentv = gsno(Bundle.main.versionNumber)
-                
-                if storever.compare(currentv, options: .numeric) == .orderedDescending {
-                    //업데이트 필요
-                    self.view?.networkResult(resultData: true, code: "version")
-                } else {
-                    self.view?.networkResult(resultData: false, code: "version")
-                }
-                
-            case .failure(let error):
-                print(error)
-                self.view?.networkFailed(code: "version")
-            }
-        }
-    }
-    
-    func notice() {
-        print("notice")
-        
-        
-        Alamofire.request("\(loginURL)server_message.json").responseObject { (res:DataResponse<Notices>) in
-            switch res.result {
-            case .success:
-                if let val = res.result.value {
-                    self.view?.networkResult(resultData: val, code: "notice")
-                } else {
-                    self.view?.networkFailed(code: "notice")
-                }
-                
-                
-                
-            case .failure(let error):
-                print(error)
-                self.view?.networkFailed(code: "notice")
-            }
-        }
-    }
-    
-    func no_student() {
-        print("no_student")
-        
-        Alamofire.request("\(loginURL)getcode").responseObject { (res:DataResponse<InfoObject>) in
-            let code = res.response?.statusCode
-            switch res.result {
-            case .success:
-                print("success")
-                let result = res.result.value
-                if code == 200 {
-                    guard let codes = result?.code else {
-                        self.view?.networkFailed(code: "no_code")
-                        return
-                    }
-                    self.view?.networkResult(resultData: codes, code: "no_student")
-                } else {
-                    //                    if code == 400 {
-                    self.view?.networkFailed(code: gino(code))
-                }
-            case .failure(let error):
-                print(error)
-                //                print("code:\(code)")
-                if code != nil {
-                    self.view?.networkFailed(code: gino(code))
-                } else {
-                    self.view?.networkFailed()
-                }
-            }
-        }
-    }
     
 //    func message(){
 //        print("message")
@@ -105,7 +25,7 @@ class LoginModel: NetworkModel {
 //                
 //            case .failure(let error):
 //                print(error)
-//                self.view?.networkFailed(code: "message")
+//                self.view?.networkFailed(errorMsg: "", code: "message")
 //            }
 //        }
 //    }
@@ -128,7 +48,7 @@ class LoginModel: NetworkModel {
 //                    print(result)
 //                    self.view?.networkResult(resultData: result, code: "stuinfo")
 //                } else if code == 400 {
-//                    self.view?.networkFailed(code: "stuinfo")
+//                    self.view?.networkFailed(errorMsg: "", code: "stuinfo")
 //                }
 //            case .failure(let error):
 //                print(error)
@@ -137,68 +57,48 @@ class LoginModel: NetworkModel {
 //        }
 //    }
     
-    func logout(){
-        Utility.removeAllUserDefaults()
-        let model = FlagModel()
-        model.deactiveBarcode(0)
-        DispatchQueue.main.async {
-            Alamofire.request("\(loginURL)logout", method: .post, parameters: nil).response { res in
-                //            print(res)
-                let code = gino(res.response?.statusCode)
-                print(code)
-                
-                if code == 200 {
-                    self.view?.networkResult(resultData: true, code: "logout")    
-                } else if code == 400 {
-                    self.view?.networkFailed(code: code)
-                } else {
-                    self.view?.networkFailed()
-                }
-            }
-        }
-        
-    }
     
-    func autologin(){
-        print("autologin")
-        let dtoken = userPreferences.string(forKey: "dtoken")!
-        let sno = userPreferences.string(forKey: "sno")!
-        let params:[String:Any] = [
-            "dtoken" : dtoken,
-            "sno" : sno
-        ]
-        print(params)
-        
-        Alamofire.request("\(loginURL)autologin", method: .post, parameters: params, headers: header).responseObject { (res: DataResponse<InfoObject>) in
-            let code = res.response?.statusCode
-            
-            switch res.result {
-            case .success:
-                print("success")
-                if code == 200 {
-                    userPreferences.setValue(sno, forKey: "sno")
-                    let result = res.result.value
-                    //여기도 바코드 넣기
-                    guard let codes = result?.code else {
-                        self.view?.networkFailed(code: "no_code")
-                        return
-                    }
-                    guard let stu_info = result?.stu_info else {
-                        self.view?.networkFailed(code: "no_stuinfo")
-                        return
-                    }
-                    userPreferences.setValue(stu_info.name, forKey: "name")
-                    userPreferences.setValue(stu_info.dep, forKey: "dep")
-                    self.view?.networkResult(resultData: codes, code: "auto_login")
-                } else if code == 400 {
-                    self.view?.networkFailed(code: gino(code))
-                }
-            case .failure(let error):
-                print(error)
-                self.view?.networkFailed()
-            }
-            
-        }
+    
+//    func autologin(){
+//        print("autologin")
+//        let dtoken = userPreferences.string(forKey: "dtoken")!
+//        let sno = userPreferences.string(forKey: "sno")!
+//        let params:[String:Any] = [
+//            "dtoken" : dtoken,
+//            "sno" : sno
+//        ]
+//        print(params)
+//        
+//        Alamofire.request("\(loginURL)autologin", method: .post, parameters: params, headers: header).responseObject { (res: DataResponse<InfoObject>) in
+//            let code = res.response?.statusCode
+//            
+//            switch res.result {
+//            case .success:
+//                print("success")
+//                if code == 200 {
+//                    userPreferences.setValue(sno, forKey: "sno")
+//                    let result = res.result.value
+//                    //여기도 바코드 넣기
+//                    guard let codes = result?.code else {
+//                        self.view?.networkFailed(errorMsg: "", code: "no_code")
+//                        return
+//                    }
+//                    guard let stu_info = result?.stu_info else {
+//                        self.view?.networkFailed(errorMsg: "", code: "no_stuinfo")
+//                        return
+//                    }
+//                    userPreferences.setValue(stu_info.name, forKey: "name")
+//                    userPreferences.setValue(stu_info.dep, forKey: "dep")
+//                    self.view?.networkResult(resultData: codes, code: "auto_login")
+//                } else if code == 400 {
+//                    self.view?.networkFailed(errorMsg: "", code: gino(code))
+//                }
+//            case .failure(let error):
+//                print(error)
+//                self.view?.networkFailed()
+//            }
+//            
+//        }
         
 //        Alamofire.request("\(loginURL)autologin", method: .post, parameters: params, headers: header).responseObject { (res:DataResponse<LoginObject>) in
 //            let code = gino(res.response?.statusCode)
@@ -212,81 +112,82 @@ class LoginModel: NetworkModel {
 //                }
 //                self.view?.networkResult(resultData: true, code: "auto_login")
 //            } else if code == 400 {
-//                self.view?.networkFailed(code: code)
+//                self.view?.networkFailed(errorMsg: "", code: code)
 //            } else {
 //                self.view?.networkFailed()
 //            }
 //        }
-    }
+//    }
     
-    func login(_ sno:String, _ pw:String, _ auto:Bool?){
-        print("login")
-//        userPreferences.setValue(sno, forKey: "sno")
-        userPreferences.setValue(auto, forKey: "auto_login")
-        
-//        self.view?.networkResult(resultData: true, code: "login")
-        
-        var autoS:String = ""
-        if auto == true {
-            autoS = "true"
-        } else {
-            autoS = "false"
-        }
-        
-        let params:[String:Any]  = [
-            "sno" : sno,
-            "pw" : pw,
-            "device" : "iOS",
-            "auto" : autoS
-        ]
-        
-        Alamofire.request("\(loginURL)postlogin", method: .post, parameters: params, headers: header).responseObject { (res: DataResponse<InfoObject>) in
-            let code = res.response?.statusCode
-            print("code:\(code)")
-            
-            switch res.result {
-            case .success:
-                print("success")
-                
-                if code == 200 {
-                    userPreferences.setValue(sno, forKey: "sno")
-                    let result = res.result.value
-                    if let dtoken = result?.login?.dtoken {
-                        print("dtoken:\(dtoken)")
-                        userPreferences.setValue(dtoken, forKey: "dtoken")
-                    }
-                    if let barcode = result?.login?.barcode {
-                        print("barcode:\(barcode)")
-                        userPreferences.setValue(barcode, forKey: "barcode")
-                    }
-                    guard let codes = result?.code else {
-                        self.view?.networkFailed(code: "no_code")
-                        return
-                    }
-                    guard let stu_info = result?.stu_info else {
-                        self.view?.networkFailed(code: "no_stuinfo")
-                        return
-                    }
-                    userPreferences.setValue(stu_info.name, forKey: "name")
-                    userPreferences.setValue(stu_info.dep, forKey: "dep")
-                    self.view?.networkResult(resultData: codes, code: "login")
-                } else {
-//                    if code == 400 {
-                    self.view?.networkFailed(code: gino(code))
-                }
-            case .failure(let error):
-                print("failure")
-                print(error)
-//                print("code:\(code)")
-                if code != nil {
-                    self.view?.networkFailed(code: gino(code))
-                } else {
-                    self.view?.networkFailed()
-                }
-            }
-            
-        }
-        
+    
+//    func login(_ sno:String, _ pw:String, _ auto:Bool?){
+//        print("login")
+////        userPreferences.setValue(sno, forKey: "sno")
+//        userPreferences.setValue(auto, forKey: "auto_login")
+//
+////        self.view?.networkResult(resultData: true, code: "login")
+//
+//        var autoS:String = ""
+//        if auto == true {
+//            autoS = "true"
+//        } else {
+//            autoS = "false"
+//        }
+//
+//        let params:[String:Any]  = [
+//            "sno" : sno,
+//            "pw" : pw,
+//            "device" : "iOS",
+//            "auto" : autoS
+//        ]
+//
+//        Alamofire.request("\(loginURL)postlogin", method: .post, parameters: params, headers: header).responseObject { (res: DataResponse<InfoObject>) in
+//            let code = res.response?.statusCode
+//            print("code:\(code)")
+//
+//            switch res.result {
+//            case .success:
+//                print("success")
+//
+//                if code == 200 {
+//                    userPreferences.setValue(sno, forKey: "sno")
+//                    let result = res.result.value
+//                    if let dtoken = result?.login?.dtoken {
+//                        print("dtoken:\(dtoken)")
+//                        userPreferences.setValue(dtoken, forKey: "dtoken")
+//                    }
+//                    if let barcode = result?.login?.barcode {
+//                        print("barcode:\(barcode)")
+//                        userPreferences.setValue(barcode, forKey: "barcode")
+//                    }
+//                    guard let codes = result?.code else {
+//                        self.view?.networkFailed(errorMsg: "", code: "no_code")
+//                        return
+//                    }
+//                    guard let stu_info = result?.stu_info else {
+//                        self.view?.networkFailed(errorMsg: "", code: "no_stuinfo")
+//                        return
+//                    }
+//                    userPreferences.setValue(stu_info.name, forKey: "name")
+//                    userPreferences.setValue(stu_info.dep, forKey: "dep")
+//                    self.view?.networkResult(resultData: codes, code: "login")
+//                } else {
+////                    if code == 400 {
+//                    self.view?.networkFailed(errorMsg: "", code: gino(code))
+//                }
+//            case .failure(let error):
+//                print("failure")
+//                print(error)
+////                print("code:\(code)")
+//                if code != nil {
+//                    self.view?.networkFailed(errorMsg: "", code: gino(code))
+//                } else {
+//                    self.view?.networkFailed()
+//                }
+//            }
+//
+//        }
+    
 //        Alamofire.request("\(loginURL)postlogin", method: .post, parameters: params, headers: header).responseObject { (res: DataResponse<LoginObject>) in
 //            
 //            let code = res.response?.statusCode
@@ -307,7 +208,7 @@ class LoginModel: NetworkModel {
 //                    }
 //                    self.view?.networkResult(resultData: true, code: "login")
 //                } else if code == 400 {
-//                    self.view?.networkFailed(code: gino(code))
+//                    self.view?.networkFailed(errorMsg: "", code: gino(code))
 //                }
 //            case .failure(let error):
 //                print(error)
@@ -342,7 +243,7 @@ class LoginModel: NetworkModel {
 //            OperationQueue.main.addOperation({ () -> Void in
 //                if dataString == "false" {
 //                    
-//                    self.view?.networkFailed(code: "400")
+//                    self.view?.networkFailed(errorMsg: "", code: "400")
 //                    
 //                } else {
 //                    
@@ -353,5 +254,166 @@ class LoginModel: NetworkModel {
 //        }
 //        
 //        task.resume()
+//    }
+    
+    let _login = "login"
+    let _cafecode = "cafecode.json"
+    let _logout = "logout"
+    let _version = "version.json"
+    let _notice = "notice.json"
+    
+    /////////
+    
+    func login(sno: String, pw: String, auto: Bool){
+        Indicator.startAnimating(activityData)
+        
+        let params = [
+            "sno" : sno,
+            "pw" : pw,
+            "auto" : auto ? "1" : "0",
+            "device" : "ios"
+        ]
+        userPreferences.saveSNO(sno: sno)
+        post(function: _login, type: LoginObject.self, params: params)
     }
+    
+    func login(){
+        // 자동로그인
+        if let token = userPreferences.getToken() {
+            let params = [
+                "token" : token
+            ]
+            post(function: _login, type: LoginObject.self, params: params)
+        } else {
+            self.view?.networkFailed(errorMsg: String.noToken, code: _login)
+        }
+    }
+    
+    func cafecode() {
+        get(function: _cafecode, type: CafeCode.self)
+    }
+    
+    func logout() {
+        if let token = userPreferences.getToken() {
+            let params = [
+                "token" : token
+            ]
+            post(function: _logout, params: params)
+        } else {
+            self.view?.networkResult(resultData: true, code: _logout)
+        }
+        userPreferences.removeAllUserDefaults()
+    }
+    
+    func version(){
+        get(function: _version, type: VerObject.self)
+    }
+    
+    func notice(){
+        get(function: _notice, type: NoticeObject.self)
+    }
+    
+    ///////
+    
+//    func logout(){
+//        userPreferences.removeAllUserDefaults()
+//        let model = FlagModel()
+//        model.deactiveBarcode(0)
+//        DispatchQueue.main.async {
+//            Alamofire.request("\(loginURL)logout", method: .post, parameters: nil).response { res in
+//                //            print(res)
+//                let code = gino(res.response?.statusCode)
+//                print(code)
+//
+//                if code == 200 {
+//                    self.view?.networkResult(resultData: true, code: "logout")
+//                } else if code == 400 {
+//                    self.view?.networkFailed(errorMsg: "", code: code)
+//                } else {
+//                    self.view?.networkFailed()
+//                }
+//            }
+//        }
+//    }
+//
+//    func version2(){
+//        print("version")
+//
+//        Alamofire.request("\(loginURL)version", method: .post, parameters: nil, headers: header).responseJSON { res in
+//            switch res.result {
+//            case .success:
+//                let val = res.result.value as! NSDictionary
+//                guard let storever = val["ios"] as? String else {
+//                    self.view?.networkFailed(errorMsg: "", code: "version")
+//                    return
+//                }
+//
+//
+//
+//                if storever.compare(currentv, options: .numeric) == .orderedDescending {
+//                    //업데이트 필요
+//                    self.view?.networkResult(resultData: true, code: "version")
+//                } else {
+//                    self.view?.networkResult(resultData: false, code: "version")
+//                }
+//
+//            case .failure(let error):
+//                print(error)
+//                self.view?.networkFailed(errorMsg: "", code: "version")
+//            }
+//        }
+//    }
+//
+//    func notice() {
+//        print("notice")
+//
+//
+//        Alamofire.request("\(loginURL)server_message.json").responseObject { (res:DataResponse<Notices>) in
+//            switch res.result {
+//            case .success:
+//                if let val = res.result.value {
+//                    self.view?.networkResult(resultData: val, code: "notice")
+//                } else {
+//                    self.view?.networkFailed(errorMsg: "", code: "notice")
+//                }
+//
+//
+//
+//            case .failure(let error):
+//                print(error)
+//                self.view?.networkFailed(errorMsg: "", code: "notice")
+//            }
+//        }
+//    }
+//
+//    func no_student() {
+//        print("no_student")
+//
+//        Alamofire.request("\(loginURL)getcode").responseObject { (res:DataResponse<InfoObject>) in
+//            let code = res.response?.statusCode
+//            switch res.result {
+//            case .success:
+//                print("success")
+//                let result = res.result.value
+//                if code == 200 {
+//                    guard let codes = result?.code else {
+//                        self.view?.networkFailed(errorMsg: "", code: "no_code")
+//                        return
+//                    }
+//                    self.view?.networkResult(resultData: codes, code: "no_student")
+//                } else {
+//                    //                    if code == 400 {
+//                    self.view?.networkFailed(errorMsg: "", code: gino(code))
+//                }
+//            case .failure(let error):
+//                print(error)
+//                //                print("code:\(code)")
+//                if code != nil {
+//                    self.view?.networkFailed(errorMsg: "", code: gino(code))
+//                } else {
+//                    self.view?.networkFailed()
+//                }
+//            }
+//        }
+//    }
 }
