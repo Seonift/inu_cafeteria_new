@@ -65,7 +65,7 @@ class NumberModel: NetworkModel {
     }
     
     func resetNumber() {
-        Indicator.startAnimating(activityData)
+//        Indicator.startAnimating(activityData)
         
         guard let token = InstanceID.instanceID().token() else {
             self.view?.networkFailed(errorMsg: String.noToken, code: _resetNumber)

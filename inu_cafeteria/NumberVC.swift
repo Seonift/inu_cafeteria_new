@@ -40,7 +40,7 @@ class NumberVC: UIViewController {
         return model
     }()
     
-//    var items:[Int] = [5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000]
+    //    var items:[Int] = [5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000]
     
     @IBOutlet weak var numLabel1: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -66,13 +66,15 @@ class NumberVC: UIViewController {
         super.viewWillAppear(animated)
         
         setSocketConnect()
+        
+        Indicator.startAnimating(activityData)
         model.isNumberWait()
         
-       setData()
+        setData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(comebackForeground), name: .UIApplicationWillEnterForeground, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: .UIApplicationDidEnterBackground, object: nil)
-
+        
     }
     
     @objc func comebackForeground() {
@@ -119,7 +121,7 @@ class NumberVC: UIViewController {
         titleLabel.text = cafeTitle
         
         let imagename = "sss"+String(code)
-//
+        //
         if let image = UIImage(named: imagename) {
             titleIV.image = image
         } else {
@@ -195,15 +197,15 @@ class NumberVC: UIViewController {
         return false
     }
     
-//    func wakeUp(){
-//        //background에서 복귀
-//        print("wakeup")
-//
-//        Indicator.startAnimating(activityData)
-//        model.isNumberWait()
-//
-//        setSocketConnect()
-//    }
+    //    func wakeUp(){
+    //        //background에서 복귀
+    //        print("wakeup")
+    //
+    //        Indicator.startAnimating(activityData)
+    //        model.isNumberWait()
+    //
+    //        setSocketConnect()
+    //    }
     
     
     
@@ -255,10 +257,10 @@ extension NumberVC: NetworkCallback {
         print(code)
         Indicator.stopAnimating()
         
-//        if code == "reset_nusadfm" {
-//            Indicator.stopAnimating()
-//            self.navigationController?.popViewController(animated: true)
-//        }
+        //        if code == "reset_nusadfm" {
+        //            Indicator.stopAnimating()
+        //            self.navigationController?.popViewController(animated: true)
+        //        }
         
         if code == model._isNumberWait {
             guard let result = resultData as? WaitNumber else { return }
@@ -274,37 +276,37 @@ extension NumberVC: NetworkCallback {
             self.navigationController?.popViewController(animated: true)
         }
         
-//        if code == "isnumberwait123" {
-//            let json = resultData as! NSDictionary
-//
-//            var arr:[Int] = []
-//
-//            let _ = json["code"] as! String
-//            let num1 = Int(json["num1"] as! String)
-//            let num2 = Int(json["num2"] as! String)
-//            let num3 = Int(json["num3"] as! String)
-//            //            arr = [num1!, num2!, num3!]
-//
-//            if num1 != -1 && num1 != nil {
-//                print("append num1")
-//                arr.append(num1!)
-//            }
-//            if num2 != -1 && num2 != nil {
-//                print("append num2")
-//                arr.append(num2!)
-//            }
-//            if num3 != -1 && num3 != nil {
-//                print("append num3")
-//                arr.append(num3!)
-//            }
-//
-//            userPreferences.setValue(arr.count, forKey: "num_count")
-//            print(arr)
-//
-//            inputNumbers = arr
-//
-//            Indicator.stopAnimating()
-//        }
+        //        if code == "isnumberwait123" {
+        //            let json = resultData as! NSDictionary
+        //
+        //            var arr:[Int] = []
+        //
+        //            let _ = json["code"] as! String
+        //            let num1 = Int(json["num1"] as! String)
+        //            let num2 = Int(json["num2"] as! String)
+        //            let num3 = Int(json["num3"] as! String)
+        //            //            arr = [num1!, num2!, num3!]
+        //
+        //            if num1 != -1 && num1 != nil {
+        //                print("append num1")
+        //                arr.append(num1!)
+        //            }
+        //            if num2 != -1 && num2 != nil {
+        //                print("append num2")
+        //                arr.append(num2!)
+        //            }
+        //            if num3 != -1 && num3 != nil {
+        //                print("append num3")
+        //                arr.append(num3!)
+        //            }
+        //
+        //            userPreferences.setValue(arr.count, forKey: "num_count")
+        //            print(arr)
+        //
+        //            inputNumbers = arr
+        //
+        //            Indicator.stopAnimating()
+        //        }
     }
     
     func networkFailed(errorMsg: String, code: String) {
