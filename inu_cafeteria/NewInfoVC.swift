@@ -10,6 +10,7 @@ import UIKit
 import Device
 
 class NewInfoVC: UIViewController {
+    @IBOutlet weak var logoIV: UIImageView!
     @IBOutlet weak var verLabel: UILabel!
     @IBAction func backClicked(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -42,8 +43,13 @@ class NewInfoVC: UIViewController {
             self.verLabel.text = "v \(version)"
         }
         
-        log.debug(scrollView.bounds)
-        log.debug(contentView.bounds)
+//        log.debug(scrollView.bounds)
+//        log.debug(contentView.bounds)
+        
+        logoIV.layer.cornerRadius = 37.0
+        logoIV.layer.borderWidth = 1.0
+        logoIV.layer.borderColor = UIColor(rgb: 240).cgColor
+        logoIV.clipsToBounds = true
         
         
 

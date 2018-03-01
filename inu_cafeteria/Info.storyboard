@@ -53,11 +53,8 @@
                                                     <action selector="backClicked:" destination="HKJ-KI-D0G" eventType="touchUpInside" id="80l-FO-KAd"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="974" translatesAutoresizingMaskIntoConstraints="NO" id="eRl-CX-rHK">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="eRl-CX-rHK">
                                                 <rect key="frame" x="117" y="64" width="141" height="141"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info_logo" translatesAutoresizingMaskIntoConstraints="NO" id="GZW-ct-tS5">
-                                                <rect key="frame" x="136.5" y="92" width="102" height="85"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v 1.20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFl-RK-1xI">
                                                 <rect key="frame" x="0.0" y="226.5" width="375" height="17"/>
@@ -195,7 +192,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wWx-sj-g77">
                                                 <rect key="frame" x="158" y="471.5" width="59" height="126.5"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgMj" translatesAutoresizingMaskIntoConstraints="NO" id="WIZ-AU-4fP">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgGy" translatesAutoresizingMaskIntoConstraints="NO" id="WIZ-AU-4fP">
                                                         <rect key="frame" x="0.0" y="0.0" width="59" height="78"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1lP-Ww-gP2" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
@@ -651,22 +648,18 @@
                                             <constraint firstItem="xyu-aY-3Em" firstAttribute="height" secondItem="tQC-Ya-03F" secondAttribute="height" multiplier="21.5:1012" id="8MG-p5-xbB"/>
                                             <constraint firstItem="Bvg-e2-U15" firstAttribute="leading" secondItem="evk-7D-C2b" secondAttribute="leading" id="8bT-K9-sTj"/>
                                             <constraint firstItem="zga-us-ie1" firstAttribute="centerX" secondItem="tQC-Ya-03F" secondAttribute="centerX" id="8hA-YM-f67"/>
-                                            <constraint firstItem="GZW-ct-tS5" firstAttribute="centerY" secondItem="eRl-CX-rHK" secondAttribute="centerY" id="9Pw-d0-vKj"/>
                                             <constraint firstItem="lCd-1m-szd" firstAttribute="leading" secondItem="aJz-hp-jG9" secondAttribute="trailing" id="BJz-V8-vVg"/>
                                             <constraint firstItem="3vM-TZ-RgF" firstAttribute="height" secondItem="zsh-jF-DFE" secondAttribute="height" id="Brw-C0-oOz"/>
                                             <constraint firstItem="aJz-hp-jG9" firstAttribute="bottom" secondItem="zga-us-ie1" secondAttribute="bottom" id="CPU-Lw-DCF"/>
                                             <constraint firstItem="XHy-Ac-YU4" firstAttribute="leading" secondItem="tQC-Ya-03F" secondAttribute="leading" id="DKt-m1-sqE"/>
-                                            <constraint firstItem="GZW-ct-tS5" firstAttribute="width" secondItem="eRl-CX-rHK" secondAttribute="width" multiplier="102:141" id="Dnq-wY-k0Z"/>
                                             <constraint firstItem="CkI-Zu-Pru" firstAttribute="top" secondItem="zga-us-ie1" secondAttribute="top" id="Dpz-QU-7fe"/>
                                             <constraint firstAttribute="trailing" secondItem="gFl-RK-1xI" secondAttribute="trailing" id="DzQ-wl-xcH"/>
                                             <constraint firstItem="eNy-4m-rl0" firstAttribute="centerX" secondItem="tQC-Ya-03F" secondAttribute="centerX" id="E0R-AX-a1v"/>
-                                            <constraint firstItem="GZW-ct-tS5" firstAttribute="centerX" secondItem="eRl-CX-rHK" secondAttribute="centerX" id="E1i-BA-BEB"/>
                                             <constraint firstItem="HBc-z1-Ph0" firstAttribute="width" secondItem="tQC-Ya-03F" secondAttribute="width" multiplier="59:375" id="EPE-tz-SbQ"/>
                                             <constraint firstItem="UyD-5d-kaV" firstAttribute="leading" secondItem="tQC-Ya-03F" secondAttribute="leading" id="Goh-b5-g5r"/>
                                             <constraint firstItem="UJD-1e-0fi" firstAttribute="height" secondItem="HBc-z1-Ph0" secondAttribute="height" id="GuR-82-osd"/>
                                             <constraint firstItem="Bvg-e2-U15" firstAttribute="height" secondItem="tQC-Ya-03F" secondAttribute="height" multiplier="49:1012" id="HIz-DC-JLp"/>
                                             <constraint firstAttribute="trailing" secondItem="xyu-aY-3Em" secondAttribute="trailing" id="HkG-TC-XKm"/>
-                                            <constraint firstItem="GZW-ct-tS5" firstAttribute="height" secondItem="eRl-CX-rHK" secondAttribute="height" multiplier="85:141" id="IWk-1G-s4x"/>
                                             <constraint firstItem="NVA-ui-g1K" firstAttribute="centerX" secondItem="HBc-z1-Ph0" secondAttribute="centerX" id="Iy9-sl-d8z"/>
                                             <constraint firstItem="kbg-Eo-Z6g" firstAttribute="height" secondItem="tQC-Ya-03F" secondAttribute="height" multiplier="76.5:1012" id="J3s-gA-pgv"/>
                                             <constraint firstItem="zsh-jF-DFE" firstAttribute="top" secondItem="Bvg-e2-U15" secondAttribute="bottom" id="Jmk-Xr-rbL"/>
@@ -774,6 +767,7 @@
                     </view>
                     <connections>
                         <outlet property="contentView" destination="tQC-Ya-03F" id="5T0-pG-Y2n"/>
+                        <outlet property="logoIV" destination="eRl-CX-rHK" id="EhN-MA-4wg"/>
                         <outlet property="scrollView" destination="Nsu-b1-WQo" id="mSL-va-Vml"/>
                         <outlet property="verLabel" destination="gFl-RK-1xI" id="bog-Jm-1K3"/>
                     </connections>
@@ -785,9 +779,9 @@
     </scenes>
     <resources>
         <image name="8907" width="83" height="83"/>
-        <image name="974" width="156" height="156"/>
         <image name="btnBack_n" width="18" height="18"/>
         <image name="imgGayoon" width="63" height="110"/>
+        <image name="imgGy" width="63" height="81"/>
         <image name="imgHs" width="60" height="77"/>
         <image name="imgJaemoon" width="63" height="110"/>
         <image name="imgJinwoong" width="62" height="110"/>
@@ -796,6 +790,6 @@
         <image name="imgSj" width="59" height="78"/>
         <image name="imgSoonjae" width="76" height="110"/>
         <image name="imgSunil" width="64" height="110"/>
-        <image name="info_logo" width="102" height="85"/>
+        <image name="logoWhite" width="141" height="141"/>
     </resources>
 </document>

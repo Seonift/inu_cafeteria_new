@@ -1545,6 +1545,12 @@
                                     <outlet property="delegate" destination="VcJ-OW-J0d" id="IK6-73-2eh"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* 문의사항 전송 시 기기 정보, 학번 수집에 동의합니다." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uga-7m-cfA">
+                                <rect key="frame" x="29" y="253.5" width="261" height="14"/>
+                                <fontDescription key="fontDescription" name="KoPubDotumPM" family="KoPubDotum_Pro" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1566,6 +1572,8 @@
                             <constraint firstItem="Lud-yj-gjR" firstAttribute="top" secondItem="jIK-GB-xpI" secondAttribute="centerY" multiplier="88.5:333.5" id="qMz-V8-Otl"/>
                             <constraint firstItem="qQl-sb-qRv" firstAttribute="top" secondItem="1HV-ED-qB3" secondAttribute="bottom" id="rAD-xU-Wbl"/>
                             <constraint firstItem="Lud-yj-gjR" firstAttribute="centerX" secondItem="jIK-GB-xpI" secondAttribute="centerX" id="rgI-PZ-lhQ"/>
+                            <constraint firstItem="Uga-7m-cfA" firstAttribute="leading" secondItem="ylN-vS-xly" secondAttribute="leading" id="rjl-7B-gIq"/>
+                            <constraint firstItem="Uga-7m-cfA" firstAttribute="top" secondItem="qQl-sb-qRv" secondAttribute="bottom" constant="5" id="w1E-uL-jvs"/>
                             <constraint firstItem="Iyg-5a-eH2" firstAttribute="top" secondItem="VDI-0P-xd1" secondAttribute="bottom" id="zm9-CP-bfb"/>
                         </constraints>
                     </view>
