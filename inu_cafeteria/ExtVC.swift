@@ -13,6 +13,7 @@ import Alamofire
 
 let MAIN = UIStoryboard(name: "Main", bundle: nil)
 let SPLASH = UIStoryboard(name: "Splash", bundle: nil)
+let INFO = UIStoryboard(name: "Info", bundle: nil)
 
 extension UIViewController: UITextFieldDelegate{
     func addToolBar(textField: UITextField){

@@ -24,7 +24,7 @@ class MenuVC: UIViewController {
     
     var foodPlan:[FoodMenu] = [] {
         didSet {
-            foodPlan = foodPlan.sorted(by: { $0.title < $1.title })
+            foodPlan = foodPlan.sorted(by: { $0.order < $1.order })
         }
     }
     

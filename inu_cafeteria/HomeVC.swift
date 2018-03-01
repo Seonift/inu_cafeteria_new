@@ -211,7 +211,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
             self.loginModel.version()
         }))
         alert.addAction(UIAlertAction(title: "앱 정보", style: .default, handler: { action in
-            guard let vc = MAIN.instantiateViewController(withIdentifier: "infovc") as? InfoVC else { return }
+            guard let vc = INFO.instantiateViewController(withIdentifier: "newinfovc") as? NewInfoVC else { return }
             self.present(vc, animated: true, completion: nil)
         }))
         if !nonClient {

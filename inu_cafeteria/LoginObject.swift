@@ -188,6 +188,7 @@ class AdObject: Mappable {
 class FoodMenu:Mappable {
     var title:String = ""
     var menu:String = ""
+    var order:String = ""
     
     required init?(map: Map) {
         
@@ -196,6 +197,7 @@ class FoodMenu:Mappable {
     func mapping(map: Map) {
         self.title <- map["TITLE"]
         self.menu <- map["MENU"]
+        self.order <- map["order"]
     }
 }
 

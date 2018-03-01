@@ -11,6 +11,8 @@
 		740689061F4415CE000291DA /* InfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740689051F4415CE000291DA /* InfoVC.swift */; };
 		7406890A1F442CDB000291DA /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 740689091F442CDB000291DA /* alarm.mp3 */; };
 		7406890D1F4430D7000291DA /* MessageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7406890C1F4430D7000291DA /* MessageObject.swift */; };
+		7413B6622047B2B0005D89AB /* NewInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7413B6612047B2B0005D89AB /* NewInfoVC.swift */; };
+		7413B6642047BBDB005D89AB /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7413B6632047BBDB005D89AB /* Info.storyboard */; };
 		741BD9181F22453600B56F30 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 741BD9171F22453600B56F30 /* Splash.storyboard */; };
 		741BD91B1F2245DA00B56F30 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741BD91A1F2245DA00B56F30 /* SplashVC.swift */; };
 		741F2D6F203ED08D00D5BDAB /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741F2D6E203ED08D00D5BDAB /* UserPreferences.swift */; };
@@ -85,6 +87,8 @@
 		740689091F442CDB000291DA /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = "<group>"; };
 		7406890B1F442FFC000291DA /* out.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = out.caf; sourceTree = "<group>"; };
 		7406890C1F4430D7000291DA /* MessageObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageObject.swift; sourceTree = "<group>"; };
+		7413B6612047B2B0005D89AB /* NewInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewInfoVC.swift; sourceTree = "<group>"; };
+		7413B6632047BBDB005D89AB /* Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		741BD9171F22453600B56F30 /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		741BD91A1F2245DA00B56F30 /* SplashVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		741F2D6E203ED08D00D5BDAB /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 				742D90091F1CF7A4000B656E /* LaunchScreen.storyboard */,
 				741BD9171F22453600B56F30 /* Splash.storyboard */,
 				742D90041F1CF7A4000B656E /* Main.storyboard */,
+				7413B6632047BBDB005D89AB /* Info.storyboard */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";
@@ -206,6 +211,7 @@
 		741F2D72203EF2FB00D5BDAB /* Trash */ = {
 			isa = PBXGroup;
 			children = (
+				740689051F4415CE000291DA /* InfoVC.swift */,
 				742D90431F1E38E8000B656E /* LoginVC.swift */,
 				742D904F1F1E53AC000B656E /* MyNumberVC.swift */,
 				74E4330A1F1F1C230081AE08 /* BarcodeVC.swift */,
@@ -267,10 +273,10 @@
 				74676FA21F47CA13008EAF66 /* CsrVC.swift */,
 				742D90471F1E441D000B656E /* DefaultNC.swift */,
 				742D90511F1E5D3F000B656E /* DrawerVC.swift */,
-				740689051F4415CE000291DA /* InfoVC.swift */,
 				74F6933F203AADFA00B1F57E /* NumberVC.swift */,
 				74F77A6D203D503F004260F7 /* MenuVC.swift */,
 				749E4FEC203D895B00672BA4 /* AdVC.swift */,
+				7413B6612047B2B0005D89AB /* NewInfoVC.swift */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -451,6 +457,7 @@
 				741BD9181F22453600B56F30 /* Splash.storyboard in Resources */,
 				74F674F6204164D700B53B22 /* AdDetailCell.xib in Resources */,
 				74BC46F6203743970071AE1E /* NumberView.xib in Resources */,
+				7413B6642047BBDB005D89AB /* Info.storyboard in Resources */,
 				742D900B1F1CF7A4000B656E /* LaunchScreen.storyboard in Resources */,
 				742D90081F1CF7A4000B656E /* Assets.xcassets in Resources */,
 				742D90061F1CF7A4000B656E /* Main.storyboard in Resources */,
@@ -603,6 +610,7 @@
 				742D902D1F1CF90E000B656E /* ExtUIImage.swift in Sources */,
 				74BC46FC203748D90071AE1E /* DummyView.swift in Sources */,
 				749410A61F39FCCF00399BF2 /* Queue.swift in Sources */,
+				7413B6622047B2B0005D89AB /* NewInfoVC.swift in Sources */,
 				742D901F1F1CF8F8000B656E /* DeviceUtil.swift in Sources */,
 				74D2D2871FA1F65200173C9F /* ServerString.swift in Sources */,
 				742D90011F1CF7A4000B656E /* AppDelegate.swift in Sources */,
