@@ -126,11 +126,26 @@ extension UserDefaults {
     }
     
     open func saveBrightness() {
-        userPreferences.setValue(UIScreen.main.brightness, forKey: _brightness)
+        log.info(UIScreen.main.brightness)
+        if UIScreen.main.brightness == 1.0 {
+            removeBrightness()
+        } else {
+            userPreferences.setValue(UIScreen.main.brightness, forKey: _brightness)
+        }
     }
     
-    open func getBrightness() -> CGFloat {
-        return CGFloat(userPreferences.float(forKey: _brightness))
+    open func getBrightness() -> CGFloat? {
+        if let bright = userPreferences.object(forKey: _brightness) as? Float {
+            if bright == 1.0 {
+                return nil
+            }
+            return CGFloat(bright)
+        }
+        return nil
+    }
+    
+    open func removeBrightness() {
+        userPreferences.removeObject(forKey: _brightness)
     }
     
     open func saveSNO(sno: String) {

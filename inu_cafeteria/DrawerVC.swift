@@ -82,6 +82,8 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        log.info("viewdidappear")
+        userPreferences.saveBrightness()
         UIScreen.main.brightness = CGFloat(1.0)
     }
     
@@ -94,6 +96,7 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        log.info("viewwilldisappear")
         flagModel.activeBarcode(0)
         adView.automaticSlidingInterval = 0
         
@@ -102,7 +105,10 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        UIScreen.main.brightness = userPreferences.getBrightness()
+        log.info("viewdiddisappear")
+        if let bright = userPreferences.getBrightness() {
+            UIScreen.main.brightness = bright
+        }
     }
     
     func setupUI(){

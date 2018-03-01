@@ -184,7 +184,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         
         self.navigationItem.titleView = nil
         //        print("homevc willdisappear")
-        userPreferences.saveBrightness()
+//        userPreferences.saveBrightness()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

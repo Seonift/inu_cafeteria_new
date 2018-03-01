@@ -23,6 +23,9 @@ class CsrModel: NetworkModel {
         if let sno = userPreferences.getSNO() {
             params["sno"] = sno
         }
+        if let packageName = Bundle.main.bundleIdentifier {
+            params["service"] = packageName
+        }
         print(params)
         post(function: _errormsg, params: params, headers: header)
     }
@@ -58,7 +61,7 @@ class CsrModel: NetworkModel {
 }
 
 public extension UIDevice {
-    
+    // 수정하지 말 것!
     var modelName: String {
         var systemInfo = utsname()
         uname(&systemInfo)
@@ -107,5 +110,4 @@ public extension UIDevice {
         default:                                        return identifier
         }
     }
-    
 }
