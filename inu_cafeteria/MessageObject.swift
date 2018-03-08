@@ -8,9 +8,9 @@
 
 import ObjectMapper
 
-class MessageObject:Mappable {
-    var title:String?
-    var message:String?
+class MessageObject: Mappable {
+    var title: String?
+    var message: String?
     
     required init?(map: Map) {
         

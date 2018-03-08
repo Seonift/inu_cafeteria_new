@@ -8,12 +8,12 @@
 
 protocol NetworkCallback {
     
-    func networkResult(resultData:Any, code:String)
-    func networkFailed(errorMsg:String, code:String)
+    func networkResult(resultData: Any, code: String)
+    func networkFailed(errorMsg: String, code: String)
     func networkFailed()
     
 }
 
 protocol ViewCallback {
-    func passData(resultData:Any, code:String)
+    func passData(resultData: Any, code: String)
 }

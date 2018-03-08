@@ -16,7 +16,7 @@ let SPLASH = UIStoryboard(name: "Splash", bundle: nil)
 let INFO = UIStoryboard(name: "Info", bundle: nil)
 
 extension UIViewController: UITextFieldDelegate{
-    func addToolBar(textField: UITextField){
+    func addToolBar(textField: UITextField) {
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
@@ -30,30 +30,30 @@ extension UIViewController: UITextFieldDelegate{
         textField.delegate = self
         textField.inputAccessoryView = toolBar
     }
-    @objc func donePressed(){
+    @objc func donePressed() {
         view.endEditing(true)
     }
-    @objc func cancelPressed(){
+    @objc func cancelPressed() {
         view.endEditing(true) // or do something
     }
 }
 
 extension UIViewController {
 
-//    func infoC(_ sender: Any){
+//    func infoC(_ sender: Any) {
 //        let sb = UIStoryboard(name: "Main", bundle: nil)
 //        guard let infovc = sb.instantiateViewController(withIdentifier: "infovc") as? InfoVC else {return}
 //        self.present(infovc, animated: true, completion: nil)
 //    }
     
-    func setTitleView(){
+    func setTitleView() {
         let logoIV = UIImageView(image: UIImage(named: "nav_logo"))
         logoIV.contentMode = .scaleAspectFit
         logoIV.frame = CGRect(x: 0, y: 0, width: 130, height: 21.5)
         self.navigationItem.titleView = logoIV
     }
     
-    func setStatusBar(_ color:UIColor){
+    func setStatusBar(_ color:UIColor) {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 500, height: UIApplication.shared.statusBarFrame.size.height))
         view.backgroundColor = color
         self.navigationController?.view.addSubview(view)
@@ -96,7 +96,7 @@ extension UIViewController {
         return (self.tabBarController?.tabBar.frame.origin.y)! < self.view.frame.maxY
     }
     
-    func showHome(_ code: [CafeCode], _ no_student: Bool = false){
+    func showHome(_ code: [CafeCode], _ no_student: Bool = false) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         guard let homenav = sb.instantiateViewController(withIdentifier: "homevcnav") as? DefaultNC, let hvc = homenav.viewControllers[0] as? HomeVC, let drawer = sb.instantiateViewController(withIdentifier: "drawervc") as? DrawerVC else { return }
         
@@ -115,7 +115,7 @@ extension UIViewController {
         self.present(drawerController, animated: true, completion: nil)
     }
     
-    func setupDrawerBtn(){
+    func setupDrawerBtn() {
         let hamburger = UIImage(named: "ic_drawer")
         let hamB = UIButton(frame: CGRect(x: 0, y: 0, width: 21, height: 15))
         hamB.setImage(hamburger, for: .normal)
@@ -125,7 +125,7 @@ extension UIViewController {
         self.navigationItem.leftBarButtonItem = lB
     }
     
-    @objc func showDrawer(_ sender: UIButton){
+    @objc func showDrawer(_ sender: UIButton) {
         if let drawerController = navigationController?.parent as? KYDrawerController {
             drawerController.setDrawerState(.opened, animated: true)
         }
@@ -133,7 +133,7 @@ extension UIViewController {
 }
 extension UIViewController {
     
-    func goLogin(){
+    func goLogin() {
         // 로그아웃 했을 경우 로그인 페이지로 귀환
         if (self.presentingViewController?.isKind(of: FirstStartVC.self))! {
             self.dismiss(animated: true, completion: nil)

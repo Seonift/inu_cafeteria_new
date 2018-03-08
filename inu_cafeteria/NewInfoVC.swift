@@ -38,21 +38,9 @@ class NewInfoVC: UIViewController {
         UIApplication.shared.isStatusBarHidden = false
     }
     
-    func setupUI(){
+    func setupUI() {
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             self.verLabel.text = "v \(version)"
         }
-        
-//        log.debug(scrollView.bounds)
-//        log.debug(contentView.bounds)
-        
-        logoIV.layer.cornerRadius = 37.0
-        logoIV.layer.borderWidth = 1.0
-        logoIV.layer.borderColor = UIColor(rgb: 240).cgColor
-        logoIV.clipsToBounds = true
-        
-        
-
-//        scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: Device.getHeight(height: 1012))
     }
 }

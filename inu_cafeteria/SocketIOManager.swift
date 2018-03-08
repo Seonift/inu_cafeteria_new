@@ -12,9 +12,8 @@ import SocketIO
 class SocketIOManager {
     static let sharedInstance = SocketIOManager()
     
-    
-    private var manager:SocketManager?
-    private var socket:SocketIOClient?
+    private var manager: SocketManager?
+    private var socket: SocketIOClient?
     
     init() {
         if let url = URL(string: BASE_URL) {
@@ -24,30 +23,39 @@ class SocketIOManager {
         }
     }
     
-    func establishConnection(){
+    func establishConnection() {
         log.info("establishSocket")
-        socket?.connect()
-
+        
         if socket?.status == .connected {
             log.info("socket connected")
         } else {
             log.info("socket disconnected")
+            socket?.connect()
+            if socket?.status == .connected {
+                log.info("socket connected")
+            } else {
+                log.info("socket disconnected")
+            }
         }
     }
     
-//    func reconnectConnection(){
+//    func reconnectConnection() {
 //        print("reconnectSocket")
 //        socket?.reconnect()
 //    }
     
-    func closeConnection(){
+    func closeConnection() {
         log.info("closeSocket")
         socket?.disconnect()
         socket?.removeAllHandlers()
-        log.info("socket status : \(self.socket?.status.description)")
+        if let status = self.socket?.status.description {
+            log.info("socket status : \(status)")
+        } else {
+            log.info("socket status : nil")
+        }
     }
     
-    func connectToServer(){
+    func connectToServer() {
 //        socket?.emit("connectUser", "name")
         print("emit socket")
 //        socket?.emit("1", "1")
@@ -68,7 +76,7 @@ class SocketIOManager {
             log.info("socket disconnected")
         }
         
-        socket?.on(code) { (dataArray, socketAck) -> Void in
+        socket?.on(code) { (dataArray, _) -> Void in
 //            print(dataArray)
 //            print(socketAck)
 //            print("getnumber:\(code)")
@@ -76,7 +84,7 @@ class SocketIOManager {
         }
     }
     
-    func removeAll(){
+    func removeAll() {
         socket?.removeAllHandlers()
     }
 }

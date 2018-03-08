@@ -181,7 +181,7 @@
 ////        }
 //    }
 //
-//    func setSocketConnect(){
+//    func setSocketConnect() {
 //        print("setsocket, code:\(String(self.code))")
 //        SocketIOManager.sharedInstance.getNumber(code: String(self.code)) { (result) -> Void in
 //            DispatchQueue.main.async {
@@ -267,11 +267,11 @@
 //
 //    }
 //
-////    func close(){
+////    func close() {
 ////
 ////    }
 //
-//    func wakeUp(){
+//    func wakeUp() {
 //        //background에서 복귀
 //        print("wakeup")
 //
@@ -442,4 +442,3 @@
 //        label.numberOfLines = 1
 //    }
 //}
-

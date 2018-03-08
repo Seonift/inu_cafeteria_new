@@ -1,0 +1,9 @@
+disabled_rules:
+ - trailing_whitespace
+ - line_length
+ - variable_name
+ - fallthrough
+ - file_length
+
+excluded:
+ - Pods

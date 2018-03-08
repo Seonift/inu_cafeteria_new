@@ -56,7 +56,7 @@
 //       
 //    }
 //    
-//    func cBoxClicked(_ sender: UITapGestureRecognizer?){
+//    func cBoxClicked(_ sender: UITapGestureRecognizer?) {
 //        
 //    }
 //    

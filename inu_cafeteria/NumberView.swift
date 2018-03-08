@@ -31,13 +31,11 @@ class NumberView: UIView {
         }
     }
     
-    var number:Int? {
-        get {
-            if let text = textField.text, text.count != 0, let num = Int(text) {
-                return num
-            }
-            return nil
+    var number: Int? {
+        if let text = textField.text, text.count != 0, let num = Int(text) {
+            return num
         }
+        return nil
     }
     
     override func awakeFromNib() {
@@ -51,7 +49,7 @@ class NumberView: UIView {
         textField.setHint(hint: textField.placeholder!, font: UIFont.KoPubDotum(type: .L, size: 12), textcolor: UIColor(rgb: 160))
     }
     
-    func commonInit(index: Int, parent: UITextFieldDelegate){
+    func commonInit(index: Int, parent: UITextFieldDelegate) {
         self.textField.delegate = parent
         switch index {
         case 0:
@@ -65,7 +63,7 @@ class NumberView: UIView {
         }
     }
     
-    func clear(){
+    func clear() {
         self.textField.text = ""
         self.textField.resignFirstResponder()
     }

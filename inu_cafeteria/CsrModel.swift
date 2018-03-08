@@ -17,8 +17,8 @@ class CsrModel: NetworkModel {
         let systemVersion = UIDevice.current.systemVersion
         let device = UIDevice.current.modelName
         var params = [
-            "msg" : msg,
-            "device" : "\(device) \(systemVersion)"
+            "msg": msg,
+            "device": "\(device) \(systemVersion)"
         ]
         if let sno = userPreferences.getSNO() {
             params["sno"] = sno
@@ -29,35 +29,6 @@ class CsrModel: NetworkModel {
         print(params)
         post(function: _errormsg, params: params, headers: header)
     }
-    
-//    func errormsg(msg: String){
-//
-//        guard let sno = userPreferences.string(forKey: "sno") else {
-//            self.view?.networkFailed()
-//            return
-//        }
-////        guard let name = userPreferences.string(forKey: "name") else {
-////            self.view?.networkFailed()
-////            return
-////        }
-//
-//        let params = [
-//            "sno" : sno,
-////            "name" : name,
-//            "msg" : msg
-//        ]
-//
-//        Alamofire.request("\(BASE_URL)errormsg", method: .post, parameters: params, headers: header).response { res in
-//
-//            let code = res.response?.statusCode
-//            if code == 200 {
-//                self.view?.networkResult(resultData: true, code: "errormsg")
-//            } else {
-//                self.view?.networkFailed()
-//            }
-//        }
-//
-//    }
 }
 
 public extension UIDevice {

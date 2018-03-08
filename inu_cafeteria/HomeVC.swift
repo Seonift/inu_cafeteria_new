@@ -100,7 +100,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
                 }
             })
         }
-        willSet(v){
+        willSet(v) {
             if v < 1 { self.num_count = 1 }
             if v > 3 { self.num_count = 3 }
         }
@@ -132,7 +132,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         print(self.scrollView.subviews[0].frame.height)
     }
     
-    func setupUI(){
+    func setupUI() {
         
         carouselView.type = .rotary
         carouselView.bounds = carouselView.frame.insetBy(dx: 15, dy: 10)
@@ -205,7 +205,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         }
     }
     
-    @objc func moreClicked(_ sender: UIBarButtonItem){
+    @objc func moreClicked(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "문의하기", style: .default, handler: { action in
             self.loginModel.version()
@@ -232,7 +232,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         self.present(alert, animated: true, completion: nil)
     }
     
-    @objc func addClicked(_ sender: UIButton){
+    @objc func addClicked(_ sender: UIButton) {
         if sender == numView1.plusBtn {
             self.num_count = 2
         }
@@ -247,7 +247,7 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
         }
     }
     
-    @objc func confirmClicked(_ sender: UIButton){
+    @objc func confirmClicked(_ sender: UIButton) {
         if let item = codes[safe: carouselView.currentItemIndex] {
             
             if !item.alarm {
@@ -302,14 +302,14 @@ class HomeVC: UIViewController, NVActivityIndicatorViewable, UIGestureRecognizer
     //    }
     
     func registerForKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     
     func unregisterForKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     @objc func keyboardWillShow(note: NSNotification) {
@@ -556,7 +556,7 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
         }
         
         //뒤 아이템들 투명화
-        if (option == .fadeMin){
+        if (option == .fadeMin) {
             return 0
         }
         if option == .fadeMax {
@@ -579,7 +579,7 @@ extension HomeVC: iCarouselDelegate, iCarouselDataSource {
 }
 
 extension UIView {
-    func setShadow(_ radius: CGFloat = 5, ratio: CGFloat = 1, color: UIColor = UIColor(r: 240, g: 240, b: 240)){
+    func setShadow(_ radius: CGFloat = 5, ratio: CGFloat = 1, color: UIColor = UIColor(r: 240, g: 240, b: 240)) {
         self.layer.borderWidth = 1
         self.layer.borderColor = color.cgColor
         self.layer.masksToBounds = false

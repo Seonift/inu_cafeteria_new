@@ -13,29 +13,23 @@ import Device
 class CsrVC: UIViewController, UIGestureRecognizerDelegate {
     // 문의하기
     
-    var parentVC:UIViewController?
-    
     @IBOutlet weak var titleL: UILabel!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var sendBtn: UIButton!
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var table_heightConst: NSLayoutConstraint!
     
     private let cellId = "CsrCell"
     
-    var log:[VerObject.VersionHistory]?
-    
-    private var lastKnowContentOfsset:CGFloat = 0
-    
-    lazy var model:CsrModel = {
+    var log: [VerObject.VersionHistory]?
+    var parentVC: UIViewController?
+    private var lastKnowContentOfsset: CGFloat = 0
+    lazy var model: CsrModel = {
         return CsrModel(self)
     }()
+    var headerView: CsrHeaderCell?
+    var tableView_flipped: Bool = true
     
-//    @IBOutlet weak var tableView_topConst: NSLayoutConstraint!
-    
-    var headerView:CsrHeaderCell?
-    var tableView_flipped:Bool = true
     @IBAction func flipClicked(_ sender: Any) {
         tableView_flipped = !tableView_flipped
         if tableView_flipped {
@@ -88,7 +82,7 @@ class CsrVC: UIViewController, UIGestureRecognizerDelegate {
         self.view.layoutIfNeeded()
     }
     
-    func setDefaultTableViewHeight(){
+    func setDefaultTableViewHeight() {
         // 테이블뷰 기본 크기
         let rect = tableView.rectForRow(at: IndexPath(row: 0, section: 0))
         table_heightConst.constant = 49 + rect.height
@@ -137,7 +131,7 @@ class CsrVC: UIViewController, UIGestureRecognizerDelegate {
     
     //TapGesu
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if (touch.view?.isDescendant(of: self.textField))! || (touch.view?.isDescendant(of: self.sendBtn))!{
+        if (touch.view?.isDescendant(of: self.textField))! || (touch.view?.isDescendant(of: self.sendBtn))! {
             return false
         }
         return true
@@ -157,8 +151,8 @@ extension CsrVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CsrCell
-       
+//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CsrCell
+        let cell = tableView.generateCell(withIdentifier: cellId, for: indexPath, cellClass: CsrCell.self)
         if let log = log {
             cell.commonInit(item: log[indexPath.row])
         }
@@ -167,7 +161,8 @@ extension CsrVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        self.headerView = tableView.dequeueReusableCell(withIdentifier: "header") as! CsrHeaderCell
+//        self.headerView = tableView.dequeueReusableCell(withIdentifier: "header") as! CsrHeaderCell
+        self.headerView = tableView.generateCell(withIdentifier: "header", cellClass: CsrHeaderCell.self)
         return self.headerView
     }
     
@@ -181,10 +176,10 @@ extension CsrVC: UITableViewDelegate, UITableViewDataSource {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == tableView {
-            if (self.lastKnowContentOfsset < scrollView.contentOffset.y) {
+            if self.lastKnowContentOfsset < scrollView.contentOffset.y {
                 // moved to top
                 if tableView_flipped { flipClicked(tableView) }
-            } else if (self.lastKnowContentOfsset > scrollView.contentOffset.y) {
+            } else if self.lastKnowContentOfsset > scrollView.contentOffset.y {
                 // moved to bottom
             } else {
                 // didn't move
@@ -203,7 +198,8 @@ extension CsrVC: UITableViewDelegate, UITableViewDataSource {
 //    }
 }
 
-extension CsrVC:NetworkCallback {
+extension CsrVC: NetworkCallback {
+    
     func networkResult(resultData: Any, code: String) {
         if code == model._errormsg {
             if let parent = parentVC { parent.view.makeToast(String.csrSuc) }
@@ -229,10 +225,10 @@ class CsrCell: UITableViewCell {
     
     override func awakeFromNib() {
         self.selectionStyle = .none
-        self.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        self.separatorInset = UIEdgeInsets.zero
     }
     
-    func commonInit(item: VerObject.VersionHistory){
+    func commonInit(item: VerObject.VersionHistory) {
         let df = DateFormatter()
         df.dateFormat = "yyyyMMdd"
         

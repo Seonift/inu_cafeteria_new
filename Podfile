@@ -10,8 +10,8 @@ target 'inu_cafeteria' do
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'KYDrawerController'
-  pod 'Alamofire', '~> 4.5'
   pod 'ObjectMapper', '~> 3.1'
+  pod 'Alamofire', '~> 4.6'
   pod 'AlamofireObjectMapper', '~> 5.0'
   pod 'NVActivityIndicatorView'
   pod 'Socket.IO-Client-Swift', '~> 13.1.0' # Or latest version
@@ -20,4 +20,5 @@ target 'inu_cafeteria' do
   pod 'Kingfisher', '~> 4.0'
   pod 'FSPagerView'
   pod 'SwiftyBeaver'
+  pod 'SwiftLint'
 end

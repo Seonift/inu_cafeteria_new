@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 extension UIFont {
     enum FontType {
         case B

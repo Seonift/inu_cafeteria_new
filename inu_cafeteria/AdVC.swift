@@ -14,17 +14,10 @@ import Kingfisher
 class AdVC: UIViewController {
     
     @IBOutlet weak var carouselView: iCarousel!
-    var adItems:[AdObject] = []
-    
-    
-    var firstIndex:Int?
     @IBOutlet weak var pageControl: FSPageControl!
-    
     @IBAction func closeClicked(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    private let cellId = "Cell"
-    
     @IBAction func linkClicked(_ sender: Any) {
         guard let url = URL(string: "http://naver.com") else { return }
         if #available(iOS 10.0, *) {
@@ -34,11 +27,15 @@ class AdVC: UIViewController {
         }
     }
     
+    private let cellId = "Cell"
+    var adItems: [AdObject] = []
+    var firstIndex: Int?
+    
     override func viewDidLoad() {
         setupUI()
     }
     
-    func setupUI(){
+    func setupUI() {
         pageControl.currentPage = 0
         pageControl.setFillColor(UIColor.cftBrightSkyBlue, for: .selected)
         pageControl.setFillColor(UIColor(rgb: 201), for: .normal)
@@ -75,7 +72,6 @@ extension AdVC: iCarouselDelegate, iCarouselDataSource {
         return Device.getWidth(width: 293.5)
     }
     
-    
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let width = Device.getWidth(width: 293.5)
         let height = Device.getHeight(height: 450.5)
@@ -99,7 +95,6 @@ extension AdVC: iCarouselDelegate, iCarouselDataSource {
         pageControl.currentPage = carousel.currentItemIndex
     }
     
-    
     func carouselWillBeginDragging(_ carousel: iCarousel) {
         guard let view = carousel.currentItemView as? AdDetailView else {return}
         view.isSelected = false
@@ -115,7 +110,7 @@ extension AdVC: iCarouselDelegate, iCarouselDataSource {
         }
         
         //뒤 아이템들 투명화
-        if (option == .fadeMin){
+        if option == .fadeMin {
             return 0
         }
         if option == .fadeMax {
@@ -132,7 +127,6 @@ extension AdVC: iCarouselDelegate, iCarouselDataSource {
         if option == .wrap {
             return 1
         }
-        
         
         return value
     }
@@ -223,4 +217,3 @@ extension AdVC: iCarouselDelegate, iCarouselDataSource {
 ////        self.selectedBackgroundView = view
 //    }
 //}
-

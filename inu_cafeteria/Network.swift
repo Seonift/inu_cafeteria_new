@@ -18,7 +18,7 @@ struct Network {
     
     func getCookie() {
         var cookiesData: Data? = UserDefaults.standard.object(forKey: "Cookies") as? Data
-        if ((cookiesData?.count) != nil) {
+        if cookiesData?.count != nil {
             let cookies: [HTTPCookie]? = NSKeyedUnarchiver.unarchiveObject(with: cookiesData!) as? [HTTPCookie]
             for cookie: HTTPCookie in cookies! {
                 HTTPCookieStorage.shared.setCookie(cookie)

@@ -31,7 +31,7 @@ class AdDetailCell: UITableViewCell {
         secondLabel.text = ""
     }
     
-    func commonInit(item: AdObject.ContentObj){
+    func commonInit(item: AdObject.ContentObj) {
         firstLabel.text = item.title
         secondLabel.text = item.msg
     }

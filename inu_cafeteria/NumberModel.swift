@@ -12,7 +12,7 @@ import Firebase
 
 class NumberModel: NetworkModel {
     
-//    func postNum(num: String, token: String){
+//    func postNum(num: String, token: String) {
 //        
 //        let params:[String:Any] = [
 //            "code" : 123,
@@ -33,7 +33,7 @@ class NumberModel: NetworkModel {
 //        }
 //    }
     
-//    func getCode(){
+//    func getCode() {
 //        Alamofire.request("\(numberURL)getCode", method: .get, parameters: nil, headers: nil).responseJSON { res in
 ////            print(res.result.value)
 //            print("getcode")
@@ -53,7 +53,7 @@ class NumberModel: NetworkModel {
     let _resetNumber = "resetnumber"
     let _registerNumber = "registernumber"
     
-    func isNumberWait(){
+    func isNumberWait() {
 //        Indicator.startAnimating(activityData)
         
         guard let token = InstanceID.instanceID().token() else {
@@ -93,7 +93,7 @@ class NumberModel: NetworkModel {
         post(function: _registerNumber, params: params)
     }
     
-//    func resetNum123ber(){
+//    func resetNum123ber() {
 //        print("resetNumber")
 //        let token = gsno(InstanceID.instanceID().token())
 //        print("firebase token:\(token)")
@@ -116,7 +116,7 @@ class NumberModel: NetworkModel {
     
     
     
-//    func isNumberWait2(){
+//    func isNumberWait2() {
 //        print("isnumberwait")
 //        let token = gsno(InstanceID.instanceID().token())
 //        let params:[String:Any] = [
@@ -167,7 +167,7 @@ class NumberModel: NetworkModel {
 //        return count
 //    }
 //
-//    func registerNumbdsfser(code: Int, num1: Int, num2: Int?, num3: Int?){
+//    func registerNumbdsfser(code: Int, num1: Int, num2: Int?, num3: Int?) {
 //        print("registerNumber")
 //        let token = gsno(InstanceID.instanceID().token())
 //        print("firebase token:\(token)")

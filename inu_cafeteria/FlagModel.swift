@@ -15,14 +15,14 @@ class FlagModel: NetworkModel {
     
     //바코드 활성화1 비활성화0
     
-    func activeBarcode(_ value: Int){
+    func activeBarcode(_ value: Int) {
         guard let barcode = userPreferences.getBarcode() else {
             self.view?.networkFailed(errorMsg: String.no_barcode, code: _activeBarcode)
             return
         }
-        let params:Parameters = [
-            "barcode" : barcode,
-            "activated" : value
+        let params: Parameters = [
+            "barcode": barcode,
+            "activated": value
         ]
         
         Alamofire.request("\(BASE_URL)/\(_activeBarcode)", method: .post, parameters: params, headers: header).responseJSON { res in
@@ -44,7 +44,7 @@ class FlagModel: NetworkModel {
         }
     }
     
-//    func activeBarcode123(_ value:Int){
+//    func activeBarcode123(_ value:Int) {
 //        if (value == 1 && (userPreferences.integer(forKey: "barcode_flag") == 0 || userPreferences.object(forKey: "barcode_flag") == nil)) || value == 0{
 //            userPreferences.setValue(value, forKey: "barcode_flag")
 //            print("activebarcode:\(value)")
@@ -72,7 +72,7 @@ class FlagModel: NetworkModel {
 //        }
 //    }
 //
-//    func deactiveBarcode123(_ value: Int){
+//    func deactiveBarcode123(_ value: Int) {
 //        if (value == 1 && (userPreferences.integer(forKey: "barcode_flag") == 0 || userPreferences.object(forKey: "barcode_flag") == nil)) || value == 0{
 //            userPreferences.setValue(value, forKey: "barcode_flag")
 //            print("activebarcode:\(value)")
@@ -93,4 +93,3 @@ class FlagModel: NetworkModel {
 //        }
 //    }
 }
-

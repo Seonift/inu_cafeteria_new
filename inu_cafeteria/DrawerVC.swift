@@ -18,7 +18,6 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     @IBOutlet weak var idLabel: UILabel!
     
     @IBOutlet weak var noInternetLabel: UILabel!
-    
     @IBOutlet weak var noLoginLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     
@@ -26,7 +25,11 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     
-    //    @IBOutlet weak var pageControl: FSPageControl!
+    @IBOutlet weak var adView: FSPagerView! {
+        didSet {
+            self.adView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: cellId)
+        }
+    }
     
     lazy var pageControl: FSPageControl = {
         let pageControl = FSPageControl(frame: .zero)
@@ -39,33 +42,21 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         //        pageControl.backgroundColor = .blue
         return pageControl
     }()
-    @IBOutlet weak var adView: FSPagerView! {
-        didSet {
-            self.adView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: cellId)
-        }
-    }
     
-    var adItems:[AdObject] = []
-    
-//    var imageURL = ["" ,"", "", "", ""]
-    
-    lazy var flagModel:FlagModel = {
+    var adItems: [AdObject] = []
+    lazy var flagModel: FlagModel = {
         let model = FlagModel(self)
         return model
     }()
-    
-    lazy var networkModel:NetworkModel = {
+    lazy var networkModel: NetworkModel = {
         let model = NetworkModel(self)
         return model
     }()
-    
     private let cellId = "Cell"
-    private var _nonClient:Bool = false
+    private var _nonClient: Bool = false
     
     override func viewDidLoad() {
         setupUI()
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,11 +78,11 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         UIScreen.main.brightness = CGFloat(1.0)
     }
     
-    @objc func comebackForeground(){
+    @objc func comebackForeground() {
         flagModel.activeBarcode(1)
     }
     
-    @objc func enterBackground(){
+    @objc func enterBackground() {
         flagModel.activeBarcode(0)
     }
     
@@ -100,8 +91,8 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         flagModel.activeBarcode(0)
         adView.automaticSlidingInterval = 0
         
-        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -111,7 +102,7 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         }
     }
     
-    func setupUI(){
+    func setupUI() {
         adView.isInfinite = true
         adView.scrollDirection = .vertical
         
@@ -119,10 +110,9 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         infoView.layer.borderColor = UIColor(rgb: 170).cgColor
         infoView.layer.borderWidth = 0
         infoView.layer.shadowOpacity = 0.1
-        infoView.layer.shadowColor = UIColor(r: 7, g:0, b: 2).cgColor
+        infoView.layer.shadowColor = UIColor(r: 7, g: 0, b: 2).cgColor
         infoView.layer.shadowOffset = CGSize(width: 1.5, height: 0)
         infoView.layer.shadowRadius = infoView.layer.cornerRadius
-        
         
         if let sno = userPreferences.getSNO() {
             idLabel.text = sno
@@ -131,25 +121,16 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         }
         self.view.addSubview(pageControl)
         
-        
-        //        let x = adView.frame.origin.x + adView.frame.width + Device.getWidth(width: 10)
-        //        pageControl.frame = CGRect(x: x, y: 0, width: 6.5, height: adView.frame.height)
-        //        pageControl.center.y = adView.center.y
-        
-        
-        let width:CGFloat = 6.5
-        let height:CGFloat = Device.getHeight(height: 284.5)
-        let x:CGFloat = Device.getWidth(width: 27.5 + 185.5 + 10) - height + width
-        let y:CGFloat = Device.getHeight(height: 28 + 45.5 + 287.5)
+        let width: CGFloat = 6.5
+        let height: CGFloat = Device.getHeight(height: 284.5)
+        let x: CGFloat = Device.getWidth(width: 27.5 + 185.5 + 10) - height + width
+        let y: CGFloat = Device.getHeight(height: 28 + 45.5 + 287.5)
         pageControl.frame.size = CGSize(width: width, height: height)
         pageControl.transform = CGAffineTransform(rotationAngle: .pi / 2)
         pageControl.frame.origin = CGPoint(x: x, y: y)
-        
-        //        pageControl.layer.position = CGPoint(x: x, y: y)
-        
     }
     
-    func setupBarcode(_ value: Bool){
+    func setupBarcode(_ value: Bool) {
         if value {
             if let barcode = userPreferences.getBarcode() {
                 barcodeIV.image = generateBarcode(from: barcode)
@@ -172,7 +153,7 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         
         _nonClient = true
         
-        titleLabel.textColor = UIColor(r:56, g:177, b:228, a:0.6)
+        titleLabel.textColor = UIColor(r: 56, g: 177, b: 228, a: 0.6)
         noLoginLabel.isHidden = false
         
         barcodeIV.isHidden = true
@@ -374,7 +355,7 @@ extension DrawerVC: NetworkCallback {
 //        UIScreen.main.brightness = CGFloat(userPreferences.float(forKey: "brightness"))
 //    }
 //
-//    func setupUI(){
+//    func setupUI() {
 //        //        imageView.layer.cornerRadius = image_const.constant / 2
 //        //        imageView.clipsToBounds = true
 //        //        imageView.layer.borderColor = UIColor(r: 189, g: 189, b: 183).cgColor
@@ -476,7 +457,7 @@ extension DrawerVC: NetworkCallback {
 //        self.delegate?.passData(resultData: true, code: "barcode")
 //    }
 //
-//    @objc func btnClicked(_ sender: UIButton){
+//    @objc func btnClicked(_ sender: UIButton) {
 //        if sender == self.logoutB {
 //            //            self.delegate?.passData(resultData: true, code: "logout")
 //            self.pushVC(vc: "logout")
@@ -493,7 +474,7 @@ extension DrawerVC: NetworkCallback {
 //        }
 //    }
 //
-//    func pushVC(vc: String){
+//    func pushVC(vc: String) {
 //        if let drawer = parent as? KYDrawerController, let nav = drawer.mainViewController as? UINavigationController {
 //            drawer.setDrawerState(.closed, animated: true)
 //
@@ -537,7 +518,7 @@ extension DrawerVC: NetworkCallback {
 //    //        self.delegate?.passData(resultData: true, code: "info")
 //    //    }
 //
-//    func setBarcode(){
+//    func setBarcode() {
 //        if userPreferences.object(forKey: "barcode") != nil {
 //            no_internet_label.isHidden = true
 //            barcodeIV.isHidden = false
@@ -548,7 +529,7 @@ extension DrawerVC: NetworkCallback {
 //        }
 //    }
 //
-//    func removeBarcode(){
+//    func removeBarcode() {
 //        barcodeIV.isHidden = true
 //        no_internet_label.isHidden = false
 //        no_internet_label.layer.cornerRadius = 5

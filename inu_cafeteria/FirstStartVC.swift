@@ -23,10 +23,6 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var moveBtn: UIView!
     
-//    @IBOutlet weak var logo_width: NSLayoutConstraint!
-//    @IBOutlet weak var logo_height: NSLayoutConstraint!
-//    @IBOutlet weak var logo_leading: NSLayoutConstraint!
-    
     @IBOutlet weak var logo_width2: NSLayoutConstraint!
     @IBOutlet weak var logo_height2: NSLayoutConstraint!
     @IBOutlet weak var logo_leading2: NSLayoutConstraint!
@@ -47,7 +43,7 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var noStudentLabel: UILabel!
     @IBOutlet weak var noStudentBtn: UIButton!
-    var showLogin:Bool = false
+    var showLogin: Bool = false
     
     @IBAction func noStudentClicked(_ sender: Any) {
         self.noStudent = true
@@ -61,11 +57,10 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var nsB_top: NSLayoutConstraint!
     @IBOutlet weak var nsL_top: NSLayoutConstraint!
     
-    lazy var loginModel:LoginModel = {
+    lazy var loginModel: LoginModel = {
         let model = LoginModel(self)
         return model
     }()
-    
     
     @IBAction func loginClicked(_ sender: Any) {
         if let sno = idTF.text, let pw = pwTF.text {
@@ -77,43 +72,34 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    let bgArr:[UIImage?] = [UIImage(named: "bg1"), UIImage(named: "bg2")]
+    let bgArr: [UIImage?] = [UIImage(named: "bg1"), UIImage(named: "bg2")]
     var index = 0
-    let animationDuration:TimeInterval = 1
-    let switchingInterval:TimeInterval = 3
+    let animationDuration: TimeInterval = 1
+    let switchingInterval: TimeInterval = 3
     
-    lazy var tap:UITapGestureRecognizer = {
+    lazy var tap: UITapGestureRecognizer = {
         let tap = UITapGestureRecognizer(target: self, action: #selector(moveLogin(_:)))
         tap.delegate = self
         return tap
     }()
-    lazy var mainTap:UITapGestureRecognizer = {
+    lazy var mainTap: UITapGestureRecognizer = {
         let mainTap = UITapGestureRecognizer(target: self, action: #selector(handleTap_mainview(_:)))
         mainTap.delegate = self
         return mainTap
     }()
-    lazy var checkTap:UITapGestureRecognizer = {
+    lazy var checkTap: UITapGestureRecognizer = {
         let checkTap = UITapGestureRecognizer(target: self, action: #selector(cBoxClicked(_:)))
         checkTap.delegate = self
         return checkTap
     }()
     
-    var noStudent:Bool = false // true면 비회원로그인
+    var noStudent: Bool = false // true면 비회원로그인
     
     override func viewDidLoad() {
-        
         setupUI()
-        
-        //분기
-//        setupFirstStart()
-//        setupLogin()
-        
-//        userPreferences.removeObject(forKey: "not_first")
-        
         if !userPreferences.isFirstStart() {
             setupLogin()
         }
-        
         animateImage()
     }
     
@@ -133,7 +119,7 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         autoB.isSelected = false
     }
     
-    func setupUI(){
+    func setupUI() {
         l1.font = UIFont(name: "KoPubDotumPB", size: 28)
         l2.font = UIFont(name: "KoPubDotumPB", size: 28)
         l3.font = UIFont(name: "KoPubDotumPB", size: 20)
@@ -154,22 +140,22 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         
         noStudentLabel.font = UIFont(name: "KoPubDotumPM", size: 12)
         
-        let attributes: [NSAttributedStringKey : Any] = [
+        let attributes: [NSAttributedStringKey: Any] = [
             NSAttributedStringKey.foregroundColor: UIColor.white,
-            NSAttributedStringKey.font : UIFont(name: "KoPubDotumPB", size: 15)!,
-            NSAttributedStringKey.underlineStyle : NSUnderlineStyle.styleSingle.rawValue
+            NSAttributedStringKey.font: UIFont(name: "KoPubDotumPB", size: 15)!,
+            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue
             ]
         let string = NSAttributedString(string: "비회원 로그인", attributes: attributes)
         noStudentBtn.setAttributedTitle(string, for: .normal)
     }
     
-    func setupLogin(){
+    func setupLogin() {
         setupLogin1()
         setupLogin2()
         setupLogin3()
     }
     
-    func setupLogin1(){
+    func setupLogin1() {
         self.view.removeConstraint(logo_leading2)
         self.view.ac_center(item: logoIV, toItem: self.view, origin: "x")
         logo_top = logo_top.setMultiplier(multiplier: 144/333.5)
@@ -195,7 +181,7 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         self.noStudentLabel.alpha = 0
     }
     
-    func setupLogin2(){
+    func setupLogin2() {
         self.idTF.alpha = 1
         self.pwTF.alpha = 1
         self.autoV.alpha = 1
@@ -204,13 +190,13 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         self.noStudentLabel.alpha = 1
     }
     
-    func setupLogin3(){
+    func setupLogin3() {
         self.view.addGestureRecognizer(mainTap)
         self.autoV.isUserInteractionEnabled = true
         self.autoV.addGestureRecognizer(checkTap)
     }
     
-    @objc func cBoxClicked(_ sender:UITapGestureRecognizer?){
+    @objc func cBoxClicked(_ sender: UITapGestureRecognizer?) {
         if self.autoB.isSelected == false {
             self.autoB.isSelected = true
         } else {
@@ -235,13 +221,12 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         }
         return true
     }
-    
-    
+      
 //    let zoom_duration:TimeInterval = 3.0
 //    let fade_duration:TimeInterval = 4.0
 //    let full_duration:TimeInterval = 7.0
 //    
-//    func zoomImage(){
+//    func zoomImage() {
 //        CATransaction.begin()
 //        
 //        CATransaction.setAnimationDuration(full_duration)
@@ -295,9 +280,8 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
 ////        self.index = self.index < self.bgArr.count - 1 ? self.index + 1 : 0
 //    }
     
-    func animateImage(){
+    func animateImage() {
 //        https://stackoverflow.com/questions/26898955/adding-image-transition-animation-in-swift
-        
         
         CATransaction.begin()
         
@@ -329,24 +313,26 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
             self.view.layoutIfNeeded()
         }, completion: { (finished: Bool) in
-            UIView.animate(withDuration: 0.5, animations: {
-                self.setupLogin2()
-            }, completion: { (finished: Bool) in
-                self.setupLogin3()
-            })
-            
+            if finished {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.setupLogin2()
+                }, completion: { (finished: Bool) in
+                    if finished {
+                        self.setupLogin3()
+                    }
+                })
+            }
         })
     }
     
     func registerForKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    
     func unregisterForKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     @objc func keyboardWillShow(note: NSNotification) {
@@ -380,7 +366,7 @@ extension FirstStartVC {
     }
 }
 
-extension FirstStartVC:NetworkCallback {
+extension FirstStartVC: NetworkCallback {
     func networkResult(resultData: Any, code: String) {
         Indicator.stopAnimating()
         print(code)
@@ -403,105 +389,13 @@ extension FirstStartVC:NetworkCallback {
                 self.showHome(result, self.noStudent)
             }
         }
-        
-//        if code == "stuinfo" {
-//            let result = resultData as! StudentInfo
-//            userPreferences.setValue(result.sno, forKey: "sno")
-//            userPreferences.setValue(result.major, forKey: "major")
-//            userPreferences.setValue(result.name, forKey: "name")
-//            
-//            let model = NumberModel(self)
-//            model.getCode()
-//        }
-        
-//        if code == "getcode" {
-//            let result = resultData as! NSDictionary
-//            self.showHome(result)
-//        }
     }
     
     func networkFailed(errorMsg: String, code: String) {
         Indicator.stopAnimating()
         self.view.makeToast(errorMsg)
-        
-//        if code == loginModel._login {
-//
-//        }
-//
-//        if code == loginModel._cafecode {
-//
-//        }
     }
-    
-//    func networkFailed(code: Any) {
-//        Indicator.stopAnimating()
-//
-//        if code
-//
-//        if let int = code as? Int {
-//            print(int)
-//            if int == 400 {
-//                self.view.makeToast(String.checkId)
-//            } else if int == 404 {
-//                self.view.makeToast(String.noServer)
-//            }
-//        }
-//
-//        if let str = code as? String {
-//            if str == "no_barcode" {
-//                self.view.makeToast(.no_barcode)
-//            }
-//
-//            if str == "no_code" {
-//                self.view.makeToast(.no_code)
-//            }
-//
-//            if str == "no_stuinfo" {
-//                self.view.makeToast(.no_stuinfo)
-//            }
-//        }
-//    }
-    
     func networkFailed() {
         self.view.makeToast(.noServer)
-    }
-}
-
-class LoginTF:UITextField {
-    
-    override func awakeFromNib() {
-        setBorder()
-        
-        self.font = UIFont(name: "KoPubDotumPM", size: 16)
-        self.textColor = UIColor.white
-        let attributes:[NSAttributedStringKey:Any] = [.foregroundColor: UIColor.white, .font: UIFont(name: "KoPubDotumPM", size: 16)!]
-        self.attributedPlaceholder = NSAttributedString(string: self.placeholder!, attributes: attributes)
-        
-        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
-        self.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
-        self.leftViewMode = .always
-        self.rightViewMode = .always
-    }
-    
-    func setBorder(){
-        let border = CALayer()
-        let height:CGFloat = 2.0
-        let width = Device.getWidth(width: 200)
-        border.borderColor = UIColor.white.cgColor
-        border.frame = CGRect(x: 5, y: self.frame.size.height - height, width: width, height: self.frame.size.height)
-        border.borderWidth = height
-        self.layer.addSublayer(border)
-        self.layer.masksToBounds = true
-    }
-}
-
-class CheckBox:UIButton {
-    
-    override func awakeFromNib() {
-        
-        let selected = UIImage(named: "login_cbox")
-        let unselected = UIImage(named: "login_cbox_no")
-        self.setImage(selected, for: .selected)
-        self.setImage(unselected, for: .normal)
     }
 }

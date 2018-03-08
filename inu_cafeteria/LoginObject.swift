@@ -25,25 +25,19 @@ class LoginObject: Mappable {
 
 class CafeCode: Mappable {
     
-    var no:String = ""
-    var name:String = ""
-    var menu:Int = -1
+    var no: String = ""
+    var name: String = ""
+    var menu: Int = -1
     
-    var alarm:Bool = false
-    var img:String = ""
-    var bgimg:String = ""
-    var order:String = ""
+    var alarm: Bool = false
+    var img: String = ""
+    var bgimg: String = ""
+    var order: String = ""
     
-    var _no:Int {
-        get {
-            if let int = Int(no) { return int }
-            return -1
-        }
+    var _no: Int {
+        if let int = Int(no) { return int }
+        return -1
     }
-    
-    //    var name:String?
-    //    var code:String?
-    //    var img:String?
     
     required init?(map: Map) {
         
@@ -53,20 +47,16 @@ class CafeCode: Mappable {
         self.no <- map["no"]
         self.name <- map["name"]
         self.menu <- map["menu"]
-        
         self.alarm <- map["alarm"]
         self.img <- map["img"]
         self.bgimg <- map["bgimg"]
         self.order <- map["order"]
-        
-        //        self.code <- map["code"]
-        //        self.img <- map["img"]
     }
 }
 
 class VerObject: Mappable {
-    var android:VerInfo?
-    var ios:VerInfo?
+    var android: VerInfo?
+    var ios: VerInfo?
     
     required init?(map: Map) {
         
@@ -78,8 +68,8 @@ class VerObject: Mappable {
     }
     
     class VerInfo: Mappable {
-        var latest:String = ""
-        var log:[VersionHistory] = []
+        var latest: String = ""
+        var log: [VersionHistory] = []
         
         required init?(map: Map) {
             
@@ -93,9 +83,9 @@ class VerObject: Mappable {
     }
     
     class VersionHistory: Mappable {
-        var version:String = ""
-        var info:[String] = []
-        var date:String = ""
+        var version: String = ""
+        var info: [String] = []
+        var date: String = ""
         
         required init?(map: Map) {
             
@@ -110,8 +100,8 @@ class VerObject: Mappable {
 }
 
 class NoticeObject: Mappable {
-    var all:DetailNotice?
-    var ios:DetailNotice?
+    var all: DetailNotice?
+    var ios: DetailNotice?
     
     required init?(map: Map) {
         
@@ -123,9 +113,9 @@ class NoticeObject: Mappable {
     }
     
     class DetailNotice: Mappable {
-        var title:String = ""
-        var message:String?
-        var id:String = ""
+        var title: String = ""
+        var message: String?
+        var id: String = ""
         
         func mapping(map: Map) {
             self.id <- map["id"]
@@ -150,12 +140,12 @@ class NoticeObject: Mappable {
 }
 
 class AdObject: Mappable {
-    var no:String = ""
-    var title:String = ""
-    var img:String = ""
-    var previewimg:String = ""
-    var url:String = ""
-    var contents:[ContentObj]?
+    var no: String = ""
+    var title: String = ""
+    var img: String = ""
+    var previewimg: String = ""
+    var url: String = ""
+    var contents: [ContentObj]?
     
     required init?(map: Map) {
         
@@ -170,9 +160,9 @@ class AdObject: Mappable {
         self.contents <- map["contents"]
     }
     
-    class ContentObj:Mappable {
-        var title:String = ""
-        var msg:String = ""
+    class ContentObj: Mappable {
+        var title: String = ""
+        var msg: String = ""
         
         required init?(map: Map) {
             
@@ -185,10 +175,10 @@ class AdObject: Mappable {
     }
 }
 
-class FoodMenu:Mappable {
-    var title:String = ""
-    var menu:String = ""
-    var order:String = ""
+class FoodMenu: Mappable {
+    var title: String = ""
+    var menu: String = ""
+    var order: String = ""
     
     required init?(map: Map) {
         
@@ -201,8 +191,7 @@ class FoodMenu:Mappable {
     }
 }
 
-
-//class FoodObject:Mappable {
+//class FoodObject: :Mappable {
 //    var menu1:[Food] = [] // 학생식당
 //    var foodMenuType2Result:[Food] = [] // 카페테리아
 //    var menu2:[Food] = [] // 사범대식당
@@ -222,7 +211,7 @@ class FoodMenu:Mappable {
 //    }
 //
 //
-//    class Food:Mappable {
+//    class Food: :Mappable {
 //        var type1:String = ""
 //        var type2:String = ""
 //        var foodmenu_type:String = ""
@@ -243,8 +232,6 @@ class FoodMenu:Mappable {
 //    }
 //}
 
-
-
 //class InfoObject: Mappable {
 //    var login:LoginObject?
 //    var code:[CodeObject]?
@@ -260,10 +247,6 @@ class FoodMenu:Mappable {
 //        self.stu_info <- map["stu_info"]
 //    }
 //}
-
-
-
-
 
 //class StuInfoObject: Mappable {
 ////    "stu_info": {
@@ -289,4 +272,3 @@ class FoodMenu:Mappable {
 //        self.stat <- map["stat"]
 //    }
 //}
-

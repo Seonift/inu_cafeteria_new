@@ -34,7 +34,7 @@ class NetworkModel {
     var view : NetworkCallback?
     
     
-    init(_ vc : NetworkCallback){
+    init(_ vc : NetworkCallback) {
         self.view = vc
     }
     
@@ -64,7 +64,7 @@ class NetworkModel {
         }
     }
     
-    func post<T:Mappable>(function name:String, type: T.Type, params:Parameters? = nil, headers: HTTPHeaders? = header) {
+    func post<T: Mappable>(function name: String, type: T.Type, params: Parameters? = nil, headers: HTTPHeaders? = header) {
         log.info(name)
         
         Alamofire.request("\(BASE_URL)/\(name)", method: .post, parameters: params, headers: headers).responseObject { (res: DataResponse<T>) in
@@ -81,7 +81,7 @@ class NetworkModel {
         }
     }
     
-    func get<T:Mappable>(function name:String, type: T.Type, params:Parameters? = nil) {
+    func get<T: Mappable>(function name:String, type: T.Type, params:Parameters? = nil) {
         log.info(name)
         
         Alamofire.request("\(BASE_URL)/\(name)").responseObject { (res: DataResponse<T>) in
@@ -195,4 +195,14 @@ class NetworkModel {
 //            return false
 //        }
 //    }
+}
+
+enum ServiceType:String {
+    // 수정하지 말 것!
+    case INU_Cafeteria = "INU Cafeteria"
+    case INU_Bus = "INU Bus"
+    case Eat_Price = "Eat Price"
+    case I_Need_You = "I Need You"
+    case People_of_No_Smoking = "People of No Smoking"
+    case Univ_Cam = "Univ Cam"
 }

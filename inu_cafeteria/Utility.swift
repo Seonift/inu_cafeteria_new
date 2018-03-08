@@ -9,39 +9,19 @@
 import Foundation
 import UIKit
 
-// "id" : id. String
-// "pw" : pw. String
-// "auto_login" : 자동로그인 여부. Bool
-
-//let device_width = UIScreen.main.bounds.size.width
-//let device_height = UIScreen.main.bounds.size.height
-
 class Utility {
     
-   
-    
-    static func showFont(){
+    static func showFont() {
 //        KoPubDotum_Pro
 //            == KoPubDotumPM
 //            == KoPubDotumPL
 //            == KoPubDotumPB
-        
-        
-        for family: String in UIFont.familyNames
-        {
-            print("\(family)")
-            for names: String in UIFont.fontNames(forFamilyName: family)
-            {
-                print("== \(names)")
+
+        for family: String in UIFont.familyNames {
+            log.debug("\(family)")
+            for names: String in UIFont.fontNames(forFamilyName: family) {
+                log.debug("== \(names)")
             }
         }
     }
-    
-//    func setStatusBarBackgroundColor(color: UIColor) {
-//        
-//        guard let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView else { return }
-//        
-//        statusBar.backgroundColor = color
-//    }
-
 }

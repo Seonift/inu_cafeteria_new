@@ -12,30 +12,29 @@ let userPreferences = UserDefaults.standard
 
 extension UserDefaults {
     
-    private var _barcode:String {
-        get { return "barcode" }
+    private var _barcode: String {
+        return "barcode"
     }
     
-    private var _token:String {
-        get { return "token" }
+    private var _token: String {
+        return "token"
     }
     
-    private var _allNoticeId:String {
-        get { return "allId" }
+    private var _allNoticeId: String {
+        return "allId"
     }
     
-    private var _iOSNoticeId:String {
-        get { return "iOSId" }
+    private var _iOSNoticeId: String {
+        return "iOSId"
     }
     
-    private var _brightness:String {
-        get { return "brightness" }
+    private var _brightness: String {
+        return "brightness"
     }
     
-    private var _sno:String {
-        get { return "sno" }
+    private var _sno: String {
+        return "sno"
     }
-    
     
     open func removeAllUserDefaults() {
         userPreferences.removeObject(forKey: _barcode)
@@ -158,7 +157,4 @@ extension UserDefaults {
         }
         return nil
     }
-    
 }
-
-

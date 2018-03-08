@@ -10,7 +10,7 @@ import UIKit
 
 class DefaultNC: UINavigationController {
     
-    var number:String!
+    var number: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()

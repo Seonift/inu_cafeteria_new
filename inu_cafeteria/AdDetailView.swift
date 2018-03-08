@@ -11,8 +11,8 @@ import UIKit
 class AdDetailView: UIView {
     @IBOutlet private var contentView: UIView?
     
-    private var _isSelected:Bool = false
-    var isSelected:Bool {
+    private var _isSelected: Bool = false
+    var isSelected: Bool {
         get {
             return _isSelected
         }
@@ -25,26 +25,13 @@ class AdDetailView: UIView {
             _isSelected = v
         }
     }
-    
-    var item:AdObject? {
-        didSet {
-            print(item)
-        }
-    }
-//    {
-//        didSet {
-//            if tableView != nil {
-//                tableView.reloadData()
-//            }
-//        }
-//    }
-    @IBOutlet weak var imageView: UIImageView!
-    
-    @IBOutlet weak var tableView: UITableView!
-    
+    var item: AdObject?
     private let cellId = "AdCell"
     private let header = "header"
     
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -57,7 +44,7 @@ class AdDetailView: UIView {
         setupUI()
     }
     
-    func setupUI(){
+    func setupUI() {
         Bundle.main.loadNibNamed("AdDetailView", owner: self, options: nil)
         
         guard let content = contentView else { return }
@@ -83,11 +70,11 @@ class AdDetailView: UIView {
         self.tableView.addGestureRecognizer(gesture)
     }
     
-    @objc func tapped(){
+    @objc func tapped() {
         self.isSelected = !self.isSelected
     }
     
-    func commonInit(item: AdObject){
+    func commonInit(item: AdObject) {
         self.item = item
         self.imageView.kf.setImage(with: URL(string: "\(BASE_URL)/\(item.img)")!)
     }
@@ -106,7 +93,8 @@ extension AdDetailView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! AdDetailCell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! AdDetailCell
+        let cell = tableView.generateCell(withIdentifier: cellId, for: indexPath, cellClass: AdDetailCell.self)
         if let contents = item?.contents, let item = contents[safe: indexPath.row] {
             cell.commonInit(item: item)
         }
@@ -119,7 +107,8 @@ extension AdDetailView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCell(withIdentifier: header) as! AdHeaderCell
+        let cell = tableView.generateCell(withIdentifier: header, cellClass: AdHeaderCell.self)
+//        let cell = tableView.dequeueReusableCell(withIdentifier: header) as! AdHeaderCell
         cell.label.text = item?.title
         return cell
     }

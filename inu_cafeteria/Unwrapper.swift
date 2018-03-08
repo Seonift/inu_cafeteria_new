@@ -17,20 +17,16 @@ func gsno(_ value: String?) -> String {
     }
 }
 
-func gino(_ value:Int?)->Int{
-    
-    guard let value_ = value else{
+func gino(_ value: Int?) -> Int {
+    guard let value_ = value else {
         return 0
     }
     return value_
 }
 
-func gfno( _ value:Float?)->Float{
-    
+func gfno(_ value: Float?) -> Float {
     guard let value_ = value else{
         return 0
     }
     return value_
-    
 }
-

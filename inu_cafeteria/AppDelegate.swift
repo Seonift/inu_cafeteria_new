@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //    https://www.youtube.com/watch?v=pVtIVfJJ35w
 //    https://www.appcoda.com/firebase-push-notifications/
     
-    
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -39,12 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
 //        application.registerUserNotificationSettings(settings)
 //        application.registerForRemoteNotifications()
-        
-//        let siren = Siren.shared
-//        siren.alertType = Siren.AlertType.force
-////        siren.showAlertAfterCurrentVersionHasBeenReleasedForDays = 0 
-//        siren.checkVersion(checkType: .immediately)
-        
         
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -68,7 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.tokenRefreshNotification(notification:)), name: .MessagingRegistrationTokenRefreshed, object: nil)
         
-        
         self.window = UIWindow(frame: UIScreen.main.bounds)
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        let firstVC = storyboard.instantiateViewController(withIdentifier: "firststartvc")
@@ -79,11 +71,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         Network().getCookie()
         
-//        SocketIOManager.sharedInstance.establishConnection()
-        
         return true
     }
-    
     
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
         print("New FCM Token received : \(fcmToken)")
@@ -101,31 +90,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+//        log.debug(#function)
         Messaging.messaging().disconnect()
-        print("Disconnected from FCM.")
-        
-        
-//        removeFlag()
-//        print("socket end")
-        
+        log.info("Disconnected from FCM.")
         SocketIOManager.sharedInstance.closeConnection()
-        
         Network().saveCookie()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         
-//        Siren.shared.checkVersion(checkType: .immediately)
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+//        log.debug(#function)
         connectToFcm()
-        
-        Network().getCookie()
-        
         SocketIOManager.sharedInstance.establishConnection()
+        Network().getCookie()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -191,25 +173,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Disconnect previous FCM connection if it exists.
         Messaging.messaging().disconnect()
         
-        Messaging.messaging().connect { (error) in
-            if error != nil {
-                print("Unable to connect with FCM. \(error)")
+        Messaging.messaging().connect { error in
+            if let error = error {
+                log.error("Unable to connect with FCM. \(error)")
             } else {
-                print("Connected to FCM.")
+                log.info("Connected to FCM.")
             }
         }
     }
-    
-//    func connectToFcm() {
-//        FIRMessaging.messaging().connect { (error) in
-//            if (error != nil) {
-//                print("Unable to connect with FCM. \(error)")
-//            } else {
-//                print("Connected to FCM.")
-//            }
-//        }
-//    }
-
 }
 
 //public extension UIWindow {
@@ -231,4 +202,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        }
 //    }
 //}
-

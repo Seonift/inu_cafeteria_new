@@ -8,9 +8,9 @@
 
 import ObjectMapper
 
-class Notices:Mappable {
-    var all:Notice?
-    var ios:Notice?
+class Notices: Mappable {
+    var all: Notice?
+    var ios: Notice?
     
     required init?(map: Map) {
         
@@ -22,9 +22,9 @@ class Notices:Mappable {
     }
 }
 
-class Notice:Mappable {
-    var title:String?
-    var message:String?
+class Notice: Mappable {
+    var title: String?
+    var message: String?
     
     required init?(map: Map) {
         

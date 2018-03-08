@@ -21,9 +21,9 @@ func generateBarcode(from string: String) -> UIImage? {
         let transform = CGAffineTransform(scaleX: 3, y: 3)
         
         if let output = filter.outputImage?.transformed(by: transform) {
-            let context:CIContext = CIContext.init(options: nil)
-            let cgImage:CGImage = context.createCGImage(output, from: output.extent)!
-            let rawImage:UIImage = UIImage.init(cgImage: cgImage)
+            let context: CIContext = CIContext.init(options: nil)
+            let cgImage: CGImage = context.createCGImage(output, from: output.extent)!
+            let rawImage: UIImage = UIImage(cgImage: cgImage)
             
             //Refinement code to allow conversion to NSData or share UIImage. Code here:
             //http://stackoverflow.com/questions/2240395/uiimage-created-from-cgimageref-fails-with-uiimagepngrepresentation

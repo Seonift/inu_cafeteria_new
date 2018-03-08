@@ -9,12 +9,12 @@
 import UIKit
 
 extension UITextField {
-    func setHint(hint:String, font:UIFont, textcolor:UIColor) {
+    func setHint(hint: String, font: UIFont, textcolor: UIColor) {
         let attributes = [
             NSAttributedStringKey.foregroundColor: textcolor,
-            NSAttributedStringKey.font : font
+            NSAttributedStringKey.font: font
         ]
-        attributedPlaceholder = NSAttributedString(string: hint, attributes:attributes)
+        attributedPlaceholder = NSAttributedString(string: hint, attributes: attributes)
     }
     
     func addDoneButtonOnKeyboard() {
@@ -37,6 +37,6 @@ extension UITextField {
         self.resignFirstResponder() // Desselect
     }
     
-    // MARK - End of adding done button to number pad
+    // MARK: End of adding done button to number pad
     
 }

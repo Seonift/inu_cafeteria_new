@@ -46,12 +46,13 @@ PODS:
   - Socket.IO-Client-Swift (13.1.1):
     - Starscream (~> 3.0.2)
   - Starscream (3.0.4)
+  - SwiftLint (0.25.0)
   - SwiftyBeaver (1.5.1)
   - TextImageButton (0.2)
   - Toast-Swift (3.0.1)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.5)
+  - Alamofire (~> 4.6)
   - AlamofireObjectMapper (~> 5.0)
   - Device (~> 3.0.3)
   - Firebase/Core
@@ -62,6 +63,7 @@ DEPENDENCIES:
   - NVActivityIndicatorView
   - ObjectMapper (~> 3.1)
   - Socket.IO-Client-Swift (~> 13.1.0)
+  - SwiftLint
   - SwiftyBeaver
   - TextImageButton
   - Toast-Swift (~> 3.0.1)
@@ -85,10 +87,11 @@ SPEC CHECKSUMS:
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   Socket.IO-Client-Swift: f22222913f29801e30ae0df712db663ec096edc2
   Starscream: f5da93fe6984c77b694366bf7299b7dc63a76f26
+  SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
   SwiftyBeaver: 4f74563624b2c1e821c522c54142b5dd5ebb0f30
   TextImageButton: cb9c8076894860d39330edaa12c476f9fa0fc126
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
 
-PODFILE CHECKSUM: 1067b6f8926cacb8d92c45b659d61755555cf8f4
+PODFILE CHECKSUM: fe83e89b3a17b54679d2a1704daffd02ec4e73c3
 
 COCOAPODS: 1.3.1

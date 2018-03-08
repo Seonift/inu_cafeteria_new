@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InfoVC:UIViewController {
+class InfoVC: UIViewController {
     @IBOutlet weak var verLabel: UILabel!
     
     @IBAction func backClicked(_ sender: Any) {
@@ -19,7 +19,7 @@ class InfoVC:UIViewController {
         setupUI()
     }
     
-    func setupUI(){
+    func setupUI() {
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             self.verLabel.text = "버전 : \(version)"
         }

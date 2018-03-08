@@ -47,7 +47,7 @@
 //        self.navigationItem.titleView = logoIV
 //    }
 //    
-//    func setupUI(){
+//    func setupUI() {
 //        image_top.constant = DeviceUtil.getHeight(height: image_top.constant)
 //        var width = DeviceUtil.getWidth(width: image_const.constant)
 //        image_const.constant = width

@@ -59,7 +59,7 @@ class MenuVC: UIViewController {
         contentView.layer.borderWidth = 0.5
     }
     
-    @objc func finish(){
+    @objc func finish() {
         
         self.bottomConst.constant = -Device.getHeight(height: 384)
         
@@ -87,8 +87,8 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MenuCell
-        
+//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MenuCell
+        let cell = tableView.generateCell(withIdentifier: cellId, for: indexPath, cellClass: MenuCell.self)
         let item = foodPlan[indexPath.row]
         cell.commonInit(menu: item)
 //        let item = foodplan[indexPath.row]
@@ -120,12 +120,12 @@ class MenuCell: UITableViewCell {
     
     @IBOutlet weak var corner_topConst: NSLayoutConstraint!
     
-    lazy var topConst:NSLayoutConstraint = {
+    lazy var topConst: NSLayoutConstraint = {
         let const = NSLayoutConstraint(item: menuLabel, attribute: .top, relatedBy: .equal, toItem: self.contentView, attribute: .top, multiplier: 1, constant: Device.getHeight(height: 14))
         return const
     }()
     
-    lazy var bottomConst:NSLayoutConstraint = {
+    lazy var bottomConst: NSLayoutConstraint = {
         let const = NSLayoutConstraint(item: menuLabel, attribute: .bottom, relatedBy: .equal, toItem: self.contentView, attribute: .bottom, multiplier: 1, constant: -Device.getHeight(height: 14))
         return const
     }()
@@ -134,11 +134,11 @@ class MenuCell: UITableViewCell {
         self.contentView.addConstraint(topConst)
         self.contentView.addConstraint(bottomConst)
         self.contentView.layoutIfNeeded()
-        self.separatorInset = UIEdgeInsetsMake(0, 2, 0, 2)
+        self.separatorInset = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
         self.selectionStyle = .none
     }
     
-    func commonInit(menu: FoodMenu){
+    func commonInit(menu: FoodMenu) {
         self.cornerLabel.text = menu.title
         self.menuLabel.text = menu.menu
         

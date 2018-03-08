@@ -10,18 +10,14 @@ import Foundation
 import ObjectMapper
 
 class WaitNumber: Mappable {
-    var cafecode:String = ""
-    var num:[String] = []
-    var _cafecode:Int {
-        get {
-            if let int = Int(cafecode) { return int }
-            return -1
-        }
+    var cafecode: String = ""
+    var num: [String] = []
+    var _cafecode: Int {
+        if let int = Int(cafecode) { return int }
+        return -1
     }
-    var _num:[Int] {
-        get {
-            return num.flatMap { Int($0) }
-        }
+    var _num: [Int] {
+        return num.flatMap { Int($0) }
     }
     
     required init?(map: Map) {

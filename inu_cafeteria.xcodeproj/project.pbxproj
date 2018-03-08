@@ -28,16 +28,12 @@
 		742D90141F1CF8C1000B656E /* FirstStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90131F1CF8C1000B656E /* FirstStartVC.swift */; };
 		742D901D1F1CF8F8000B656E /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90161F1CF8F8000B656E /* Constraint.swift */; };
 		742D901E1F1CF8F8000B656E /* Unwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90171F1CF8F8000B656E /* Unwrapper.swift */; };
-		742D901F1F1CF8F8000B656E /* DeviceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90181F1CF8F8000B656E /* DeviceUtil.swift */; };
 		742D90201F1CF8F8000B656E /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90191F1CF8F8000B656E /* Shadow.swift */; };
 		742D90211F1CF8F8000B656E /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D901A1F1CF8F8000B656E /* Utility.swift */; };
-		742D90221F1CF8F8000B656E /* ScheduleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D901B1F1CF8F8000B656E /* ScheduleColor.swift */; };
-		742D90231F1CF8F8000B656E /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D901C1F1CF8F8000B656E /* Strings.swift */; };
 		742D902B1F1CF90E000B656E /* ExtVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90251F1CF90E000B656E /* ExtVC.swift */; };
 		742D902C1F1CF90E000B656E /* ExtColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90261F1CF90E000B656E /* ExtColor.swift */; };
 		742D902D1F1CF90E000B656E /* ExtUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90271F1CF90E000B656E /* ExtUIImage.swift */; };
 		742D902E1F1CF90E000B656E /* ExtDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90281F1CF90E000B656E /* ExtDate.swift */; };
-		742D902F1F1CF90E000B656E /* ExtInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90291F1CF90E000B656E /* ExtInt.swift */; };
 		742D90301F1CF90E000B656E /* ExtTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D902A1F1CF90E000B656E /* ExtTextfield.swift */; };
 		742D90351F1CF931000B656E /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90331F1CF931000B656E /* NetworkModel.swift */; };
 		742D90361F1CF931000B656E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90341F1CF931000B656E /* Network.swift */; };
@@ -71,6 +67,10 @@
 		74BC46F8203745CE0071AE1E /* ExtFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BC46F7203745CE0071AE1E /* ExtFont.swift */; };
 		74BC46FC203748D90071AE1E /* DummyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BC46FB203748D90071AE1E /* DummyView.swift */; };
 		74D2D2871FA1F65200173C9F /* ServerString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D2D2861FA1F65200173C9F /* ServerString.swift */; };
+		74E031322048630F00EACE49 /* ExtTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E031312048630F00EACE49 /* ExtTableView.swift */; };
+		74E03134204864E900EACE49 /* ExtString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E03133204864E900EACE49 /* ExtString.swift */; };
+		74E03136204BDBFE00EACE49 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E03135204BDBFE00EACE49 /* CheckBox.swift */; };
+		74E03138204BDC0D00EACE49 /* LoginTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E03137204BDC0D00EACE49 /* LoginTF.swift */; };
 		74E4330B1F1F1C230081AE08 /* BarcodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4330A1F1F1C230081AE08 /* BarcodeVC.swift */; };
 		74E6BDC320394DF900D6A03F /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E6BDC220394DF900D6A03F /* CustomAlert.swift */; };
 		74F674F12041648500B53B22 /* AdHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F674EF2041648500B53B22 /* AdHeaderCell.swift */; };
@@ -106,16 +106,12 @@
 		742D90131F1CF8C1000B656E /* FirstStartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstStartVC.swift; sourceTree = "<group>"; };
 		742D90161F1CF8F8000B656E /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
 		742D90171F1CF8F8000B656E /* Unwrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unwrapper.swift; sourceTree = "<group>"; };
-		742D90181F1CF8F8000B656E /* DeviceUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceUtil.swift; sourceTree = "<group>"; };
 		742D90191F1CF8F8000B656E /* Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
 		742D901A1F1CF8F8000B656E /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
-		742D901B1F1CF8F8000B656E /* ScheduleColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleColor.swift; sourceTree = "<group>"; };
-		742D901C1F1CF8F8000B656E /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		742D90251F1CF90E000B656E /* ExtVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtVC.swift; sourceTree = "<group>"; };
 		742D90261F1CF90E000B656E /* ExtColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtColor.swift; sourceTree = "<group>"; };
 		742D90271F1CF90E000B656E /* ExtUIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtUIImage.swift; sourceTree = "<group>"; };
 		742D90281F1CF90E000B656E /* ExtDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtDate.swift; sourceTree = "<group>"; };
-		742D90291F1CF90E000B656E /* ExtInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtInt.swift; sourceTree = "<group>"; };
 		742D902A1F1CF90E000B656E /* ExtTextfield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtTextfield.swift; sourceTree = "<group>"; };
 		742D90331F1CF931000B656E /* NetworkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
 		742D90341F1CF931000B656E /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -152,6 +148,10 @@
 		74BC46F7203745CE0071AE1E /* ExtFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtFont.swift; sourceTree = "<group>"; };
 		74BC46FB203748D90071AE1E /* DummyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyView.swift; sourceTree = "<group>"; };
 		74D2D2861FA1F65200173C9F /* ServerString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerString.swift; sourceTree = "<group>"; };
+		74E031312048630F00EACE49 /* ExtTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtTableView.swift; sourceTree = "<group>"; };
+		74E03133204864E900EACE49 /* ExtString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtString.swift; sourceTree = "<group>"; };
+		74E03135204BDBFE00EACE49 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		74E03137204BDC0D00EACE49 /* LoginTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTF.swift; sourceTree = "<group>"; };
 		74E4330A1F1F1C230081AE08 /* BarcodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeVC.swift; sourceTree = "<group>"; };
 		74E6BDC220394DF900D6A03F /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		74F674EF2041648500B53B22 /* AdHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdHeaderCell.swift; sourceTree = "<group>"; };
@@ -287,11 +287,8 @@
 				745E68C11F21CA6600D0C0A5 /* IndicatorClass.swift */,
 				742D90161F1CF8F8000B656E /* Constraint.swift */,
 				742D90171F1CF8F8000B656E /* Unwrapper.swift */,
-				742D90181F1CF8F8000B656E /* DeviceUtil.swift */,
 				742D90191F1CF8F8000B656E /* Shadow.swift */,
 				742D901A1F1CF8F8000B656E /* Utility.swift */,
-				742D901B1F1CF8F8000B656E /* ScheduleColor.swift */,
-				742D901C1F1CF8F8000B656E /* Strings.swift */,
 				747C10571F248BD500C195A9 /* Barcode.swift */,
 				741F2D6E203ED08D00D5BDAB /* UserPreferences.swift */,
 				741F2D70203EE18C00D5BDAB /* Reachability.swift */,
@@ -306,11 +303,12 @@
 				742D90261F1CF90E000B656E /* ExtColor.swift */,
 				742D90271F1CF90E000B656E /* ExtUIImage.swift */,
 				742D90281F1CF90E000B656E /* ExtDate.swift */,
-				742D90291F1CF90E000B656E /* ExtInt.swift */,
 				742D902A1F1CF90E000B656E /* ExtTextfield.swift */,
 				74AF6E411F556C36007D335B /* ExtBundle.swift */,
 				74B66C552037325A0071F189 /* ExtDevice.swift */,
 				74BC46F7203745CE0071AE1E /* ExtFont.swift */,
+				74E031312048630F00EACE49 /* ExtTableView.swift */,
+				74E03133204864E900EACE49 /* ExtString.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -374,6 +372,8 @@
 				74F674F02041648500B53B22 /* AdHeaderCell.xib */,
 				74F674F3204164D700B53B22 /* AdDetailCell.swift */,
 				74F674F4204164D700B53B22 /* AdDetailCell.xib */,
+				74E03135204BDBFE00EACE49 /* CheckBox.swift */,
+				74E03137204BDC0D00EACE49 /* LoginTF.swift */,
 			);
 			name = CustomView;
 			sourceTree = "<group>";
@@ -391,6 +391,7 @@
 				742D8FFB1F1CF7A4000B656E /* Resources */,
 				9F5E16C862B24AE8E01A16B8 /* [CP] Embed Pods Frameworks */,
 				7B24962E5A8682BD3099F2A1 /* [CP] Copy Pods Resources */,
+				74E0313020485EF200EACE49 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -487,6 +488,19 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		74E0313020485EF200EACE49 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint";
+		};
 		7B24962E5A8682BD3099F2A1 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -564,23 +578,24 @@
 				742D90541F1E61CF000B656E /* NumberModel.swift in Sources */,
 				74F69340203AADFA00B1F57E /* NumberVC.swift in Sources */,
 				742D90461F1E43E2000B656E /* HomeVC.swift in Sources */,
+				74E031322048630F00EACE49 /* ExtTableView.swift in Sources */,
 				740689061F4415CE000291DA /* InfoVC.swift in Sources */,
 				74AF6E421F556C36007D335B /* ExtBundle.swift in Sources */,
 				741F2D76203EFF3100D5BDAB /* NumberObject.swift in Sources */,
 				742D90301F1CF90E000B656E /* ExtTextfield.swift in Sources */,
-				742D90231F1CF8F8000B656E /* Strings.swift in Sources */,
 				742D90441F1E38E8000B656E /* LoginVC.swift in Sources */,
 				74E4330B1F1F1C230081AE08 /* BarcodeVC.swift in Sources */,
 				747C10581F248BD500C195A9 /* Barcode.swift in Sources */,
 				742D902C1F1CF90E000B656E /* ExtColor.swift in Sources */,
 				749410A41F39CEEB00399BF2 /* SocketIOManager.swift in Sources */,
 				742D90521F1E5D3F000B656E /* DrawerVC.swift in Sources */,
+				74E03134204864E900EACE49 /* ExtString.swift in Sources */,
 				74BC46F42037438F0071AE1E /* NumberView.swift in Sources */,
-				742D902F1F1CF90E000B656E /* ExtInt.swift in Sources */,
 				74F77A6E203D503F004260F7 /* MenuVC.swift in Sources */,
 				742D90381F1CF937000B656E /* NetworkCallback.swift in Sources */,
 				74201FAF20413CF000762050 /* AdDetailView.swift in Sources */,
 				747C105B1F2A388200C195A9 /* LoginObject.swift in Sources */,
+				74E03136204BDBFE00EACE49 /* CheckBox.swift in Sources */,
 				742D902B1F1CF90E000B656E /* ExtVC.swift in Sources */,
 				741BD91B1F2245DA00B56F30 /* SplashVC.swift in Sources */,
 				74676FA51F47D1B2008EAF66 /* CsrModel.swift in Sources */,
@@ -594,8 +609,8 @@
 				742D90481F1E441D000B656E /* DefaultNC.swift in Sources */,
 				742D902E1F1CF90E000B656E /* ExtDate.swift in Sources */,
 				742D90351F1CF931000B656E /* NetworkModel.swift in Sources */,
-				742D90221F1CF8F8000B656E /* ScheduleColor.swift in Sources */,
 				747C105D1F2A3B9F00C195A9 /* FlagModel.swift in Sources */,
+				74E03138204BDC0D00EACE49 /* LoginTF.swift in Sources */,
 				742D90361F1CF931000B656E /* Network.swift in Sources */,
 				749E4FED203D895B00672BA4 /* AdVC.swift in Sources */,
 				742D904C1F1E4957000B656E /* iCarousel.m in Sources */,
@@ -611,7 +626,6 @@
 				74BC46FC203748D90071AE1E /* DummyView.swift in Sources */,
 				749410A61F39FCCF00399BF2 /* Queue.swift in Sources */,
 				7413B6622047B2B0005D89AB /* NewInfoVC.swift in Sources */,
-				742D901F1F1CF8F8000B656E /* DeviceUtil.swift in Sources */,
 				74D2D2871FA1F65200173C9F /* ServerString.swift in Sources */,
 				742D90011F1CF7A4000B656E /* AppDelegate.swift in Sources */,
 			);
@@ -680,7 +694,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -724,7 +738,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

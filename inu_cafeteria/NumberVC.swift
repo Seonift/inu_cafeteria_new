@@ -17,8 +17,8 @@ class NumberVC: UIViewController {
     
     private var audioPlayer: AVAudioPlayer?
     
-    var start_index:Int = 0 // 출력 시작하는 index
-    var items:[String] = [] {
+    var start_index: Int = 0 // 출력 시작하는 index
+    var items: [String] = [] {
         didSet {
             if collectionView != nil {
                 collectionView.reloadData()
@@ -29,18 +29,16 @@ class NumberVC: UIViewController {
         }
     }
     
-    var inputNumbers:[Int] = []
+    var inputNumbers: [Int] = []
     
-    var code:Int = 0
-    var cafeTitle:String = ""
-    var bgimg:String?
+    var code: Int = 0
+    var cafeTitle: String = ""
+    var bgimg: String?
     
-    lazy var model:NumberModel = {
+    lazy var model: NumberModel = {
         let model = NumberModel(self)
         return model
     }()
-    
-    //    var items:[Int] = [5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000]
     
     @IBOutlet weak var numLabel1: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -49,7 +47,7 @@ class NumberVC: UIViewController {
     
     @IBOutlet weak var content: UIView!
     @IBAction func backClicked(_ sender: Any) {
-        let alert = CustomAlert.alert(message: String.cancel_num, positiveAction: { action in
+        let alert = CustomAlert.alert(message: String.cancel_num, positiveAction: { _ in
             // 소켓 초기화
             Indicator.startAnimating(activityData)
             self.model.resetNumber()
@@ -82,31 +80,31 @@ class NumberVC: UIViewController {
         model.isNumberWait()
     }
     
-    @objc func enterBackground(){
+    @objc func enterBackground() {
         SocketIOManager.sharedInstance.removeAll()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         SocketIOManager.sharedInstance.removeAll()
         
-        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
     }
     
-    func setData(){
+    func setData() {
         // 번호와 타이틀 설정
-        var attrs:[NSMutableAttributedString] = []
+        var attrs: [NSMutableAttributedString] = []
         switch inputNumbers.count {
         case 3:
-            let n3 = NSMutableAttributedString(string: " \(inputNumbers[2])", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, .font: UIFont.KoPubDotum(type: .L, size: 24)])
+            let n3 = NSMutableAttributedString(string: " \(inputNumbers[2])", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white, .font: UIFont.KoPubDotum(type: .L, size: 24)])
             attrs.append(n3)
             fallthrough
         case 2:
-            let n2 = NSMutableAttributedString(string: "\r\(inputNumbers[1])", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, .font: UIFont.KoPubDotum(type: .L, size: 24)])
+            let n2 = NSMutableAttributedString(string: "\r\(inputNumbers[1])", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white, .font: UIFont.KoPubDotum(type: .L, size: 24)])
             attrs.append(n2)
             fallthrough
         case 1:
-            let n1 = NSMutableAttributedString(string: "\(inputNumbers[0])", attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, .font: UIFont.KoPubDotum(type: .L, size: 55)])
+            let n1 = NSMutableAttributedString(string: "\(inputNumbers[0])", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white, .font: UIFont.KoPubDotum(type: .L, size: 55)])
             attrs.append(n1)
         default:
             print()
@@ -127,14 +125,14 @@ class NumberVC: UIViewController {
         } else {
             guard let bgimg = self.bgimg else {
                 titleIV.image = nil
-                titleIV.backgroundColor = UIColor(r: 54, g: 46, b:43)
+                titleIV.backgroundColor = UIColor(r: 54, g: 46, b: 43)
                 return
             }
             if let url = URL(string: "\(BASE_URL + bgimg)") {
                 titleIV.kf.setImage(with: url) { (_, error, _, _) in
-                    if let _ = error {
+                    if error != nil {
                         self.titleIV.image = nil
-                        self.titleIV.backgroundColor = UIColor(r: 54, g: 46, b:43)
+                        self.titleIV.backgroundColor = UIColor(r: 54, g: 46, b: 43)
                     }
                 }
             }
@@ -154,13 +152,13 @@ class NumberVC: UIViewController {
         collectionView.isUserInteractionEnabled = true
     }
     
-    func commonInit(code: Int, title:String, numbers: [Int]) {
+    func commonInit(code: Int, title: String, numbers: [Int]) {
         self.code = code
         self.cafeTitle = title
         self.inputNumbers = numbers
     }
     
-    func setSocketConnect(){
+    func setSocketConnect() {
         log.debug("setSocket, code:\(self.code)")
         SocketIOManager.sharedInstance.getNumber(code: String(self.code)) { (result) -> Void in
             DispatchQueue.main.async {
@@ -169,12 +167,12 @@ class NumberVC: UIViewController {
                     self.items.append(msg)
                     if self.checkNumCorrect(msgint) == true {
                         //내 번호가 나오면 알림
-                        let alert = CustomAlert.okAlert(message: "\(String.complete_num)\n번호 : \(msgint)", positiveAction: { action in
+                        let alert = CustomAlert.okAlert(message: "\(String.complete_num)\n번호 : \(msgint)", positiveAction: { _ in
                             self.model.isNumberWait()
                         })
                         self.present(alert, animated: true, completion: nil)
                         
-                        let systemSoundID:SystemSoundID = 1005
+                        let systemSoundID: SystemSoundID = 1005
                         let vib = SystemSoundID(kSystemSoundID_Vibrate)
                         AudioServicesPlaySystemSound(systemSoundID)
                         AudioServicesPlaySystemSound(vib)
@@ -184,20 +182,18 @@ class NumberVC: UIViewController {
         }
     }
     
-    func checkNumCorrect(_ num:Int) -> Bool{
+    func checkNumCorrect(_ num: Int) -> Bool {
         print("checkNumCorrect:\(String(num))")
         //번호가 들어왔을때 맞는 번호인지 확인
         if inputNumbers.count > 0 {
-            for item in inputNumbers {
-                if item == num {
-                    return true
-                }
+            for item in inputNumbers where item == num {
+                return true
             }
         }
         return false
     }
     
-    //    func wakeUp(){
+    //    func wakeUp() {
     //        //background에서 복귀
     //        print("wakeup")
     //
@@ -206,8 +202,6 @@ class NumberVC: UIViewController {
     //
     //        setSocketConnect()
     //    }
-    
-    
     
     // 아래 밖 여백 53 - 43.5 = 9.5
     
@@ -233,7 +227,8 @@ extension NumberVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! NumCell
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! NumCell
+        let cell = collectionView.generateCell(withIdentifier: cellId, for: indexPath, cellClass: NumCell.self)
         cell.backgroundColor = .white
         
         guard let text = items[safe: self.start_index + indexPath.row] else {
