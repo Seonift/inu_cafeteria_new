@@ -16,20 +16,12 @@ class MenuVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableView_bottomConst: NSLayoutConstraint!
     
-//    var foodplan:[FoodObject.Food] = [] {
-//        didSet {
-//            foodplan = foodplan.sorted(by: { $0.type1 < $1.type1 })
-//        }
-//    }
-    
-    var foodPlan:[FoodMenu] = [] {
+    private var foodPlan: [FoodMenu] = [] { // 식단 메뉴
         didSet {
             foodPlan = foodPlan.sorted(by: { $0.order < $1.order })
         }
     }
-    
-    var code:Int = -1
-    
+    private var code: Int = -1 // 현재 식당 코드
     private let cellId = "MenuCell"
     
     override func viewDidLoad() {
@@ -57,6 +49,11 @@ class MenuVC: UIViewController {
         contentView.layer.cornerRadius = Device.getWidth(width: 22)
         contentView.layer.borderColor = UIColor(rgb: 240).cgColor
         contentView.layer.borderWidth = 0.5
+    }
+    
+    func setData(menu: [FoodMenu], code: Int) {
+        self.foodPlan = menu
+        self.code = code
     }
     
     @objc func finish() {
@@ -160,8 +157,6 @@ extension UIView {
 //        superview.drawHierarchy(in: CGRect(x: -self.frame.minX, y: -self.frame.minY, width: superview.bounds.width, height: superview.bounds.height), afterScreenUpdates: true)
 //        let image = UIGraphicsGetImageFromCurrentImageContext()
 //        UIGraphicsEndImageContext()
-        
-        
         
         // Add a UIImageView with the image from the context as a subview
         let imageView = UIImageView(frame: self.bounds)

@@ -52,8 +52,8 @@ class FlagModel: NetworkModel {
 //            guard let barcode = userPreferences.getBarcode() else { return }
 //
 //            let params:[String:Any] = [
-//                "flag" : value,
-//                "barcode" : barcode
+//                "flag": value,
+//                "barcode": barcode
 //            ]
 //
 //            Alamofire.request("\(BASE_URL)activeBarcode", method: .post, parameters: params, headers: header).response { res in
@@ -80,8 +80,8 @@ class FlagModel: NetworkModel {
 //            guard let barcode = userPreferences.getBarcode() else { return }
 //
 //            let params:[String:Any] = [
-//                "flag" : value,
-//                "barcode" : barcode
+//                "flag": value,
+//                "barcode": barcode
 //            ]
 //
 //            Alamofire.request("\(BASE_URL)activeBarcode", method: .post, parameters: params, headers: header).response { res in

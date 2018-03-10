@@ -4,6 +4,7 @@ disabled_rules:
  - variable_name
  - fallthrough
  - file_length
+ - function_body_length
 
 excluded:
  - Pods

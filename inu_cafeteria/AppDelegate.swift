@@ -16,7 +16,6 @@ import SwiftyBeaver
 
 let log = SwiftyBeaver.self
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
 
@@ -118,14 +117,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        print("socket end")
     }
 
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        
-        log.info("reset!!!")
-//        print("didreceiveremotenotification")
-        
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         Messaging.messaging().appDidReceiveMessage(userInfo)
-        
-        
+
         //푸시 메시지 클릭했을 때 이벤트
         UIApplication.shared.applicationIconBadgeNumber = 0
         
@@ -154,7 +148,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // 앱 켜져있을 때 푸시 알림 올 경우
         completionHandler([.alert, .sound, .badge])
     }
-    
     
     @objc func tokenRefreshNotification(notification: NSNotification) {
         // NOTE: It can be nil here

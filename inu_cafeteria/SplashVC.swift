@@ -12,9 +12,9 @@ import Toast_Swift
 
 class SplashVC: UIViewController {
     
-    var delayInSeconds = 2.0
+    private var delayInSeconds = 2.0
     
-    lazy var loginModel: LoginModel = {
+    private lazy var loginModel: LoginModel = {
         let model = LoginModel(self)
         return model
     }()
@@ -46,43 +46,6 @@ class SplashVC: UIViewController {
             self.present(main, animated: false, completion: nil)
         }
     }
-    
-//    func failAutoLogin(_ code: String?) {
-//        userPreferences.removeAllUserDefaults()
-//
-//        if code == nil {
-//            self.view.makeToast(String.login_failed)
-//        } else {
-//            if code == "no_barcode" {
-//                self.view.makeToast(String.no_barcode)
-//            }
-//
-//            if code == "no_code" {
-//                self.view.makeToast(String.no_code)
-//            }
-//
-//            if code == "no_stuinfo" {
-//                self.view.makeToast(String.no_stuinfo)
-//            }
-//
-//            if code == "notice" {
-//                self.showLogin()
-//            }
-//
-//            if code == "version" {
-//                let alert = CustomAlert.okAlert(positive: "재시도", title: "오류", message: String.fail_version, positiveAction: { action in
-//                    let model = LoginModel(self)
-//                    model.version()
-//                })
-//                self.present(alert, animated: true, completion: nil)
-//
-//            }
-//        }
-//
-//        let main_storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        guard let main = main_storyboard.instantiateViewController(withIdentifier: "firststartvc") as? FirstStartVC else {return}
-//        self.present(main, animated: true, completion: nil)
-//    }
 }
 
 extension SplashVC: NetworkCallback {
@@ -94,20 +57,9 @@ extension SplashVC: NetworkCallback {
         if code == loginModel._version {
             if let result = resultData as? VerObject,
                 let latest = result.ios?.latest, let current = Bundle.main.versionNumber {
-//                , let _ = result.ios?.log {
                 if latest.compare(current, options: .numeric) == .orderedDescending {
                    // 업데이트 필요
-                    let alert = CustomAlert.okAlert(title: "업데이트", message: String.update, positiveAction: { _ in
-                        if let url = URL(string: String.appStore), UIApplication.shared.canOpenURL(url) {
-                            if #available(iOS 10.0, *) {
-                                UIApplication.shared.open(url)
-                            } else {
-                                // Fallback on earlier versions
-                                UIApplication.shared.openURL(url)
-                            }
-                        }
-                    })
-                    self.present(alert, animated: true, completion: nil)
+                    showUpdateAlert()
                 } else {
                     // 최신 버전
                     self.loginModel.notice()
@@ -116,31 +68,8 @@ extension SplashVC: NetworkCallback {
         }
         
         if code == loginModel._notice {
-            guard let result = resultData as? NoticeObject,
-                let all = result.all, let ios = result.ios else { return }
-            
-            if let id = all.isVaild(), userPreferences.allNoticeCheck(id: id) {
-                // 전체 공지가 있으면 전체 공지 출력
-                let alert = CustomAlert.noticeAlert(title: all.title, message: all.message, firstAction: { _ in
-                    self.showLogin()
-                }, secondAction: { _ in
-                    // 하루 보지 않기
-                    userPreferences.setAllNoticeId(id: id)
-                    self.showLogin()
-                })
-                self.present(alert, animated: true, completion: nil)
-            } else if let id = ios.isVaild(), userPreferences.iOSNoticeCheck(id: id) {
-                let alert = CustomAlert.noticeAlert(title: ios.title, message: ios.message, firstAction: { _ in
-                    self.showLogin()
-                }, secondAction: { _ in
-                    // 하루 보지 않기
-                    userPreferences.setiOSNoticeId(id: id)
-                    self.showLogin()
-                })
-                self.present(alert, animated: true, completion: nil)
-            } else {
-                self.showLogin()
-            }
+            guard let result = resultData as? NoticeObject else { return }
+            showNoticeAlert(notice: result)
         }
         
         if code == loginModel._login {
@@ -155,26 +84,6 @@ extension SplashVC: NetworkCallback {
             guard let result = resultData as? [CafeCode] else {return}
             showHome(result, false)
         }
-        
-//        if code == "auto_login" {
-//            let result = resultData as! [CodeObject]
-//
-//            self.showHome(result, false)
-//        }
-        
-//        if code == "notice" {
-//            let result = resultData as! Notices
-//
-//
-//            if userPreferences.object(forKey: "notice") == nil || !isDateToday(userPreferences.object(forKey: "notice") as! Date) {
-//                //저장된 날짜가 없으면 다이얼로그 출력
-//                //오늘 보인적이 없으면 보이기
-//                showDialog(result)
-//            } else {
-//                self.showLogin()
-//            }
-//
-//        }
     }
     
     func networkFailed(errorMsg: String, code: String) {
@@ -209,9 +118,47 @@ extension SplashVC: NetworkCallback {
     func networkFailed() {
         log.info("")
         Indicator.stopAnimating()
-        
-//        failAutoLogin(nil)
         self.view.makeToast(String.noServer)
+    }
+    
+    func showUpdateAlert() {
+        let alert = CustomAlert.okAlert(title: "업데이트", message: String.update, positiveAction: { _ in
+            if let url = URL(string: String.appStore), UIApplication.shared.canOpenURL(url) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url)
+                } else {
+                    // Fallback on earlier versions
+                    UIApplication.shared.openURL(url)
+                }
+            }
+        })
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showNoticeAlert(notice: NoticeObject) {
+        guard let all = notice.all, let ios = notice.ios else { return }
+        if let id = all.isVaild(), userPreferences.allNoticeCheck(id: id) {
+            // 전체 공지가 있으면 전체 공지 출력
+            let alert = CustomAlert.noticeAlert(title: all.title, message: all.message, firstAction: { _ in
+                self.showLogin()
+            }, secondAction: { _ in
+                // 하루 보지 않기
+                userPreferences.setAllNoticeId(id: id)
+                self.showLogin()
+            })
+            self.present(alert, animated: true, completion: nil)
+        } else if let id = ios.isVaild(), userPreferences.iOSNoticeCheck(id: id) {
+            let alert = CustomAlert.noticeAlert(title: ios.title, message: ios.message, firstAction: { _ in
+                self.showLogin()
+            }, secondAction: { _ in
+                // 하루 보지 않기
+                userPreferences.setiOSNoticeId(id: id)
+                self.showLogin()
+            })
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            self.showLogin()
+        }
     }
     
 }

@@ -8,22 +8,6 @@
 
 import UIKit
 
-//extension UITableViewDataSource {
-//    func generateCell<T: UITableViewCell>(_ tableView: UITableView, withIdentifier identifier: String, for indexPath: IndexPath? = nil, cellClass: T.Type) -> T {
-//        if let indexPath = indexPath {
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? T else {
-//                fatalError("Could not dequeue cell: \(T.self) with identifier: \(identifier)")
-//            }
-//            return cell
-//        }
-//
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? T else {
-//            fatalError("Could not dequeue cell: \(T.self) with identifier: \(identifier)")
-//        }
-//        return cell
-//    }
-//}
-
 extension UITableView {
     func generateCell<T: UITableViewCell>(withIdentifier identifier: String, for indexPath: IndexPath? = nil, cellClass: T.Type) -> T {
         if let indexPath = indexPath {

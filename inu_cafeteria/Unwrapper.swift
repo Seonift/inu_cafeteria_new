@@ -25,7 +25,7 @@ func gino(_ value: Int?) -> Int {
 }
 
 func gfno(_ value: Float?) -> Float {
-    guard let value_ = value else{
+    guard let value_ = value else {
         return 0
     }
     return value_

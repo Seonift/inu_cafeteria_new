@@ -43,12 +43,12 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         return pageControl
     }()
     
-    var adItems: [AdObject] = []
-    lazy var flagModel: FlagModel = {
+    private var adItems: [AdObject] = []
+    private lazy var flagModel: FlagModel = {
         let model = FlagModel(self)
         return model
     }()
-    lazy var networkModel: NetworkModel = {
+    private lazy var networkModel: NetworkModel = {
         let model = NetworkModel(self)
         return model
     }()
@@ -208,12 +208,6 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
 
 extension DrawerVC: NetworkCallback {
     func networkResult(resultData: Any, code: String) {
-//        if code == "activebarcode" {
-//            if let code = resultData as? Int {
-//                if code == 1 { setupBarcode(true) }
-//            }
-//        }
-        
         log.info(code)
         if code == flagModel._activeBarcode {
             if let result = resultData as? Bool, result {
@@ -236,10 +230,6 @@ extension DrawerVC: NetworkCallback {
         if code == flagModel._activeBarcode {
             setupBarcode(false)
         }
-        
-//        if code == "activebarcode" {
-//            setupBarcode(false)
-//        }
     }
     
     func networkFailed() {
@@ -562,4 +552,3 @@ extension DrawerVC: NetworkCallback {
 //    }
 //}
 //
-

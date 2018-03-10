@@ -25,7 +25,7 @@ class LoginModel: NetworkModel {
         let params = [
             "sno": sno,
             "pw": pw,
-            "auto": auto ? "1" : "0",
+            "auto": auto ? "1": "0",
             "device": "ios"
         ]
         userPreferences.saveSNO(sno: sno)

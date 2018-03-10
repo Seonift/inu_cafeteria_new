@@ -43,7 +43,7 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var noStudentLabel: UILabel!
     @IBOutlet weak var noStudentBtn: UIButton!
-    var showLogin: Bool = false
+    private var showLogin: Bool = false // true면 바로 로그인화면 보여줌
     
     @IBAction func noStudentClicked(_ sender: Any) {
         self.noStudent = true
@@ -57,7 +57,7 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var nsB_top: NSLayoutConstraint!
     @IBOutlet weak var nsL_top: NSLayoutConstraint!
     
-    lazy var loginModel: LoginModel = {
+    private lazy var loginModel: LoginModel = {
         let model = LoginModel(self)
         return model
     }()
@@ -72,28 +72,28 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    let bgArr: [UIImage?] = [UIImage(named: "bg1"), UIImage(named: "bg2")]
-    var index = 0
-    let animationDuration: TimeInterval = 1
-    let switchingInterval: TimeInterval = 3
+    private let bgArr: [UIImage?] = [UIImage(named: "bg1"), UIImage(named: "bg2")]
+    private var index = 0
+    private let animationDuration: TimeInterval = 1
+    private let switchingInterval: TimeInterval = 3
     
-    lazy var tap: UITapGestureRecognizer = {
+    private lazy var tap: UITapGestureRecognizer = {
         let tap = UITapGestureRecognizer(target: self, action: #selector(moveLogin(_:)))
         tap.delegate = self
         return tap
     }()
-    lazy var mainTap: UITapGestureRecognizer = {
+    private lazy var mainTap: UITapGestureRecognizer = {
         let mainTap = UITapGestureRecognizer(target: self, action: #selector(handleTap_mainview(_:)))
         mainTap.delegate = self
         return mainTap
     }()
-    lazy var checkTap: UITapGestureRecognizer = {
+    private lazy var checkTap: UITapGestureRecognizer = {
         let checkTap = UITapGestureRecognizer(target: self, action: #selector(cBoxClicked(_:)))
         checkTap.delegate = self
         return checkTap
     }()
     
-    var noStudent: Bool = false // true면 비회원로그인
+    private var noStudent: Bool = false // true면 비회원로그인
     
     override func viewDidLoad() {
         setupUI()
@@ -117,6 +117,10 @@ class FirstStartVC: UIViewController, UIGestureRecognizerDelegate {
         self.idTF.text = ""
         self.pwTF.text = ""
         autoB.isSelected = false
+    }
+    
+    func setLoginPage() {
+        self.showLogin = true
     }
     
     func setupUI() {

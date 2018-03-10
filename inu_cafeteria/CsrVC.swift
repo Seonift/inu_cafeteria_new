@@ -21,14 +21,14 @@ class CsrVC: UIViewController, UIGestureRecognizerDelegate {
     
     private let cellId = "CsrCell"
     
-    var log: [VerObject.VersionHistory]?
-    var parentVC: UIViewController?
+    private var log: [VerObject.VersionHistory]?
+    private var parentVC: UIViewController?
     private var lastKnowContentOfsset: CGFloat = 0
     lazy var model: CsrModel = {
         return CsrModel(self)
     }()
-    var headerView: CsrHeaderCell?
-    var tableView_flipped: Bool = true
+    private var headerView: CsrHeaderCell?
+    private var tableView_flipped: Bool = true
     
     @IBAction func flipClicked(_ sender: Any) {
         tableView_flipped = !tableView_flipped
@@ -100,6 +100,11 @@ class CsrVC: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    func setData(log: [VerObject.VersionHistory]? = nil, parent: UIViewController? = nil) {
+        if let log = log { self.log = log }
+        self.parentVC = parent
+    }
+    
     @objc func sendClicked(_ sender: UIButton) {
         if let text = textField.text, text != "" {
             self.textField.resignFirstResponder()
@@ -151,17 +156,15 @@ extension CsrVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CsrCell
         let cell = tableView.generateCell(withIdentifier: cellId, for: indexPath, cellClass: CsrCell.self)
         if let log = log {
             cell.commonInit(item: log[indexPath.row])
         }
-        
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        self.headerView = tableView.dequeueReusableCell(withIdentifier: "header") as! CsrHeaderCell
         self.headerView = tableView.generateCell(withIdentifier: "header", cellClass: CsrHeaderCell.self)
         return self.headerView
     }

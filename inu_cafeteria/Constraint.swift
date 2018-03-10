@@ -25,7 +25,7 @@ extension UIView {
                                                            views: viewDictionary))
     }
     
-    func acwf(width: CGFloat?, height:CGFloat?, view: UIView) {
+    func acwf(width: CGFloat?, height: CGFloat?, view: UIView) {
         
         if width == -1 {
             self.addConstraintsWithFormat(format: "H:|[v0]|", views: view)
@@ -40,13 +40,12 @@ extension UIView {
         }
     }
     
-    
-    func ac_center(item:UIView, toItem:UIView) {
+    func ac_center(item: UIView, toItem: UIView) {
         addConstraint(NSLayoutConstraint(item: item, attribute: .centerX, relatedBy: .equal, toItem: toItem, attribute: .centerX, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: item, attribute: .centerY, relatedBy: .equal, toItem: toItem, attribute: .centerY, multiplier: 1, constant: 0))
     }
     
-    func ac_center(item:UIView, toItem:UIView, origin:String) {
+    func ac_center(item: UIView, toItem: UIView, origin: String) {
         if origin == "x" {
             addConstraint(NSLayoutConstraint(item: item, attribute: .centerX, relatedBy: .equal, toItem: toItem, attribute: .centerX, multiplier: 1, constant: 0))
         } else if origin == "y" {
@@ -62,7 +61,7 @@ extension NSLayoutConstraint {
      - parameter multiplier: CGFloat
      - returns: NSLayoutConstraint
      */
-    func setMultiplier(multiplier:CGFloat) -> NSLayoutConstraint {
+    func setMultiplier(multiplier: CGFloat) -> NSLayoutConstraint {
         
         NSLayoutConstraint.deactivate([self])
         
@@ -83,4 +82,3 @@ extension NSLayoutConstraint {
         return newConstraint
     }
 }
-

@@ -21,4 +21,5 @@ target 'inu_cafeteria' do
   pod 'FSPagerView'
   pod 'SwiftyBeaver'
   pod 'SwiftLint'
+  pod 'AlamofireNetworkActivityIndicator', '~> 2.2'
 end
