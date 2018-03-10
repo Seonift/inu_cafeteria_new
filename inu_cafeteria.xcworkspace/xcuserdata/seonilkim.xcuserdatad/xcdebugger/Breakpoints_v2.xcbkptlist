@@ -168,11 +168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/DrawerVC.swift"
-            timestampString = "542186033.590667"
+            timestampString = "542362544.46363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
             landmarkName = "unknown"
             landmarkType = "0">
          </BreakpointContent>
@@ -248,13 +248,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/NumberVC.swift"
-            timestampString = "541840570.37596"
+            timestampString = "542362544.464064"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "setSocketConnect()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -296,7 +296,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/HomeVC.swift"
-            timestampString = "542019282.771776"
+            timestampString = "542362544.464155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "370"
@@ -312,11 +312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/NumberVC.swift"
-            timestampString = "541840570.376189"
+            timestampString = "542362544.464204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316">
+            startingLineNumber = "297"
+            endingLineNumber = "297">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -326,13 +326,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/NumberVC.swift"
-            timestampString = "541840570.3762341"
+            timestampString = "542362544.4642479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "NumberVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -390,13 +390,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/NumberVC.swift"
-            timestampString = "541840570.37631"
+            timestampString = "542362544.4643101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "networkResult(resultData:code:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -438,7 +438,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/HomeVC.swift"
-            timestampString = "542019282.771938"
+            timestampString = "542362544.464391"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "375"
@@ -502,11 +502,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/HomeVC.swift"
-            timestampString = "542019282.772016"
+            timestampString = "542362544.464479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "534"
-            endingLineNumber = "534"
+            startingLineNumber = "532"
+            endingLineNumber = "532"
             landmarkName = "setShadow(_:ratio:color:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -518,23 +518,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/HomeVC.swift"
-            timestampString = "542019282.772059"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "537"
-            endingLineNumber = "537"
-            landmarkName = "setShadow(_:ratio:color:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "inu_cafeteria/HomeVC.swift"
-            timestampString = "542019282.772101"
+            timestampString = "542362544.464524"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "535"
@@ -549,46 +533,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "inu_cafeteria/MenuVC.swift"
-            timestampString = "541840570.376744"
+            filePath = "inu_cafeteria/HomeVC.swift"
+            timestampString = "542362544.4645669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "533"
+            endingLineNumber = "533"
+            landmarkName = "setShadow(_:ratio:color:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "inu_cafeteria.MenuVC.foodPlan.didset : Swift.Array&lt;inu_cafeteria.FoodMenu&gt;"
-                  moduleName = "inu_cafeteria"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/seonilkim/iOS/inu_cafeteria/inu_cafeteria/MenuVC.swift"
-                  timestampString = "541234553.263581"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "347">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (inu_cafeteria.FoodMenu, inu_cafeteria.FoodMenu) -&gt; Swift.Bool in inu_cafeteria.MenuVC.foodPlan.didset : Swift.Array&lt;inu_cafeteria.FoodMenu&gt;"
-                  moduleName = "inu_cafeteria"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/seonilkim/iOS/inu_cafeteria/inu_cafeteria/MenuVC.swift"
-                  timestampString = "541234553.2658091"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "18">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -598,13 +550,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/NumberVC.swift"
-            timestampString = "541840570.3767819"
+            timestampString = "542362544.464613"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "268"
+            endingLineNumber = "268"
+            landmarkName = "networkFailed(errorMsg:code:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -614,13 +566,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/NumberVC.swift"
-            timestampString = "541840570.376819"
+            timestampString = "542362544.464666"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "networkFailed(errorMsg:code:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -630,11 +582,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/HomeVC.swift"
-            timestampString = "542019282.772217"
+            timestampString = "542362544.464715"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "508"
-            endingLineNumber = "508"
+            startingLineNumber = "506"
+            endingLineNumber = "506"
             landmarkName = "carousel(_:valueFor:withDefault:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -646,11 +598,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/NumberVC.swift"
-            timestampString = "541840570.3768981"
+            timestampString = "542362544.464757"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320">
+            startingLineNumber = "297"
+            endingLineNumber = "297">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -756,11 +708,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/HomeVC.swift"
-            timestampString = "542019282.772398"
+            timestampString = "542362544.4648319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "512"
-            endingLineNumber = "512"
+            startingLineNumber = "510"
+            endingLineNumber = "510"
             landmarkName = "carousel(_:valueFor:withDefault:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -793,14 +745,14 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "85"
             endingLineNumber = "85"
-            landmarkName = "applicationWillResignActive(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/CsrModel.swift"
@@ -836,7 +788,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/DrawerVC.swift"
-            timestampString = "542186036.641564"
+            timestampString = "542362544.4649349"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "184"

@@ -373,13 +373,11 @@ extension HomeVC: NetworkCallback {
     
     func showNumVC(code: Int, title: String, numbers: [Int], bgimg: String? = nil) {
         guard let vc = MAIN.instantiateViewController(withIdentifier: "numbervc") as? NumberVC else { return }
-        vc.commonInit(code: code, title: title, numbers: numbers)
+        vc.commonInit(code: code, title: title, numbers: numbers, bgimg: bgimg)
         
         vc.navigationItem.setHidesBackButton(true, animated: false)
         vc.setTitleView()
         vc.setupDrawerBtn()
-        
-        if let bgimg = bgimg, bgimg != "" { vc.bgimg = bgimg }
         
         self.navigationController?.pushViewController(vc, animated: true)
         

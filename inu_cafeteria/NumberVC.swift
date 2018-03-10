@@ -17,8 +17,8 @@ class NumberVC: UIViewController {
     
     private var audioPlayer: AVAudioPlayer?
     
-    var start_index: Int = 0 // 출력 시작하는 index
-    var items: [String] = [] {
+    private var start_index: Int = 0 // 출력 시작하는 index
+    private var items: [String] = [] {
         didSet {
             if collectionView != nil {
                 collectionView.reloadData()
@@ -29,22 +29,19 @@ class NumberVC: UIViewController {
         }
     }
     
-    var inputNumbers: [Int] = []
+    private var inputNumbers: [Int] = []
+    private var code: Int = 0
+    private var cafeTitle: String = ""
+    private var bgimg: String?
+    private let cellId = "NumCell"
     
-    var code: Int = 0
-    var cafeTitle: String = ""
-    var bgimg: String?
-    
-    lazy var model: NumberModel = {
+    private lazy var model: NumberModel = {
         let model = NumberModel(self)
         return model
     }()
     
     @IBOutlet weak var numLabel1: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    private let cellId = "NumCell"
-    
     @IBOutlet weak var content: UIView!
     @IBAction func backClicked(_ sender: Any) {
         let alert = CustomAlert.alert(message: String.cancel_num, positiveAction: { _ in
@@ -152,10 +149,11 @@ class NumberVC: UIViewController {
         collectionView.isUserInteractionEnabled = true
     }
     
-    func commonInit(code: Int, title: String, numbers: [Int]) {
+    func commonInit(code: Int, title: String, numbers: [Int], bgimg: String? = nil) {
         self.code = code
         self.cafeTitle = title
         self.inputNumbers = numbers
+        if let bgimg = bgimg, bgimg != "" { self.bgimg = bgimg }
     }
     
     func setSocketConnect() {

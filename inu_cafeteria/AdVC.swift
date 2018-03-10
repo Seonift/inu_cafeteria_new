@@ -28,8 +28,8 @@ class AdVC: UIViewController {
     }
     
     private let cellId = "Cell"
-    var adItems: [AdObject] = []
-    var firstIndex: Int?
+    private var adItems: [AdObject] = []
+    private var firstIndex: Int?
     
     override func viewDidLoad() {
         setupUI()
@@ -46,6 +46,16 @@ class AdVC: UIViewController {
         carouselView.type = .rotary
         carouselView.isPagingEnabled = true
         
+        if adItems.count <= 1 {
+            carouselView.isScrollEnabled = false
+        } else {
+            carouselView.isScrollEnabled = true
+        }
+    }
+    
+    func setData(adItems: [AdObject], firstIndex: Int) {
+        self.adItems = adItems
+        self.firstIndex = firstIndex
     }
     
     override func viewWillAppear(_ animated: Bool) {

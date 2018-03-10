@@ -189,8 +189,7 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
         
         guard let vc = MAIN.instantiateViewController(withIdentifier: "advc") as? AdVC else { return }
         vc.modalPresentationStyle = .overCurrentContext
-        vc.adItems = self.adItems
-        vc.firstIndex = index
+        vc.setData(adItems: adItems, firstIndex: index)
         self.present(vc, animated: true, completion: nil)
     }
     

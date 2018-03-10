@@ -13,6 +13,7 @@ import FirebaseInstanceID
 import FirebaseMessaging
 import KYDrawerController
 import SwiftyBeaver
+import AlamofireNetworkActivityIndicator
 
 let log = SwiftyBeaver.self
 
@@ -31,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         log.addDestination(console)
         
         userPreferences.removeBrightness()
+        
+        NetworkActivityIndicatorManager.shared.isEnabled = true
         
 //        FIRApp.configure()
 //        

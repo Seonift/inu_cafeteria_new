@@ -376,24 +376,24 @@
                                                 <rect key="frame" x="158" y="694" width="59" height="123"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgJaemoon" translatesAutoresizingMaskIntoConstraints="NO" id="NIE-F5-9Ms">
-                                                        <rect key="frame" x="0.0" y="0.0" width="59" height="76.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="59" height="75.5"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0LQ-Ac-hXW" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="76.5" width="59" height="10"/>
+                                                        <rect key="frame" x="0.0" y="75.5" width="59" height="10"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Server" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCk-vJ-1Lr">
-                                                        <rect key="frame" x="0.0" y="86.5" width="59" height="14"/>
+                                                        <rect key="frame" x="0.0" y="85.5" width="59" height="14"/>
                                                         <fontDescription key="fontDescription" name="KoPubDotumPL" family="KoPubDotum_Pro" pointSize="12"/>
                                                         <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fnZ-kJ-coO" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="100.5" width="59" height="5"/>
+                                                        <rect key="frame" x="0.0" y="99.5" width="59" height="5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="신재문" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdA-Ys-xWe">
-                                                        <rect key="frame" x="0.0" y="105.5" width="59" height="20"/>
+                                                        <rect key="frame" x="0.0" y="104.5" width="59" height="20"/>
                                                         <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="18"/>
                                                         <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -425,24 +425,24 @@
                                                 <rect key="frame" x="269" y="694" width="59" height="123"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgSunil" translatesAutoresizingMaskIntoConstraints="NO" id="zop-kI-sbA">
-                                                        <rect key="frame" x="0.0" y="0.0" width="59" height="76.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="59" height="75.5"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qvI-h1-tC7" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="76.5" width="59" height="10"/>
+                                                        <rect key="frame" x="0.0" y="75.5" width="59" height="10"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iOS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ecp-Nc-FHb">
-                                                        <rect key="frame" x="0.0" y="86.5" width="59" height="14"/>
+                                                        <rect key="frame" x="0.0" y="85.5" width="59" height="14"/>
                                                         <fontDescription key="fontDescription" name="KoPubDotumPL" family="KoPubDotum_Pro" pointSize="12"/>
                                                         <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqp-ou-gFr" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="100.5" width="59" height="5"/>
+                                                        <rect key="frame" x="0.0" y="99.5" width="59" height="5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김선일" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gV-j0-Xop">
-                                                        <rect key="frame" x="0.0" y="105.5" width="59" height="20"/>
+                                                        <rect key="frame" x="0.0" y="104.5" width="59" height="20"/>
                                                         <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="18"/>
                                                         <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -478,24 +478,24 @@
                                                 <rect key="frame" x="158" y="841" width="59" height="123"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgGayoon" translatesAutoresizingMaskIntoConstraints="NO" id="jrD-FW-JEp">
-                                                        <rect key="frame" x="0.0" y="0.0" width="59" height="76.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="59" height="75.5"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JKP-0G-Y4X" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="76.5" width="59" height="10"/>
+                                                        <rect key="frame" x="0.0" y="75.5" width="59" height="10"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Android" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4G-96-Ze4">
-                                                        <rect key="frame" x="0.0" y="86.5" width="59" height="14"/>
+                                                        <rect key="frame" x="0.0" y="85.5" width="59" height="14"/>
                                                         <fontDescription key="fontDescription" name="KoPubDotumPL" family="KoPubDotum_Pro" pointSize="12"/>
                                                         <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6B4-sR-gwE" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="100.5" width="59" height="5"/>
+                                                        <rect key="frame" x="0.0" y="99.5" width="59" height="5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이가윤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0C-ez-qRQ">
-                                                        <rect key="frame" x="0.0" y="105.5" width="59" height="20"/>
+                                                        <rect key="frame" x="0.0" y="104.5" width="59" height="20"/>
                                                         <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="18"/>
                                                         <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -527,24 +527,24 @@
                                                 <rect key="frame" x="269" y="841" width="59" height="123"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgJinwoong" translatesAutoresizingMaskIntoConstraints="NO" id="XT8-W9-AYA">
-                                                        <rect key="frame" x="0.0" y="0.0" width="59" height="76.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="59" height="75.5"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5c1-zg-TD6" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="76.5" width="59" height="10"/>
+                                                        <rect key="frame" x="0.0" y="75.5" width="59" height="10"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Design" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KbF-fZ-KEC">
-                                                        <rect key="frame" x="0.0" y="86.5" width="59" height="14"/>
+                                                        <rect key="frame" x="0.0" y="85.5" width="59" height="14"/>
                                                         <fontDescription key="fontDescription" name="KoPubDotumPL" family="KoPubDotum_Pro" pointSize="12"/>
                                                         <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9y-Ni-wk8" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="100.5" width="59" height="5"/>
+                                                        <rect key="frame" x="0.0" y="99.5" width="59" height="5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김진웅" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frH-ld-ZGH">
-                                                        <rect key="frame" x="0.0" y="105.5" width="59" height="20"/>
+                                                        <rect key="frame" x="0.0" y="104.5" width="59" height="20"/>
                                                         <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="18"/>
                                                         <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -576,24 +576,24 @@
                                                 <rect key="frame" x="47" y="841" width="59" height="123"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgSoonjae" translatesAutoresizingMaskIntoConstraints="NO" id="09X-cG-NeQ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="59" height="76.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="59" height="75.5"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bF7-bh-9qC" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="76.5" width="59" height="10"/>
+                                                        <rect key="frame" x="0.0" y="75.5" width="59" height="10"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Android" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nbp-9D-6HB">
-                                                        <rect key="frame" x="0.0" y="86.5" width="59" height="14"/>
+                                                        <rect key="frame" x="0.0" y="85.5" width="59" height="14"/>
                                                         <fontDescription key="fontDescription" name="KoPubDotumPL" family="KoPubDotum_Pro" pointSize="12"/>
                                                         <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pRH-6P-T7g" customClass="DummyView" customModule="inu_cafeteria" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="100.5" width="59" height="5"/>
+                                                        <rect key="frame" x="0.0" y="99.5" width="59" height="5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="권순재" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ugw-fV-hYh">
-                                                        <rect key="frame" x="0.0" y="105.5" width="59" height="20"/>
+                                                        <rect key="frame" x="0.0" y="104.5" width="59" height="20"/>
                                                         <fontDescription key="fontDescription" name="KoPubDotumPB" family="KoPubDotum_Pro" pointSize="18"/>
                                                         <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>

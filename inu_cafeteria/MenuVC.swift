@@ -69,7 +69,7 @@ class MenuVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        contentView.dropShadow(superview: view)
+        
     }
 }
 
@@ -84,28 +84,8 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MenuCell
         let cell = tableView.generateCell(withIdentifier: cellId, for: indexPath, cellClass: MenuCell.self)
-        let item = foodPlan[indexPath.row]
-        cell.commonInit(menu: item)
-//        let item = foodplan[indexPath.row]
-//        cell.commonInit(corner: item.type1, menu: item.menu)
-        
-//        switch indexPath.row {
-//        case 0:
-//            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "차돌순두부찌개(조식) 피망잡채&꽃빵 건파래볶음 열무된장무침 배추김치 3,000원 636kcal\r치즈닭갈비/삼겹살김치찌개 계란말이 맛살야채볶음 열무된장무침 배추김치 4,000 732/712kcal\r훈제오리철판구이(2인)")
-//        case 1:
-//            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "돈까스야끼파스타 크림스프 양배추샐러드 단무지 배추김치 3,500원 683kcal\r소불고기새싹비빔밤 미역국 배추김치 3,000원 707kcal")
-//        case 2:
-//            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "")
-//        case 3:
-//            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "삼겹살스테이크 도리아(불닭)\r치즈오븐스파게티(토마토)\r빠네파스타\r날치알베이컨파스타 불고기샐러드 닭가슴살샐러드\r훈제연어샐러드")
-//        case 4:
-//            cell.commonInit(corner: "\(indexPath.row + 1)코너", menu: "")
-//        default:
-//            print()
-//        }
-        
+        cell.commonInit(menu: foodPlan[indexPath.row])
         return cell
     }
 }
