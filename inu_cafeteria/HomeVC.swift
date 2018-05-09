@@ -15,6 +15,8 @@ import FirebaseMessaging
 import Device
 import ObjectMapper
 
+import SocketIO
+
 class HomeVC: UIViewController {
     @IBOutlet weak var carouselView: iCarousel!
     @IBOutlet weak var topL: UILabel!
@@ -94,8 +96,28 @@ class HomeVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         numberModel.isNumberWait()
-        SocketIOManager.sharedInstance.removeAll()
+//        SocketIOManager.sharedInstance.removeAll()
         setTitleView()
+        
+        if let url = URL(string: BASE_URL) {
+            log.info("socket url : \(url)")
+            let socket = SocketManager(socketURL: url).defaultSocket
+            let socket1 = SocketManager(socketURL: url).defaultSocket
+            let socket2 = SocketManager(socketURL: url).defaultSocket
+            socket.connect()
+            socket1.connect()
+            socket2.connect()
+            
+            socket.on("1", callback: { res, _ in
+                print(res)
+            })
+            socket1.on("1", callback: { res, _ in
+                print(res)
+            })
+            socket2.on("1", callback: { res, _ in
+                print(res)
+            })
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

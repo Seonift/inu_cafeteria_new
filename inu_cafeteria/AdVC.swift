@@ -19,7 +19,9 @@ class AdVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func linkClicked(_ sender: Any) {
-        guard let url = URL(string: "http://naver.com") else { return }
+        let index = carouselView.currentItemIndex
+//        self.view.makeToast("\(index)")
+        guard let url = URL(string: adItems[index].url) else { return }
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else {
