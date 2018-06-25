@@ -317,7 +317,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "265"
             endingLineNumber = "265"
-            landmarkName = "networkResult(resultData:code:)"
+            landmarkName = "networkFailed(errorMsg:code:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -475,8 +475,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "267"
             endingLineNumber = "267"
-            landmarkName = "NumberVC"
-            landmarkType = "21">
+            landmarkName = "networkFailed(errorMsg:code:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -649,7 +649,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "184"
             endingLineNumber = "184"
-            landmarkName = "pagerView(_:didSelectItemAt:)"
+            landmarkName = "pagerView(_:didHighlightItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

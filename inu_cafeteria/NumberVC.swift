@@ -159,6 +159,7 @@ class NumberVC: UIViewController {
     func setSocketConnect() {
         log.debug("setSocket, code:\(self.code)")
         SocketIOManager.sharedInstance.getNumber(code: String(self.code)) { (result) -> Void in
+            // 소켓 수신 할 때 이벤트
             DispatchQueue.main.async {
                 if let res = result.first as? NSDictionary, let msg = res["msg"] as? String, let msgint = Int(msg) {
                     log.info("msgint:\(msgint)")
@@ -250,15 +251,7 @@ extension NumberVC: NetworkCallback {
         print(code)
         Indicator.stopAnimating()
         
-        if code == model._isNumberWait {
-            guard let result = resultData as? WaitNumber else { return }
-            
-            if result.num.count != self.inputNumbers.count {
-                // 갔다 온 사이에 변화가 있으면
-                self.inputNumbers = result._num
-                setData()
-            }
-        }
+        i트
         
         if code == model._resetNumber {
             self.navigationController?.popViewController(animated: true)

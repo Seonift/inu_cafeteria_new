@@ -14,6 +14,7 @@ class CsrModel: NetworkModel {
     let _errormsg = "errormsg"
     
     func errormsg(msg: String) {
+        // 문의하기 전달
         let systemVersion = UIDevice.current.systemVersion
         let device = UIDevice.current.modelName
         var params = [
