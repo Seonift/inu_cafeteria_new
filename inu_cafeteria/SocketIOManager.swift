@@ -24,6 +24,7 @@ class SocketIOManager {
     }
     
     func establishConnection() {
+        // 소켓 연결
         log.info("establishSocket")
         
         if socket?.status == .connected {
@@ -45,6 +46,7 @@ class SocketIOManager {
 //    }
     
     func closeConnection() {
+        // 소켓 연결 해제
         log.info("closeSocket")
         socket?.disconnect()
         socket?.removeAllHandlers()
@@ -56,6 +58,7 @@ class SocketIOManager {
     }
     
     func connectToServer() {
+        // 서버에 테스트 메시지 보내기
 //        socket?.emit("connectUser", "name")
         print("emit socket")
 //        socket?.emit("1", "1")
@@ -69,6 +72,11 @@ class SocketIOManager {
     }
     
     func getNumber(code: String, completionHandler: @escaping (_ messageInfo: [Any]) -> Void) {
+        // 특정 식당의 메시지 수신
+        
+//        SocketIOManager.sharedInstance.getNumber(code: "1", completionHandler: { item in
+//            item =-> 수신된 데이터
+//        })
         
         if socket?.status == .connected {
             log.info("socket connected")
@@ -85,6 +93,7 @@ class SocketIOManager {
     }
     
     func removeAll() {
+        // 식당 메시지 수신 해제
         socket?.removeAllHandlers()
     }
 }

@@ -251,7 +251,15 @@ extension NumberVC: NetworkCallback {
         print(code)
         Indicator.stopAnimating()
         
-        i트
+        if code == model._isNumberWait {
+            guard let result = resultData as? WaitNumber else { return }
+            
+            if result.num.count != self.inputNumbers.count {
+                // 갔다 온 사이에 변화가 있으면
+                self.inputNumbers = result._num
+                setData()
+            }
+        }
         
         if code == model._resetNumber {
             self.navigationController?.popViewController(animated: true)
