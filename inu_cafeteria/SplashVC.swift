@@ -120,6 +120,10 @@ extension SplashVC: NetworkCallback {
         Indicator.stopAnimating()
         self.view.makeToast(String.noServer)
     }
+}
+
+extension SplashVC {
+    // Alert 출력
     
     func showUpdateAlert() {
         let alert = CustomAlert.okAlert(title: "업데이트", message: String.update, positiveAction: { _ in
@@ -160,5 +164,4 @@ extension SplashVC: NetworkCallback {
             self.showLogin()
         }
     }
-    
 }

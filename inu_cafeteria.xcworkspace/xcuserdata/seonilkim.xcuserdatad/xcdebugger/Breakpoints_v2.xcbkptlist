@@ -25,22 +25,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "inu_cafeteria/SplashVC.swift"
-            timestampString = "551608633.37014"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "networkFailed()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "inu_cafeteria/LoginObject.swift"
             timestampString = "541568852.049528"
             startingColumnNumber = "9223372036854775807"
@@ -64,68 +48,6 @@
             startingLineNumber = "103"
             endingLineNumber = "103"
             landmarkName = "networkResult(function:statusCode:item:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "inu_cafeteria/SplashVC.swift"
-            timestampString = "551608633.37026"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "inu_cafeteria.SplashVC.networkFailed(errorMsg: Swift.String, code: Swift.String) -&gt; ()"
-                  moduleName = "inu_cafeteria"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/seonilkim/iOS/inu_cafeteria/inu_cafeteria/SplashVC.swift"
-                  timestampString = "540997944.968078"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "181"
-                  endingLineNumber = "181"
-                  offsetFromSymbolStart = "48">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "implicit closure #1 : @autoclosure () -&gt; Any in inu_cafeteria.SplashVC.networkFailed(errorMsg: Swift.String, code: Swift.String) -&gt; ()"
-                  moduleName = "inu_cafeteria"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/seonilkim/iOS/inu_cafeteria/inu_cafeteria/SplashVC.swift"
-                  timestampString = "540997944.970257"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "181"
-                  endingLineNumber = "181"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "inu_cafeteria/SplashVC.swift"
-            timestampString = "551608633.370315"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "showNoticeAlert(notice:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -444,22 +366,6 @@
             startingLineNumber = "397"
             endingLineNumber = "397"
             landmarkName = "showNumVC(code:title:numbers:bgimg:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "inu_cafeteria/SplashVC.swift"
-            timestampString = "551608633.370676"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "showNoticeAlert(notice:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
