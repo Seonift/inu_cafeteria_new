@@ -72,6 +72,7 @@ extension UserDefaults {
     }
     
     open func isToken() -> Bool {
+        // 토큰으로 자동로그인 여부 식별
         if userPreferences.object(forKey: _token) != nil {
             return true
         }
