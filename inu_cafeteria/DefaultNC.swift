@@ -9,6 +9,7 @@
 import UIKit
 
 class DefaultNC: UINavigationController {
+    // 기본 네비게이션 바
     
     override func viewDidLoad() {
         super.viewDidLoad()

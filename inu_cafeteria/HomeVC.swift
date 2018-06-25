@@ -32,7 +32,7 @@ class HomeVC: UIViewController {
     @IBOutlet var dummy2_Const: NSLayoutConstraint!
     @IBOutlet var dummy3_Const: NSLayoutConstraint!
     
-    private var menus: NSDictionary?
+    private var menus: NSDictionary? // 각 식당 메뉴들
     private var nonClient: Bool = false // true면 비회원모드
     private lazy var numberModel: NumberModel = {
         return NumberModel(self)
@@ -46,7 +46,7 @@ class HomeVC: UIViewController {
     private let tf_height: CGFloat = 40.0
     private var activeField: UITextField?
     
-    var num_count: Int = 1 {
+    private var num_count: Int = 1 {
         // 입력할 번호의 갯수
         didSet {
             setInputNum()
@@ -57,14 +57,14 @@ class HomeVC: UIViewController {
         }
     }
     
-    private var codes: [CafeCode] = [] {
+    private var codes: [CafeCode] = [] { // 식당 정보
         didSet {
             codes = codes.sorted(by: { $0.order < $1.order })
             if carouselView != nil {
                 carouselView.reloadData()
                 
                 if carouselView.currentItemIndex == 0 && self.codes.count > 0 {
-                    self.titleL.text = codes[0].name
+                    self.titleL.text = codes[0].name // 식당 이름 출력
                 }
             }
         }
@@ -81,7 +81,7 @@ class HomeVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setTitleView()
+        setTitleView() // 네비바에 카페테리아 로고 출력
         
         registerForKeyboardNotifications()
         
@@ -98,43 +98,25 @@ class HomeVC: UIViewController {
         numberModel.isNumberWait()
 //        SocketIOManager.sharedInstance.removeAll()
         setTitleView()
-        
-        if let url = URL(string: BASE_URL) {
-            log.info("socket url : \(url)")
-            let socket = SocketManager(socketURL: url).defaultSocket
-            let socket1 = SocketManager(socketURL: url).defaultSocket
-            let socket2 = SocketManager(socketURL: url).defaultSocket
-            socket.connect()
-            socket1.connect()
-            socket2.connect()
-            
-            socket.on("1", callback: { res, _ in
-                print(res)
-            })
-            socket1.on("1", callback: { res, _ in
-                print(res)
-            })
-            socket2.on("1", callback: { res, _ in
-                print(res)
-            })
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         unregisterForKeyboardNotifications()
-        numView1.clear()
-        numView2.clear()
-        numView3.clear()
+        [numView1, numView2, numView3].forEach { view in
+            view?.clear()
+        }
         num_count = 1
         self.navigationItem.titleView = nil
     }
     
     func setData(codes: [CafeCode], nonClient: Bool = false) {
+        // 초기 값 설정
         self.codes = codes
         self.nonClient = nonClient
     }
     
     func setInputNum() {
+        // 번호 텍스트필드 갯수 조절
         switch num_count {
         case 1:
             dummy1_Const.isActive = true
@@ -163,9 +145,9 @@ class HomeVC: UIViewController {
                 self.numView1.plusBtn.isHidden = false
             case 2:
                 self.numView1.plusBtn.isHidden = true
-                self.numView2.isHidden = false
-                self.numView2.plusBtn.isHidden = false
-                self.numView2.minusBtn.isHidden = false
+                [self.numView2, self.numView2.plusBtn, self.numView2.minusBtn].forEach { view in
+                    view.isHidden = false
+                }
             case 3:
                 self.numView3.isHidden = false
                 self.numView2.plusBtn.isHidden = true
@@ -192,17 +174,15 @@ class HomeVC: UIViewController {
         numView1.commonInit(index: 0, parent: self)
         numView2.commonInit(index: 1, parent: self)
         numView3.commonInit(index: 2, parent: self)
-        numView1.plusBtn.addTarget(self, action: #selector(addClicked(_:)), for: .touchUpInside)
-        numView2.plusBtn.addTarget(self, action: #selector(addClicked(_:)), for: .touchUpInside)
-        numView2.minusBtn.addTarget(self, action: #selector(addClicked(_:)), for: .touchUpInside)
-        numView3.minusBtn.addTarget(self, action: #selector(addClicked(_:)), for: .touchUpInside)
-        
-        addToolBar(textField: numView1.textField)
-        addToolBar(textField: numView2.textField)
-        addToolBar(textField: numView3.textField)
+        [numView1.plusBtn, numView2.plusBtn, numView2.minusBtn, numView3.minusBtn].forEach { btn in
+            btn.addTarget(self, action: #selector(addClicked(_:)), for: .touchUpInside)
+        }
+        [numView1.textField, numView2.textField, numView3.textField].forEach { tf in
+            addToolBar(textField: tf)
+        }
         
         self.navigationItem.rightBarButtonItem = moreButton
-        scrollView.contentSize = contentView.frame.size
+        scrollView.contentSize = contentView.frame.size // 스크롤 뷰에서 스크롤 될 아이템의 크기 설정.
     }
     
     @objc func moreClicked(_ sender: UIBarButtonItem) {
@@ -249,7 +229,7 @@ class HomeVC: UIViewController {
     
     @objc func confirmClicked(_ sender: UIButton) {
         if let item = codes[safe: carouselView.currentItemIndex] {
-            
+            // item : 헌재 선택한 식당
             if !item.alarm {
                 self.view.makeToast(String.noAlarm)
                 return
@@ -334,6 +314,7 @@ extension HomeVC: NetworkCallback {
         }
         
         if code == numberModel._isNumberWait {
+            // 번호 대기 화면으로 이동
             guard let result = resultData as? WaitNumber else { return }
             
             let cafes = codes.filter { $0.no == result.cafecode }
