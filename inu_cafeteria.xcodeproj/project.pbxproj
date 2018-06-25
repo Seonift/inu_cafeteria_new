@@ -25,7 +25,7 @@
 		742D90061F1CF7A4000B656E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 742D90041F1CF7A4000B656E /* Main.storyboard */; };
 		742D90081F1CF7A4000B656E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 742D90071F1CF7A4000B656E /* Assets.xcassets */; };
 		742D900B1F1CF7A4000B656E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 742D90091F1CF7A4000B656E /* LaunchScreen.storyboard */; };
-		742D90141F1CF8C1000B656E /* FirstStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90131F1CF8C1000B656E /* FirstStartVC.swift */; };
+		742D90141F1CF8C1000B656E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90131F1CF8C1000B656E /* LoginVC.swift */; };
 		742D901D1F1CF8F8000B656E /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90161F1CF8F8000B656E /* Constraint.swift */; };
 		742D901E1F1CF8F8000B656E /* Unwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90171F1CF8F8000B656E /* Unwrapper.swift */; };
 		742D90201F1CF8F8000B656E /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90191F1CF8F8000B656E /* Shadow.swift */; };
@@ -42,7 +42,7 @@
 		742D903E1F1CFBBE000B656E /* KoPub Dotum_Pro Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 742D903B1F1CFA9A000B656E /* KoPub Dotum_Pro Light.otf */; };
 		742D903F1F1CFBBE000B656E /* KoPub Dotum_Pro Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 742D903C1F1CFA9A000B656E /* KoPub Dotum_Pro Medium.otf */; };
 		742D90411F1DB5FA000B656E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 742D90401F1DB5FA000B656E /* GoogleService-Info.plist */; };
-		742D90441F1E38E8000B656E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90431F1E38E8000B656E /* LoginVC.swift */; };
+		742D90441F1E38E8000B656E /* LoginVC_trash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90431F1E38E8000B656E /* LoginVC_trash.swift */; };
 		742D90461F1E43E2000B656E /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90451F1E43E2000B656E /* HomeVC.swift */; };
 		742D90481F1E441D000B656E /* DefaultNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D90471F1E441D000B656E /* DefaultNC.swift */; };
 		742D904C1F1E4957000B656E /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 742D904B1F1E4957000B656E /* iCarousel.m */; };
@@ -103,7 +103,7 @@
 		742D90071F1CF7A4000B656E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		742D900A1F1CF7A4000B656E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		742D900C1F1CF7A4000B656E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		742D90131F1CF8C1000B656E /* FirstStartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstStartVC.swift; sourceTree = "<group>"; };
+		742D90131F1CF8C1000B656E /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		742D90161F1CF8F8000B656E /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
 		742D90171F1CF8F8000B656E /* Unwrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unwrapper.swift; sourceTree = "<group>"; };
 		742D90191F1CF8F8000B656E /* Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 		742D903C1F1CFA9A000B656E /* KoPub Dotum_Pro Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KoPub Dotum_Pro Medium.otf"; sourceTree = "<group>"; };
 		742D90401F1DB5FA000B656E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		742D90421F1DBC45000B656E /* inu_cafeteria.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = inu_cafeteria.entitlements; sourceTree = "<group>"; };
-		742D90431F1E38E8000B656E /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		742D90431F1E38E8000B656E /* LoginVC_trash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC_trash.swift; sourceTree = "<group>"; };
 		742D90451F1E43E2000B656E /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		742D90471F1E441D000B656E /* DefaultNC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultNC.swift; sourceTree = "<group>"; };
 		742D90491F1E4957000B656E /* inu_cafeteria-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inu_cafeteria-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -212,7 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				740689051F4415CE000291DA /* InfoVC.swift */,
-				742D90431F1E38E8000B656E /* LoginVC.swift */,
+				742D90431F1E38E8000B656E /* LoginVC_trash.swift */,
 				742D904F1F1E53AC000B656E /* MyNumberVC.swift */,
 				74E4330A1F1F1C230081AE08 /* BarcodeVC.swift */,
 			);
@@ -240,8 +240,6 @@
 		742D8FFF1F1CF7A4000B656E /* inu_cafeteria */ = {
 			isa = PBXGroup;
 			children = (
-				7406890B1F442FFC000291DA /* out.caf */,
-				740689091F442CDB000291DA /* alarm.mp3 */,
 				742D90121F1CF8A9000B656E /* VC */,
 				741F2D72203EF2FB00D5BDAB /* Trash */,
 				74BC46F2203743780071AE1E /* CustomView */,
@@ -250,9 +248,11 @@
 				742D90241F1CF904000B656E /* Extension */,
 				747C10591F2A387200C195A9 /* Model */,
 				742D90151F1CF8EE000B656E /* Utils */,
-				742D90001F1CF7A4000B656E /* AppDelegate.swift */,
 				742D90391F1CFA82000B656E /* Font */,
 				741BD9191F22456A00B56F30 /* Storyboard */,
+				7406890B1F442FFC000291DA /* out.caf */,
+				740689091F442CDB000291DA /* alarm.mp3 */,
+				742D90001F1CF7A4000B656E /* AppDelegate.swift */,
 				742D90071F1CF7A4000B656E /* Assets.xcassets */,
 				742D900C1F1CF7A4000B656E /* Info.plist */,
 				742D90401F1DB5FA000B656E /* GoogleService-Info.plist */,
@@ -268,7 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				741BD91A1F2245DA00B56F30 /* SplashVC.swift */,
-				742D90131F1CF8C1000B656E /* FirstStartVC.swift */,
+				742D90131F1CF8C1000B656E /* LoginVC.swift */,
 				742D90451F1E43E2000B656E /* HomeVC.swift */,
 				74676FA21F47CA13008EAF66 /* CsrVC.swift */,
 				742D90471F1E441D000B656E /* DefaultNC.swift */,
@@ -588,7 +588,7 @@
 				74AF6E421F556C36007D335B /* ExtBundle.swift in Sources */,
 				741F2D76203EFF3100D5BDAB /* NumberObject.swift in Sources */,
 				742D90301F1CF90E000B656E /* ExtTextfield.swift in Sources */,
-				742D90441F1E38E8000B656E /* LoginVC.swift in Sources */,
+				742D90441F1E38E8000B656E /* LoginVC_trash.swift in Sources */,
 				74E4330B1F1F1C230081AE08 /* BarcodeVC.swift in Sources */,
 				747C10581F248BD500C195A9 /* Barcode.swift in Sources */,
 				742D902C1F1CF90E000B656E /* ExtColor.swift in Sources */,
@@ -620,7 +620,7 @@
 				749E4FED203D895B00672BA4 /* AdVC.swift in Sources */,
 				742D904C1F1E4957000B656E /* iCarousel.m in Sources */,
 				741F2D71203EE18C00D5BDAB /* Reachability.swift in Sources */,
-				742D90141F1CF8C1000B656E /* FirstStartVC.swift in Sources */,
+				742D90141F1CF8C1000B656E /* LoginVC.swift in Sources */,
 				745E68C21F21CA6600D0C0A5 /* IndicatorClass.swift in Sources */,
 				747C10541F231F4700C195A9 /* LoginModel.swift in Sources */,
 				742D901E1F1CF8F8000B656E /* Unwrapper.swift in Sources */,

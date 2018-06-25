@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let firstVC = storyboard.instantiateViewController(withIdentifier: "firststartvc")
+//        let firstVC = storyboard.instantiateViewController(withIdentifier: "loginvc")
         let sb = UIStoryboard(name: "Splash", bundle: nil)
         guard let firstVC = sb.instantiateViewController(withIdentifier: "splashvc") as? SplashVC else { return true }
         self.window?.rootViewController = firstVC

@@ -42,7 +42,7 @@ class SplashVC: UIViewController {
             loginModel.login()
         } else {
             let main_storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let main = main_storyboard.instantiateViewController(withIdentifier: "firststartvc") as? FirstStartVC else {return}
+            guard let main = main_storyboard.instantiateViewController(withIdentifier: "loginvc") as? LoginVC else {return}
             self.present(main, animated: false, completion: nil)
         }
     }

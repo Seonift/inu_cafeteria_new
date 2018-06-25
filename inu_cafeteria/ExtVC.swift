@@ -92,10 +92,10 @@ extension UIViewController {
     
     func goLogin() {
         // 로그아웃 했을 경우 로그인 페이지로 귀환
-        if (self.presentingViewController?.isKind(of: FirstStartVC.self))! {
+        if (self.presentingViewController?.isKind(of: LoginVC.self))! {
             self.dismiss(animated: true, completion: nil)
         } else {
-            guard let loginvc = MAIN.instantiateViewController(withIdentifier: "firststartvc") as? FirstStartVC else {return}
+            guard let loginvc = MAIN.instantiateViewController(withIdentifier: "loginvc") as? LoginVC else {return}
             loginvc.setLoginPage()
             UIApplication.shared.keyWindow?.rootViewController = loginvc
         }
