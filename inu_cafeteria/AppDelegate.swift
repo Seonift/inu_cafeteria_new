@@ -108,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 //        log.debug(#function)
         connectToFcm()
-//        SocketIOManager.sharedInstance.establishConnection()
+        SocketIOManager.sharedInstance.establishConnection()
         Network().getCookie()
     }
 
@@ -126,16 +126,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         //푸시 메시지 클릭했을 때 이벤트
         UIApplication.shared.applicationIconBadgeNumber = 0
         
-//        userPreferences.set(false, forKey: "socket")
-//        userPreferences.removeObject(forKey: "code")
-//        userPreferences.removeObject(forKey: "num1")
-//        userPreferences.removeObject(forKey: "num2")
-//        userPreferences.removeObject(forKey: "num3")
-        
-//        let dict = userInfo["aps"] as! NSDictionary
-//        let message = dict["alert"]
-//        print(message)
-        
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -146,11 +136,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print(remoteMessage.appData)
     }
     
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // 앱 켜져있을 때 푸시 알림 올 경우
-        completionHandler([.alert, .sound, .badge])
-    }
+//    @available(iOS 10.0, *)
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//        // 앱 켜져있을 때 푸시 알림 올 경우
+//        completionHandler([.alert, .sound, .badge])
+//    }
     
     @objc func tokenRefreshNotification(notification: NSNotification) {
         // NOTE: It can be nil here
