@@ -62,7 +62,8 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     override func viewWillAppear(_ animated: Bool) {
         adView.itemSize = adView.frame.size
         
-        flagModel.activeBarcode(1)
+        flagModel.activeBarcode(1) // 바코드 활성화
+        
         adView.automaticSlidingInterval = 5.0
         if adItems.count == 0 {
             networkModel.ads()
@@ -74,32 +75,35 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     
     override func viewDidAppear(_ animated: Bool) {
         log.info("viewdidappear")
+        
+        // 화면 밝기 조절
         userPreferences.saveBrightness()
         UIScreen.main.brightness = CGFloat(1.0)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        log.info("viewdiddisappear")
+        // 화면 밝기 조절
+        if let bright = userPreferences.getBrightness() {
+            UIScreen.main.brightness = bright
+        }
+    }
+    
     @objc func comebackForeground() {
-        flagModel.activeBarcode(1)
+        flagModel.activeBarcode(1) // 바코드 활성화
     }
     
     @objc func enterBackground() {
-        flagModel.activeBarcode(0)
+        flagModel.activeBarcode(0) // 바코드 비활성화
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         log.info("viewwilldisappear")
-        flagModel.activeBarcode(0)
+        flagModel.activeBarcode(0) // 바코드 비활성화
         adView.automaticSlidingInterval = 0
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        log.info("viewdiddisappear")
-        if let bright = userPreferences.getBrightness() {
-            UIScreen.main.brightness = bright
-        }
     }
     
     func setupUI() {
@@ -170,7 +174,7 @@ class DrawerVC: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: cellId, at: index)
         cell.imageView?.contentMode = .scaleAspectFit
-        cell.imageView?.kf.setImage(with: URL(string: "\(BASE_URL)/\(adItems[index].img)")!)
+        cell.imageView?.kf.setImage(with: URL(string: "\(BASE_URL)/\(adItems[index].previewimg)")!)
         cell.contentView.layer.shadowRadius = 0
         
         return cell
