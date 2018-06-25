@@ -17,7 +17,7 @@ class WaitNumber: Mappable {
         return -1
     }
     var _num: [Int] {
-        return num.compactMap { Int($0) }
+        return num.flatMap { Int($0) }
     }
     
     required init?(map: Map) {
