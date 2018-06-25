@@ -20,16 +20,14 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var l3: UILabel!
     
     @IBOutlet weak var labelV: UIView!
-    
     @IBOutlet weak var moveBtn: UIView!
     
     @IBOutlet weak var logo_width2: NSLayoutConstraint!
     @IBOutlet weak var logo_height2: NSLayoutConstraint!
     @IBOutlet weak var logo_leading2: NSLayoutConstraint!
-    
     @IBOutlet weak var logo_top: NSLayoutConstraint!
-    @IBOutlet weak var logoIV: UIImageView!
     
+    @IBOutlet weak var logoIV: UIImageView!
     @IBOutlet weak var bgIV: UIImageView!
     
     @IBOutlet weak var idTF: LoginTF!
@@ -52,10 +50,6 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var idTF_top: NSLayoutConstraint!
     @IBOutlet weak var pwTF_top: NSLayoutConstraint!
-    @IBOutlet weak var auto_top: NSLayoutConstraint!
-    @IBOutlet weak var loginB_top: NSLayoutConstraint!
-    @IBOutlet weak var nsB_top: NSLayoutConstraint!
-    @IBOutlet weak var nsL_top: NSLayoutConstraint!
     
     private lazy var loginModel: LoginModel = {
         let model = LoginModel(self)
@@ -100,7 +94,7 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         if !userPreferences.isFirstStart() {
             setupLogin()
         }
-        animateImage()
+        animateImage() // 배경 이미지 전환 애니메이션
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -124,25 +118,24 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func setupUI() {
-        l1.font = UIFont(name: "KoPubDotumPB", size: 28)
-        l2.font = UIFont(name: "KoPubDotumPB", size: 28)
+        [l1, l2].forEach { label in
+            label?.font = UIFont(name: "KoPubDotumPB", size: 28)
+        }
         l3.font = UIFont(name: "KoPubDotumPB", size: 20)
-        autoL.font = UIFont(name: "KoPubDotumPM", size: 12)
-        idTF.font = UIFont(name: "KoPubDotumPM", size: 16)
-        pwTF.font = UIFont(name: "KoPubDotumPM", size: 16)
+        [autoL, noStudentLabel].forEach { label in
+            label?.font = UIFont(name: "KoPubDotumPM", size: 12)
+            
+        }
+        [idTF, pwTF].forEach { label in
+            label?.font = UIFont(name: "KoPubDotumPM", size: 16)
+            label?.delegate = self
+            addToolBar(textField: label!)
+        }
+        
         pwTF.isSecureTextEntry = true
-        idTF.delegate = self
-        pwTF.delegate = self
-        
-        addToolBar(textField: idTF)
-        addToolBar(textField: pwTF)
-        
         moveBtn.isUserInteractionEnabled = true
         moveBtn.addGestureRecognizer(tap)
-        
         autoB.isUserInteractionEnabled = false
-        
-        noStudentLabel.font = UIFont(name: "KoPubDotumPM", size: 12)
         
         let attributes: [NSAttributedStringKey: Any] = [
             NSAttributedStringKey.foregroundColor: UIColor.white,
@@ -154,6 +147,7 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func setupLogin() {
+        // 최초 진입이 아닐시 바로 로그인 화면 출력
         setupLogin1()
         setupLogin2()
         setupLogin3()
@@ -166,32 +160,20 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         logo_width2 = logo_width2.setMultiplier(multiplier: 220/375)
         logo_height2 = logo_height2.setMultiplier(multiplier: 143.6/667)
         
-        labelV.isHidden = true
-        l3.isHidden = true
-        moveBtn.isHidden = true
+        [labelV, l3, moveBtn].forEach { view in
+            view?.isHidden = true
+        }
         
-        self.idTF.isHidden = false
-        self.pwTF.isHidden = false
-        self.autoV.isHidden = false
-        self.loginBtn.isHidden = false
-        self.noStudentBtn.isHidden = false
-        self.noStudentLabel.isHidden = false
-        
-        self.idTF.alpha = 0
-        self.pwTF.alpha = 0
-        self.autoV.alpha = 0
-        self.loginBtn.alpha = 0
-        self.noStudentBtn.alpha = 0
-        self.noStudentLabel.alpha = 0
+        [idTF, pwTF, autoV, loginBtn, noStudentBtn, noStudentLabel].forEach { view in
+            view?.isHidden = false
+            view?.alpha = 0.0
+        }
     }
     
     func setupLogin2() {
-        self.idTF.alpha = 1
-        self.pwTF.alpha = 1
-        self.autoV.alpha = 1
-        self.loginBtn.alpha = 1
-        self.noStudentBtn.alpha = 1
-        self.noStudentLabel.alpha = 1
+        [idTF, pwTF, autoV, loginBtn, noStudentBtn, noStudentLabel].forEach { view in
+            view?.alpha = 1.0
+        }
     }
     
     func setupLogin3() {
@@ -291,11 +273,13 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         
         CATransaction.setAnimationDuration(animationDuration)
         CATransaction.setCompletionBlock {
+            // 트랜잭션이 끝날 경우 어떤 작업을 실행할 것이지
             DispatchQueue.main.asyncAfter(deadline: .now()+self.switchingInterval) {
                 self.animateImage()
             }
         }
         
+        // 이미지 전환
         let transition = CATransition()
         transition.type = kCATransitionFade
         self.bgIV.layer.add(transition, forKey: kCATransition)
@@ -309,7 +293,8 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc func moveLogin(_ sender: UITapGestureRecognizer?) {
-        print("movelogin")
+        // 시작하기 버튼 클릭했을 때 이벤트. 애니메이션
+        
         self.moveBtn.removeGestureRecognizer(tap)
         
         setupLogin1()
@@ -329,6 +314,7 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         })
     }
     
+    //키보드 이벤트
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
