@@ -86,10 +86,3 @@ extension String {
         return "해당 식당은 알림을 지원하지 않습니다."
     }
 }
-
-extension CGFloat {
-    static var drawer_width: CGFloat {
-        //        return 240.0
-        return Device.getWidth(width: 240)
-    }
-}

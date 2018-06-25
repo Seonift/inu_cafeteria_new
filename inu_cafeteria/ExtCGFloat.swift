@@ -7,3 +7,11 @@
 //
 
 import Foundation
+import Device
+
+extension CGFloat {
+    static var drawer_width: CGFloat {
+        //        return 240.0
+        return Device.getWidth(width: 240)
+    }
+}
